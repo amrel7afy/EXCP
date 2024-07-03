@@ -11,13 +11,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  const ScreenUtilInit(
-      designSize: Size(375,812),
+    return   ScreenUtilInit(
+      designSize: const Size(375,812),
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: MaterialApp(
-          
-         home: LoginView(),
+          theme: ThemeData(
+            fontFamily: 'Alexandria',
+          ),
+         home: const LoginView(),
         
         ),
       ),
