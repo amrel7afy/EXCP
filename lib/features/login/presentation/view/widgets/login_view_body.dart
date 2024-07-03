@@ -61,7 +61,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     ),
                     
                   ),
-                  const HorizontalSpacer(7),
+                  const HorizontalSpacer(7.0),
                   const Text('العربية'),
 
                 ],
