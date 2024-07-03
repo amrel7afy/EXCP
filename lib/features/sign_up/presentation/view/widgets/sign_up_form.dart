@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
-import 'package:test1/core/theming/styles.dart';
+import 'package:test1/core/shared/cubits/auth_cubit/auth_cubit.dart';
 import 'package:test1/features/login/presentation/view/widgets/text_form_field.dart';
 
 class SignUpForm extends StatefulWidget {
@@ -17,22 +18,27 @@ class _SignUpFormState extends State<SignUpForm> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const MyTextFormField(
+        MyTextFormField(
           labelText: 'الإسم الأول ',
+          controller: context.read<AuthCubit>().firstNameController,
         ),
-        const MyTextFormField(
+        MyTextFormField(
           labelText: 'الإسم الأوسط ',
+          controller: context.read<AuthCubit>().middleNameController,
         ),
-        const MyTextFormField(
+        MyTextFormField(
           labelText: 'الإسم الأخير ',
+          controller: context.read<AuthCubit>().lastNameController,
         ),
-        const MyTextFormField(
+        MyTextFormField(
           labelText: 'رقم الجوال ',
+          controller: context.read<AuthCubit>().phoneNumberController,
         ),
-        const MyTextFormField(
+        MyTextFormField(
           labelText: 'البريد الالكتروني ',
+          controller: context.read<AuthCubit>().emailController,
         ),
-        const VerticalSpacer(33),
+
         MyTextFormField(
           isObscureText: isObscureText,
           suffixIcon: GestureDetector(
@@ -46,6 +52,7 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
           ),
           labelText: 'كلمة المرور ',
+          controller: context.read<AuthCubit>().passwordController,
         ),
         MyTextFormField(
           isObscureText: isObscureText,
@@ -60,9 +67,9 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
           ),
           labelText: 'تأكيد كلمة المرور ',
+          controller: context.read<AuthCubit>().confirmPasswordController,
         ),
         const VerticalSpacer(8),
-
       ],
     );
   }

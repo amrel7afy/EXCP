@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
+import 'package:test1/core/shared/cubits/auth_cubit/auth_cubit.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/features/login/presentation/view/widgets/text_form_field.dart';
 
@@ -15,10 +17,11 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return  Column(
-      children: [ const MyTextFormField(
+      children: [  MyTextFormField(
         labelText: 'رقم الجوال ',
+        controller: context.read<AuthCubit>().phoneNumberController,
       ),
-        const VerticalSpacer(33),
+        const VerticalSpacer(18),
         MyTextFormField(
           isObscureText: isObscureText,
           suffixIcon: GestureDetector(

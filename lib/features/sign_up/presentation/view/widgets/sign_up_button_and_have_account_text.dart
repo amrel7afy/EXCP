@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/methods.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
+import 'package:test1/core/shared/cubits/auth_cubit/auth_cubit.dart';
+import 'package:test1/core/shared/cubits/auth_cubit/auth_states.dart';
 import 'package:test1/core/theming/my_colors.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/custom_button.dart';
@@ -17,16 +20,26 @@ class SignUpButtonAndHaveAccountText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 47.h,
-          width: getWidth(context) * 0.5,
-          child: CustomButton(
-            borderRadius: BorderRadius.circular(8),
-            text: 'إنشاء حساب',
-            textStyle:
-                MyTextStyles.font18Weight600.copyWith(color: Colors.white),
-            backGroundColor: MyColors.kPrimaryColor,
-            onPressed: () {},
+        BlocListener<AuthCubit, AuthStates>(
+          listener: (context, state) {
+            if (state is AuthSuccess) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text('تم إنشاء الحساب')));
+            }
+          },
+          child: SizedBox(
+            height: 47.h,
+            width: getWidth(context) * 0.5,
+            child: CustomButton(
+              borderRadius: BorderRadius.circular(8),
+              text: 'إنشاء حساب',
+              textStyle:
+                  MyTextStyles.font18Weight600.copyWith(color: Colors.white),
+              backGroundColor: MyColors.kPrimaryColor,
+              onPressed: () {
+                context.read<AuthCubit>().signUp();
+              },
+            ),
           ),
         ),
         const VerticalSpacer(12),
