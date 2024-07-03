@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/theming/styles.dart';
 
-import 'package:test1/features/sign_up/presentation/view/widgets/sign_up_form.dart';
-
-import 'sign_up_button_and_have_account_text.dart';
-
 class SignUpLogoAndUpperText extends StatelessWidget {
   const SignUpLogoAndUpperText({super.key});
 

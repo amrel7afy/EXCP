@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:test1/core/constants/methods.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/theming/my_colors.dart';
 import 'package:test1/core/theming/styles.dart';
-import 'package:test1/core/widgets/custom_button.dart';
 import 'package:test1/features/login/presentation/view/widgets/login_form.dart';
-import 'package:test1/features/login/presentation/view/widgets/text_form_field.dart';
-
-import '../../../../../main.dart';
+import 'package:test1/features/login/presentation/view/widgets/login_logo_and_upper_text.dart';
+import 'package:test1/main.dart';
 import 'login_button_and_create_account_text.dart';
 
 class LoginViewBody extends StatefulWidget {
@@ -20,6 +16,8 @@ class LoginViewBody extends StatefulWidget {
 
 class _LoginViewBodyState extends State<LoginViewBody> {
   bool isObscureText = true;
+  bool _isSwitched = false;
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -29,27 +27,45 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'Logo',
-                style: MyTextStyles.font40Weight700
-                    .copyWith(color: Colors.black),
-              ),
-              const VerticalSpacer(105),
-              Text(
-                'تسجيل الدخول',
-                style: MyTextStyles.font24Weight500
-                    .copyWith(color: Colors.black),
-              ),
-              Text(
-                'يرجى إدخال رقم جوالك المسجل لدينا و كلمة المرور',
-                style: MyTextStyles.font12Weight500
-                    .copyWith(color: Colors.black),
-              ),
+              const LoginLogoAndUpperText(),
               const VerticalSpacer(54),
               const LoginForm(),
               const VerticalSpacer(12),
               const LoginButtonAndCreateAccountText(),
-              InkWell(onTap:(){},child: Text('تخطي الان',style: MyTextStyles.font14Weight600,))
+              InkWell(
+                  onTap: () {},
+                  child: Text(
+                    'تخطي الان',
+                    style: MyTextStyles.font14Weight600,
+                  )),
+              const VerticalSpacer(35),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+
+                children: [
+                  const Text('English'),
+                  const HorizontalSpacer(7),
+                  Directionality(
+                    textDirection: appTextDirection,
+                    child: Switch(
+                      inactiveThumbColor: MyColors.kPrimaryColor,
+                      inactiveTrackColor: const Color(0xffACACAC),
+                      activeColor: MyColors.kGreenColor,
+                      value: _isSwitched,
+                      onChanged: (value) {
+                        setState(() {
+                          _isSwitched = value;
+                        });
+                      },
+                    ),
+                    
+                  ),
+                  const HorizontalSpacer(7),
+                  const Text('العربية'),
+
+                ],
+              ),
             ],
           ),
         ),
