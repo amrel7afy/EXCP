@@ -7,6 +7,7 @@ import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/custom_button.dart';
 
 import '../../../../../main.dart';
+import '../../../../sign_up/presentation/view/sign_up_view.dart';
 class LoginButtonAndCreateAccountText extends StatelessWidget {
   const LoginButtonAndCreateAccountText({super.key});
 
@@ -38,12 +39,17 @@ class LoginButtonAndCreateAccountText extends StatelessWidget {
     ,
     ),
     const HorizontalSpacer(10),
-    InkWell(onTap: (){},
+    InkWell(onTap: (){
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const SignUpView()));
+    },
     child: Text('إنشاء حساب',style: MyTextStyles.font14Weight600.copyWith(color: MyColors.kGreenColor),),)
     ],
     ),
     ),
-    const VerticalSpacer(24),],
+        const VerticalSpacer(24),],
     );
   }
 }
