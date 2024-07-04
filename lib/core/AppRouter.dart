@@ -1,8 +1,12 @@
 import 'dart:developer';
 
 
+import 'package:flutter/material.dart';
 import 'package:test1/core/helper/extensions.dart';
+import 'package:test1/features/home/presentation/view/home_view.dart';
 
+import '../features/login/presentation/view/login_view.dart';
+import '../features/sign_up/presentation/view/sign_up_view.dart';
 import 'constants/constants.dart';
 
 import 'helper/cache_helper.dart';
@@ -33,27 +37,28 @@ class AppRouter {
   static const String searchView = '/searchView';
   static const String singUpView = '/singUpView';
 
-/*  Route? generateRoute(RouteSettings settings) {
+  Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case homeView:
         return MaterialPageRoute(
-          builder: (context) => MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => locator<HomeCubit>()..emitFetchHomeData(),
-              ),
-              BlocProvider(
-                create: (context) => locator<SpecializationCubit>()..emitFetchSpecializations(),
-              ),
-            ],
-            child: const BottomNavBar(),
-          ),
+          builder: (context) =>
+          const HomeView(),
+        );
+      case loginView:
+        return MaterialPageRoute(
+          builder: (context) =>
+          const LoginView(),
+        );
+      case singUpView:
+        return MaterialPageRoute(
+          builder: (context) =>
+          const SignUpView(),
         );
 
+        return null;
+    }
     return null;
-  }*/
+  }
+
+
 }
-
-
-
-

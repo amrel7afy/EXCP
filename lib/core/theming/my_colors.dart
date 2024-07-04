@@ -6,6 +6,7 @@ abstract class MyColors{
 
   static const  kMoreGreyColor=Color(0xff616161);
   static const    kGreenColor=Color(0xff24A19D);
+  static const    kAppBarBackGroundColor=Color(0xffF8F8F8);
 
   static const  kWhiteColor=Color(0xffF4F8FF);
   static const  kGreyColor=Color(0xff757575);
