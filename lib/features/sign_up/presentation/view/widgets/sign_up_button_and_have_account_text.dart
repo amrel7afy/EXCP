@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/methods.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
-import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/shared/cubits/auth_cubit/auth_cubit.dart';
 import 'package:test1/core/shared/cubits/auth_cubit/auth_states.dart';
 import 'package:test1/core/theming/my_colors.dart';
@@ -37,7 +36,9 @@ class SignUpButtonAndHaveAccountText extends StatelessWidget {
                   MyTextStyles.font18Weight600.copyWith(color: Colors.white),
               backGroundColor: MyColors.kPrimaryColor,
               onPressed: () {
-                context.read<AuthCubit>().signUp();
+                if(context.read<AuthCubit>().signUpFormKey.currentState!.validate()){
+                  context.read<AuthCubit>().signUp();
+                }
               },
             ),
           ),

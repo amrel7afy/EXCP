@@ -7,6 +7,7 @@ import 'package:test1/core/shared/cubits/auth_cubit/auth_states.dart';
 import 'package:test1/core/shared/models/user.dart';
 
 import '../../../../main.dart';
+import '../../../helper/app_regex.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
   AuthCubit() : super(AuthInitial());
@@ -19,6 +20,8 @@ class AuthCubit extends Cubit<AuthStates> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  final signUpFormKey = GlobalKey<FormState>();
+  final loginFormKey = GlobalKey<FormState>();
 
   void assignUserData(User user) {
     user.firstName = firstNameController.text.trim();
@@ -75,6 +78,49 @@ class AuthCubit extends Cubit<AuthStates> {
         log(user.phoneNumber??'empty phone number');
         return user;
       }
+    }
+    return null;
+  }
+
+  firstNameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please, enter a valid name.';
+    }
+    return null;
+
+  }  middleNameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please, enter a valid name.';
+    }
+    return null;
+
+  } lastNameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please, enter a valid name.';
+    }
+    return null;
+
+  }
+  phoneValidator(String? value) {
+    if (value == null || value.isEmpty||!AppRegex.isPhoneNumberValid(value)) {
+      return 'Please, enter a valid phone number.';
+    }
+    return null;
+  }  emailValidator(String? value) {
+    if (value == null || value.isEmpty||!AppRegex.isEmailValid(value)) {
+      return 'Please, enter a valid email.';
+    }
+    return null;
+  }
+  passwordValidator(String? value) {
+    if (value == null || value.isEmpty||!AppRegex.isPasswordValid(value)) {
+      return 'Please, enter a valid phone number.';
+    }
+    return null;
+  }
+  confirmPasswordValidator(String? value) {
+    if (value == null || value.isEmpty||!AppRegex.isPasswordValid(value)) {
+      return 'Please, enter a valid phone number.';
     }
     return null;
   }
