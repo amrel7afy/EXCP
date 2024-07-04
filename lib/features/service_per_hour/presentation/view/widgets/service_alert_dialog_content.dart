@@ -65,7 +65,7 @@ class ServiceAlertDialogContent extends StatelessWidget {
                   text: 'التالي',
                   backGroundColor: Colors.black,
                   onPressed: () {
-                    context.pushReplacementNamed(AppRouter.selectAddressView);
+                    context.pushReplacementNamed(AppRouter.emptyAddressView);
                   },
                 ),
               ),

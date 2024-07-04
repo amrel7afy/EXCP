@@ -9,7 +9,7 @@ const Duration kNavigationDurationVal= Duration(milliseconds: 1300);
 
  double kAppDefaultPadding=24.0.w;
 
-const double kRightHomeViewPadding=10.0;
+const double k8Padding=10.0;
 const double kLeftHomeViewPadding=10.0;
 const double kLeftBookDetailsViewPadding=30.0;
 const double kRightBookDetailsViewPadding=30.0;
@@ -23,4 +23,5 @@ class AppConstants{
  static const isLoggedInKey='isSignedInKey';
  static const isOnBoardingKey='isOnBoardingKey';
  static const userToken='';
+ static const double k8Radius=8.0;
 }

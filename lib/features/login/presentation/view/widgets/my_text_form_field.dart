@@ -8,6 +8,7 @@ class MyTextFormField extends StatelessWidget {
   final bool? isObscureText;
   final TextEditingController controller;
   final double? padding;
+  final int? maxLines;
   final Function(String? value) validator;
 
   const MyTextFormField({
@@ -17,7 +18,7 @@ class MyTextFormField extends StatelessWidget {
     this.isObscureText,
     required this.controller,
     this.padding,
-    required this.validator,
+    required this.validator, this.maxLines,
   });
 
   @override
@@ -30,9 +31,11 @@ class MyTextFormField extends StatelessWidget {
           validator: (value) {
             return validator(value);
           },
+          maxLines: maxLines??1,
           controller: controller,
           obscureText: isObscureText ?? false,
           decoration: InputDecoration(
+
             floatingLabelBehavior: FloatingLabelBehavior.always,
             // تثبيت التسمية
 
