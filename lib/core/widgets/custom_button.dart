@@ -37,6 +37,7 @@ class CustomButton extends StatelessWidget {
         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: borderRadius ?? BorderRadius.circular(16),
+            side: const BorderSide()
           ),
         ),
       ),
