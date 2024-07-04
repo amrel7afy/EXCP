@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/constants/methods.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
+import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/shared/cubits/auth_cubit/auth_cubit.dart';
 import 'package:test1/core/shared/cubits/auth_cubit/auth_states.dart';
 import 'package:test1/core/theming/my_colors.dart';
@@ -59,10 +61,7 @@ class SignUpButtonAndHaveAccountText extends StatelessWidget {
               const HorizontalSpacer(10),
               InkWell(
                 onTap: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginView()));
+              context.pushReplacementNamed(AppRouter.loginView);
                 },
                 child: Text(
                   'تسجيل الدخول',

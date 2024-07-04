@@ -43,7 +43,10 @@ dependencies:
   flutter_screenutil: ^5.9.3
 #Business Logic
   flutter_bloc: ^8.1.6
-
+# carousel slider widget, support infinite scroll and custom child widget.
+  carousel_slider: ^4.2.1
+# automatically resizes text to fit perfectly within its bounds.
+  auto_size_text: ^3.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
