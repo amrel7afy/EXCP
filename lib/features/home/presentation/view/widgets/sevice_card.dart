@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
@@ -5,12 +6,16 @@ import 'package:test1/core/theming/styles.dart';
 import 'package:test1/features/home/presentation/view/widgets/custom_carousel.dart';
 
 class ServiceCard extends StatelessWidget {
-  final String image='';
+  final String image = '';
   final String title;
   final String subTitle;
   final VoidCallback onTap;
+
   const ServiceCard({
-    super.key,  required this.title, required this.subTitle, required this.onTap,
+    super.key,
+    required this.title,
+    required this.subTitle,
+    required this.onTap,
   });
 
   @override
@@ -22,8 +27,7 @@ class ServiceCard extends StatelessWidget {
         height: 70.h,
         padding: EdgeInsets.all(7.w),
         decoration: BoxDecoration(
-            border: Border.all(),
-            borderRadius: BorderRadius.circular(12)),
+            border: Border.all(), borderRadius: BorderRadius.circular(12)),
         child: Row(
           children: [
             Container(
@@ -35,19 +39,26 @@ class ServiceCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14)),
             ),
             const HorizontalSpacer(12),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-
-                Text(
-                  title,
-                  style: MyTextStyles.font16Weight600.copyWith(color: Colors.black),
-                ),
-                Text(
-                  subTitle,
-                  style: MyTextStyles.font12Weight600.copyWith(color: Colors.black),
-                ),
-              ],)
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: MyTextStyles.font16Weight600
+                        .copyWith(color: Colors.black),
+                  ),
+                  AutoSizeText(
+                    subTitle,
+                    style: MyTextStyles.font12Weight600
+                        .copyWith(color: Colors.black),
+                    minFontSize: 10.sp,
+                    stepGranularity: 0.5.sp,
+                    maxLines: 1,
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
