@@ -14,7 +14,7 @@ class ServicePerHourView extends StatelessWidget {
     return Directionality(
       textDirection: appTextDirection,
       child: const Scaffold(
-        appBar: CustomAppBar(title: 'اختر الخدمة',),
+        appBar: CustomAppBar(title: 'اختر الخدمة',leading: true,),
         body: SafeArea(child: ServicePerHourBody()),
       ),
     );

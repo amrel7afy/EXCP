@@ -22,7 +22,7 @@ showAlertDialog(BuildContext context,  Widget content) async {
               Positioned(
                 top: -40.h, // Adjust the value to control the button position
                 child: InkWell(
-                  onTap:  ()=>context.pop(),
+                  onTap:  (){context.pop();},
                   child:  CircleAvatar(
                     radius: 22,
                     backgroundColor: Colors.grey[300],

@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
     return Directionality(
       textDirection: appTextDirection,
       child: const Scaffold(
-        appBar: CustomAppBar(title: 'مرحباً بك عميلنا العزيز',),
+        appBar: CustomAppBar(title: 'مرحباً بك عميلنا العزيز',leading: true,),
         body: SafeArea(child: HomeViewBody()),
       ),
     );

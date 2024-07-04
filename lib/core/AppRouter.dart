@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/home/presentation/view/home_view.dart';
+import 'package:test1/features/select_address/presentation/view/select_address_view.dart';
+import 'package:test1/features/select_address/presentation/view/widgets/select_address_view_body.dart';
 
 import '../features/login/presentation/view/login_view.dart';
 import '../features/service_per_hour/presentation/view/service_per_hour_view.dart';
@@ -38,9 +40,15 @@ class AppRouter {
   static const String searchView = '/searchView';
   static const String singUpView = '/singUpView';
   static const String servicePerHourView = '/servicePerHourView';
+  static const String selectAddressView = '/selectAddressView';
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case selectAddressView:
+        return MaterialPageRoute(
+          builder: (context) =>
+          const SelectAddressView(),
+        );
       case servicePerHourView:
         return MaterialPageRoute(
           builder: (context) =>

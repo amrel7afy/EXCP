@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return   ScreenUtilInit(
-      designSize: const Size(375,812),
+      designSize: const Size(430,932),
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: BlocProvider(
@@ -25,6 +25,12 @@ class MyApp extends StatelessWidget {
               fontFamily: 'Alexandria',
               appBarTheme: const AppBarTheme(
                 backgroundColor: MyColors.kAppBarBackGroundColor
+              ),
+              scaffoldBackgroundColor: Colors.white,
+              floatingActionButtonTheme: const FloatingActionButtonThemeData(
+                backgroundColor: MyColors.kPrimaryColor,
+
+                shape: CircleBorder(),
               )
             ),
            initialRoute: AppRouter.loginView,
