@@ -8,44 +8,48 @@ class ServiceCard extends StatelessWidget {
   final String image='';
   final String title;
   final String subTitle;
+  final VoidCallback onTap;
   const ServiceCard({
-    super.key,  required this.title, required this.subTitle,
+    super.key,  required this.title, required this.subTitle, required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 365.w,
-      height: 70.h,
-      padding: EdgeInsets.all(7.w),
-      decoration: BoxDecoration(
-          border: Border.all(),
-          borderRadius: BorderRadius.circular(12)),
-      child: Row(
-        children: [
-          Container(
-            height: 52.h,
-            width: 52.w,
-            decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(14)),
-          ),
-          HorizontalSpacer(12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 365.w,
+        height: 70.h,
+        padding: EdgeInsets.all(7.w),
+        decoration: BoxDecoration(
+            border: Border.all(),
+            borderRadius: BorderRadius.circular(12)),
+        child: Row(
+          children: [
+            Container(
+              height: 52.h,
+              width: 52.w,
+              decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(14)),
+            ),
+            const HorizontalSpacer(12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
 
-              Text(
-                title,
-                style: MyTextStyles.font16Weight600.copyWith(color: Colors.black),
-              ),
-              Text(
-                subTitle,
-                style: MyTextStyles.font12Weight600.copyWith(color: Colors.black),
-              ),
-            ],)
-        ],
+                Text(
+                  title,
+                  style: MyTextStyles.font16Weight600.copyWith(color: Colors.black),
+                ),
+                Text(
+                  subTitle,
+                  style: MyTextStyles.font12Weight600.copyWith(color: Colors.black),
+                ),
+              ],)
+          ],
+        ),
       ),
     );
   }
