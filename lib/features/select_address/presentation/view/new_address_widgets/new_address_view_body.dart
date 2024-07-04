@@ -65,6 +65,7 @@ class _NewAddressBodyState extends State<NewAddressBody> {
                   const Spacer(),
                   // Add some space between buttons
                   Flexible(
+
                     child: CustomButton(
                       borderRadius: BorderRadius.circular(8),
                       textStyle: MyTextStyles.font18Weight600
