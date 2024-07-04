@@ -21,9 +21,12 @@ class SignUpButtonAndHaveAccountText extends StatelessWidget {
       children: [
         BlocListener<AuthCubit, AuthStates>(
           listener: (context, state) {
-            if (state is AuthSuccess) {
+            if (state is AuthCreateUserSuccess) {
               ScaffoldMessenger.of(context)
                   .showSnackBar(const SnackBar(content: Text('تم إنشاء الحساب')));
+            }else if (state is AuthUserIsExists) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text('الحساب موجود بالفعل')));
             }
           },
           child: SizedBox(

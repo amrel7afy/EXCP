@@ -35,47 +35,53 @@ class AuthCubit extends Cubit<AuthStates> {
   signUp() async {
     emit(AuthLoading());
     try {
-      User user = User();
-      assignUserData(user);
-      users.add(user);
-      String jsonData = User.encode(users);
-      await SharedPrefHelper.setData(usersListKey, jsonData);
-      emit(AuthSuccess());
+      await getUsersFromCache();
+      User? user = findUserByPhoneNumber(phoneNumberController.text.trim());
+      if (user != null) {
+        emit(AuthUserIsExists());
+      } else {
+        await createNewUser(user);
+      }
     } catch (e) {
       emit(AuthFailure());
     }
   }
 
+  Future<void> createNewUser(User? user) async {
+    user = User();
+    assignUserData(user);
+    users.add(user);
+    String jsonData = User.encode(users);
+    await SharedPrefHelper.setData(usersListKey, jsonData);
+    emit(AuthCreateUserSuccess());
+  }
 
-  logIn()async{
-    try{
+  logIn() async {
+    try {
       await getUsersFromCache();
-      User? user=findUserByPhoneNumber(phoneNumberController.text.trim());
-      if(user!=null){
+      User? user = findUserByPhoneNumber(phoneNumberController.text.trim());
+      if (user != null) {
         emit(AuthSuccess());
-      }else{
+      } else {
         emit(AuthUserNotExists());
       }
-    }
-    catch(e){
+    } catch (e) {
       log(e.toString());
       emit(AuthFailure());
     }
   }
 
   Future<void> getUsersFromCache() async {
-    String users=await SharedPrefHelper.getString(usersListKey);
+    String users = await SharedPrefHelper.getString(usersListKey);
 
-    this.users=User.decode(users) ;
+    this.users = User.decode(users);
     log(this.users.length.toString());
   }
-
-
 
   User? findUserByPhoneNumber(String phoneNumber) {
     for (var user in users) {
       if (user.phoneNumber == phoneNumber) {
-        log(user.phoneNumber??'empty phone number');
+        log(user.phoneNumber ?? 'empty phone number');
         return user;
       }
     }
@@ -87,42 +93,47 @@ class AuthCubit extends Cubit<AuthStates> {
       return 'Please, enter a valid name.';
     }
     return null;
-
-  }  middleNameValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please, enter a valid name.';
-    }
-    return null;
-
-  } lastNameValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please, enter a valid name.';
-    }
-    return null;
-
   }
+
+  middleNameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please, enter a valid name.';
+    }
+    return null;
+  }
+
+  lastNameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please, enter a valid name.';
+    }
+    return null;
+  }
+
   phoneValidator(String? value) {
-    if (value == null || value.isEmpty||!AppRegex.isPhoneNumberValid(value)) {
+    if (value == null || value.isEmpty || !AppRegex.isPhoneNumberValid(value)) {
       return 'Please, enter a valid phone number.';
     }
     return null;
-  }  emailValidator(String? value) {
-    if (value == null || value.isEmpty||!AppRegex.isEmailValid(value)) {
+  }
+
+  emailValidator(String? value) {
+    if (value == null || value.isEmpty || !AppRegex.isEmailValid(value)) {
       return 'Please, enter a valid email.';
     }
     return null;
   }
+
   passwordValidator(String? value) {
-    if (value == null || value.isEmpty||!AppRegex.isPasswordValid(value)) {
-      return 'Please, enter a valid phone number.';
-    }
-    return null;
-  }
-  confirmPasswordValidator(String? value) {
-    if (value == null || value.isEmpty||!AppRegex.isPasswordValid(value)) {
+    if (value == null || value.isEmpty || !AppRegex.isPasswordValid(value)) {
       return 'Please, enter a valid phone number.';
     }
     return null;
   }
 
+  confirmPasswordValidator(String? value) {
+    if (value == null || value.isEmpty || !AppRegex.isPasswordValid(value)) {
+      return 'Please, enter a valid phone number.';
+    }
+    return null;
+  }
 }
