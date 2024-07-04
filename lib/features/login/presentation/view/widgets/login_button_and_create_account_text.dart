@@ -19,11 +19,11 @@ class LoginButtonAndCreateAccountText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BlocListener<AuthCubit,AuthStates>(
+        BlocListener<AuthCubit, AuthStates>(
           listener: (BuildContext context, AuthStates state) {
-            if(state is AuthUserNotExists){
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(const SnackBar(content: Text('User is not Exists')));
+            if (state is AuthUserNotExists) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('User is not Exists')));
             }
           },
           child: SizedBox(
@@ -36,7 +36,13 @@ class LoginButtonAndCreateAccountText extends StatelessWidget {
                   MyTextStyles.font18Weight600.copyWith(color: Colors.white),
               backGroundColor: MyColors.kPrimaryColor,
               onPressed: () {
-                context.read<AuthCubit>().logIn();
+                if (context
+                    .read<AuthCubit>()
+                    .loginFormKey
+                    .currentState!
+                    .validate()) {
+                  context.read<AuthCubit>().logIn();
+                }
               },
             ),
           ),
