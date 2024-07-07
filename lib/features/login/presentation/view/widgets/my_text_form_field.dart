@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/constants/constants.dart';
 import '../../../../../main.dart';
 
 class MyTextFormField extends StatelessWidget {
@@ -24,7 +25,7 @@ class MyTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: appTextDirection,
+      textDirection: AppConstants.appTextDirection,
       child: Padding(
         padding: EdgeInsets.only(bottom: padding ?? 15.0),
         child: TextFormField(

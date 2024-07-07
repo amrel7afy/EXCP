@@ -1,6 +1,8 @@
 //--------------- Routing -----------------
 
 
+import 'dart:ui';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const Duration kTransitionDurationVal=Duration(milliseconds: 1300);
@@ -24,4 +26,6 @@ class AppConstants{
  static const isOnBoardingKey='isOnBoardingKey';
  static const userToken='';
  static const double k8Radius=8.0;
+ static  TextDirection appTextDirection=TextDirection.rtl;
+ static const String usersListKey='';
 }

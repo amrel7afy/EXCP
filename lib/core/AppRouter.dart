@@ -2,12 +2,15 @@ import 'dart:developer';
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test1/core/di/locator.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/home/presentation/view/home_view.dart';
 import 'package:test1/features/select_address/presentation/view/select_address_view.dart';
+import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_cubit.dart';
 
 import '../features/login/presentation/view/login_view.dart';
-import '../features/select_address/presentation/new_address_view.dart';
+import '../features/select_address/presentation/view/new_address_view.dart';
 import '../features/select_address/presentation/view/empty_address_view.dart';
 import '../features/service_per_hour/presentation/view/service_per_hour_view.dart';
 import '../features/sign_up/presentation/view/sign_up_view.dart';
@@ -47,6 +50,7 @@ class AppRouter {
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+
       case emptyAddressView:
         return MaterialPageRoute(
           builder: (context) =>
@@ -55,7 +59,8 @@ class AppRouter {
       case newAddressView:
         return MaterialPageRoute(
           builder: (context) =>
-          const NewAddressView(),
+          BlocProvider(create: (BuildContext context) =>locator<AddressCubit>(),
+          child: const NewAddressView()),
         );
       case selectAddressView:
         return MaterialPageRoute(
