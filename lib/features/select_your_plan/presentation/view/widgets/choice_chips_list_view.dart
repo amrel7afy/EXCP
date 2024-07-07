@@ -12,6 +12,7 @@ import 'package:test1/features/home/presentation/view/widgets/sevice_card.dart';
 import 'nationality_chip.dart';
 
 class NationalityChipsListView extends StatefulWidget {
+
   const NationalityChipsListView({super.key});
 
   @override

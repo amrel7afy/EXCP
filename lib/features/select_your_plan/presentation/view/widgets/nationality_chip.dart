@@ -6,9 +6,9 @@ import 'package:test1/core/theming/my_colors.dart';
 import 'package:test1/core/theming/styles.dart';
 
 class NationalityChip extends StatelessWidget {
-  bool isSelected;
+ final bool isSelected;
   final VoidCallback onTap;
-  NationalityChip({
+  const NationalityChip({
     super.key,
     required this.isSelected, required this.onTap
   });
