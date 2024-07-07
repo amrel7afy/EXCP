@@ -8,6 +8,7 @@ import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/home/presentation/view/home_view.dart';
 import 'package:test1/features/select_address/presentation/view/select_address_view.dart';
 import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_cubit.dart';
+import 'package:test1/features/select_your_plan/presentation/view/select_your_plan_view.dart';
 
 import '../features/login/presentation/view/login_view.dart';
 import '../features/select_address/presentation/view/new_address_view.dart';
@@ -47,10 +48,16 @@ class AppRouter {
   static const String selectAddressView = '/selectAddressView';
   static const String emptyAddressView = '/emptyAddressView';
   static const String newAddressView = '/newAddressView';
+  static const String selectYourPlanView = '/selectYourPlanView';
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
 
+      case selectYourPlanView:
+        return MaterialPageRoute(
+          builder: (context) =>
+          const SelectYourPlanView(),
+        );
       case emptyAddressView:
         return MaterialPageRoute(
           builder: (context) =>

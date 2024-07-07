@@ -19,10 +19,9 @@ class _NewAddressBodyState extends State<NewAddressBody> {
       builder: (context, state) {
         return PageView(
           controller: context.read<AddressCubit>().pageController,
-          children: [
-            const EnterAddressDataPage(),
-            const AddressOnTheMapViewPage(),
-            Container(color: Colors.blue),
+          children: const [
+            EnterAddressDataPage(),
+            AddressOnTheMapViewPage(),
           ],
         );
       },

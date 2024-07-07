@@ -21,11 +21,16 @@ const double cardBorderRadius=10.0;
 
 const kGTSectraFine='GT Sectra Fine';
 
-class AppConstants{
+abstract class AppConstants{
  static const isLoggedInKey='isSignedInKey';
  static const isOnBoardingKey='isOnBoardingKey';
  static const userToken='';
  static const double k8Radius=8.0;
  static  TextDirection appTextDirection=TextDirection.rtl;
  static const String usersListKey='';
+
+
+ static const double k8Padding=10.0;
+ static  double k30HomeViewPadding=30.0.w;
+
 }
