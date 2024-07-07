@@ -8,6 +8,7 @@ import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/my_colors.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/features/select_your_plan/presentation/view/widgets/plan_duration_list_view.dart';
+import 'collapse_card.dart';
 import 'my_choice_chip.dart';
 import 'choice_chips_list_view.dart';
 
@@ -21,7 +22,6 @@ class SelectYourPlanViewBody extends StatefulWidget {
 class _SelectYourPlanViewBodyState extends State<SelectYourPlanViewBody> {
   bool is4Hours = true;
   bool isAM = true;
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -31,7 +31,7 @@ class _SelectYourPlanViewBodyState extends State<SelectYourPlanViewBody> {
           const VerticalSpacer(24),
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: AppConstants.k30HomeViewPadding),
+                horizontal: AppConstants.k30ViewPadding),
             child: Text(
               "الجنسية",
               style: MyTextStyles.font12Weight500.copyWith(color: Colors.black),
@@ -39,17 +39,17 @@ class _SelectYourPlanViewBodyState extends State<SelectYourPlanViewBody> {
           ),
           const VerticalSpacer(12),
           const NationalityChipsListView(),
-
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: AppConstants.k30HomeViewPadding),
+                horizontal: AppConstants.k30ViewPadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const VerticalSpacer(12),
                 Text(
                   "الفترة",
-                  style: MyTextStyles.font12Weight500.copyWith(color: Colors.black),
+                  style: MyTextStyles.font12Weight500
+                      .copyWith(color: Colors.black),
                 ),
                 const VerticalSpacer(12),
                 buildIntervalRow(),
@@ -87,12 +87,14 @@ class _SelectYourPlanViewBodyState extends State<SelectYourPlanViewBody> {
                   style: MyTextStyles.font12Weight500
                       .copyWith(color: Colors.black),
                 ),
-
               ],
             ),
           ),
           const VerticalSpacer(12),
-          const PlanDurationChipsListView()
+          const PlanDurationChipsListView(),
+          const VerticalSpacer(17),
+          const CollapseCard(),const VerticalSpacer(80),
+
         ],
       ),
     );
@@ -191,4 +193,24 @@ class _SelectYourPlanViewBodyState extends State<SelectYourPlanViewBody> {
       ],
     );
   }
+}
+class Item {
+  Item({
+    required this.expandedValue,
+    required this.headerValue,
+    this.isExpanded = false,
+  });
+
+  String expandedValue;
+  String headerValue;
+  bool isExpanded;
+}
+
+List<Item> generateItems(int numberOfItems) {
+  return List<Item>.generate(numberOfItems, (int index) {
+    return Item(
+      headerValue: 'Panel $index',
+      expandedValue: 'This is item number $index',
+    );
+  });
 }

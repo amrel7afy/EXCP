@@ -24,7 +24,7 @@ class _PlanDurationChipsListViewState extends State<PlanDurationChipsListView> {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Container(
-            margin:  EdgeInsets.only(left: 5.w,right: index==0?AppConstants.k30HomeViewPadding:0),
+            margin:  EdgeInsets.only(left: 5.w,right: index==0?AppConstants.k30ViewPadding:0),
             width: 71.w,
             child: MyChoiceChip(onTap: (){
               setState(() {
