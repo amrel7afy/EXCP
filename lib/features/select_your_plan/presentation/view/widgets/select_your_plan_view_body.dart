@@ -9,6 +9,7 @@ import 'package:test1/core/theming/my_colors.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/features/select_your_plan/presentation/view/widgets/plan_duration_list_view.dart';
 import 'collapse_card.dart';
+import 'expansion_list_view.dart';
 import 'my_choice_chip.dart';
 import 'choice_chips_list_view.dart';
 
@@ -21,82 +22,88 @@ class SelectYourPlanViewBody extends StatefulWidget {
 
 class _SelectYourPlanViewBodyState extends State<SelectYourPlanViewBody> {
   bool is4Hours = true;
+  bool isFrom8AM = true;
   bool isAM = true;
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const VerticalSpacer(24),
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: AppConstants.k30ViewPadding),
-            child: Text(
-              "الجنسية",
-              style: MyTextStyles.font12Weight500.copyWith(color: Colors.black),
-            ),
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const VerticalSpacer(24),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: AppConstants.k30ViewPadding),
+                child: Text(
+                  "الجنسية",
+                  style: MyTextStyles.font12Weight500
+                      .copyWith(color: Colors.black),
+                ),
+              ),
+              const VerticalSpacer(12),
+              const NationalityChipsListView(),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: AppConstants.k30ViewPadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const VerticalSpacer(12),
+                    Text(
+                      "الفترة",
+                      style: MyTextStyles.font12Weight500
+                          .copyWith(color: Colors.black),
+                    ),
+                    const VerticalSpacer(12),
+                    buildIntervalRow(),
+                    const VerticalSpacer(15),
+                    Text(
+                      "مواعيد التوصيل",
+                      style: MyTextStyles.font12Weight500
+                          .copyWith(color: Colors.black),
+                    ),
+                    Text(
+                      "الفترة الصباحية : من 8 ص الى 5 م     الفترة المسائية : من 5 م الى 9 م",
+                      maxLines: 1,
+                      style: MyTextStyles.font11Weight500
+                          .copyWith(color: Colors.black, height: 2.5),
+                    ),
+                    const VerticalSpacer(12),
+                    Text(
+                      "عدد الساعات",
+                      style: MyTextStyles.font12Weight500
+                          .copyWith(color: Colors.black),
+                    ),
+                    const VerticalSpacer(12),
+                    buildHoursRow(),
+                    const VerticalSpacer(12),
+                    Text(
+                      "توقيت الزيارة",
+                      style: MyTextStyles.font12Weight500
+                          .copyWith(color: Colors.black),
+                    ),
+                    const VerticalSpacer(12),
+                    buildTimeOfVisitRow(),
+                    const VerticalSpacer(20),
+                    Text(
+                      "مدة الباقة",
+                      style: MyTextStyles.font12Weight500
+                          .copyWith(color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              const VerticalSpacer(12),
+              const PlanDurationChipsListView(),
+              const VerticalSpacer(17),
+            ],
           ),
-          const VerticalSpacer(12),
-          const NationalityChipsListView(),
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: AppConstants.k30ViewPadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const VerticalSpacer(12),
-                Text(
-                  "الفترة",
-                  style: MyTextStyles.font12Weight500
-                      .copyWith(color: Colors.black),
-                ),
-                const VerticalSpacer(12),
-                buildIntervalRow(),
-                const VerticalSpacer(15),
-                Text(
-                  "مواعيد التوصيل",
-                  style: MyTextStyles.font12Weight500
-                      .copyWith(color: Colors.black),
-                ),
-                Text(
-                  "الفترة الصباحية : من 8 ص الى 5 م     الفترة المسائية : من 5 م الى 9 م",
-                  maxLines: 1,
-                  style: MyTextStyles.font11Weight500
-                      .copyWith(color: Colors.black, height: 2.5),
-                ),
-                const VerticalSpacer(12),
-                Text(
-                  "عدد الساعات",
-                  style: MyTextStyles.font12Weight500
-                      .copyWith(color: Colors.black),
-                ),
-                const VerticalSpacer(12),
-                buildHoursRow(),
-                const VerticalSpacer(12),
-                Text(
-                  "توقيت الزيارة",
-                  style: MyTextStyles.font12Weight500
-                      .copyWith(color: Colors.black),
-                ),
-                const VerticalSpacer(12),
-                buildTimeOfVisitRow(),
-                const VerticalSpacer(20),
-                Text(
-                  "مدة الباقة",
-                  style: MyTextStyles.font12Weight500
-                      .copyWith(color: Colors.black),
-                ),
-              ],
-            ),
-          ),
-          const VerticalSpacer(12),
-          const PlanDurationChipsListView(),
-          const VerticalSpacer(17),
-          const CollapseCard(),const VerticalSpacer(80),
-
-        ],
-      ),
+        ),
+        const ExpansionListView()
+      ],
     );
   }
 
@@ -140,10 +147,10 @@ class _SelectYourPlanViewBodyState extends State<SelectYourPlanViewBody> {
           child: MyChoiceChip(
             onTap: () {
               setState(() {
-                is4Hours = true;
+                isFrom8AM = true;
               });
             },
-            toggle: is4Hours,
+            toggle: isFrom8AM,
             text: "من 8ص الي 10ص",
           ),
         ),
@@ -153,10 +160,10 @@ class _SelectYourPlanViewBodyState extends State<SelectYourPlanViewBody> {
           child: MyChoiceChip(
             onTap: () {
               setState(() {
-                is4Hours = false;
+                isFrom8AM = false;
               });
             },
-            toggle: !is4Hours,
+            toggle: !isFrom8AM,
             text: 'من10ص الي 12ص',
           ),
         )
@@ -193,24 +200,4 @@ class _SelectYourPlanViewBodyState extends State<SelectYourPlanViewBody> {
       ],
     );
   }
-}
-class Item {
-  Item({
-    required this.expandedValue,
-    required this.headerValue,
-    this.isExpanded = false,
-  });
-
-  String expandedValue;
-  String headerValue;
-  bool isExpanded;
-}
-
-List<Item> generateItems(int numberOfItems) {
-  return List<Item>.generate(numberOfItems, (int index) {
-    return Item(
-      headerValue: 'Panel $index',
-      expandedValue: 'This is item number $index',
-    );
-  });
 }
