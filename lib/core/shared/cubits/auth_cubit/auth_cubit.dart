@@ -7,6 +7,7 @@ import 'package:test1/core/shared/cubits/auth_cubit/auth_states.dart';
 import 'package:test1/core/shared/models/user.dart';
 
 import '../../../../main.dart';
+import '../../../constants/constants.dart';
 import '../../../helper/app_regex.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
@@ -52,7 +53,7 @@ class AuthCubit extends Cubit<AuthStates> {
     assignUserData(user);
     users.add(user);
     String jsonData = User.encode(users);
-    await SharedPrefHelper.setData(usersListKey, jsonData);
+    await SharedPrefHelper.setData(AppConstants.usersListKey, jsonData);
     emit(AuthCreateUserSuccess());
   }
 
@@ -72,7 +73,7 @@ class AuthCubit extends Cubit<AuthStates> {
   }
 
   Future<void> getUsersFromCache() async {
-    String users = await SharedPrefHelper.getString(usersListKey);
+    String users = await SharedPrefHelper.getString(AppConstants.usersListKey);
 
     this.users = User.decode(users);
     log(this.users.length.toString());

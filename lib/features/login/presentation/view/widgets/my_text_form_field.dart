@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/constants/constants.dart';
 import '../../../../../main.dart';
 
 class MyTextFormField extends StatelessWidget {
@@ -8,6 +9,7 @@ class MyTextFormField extends StatelessWidget {
   final bool? isObscureText;
   final TextEditingController controller;
   final double? padding;
+  final int? maxLines;
   final Function(String? value) validator;
 
   const MyTextFormField({
@@ -17,22 +19,24 @@ class MyTextFormField extends StatelessWidget {
     this.isObscureText,
     required this.controller,
     this.padding,
-    required this.validator,
+    required this.validator, this.maxLines,
   });
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: appTextDirection,
+      textDirection: AppConstants.appTextDirection,
       child: Padding(
         padding: EdgeInsets.only(bottom: padding ?? 15.0),
         child: TextFormField(
           validator: (value) {
             return validator(value);
           },
+          maxLines: maxLines??1,
           controller: controller,
           obscureText: isObscureText ?? false,
           decoration: InputDecoration(
+
             floatingLabelBehavior: FloatingLabelBehavior.always,
             // تثبيت التسمية
 

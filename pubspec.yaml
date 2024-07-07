@@ -47,6 +47,9 @@ dependencies:
   carousel_slider: ^4.2.1
 # automatically resizes text to fit perfectly within its bounds.
   auto_size_text: ^3.0.0
+
+  font_awesome_flutter:
+  get_it: ^7.7.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

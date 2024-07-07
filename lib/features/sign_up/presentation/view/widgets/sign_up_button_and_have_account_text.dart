@@ -12,6 +12,7 @@ import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/custom_button.dart';
 import 'package:test1/features/login/presentation/view/login_view.dart';
 
+import '../../../../../core/constants/constants.dart';
 import '../../../../../main.dart';
 
 class SignUpButtonAndHaveAccountText extends StatelessWidget {
@@ -50,7 +51,7 @@ class SignUpButtonAndHaveAccountText extends StatelessWidget {
         ),
         const VerticalSpacer(12),
         Directionality(
-          textDirection: appTextDirection,
+          textDirection: AppConstants.appTextDirection,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

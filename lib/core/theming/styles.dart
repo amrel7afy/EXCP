@@ -5,20 +5,35 @@ import 'my_colors.dart';
 
 abstract class MyTextStyles {
   //----------------------------------------------
+  static TextStyle font11Weight500 = TextStyle(
+    fontSize: 11.sp,
+    fontWeight: FontWeight.w500,
+    color: MyColors.kPrimaryColor,
+  );
+  static TextStyle font11Weight600 = TextStyle(
+    fontSize: 11.sp,
+    fontWeight: FontWeight.w600,
+    color: MyColors.kPrimaryColor,
+  );
+  static TextStyle font11Weight700 = TextStyle(
+    fontSize: 11.sp,
+    fontWeight: FontWeight.w700,
+    color: MyColors.kPrimaryColor,
+  );//----------------------------------------------
   static TextStyle font12Weight500 = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeight.w500,
-    color: MyColors.kGreyColor,
+    color: MyColors.kPrimaryColor,
   );
   static TextStyle font12Weight600 = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeight.w600,
-    color: MyColors.kGreyColor,
+    color: MyColors.kPrimaryColor,
   );
   static TextStyle font12Weight700 = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeight.w700,
-    color: MyColors.kGreyColor,
+    color: MyColors.kPrimaryColor,
   );
   //----------------------------------------------
   static TextStyle font13Weight500 = TextStyle(

@@ -5,6 +5,7 @@ import 'package:test1/core/theming/styles.dart';
 import 'package:test1/features/login/presentation/view/widgets/login_form.dart';
 import 'package:test1/features/login/presentation/view/widgets/login_logo_and_upper_text.dart';
 import 'package:test1/main.dart';
+import '../../../../../core/constants/constants.dart';
 import 'login_button_and_create_account_text.dart';
 
 class LoginViewBody extends StatefulWidget {
@@ -47,7 +48,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   const Text('English'),
                   const HorizontalSpacer(7),
                   Directionality(
-                    textDirection: appTextDirection,
+                    textDirection: AppConstants.appTextDirection,
                     child: Switch(
                       inactiveThumbColor: MyColors.kPrimaryColor,
                       inactiveTrackColor: const Color(0xffACACAC),

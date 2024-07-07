@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/constants/methods.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/custom_button.dart';
-import 'package:test1/main.dart';
 
 
 class ServiceAlertDialogContent extends StatelessWidget {
@@ -50,8 +48,7 @@ class ServiceAlertDialogContent extends StatelessWidget {
                   text: 'رجوع',
                   backGroundColor: Colors.white,
                   onPressed: () {
-                    Navigator.of(context)
-                        .pop(); // Close the dialog on button press
+                    context.pop(); // Close the dialog on button press
                   },
                 ),
               ),

@@ -11,6 +11,7 @@ import 'package:test1/core/theming/my_colors.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/custom_button.dart';
 
+import '../../../../../core/constants/constants.dart';
 import '../../../../../main.dart';
 import '../../../../sign_up/presentation/view/sign_up_view.dart';
 
@@ -57,7 +58,7 @@ class LoginButtonAndCreateAccountText extends StatelessWidget {
         ),
         const VerticalSpacer(12),
         Directionality(
-          textDirection: appTextDirection,
+          textDirection: AppConstants.appTextDirection,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

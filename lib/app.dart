@@ -22,6 +22,8 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context)=>AuthCubit(),
           child: MaterialApp(
             theme: ThemeData(
+              useMaterial3: true,
+              colorSchemeSeed:MyColors.kPrimaryColor ,
               fontFamily: 'Alexandria',
               appBarTheme: const AppBarTheme(
                 backgroundColor: MyColors.kAppBarBackGroundColor

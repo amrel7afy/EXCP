@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-abstract class MyColors{
-  static const  kPrimaryColor=Color(0xff000000);
-  static const  kBlackColor=Color(0xff242424);
+abstract class MyColors {
+  static const kPrimaryColor = Color(0xff000000);
+  static const kBlackColor = Color(0xff242424);
 
-  static const  kMoreGreyColor=Color(0xff616161);
-  static const    kGreenColor=Color(0xff24A19D);
-  static const    kAppBarBackGroundColor=Color(0xffF8F8F8);
+  static const kMoreGreyColor = Color(0xff616161);
+  static const kGreenColor = Color(0xff24A19D);
+  static const kAppBarBackGroundColor = Color(0xffF8F8F8);
+  static const kPinkColor = Color(0xffFFE5E5);
 
-  static const  kWhiteColor=Color(0xffF4F8FF);
-  static const  kGreyColor=Color(0xff757575);
-  static const  kLightGreyColor=Color(0xffC2C2C2);
-  static const  kLighterGreyColor=Color(0xffEDEDED);
-  static const  kMostLighterGreyColor=Color(0xffFDFDFF);
-  static const  kRedColor=Color(0xffFF4C5E);
-
+  static const kWhiteColor = Color(0xffF4F8FF);
+  static const kGreyColor = Color(0xff757575);
+  static const kLightGreyColor = Color(0xffC2C2C2);
+  static const kLighterGreyColor = Color(0xffEDEDED);
+  static const kMostLighterGreyColor = Color(0xffFDFDFF);
+  static const kRedColor = Color(0xffFF4C5E);
 
   static const int primaryValue = 0xFF247CFF;
   static const MaterialColor kMapPrimaryColor = MaterialColor(
