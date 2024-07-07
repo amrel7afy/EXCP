@@ -42,7 +42,6 @@ class MyDropdownFormField<T> extends StatelessWidget {
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             labelText: labelText,
-
             labelStyle: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
