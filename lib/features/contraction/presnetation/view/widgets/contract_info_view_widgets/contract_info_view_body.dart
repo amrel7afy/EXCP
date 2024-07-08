@@ -13,6 +13,7 @@ import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/custom_button.dart';
 import 'package:test1/core/widgets/drop_down_floating_label_form_field.dart';
 import 'package:test1/core/widgets/select_date.dart';
+import 'package:test1/core/widgets/show_alert_dialog.dart';
 import 'package:test1/features/login/presentation/view/widgets/my_text_form_field.dart';
 import 'package:test1/features/select_your_plan/presentation/view/widgets/collapse_card.dart';
 
@@ -36,32 +37,7 @@ class _ContractInfoViewBodyState extends State<ContractInfoViewBody> {
           children: [
             const CobunTextFormField(),
             const VerticalSpacer(20),
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 1.2),
-                      borderRadius: BorderRadius.circular(10)),
-                  width: getWidth(context),
-                  child: const FavoriteDays(),
-                ),
-                Positioned(
-                  top: -10,
-                  right: 10,
-                  child: Container(
-                    alignment: Alignment.center,
-                    color: Colors.white,
-                    width: 120.w,
-                    child: Text(
-                      'الأيام المفضلة',
-                      style: MyTextStyles.font14Weight500,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            const FavoriteDaysContainer(),
             const VerticalSpacer(23),
             const CollapseCard(
               showVisitPrice: true,
@@ -80,39 +56,136 @@ class _ContractInfoViewBodyState extends State<ContractInfoViewBody> {
               ),
             ),
             const VerticalSpacer(37),
-            Row(
-              children: [
-                Flexible(
-                  child: CustomButton(
-                    borderRadius: BorderRadius.circular(8),
-                    textStyle: MyTextStyles.font18Weight500
-                        .copyWith(color: Colors.black),
-                    text: 'عرض الزيارات',
-                    backGroundColor: Colors.white,
-                    onPressed: () {
-
-                    },
-                  ),
-                ),
-                const HorizontalSpacer(40),
-                // Add some space between buttons
-                Flexible(
-                  child: CustomButton(
-                    borderRadius: BorderRadius.circular(8),
-                    textStyle: MyTextStyles.font18Weight500
-                        .copyWith(color: Colors.white),
-                    text: 'إتمام التعاقد',
-                    backGroundColor: Colors.black,
-                    onPressed: () {
-
-                    },
-                  ),
-                ),
-              ],
-            )
+            const Actions()
           ],
         ),
       ),
+    );
+  }
+}
+
+class FavoriteDaysContainer extends StatelessWidget {
+  const FavoriteDaysContainer({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+              border: Border.all(width: 1.2),
+              borderRadius: BorderRadius.circular(10)),
+          width: getWidth(context),
+          child: const FavoriteDays(),
+        ),
+        Positioned(
+          top: -10,
+          right: 10,
+          child: Container(
+            alignment: Alignment.center,
+            color: Colors.white,
+            width: 120.w,
+            child: Text(
+              'الأيام المفضلة',
+              style: MyTextStyles.font14Weight500,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class Actions extends StatelessWidget {
+  const Actions({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Flexible(
+          child: CustomButton(
+            borderRadius: BorderRadius.circular(8),
+            textStyle:
+                MyTextStyles.font18Weight500.copyWith(color: Colors.black),
+            text: 'عرض الزيارات',
+            backGroundColor: Colors.white,
+            onPressed: () {
+              showAlertDialog(context, const ShowVisitsDialogContent());
+            },
+          ),
+        ),
+        const HorizontalSpacer(40),
+        // Add some space between buttons
+        Flexible(
+          child: CustomButton(
+            borderRadius: BorderRadius.circular(8),
+            textStyle:
+                MyTextStyles.font18Weight500.copyWith(color: Colors.white),
+            text: 'إتمام التعاقد',
+            backGroundColor: Colors.black,
+            onPressed: () {
+              context.pushNamed(AppRouter.contractSuccessView);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ShowVisitsDialogContent extends StatelessWidget {
+  const ShowVisitsDialogContent({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'الزيارات المتوقعة',
+          style: MyTextStyles.font18Weight600
+              .copyWith(color: MyColors.kPrimaryColor),
+        ),
+        const VerticalSpacer(17),
+        ...List.generate(
+          3,
+          (index) {
+            return Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.only(bottom: 4),
+              alignment: Alignment.centerRight,
+              height: 44.h,
+              width: getWidth(context),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.grey[400]),
+              child: Text(
+                'الأحد, ‏26 أغسطس 2023',
+                style: MyTextStyles.font16Weight600
+                    .copyWith(color: MyColors.kPrimaryColor),
+              ),
+            );
+          },
+        ),
+        const VerticalSpacer(22),
+        CustomButton(
+          buttonWidth: 108.w,
+            textStyle: MyTextStyles.font18Weight600.copyWith(color: Colors.white),
+            text: 'إغلاق',
+            backGroundColor: MyColors.kPrimaryColor,
+            onPressed: () {
+            context.pop();
+
+            },)
+      ],
     );
   }
 }

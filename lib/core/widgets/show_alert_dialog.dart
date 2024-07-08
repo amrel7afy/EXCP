@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/constants.dart';
@@ -27,7 +29,10 @@ showAlertDialog(BuildContext context, Widget content) async {
                   ),
                 ),
               ),
-              content,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 22),
+                child: content,
+              ),
             ],
           ),
         ),
