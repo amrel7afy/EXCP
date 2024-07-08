@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:test1/core/theming/my_colors.dart';
 import 'package:test1/core/theming/styles.dart';
 
-import '../../../../../main.dart';
 import '../constants/constants.dart';
 
 class MyDropdownFormField<T> extends StatelessWidget {
@@ -32,6 +31,7 @@ class MyDropdownFormField<T> extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(bottom: padding ?? 15.0),
         child: DropdownButtonFormField<T>(
+
           style: MyTextStyles.font15Weight600.copyWith(color: MyColors.kPrimaryColor),
           value: value,
           icon: const Icon(
@@ -64,7 +64,9 @@ class MyDropdownFormField<T> extends StatelessWidget {
           items: items.map((T item) {
             return DropdownMenuItem<T>(
               value: item,
-              child: itemBuilder(item),
+              child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: itemBuilder(item)),
             );
           }).toList(),
           validator: (value) => validator(value),
