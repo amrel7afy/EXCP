@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final double? padding;
   final BorderRadius? borderRadius;
   final Color backGroundColor;
   final TextStyle textStyle;
@@ -18,13 +19,16 @@ class CustomButton extends StatelessWidget {
       required this.onPressed,
       this.borderRadius,
       this.buttonWidth,
-      this.buttonHeight});
+      this.buttonHeight, this.padding});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
+        padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
+          EdgeInsets.all(padding ?? 3),
+        ),
         fixedSize: WidgetStateProperty.all(
             Size(buttonWidth?.w ?? double.maxFinite, buttonHeight?.h ?? 50.h)),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -42,7 +46,7 @@ class CustomButton extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(5),
+        padding:  EdgeInsets.all(padding??3),
         child: Text(
           text,
           style: textStyle,

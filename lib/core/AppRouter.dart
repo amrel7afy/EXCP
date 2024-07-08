@@ -11,6 +11,7 @@ import 'package:test1/features/select_address/presentation/view/select_address_v
 import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_cubit.dart';
 import 'package:test1/features/select_your_plan/presentation/view/select_your_plan_view.dart';
 
+import '../features/contraction/presnetation/view/contract_info_view.dart';
 import '../features/login/presentation/view/login_view.dart';
 import '../features/select_address/presentation/view/new_address_view.dart';
 import '../features/select_address/presentation/view/empty_address_view.dart';
@@ -51,9 +52,15 @@ class AppRouter {
   static const String newAddressView = '/newAddressView';
   static const String selectYourPlanView = '/selectYourPlanView';
   static const String designYourOfferView = '/designYourOfferView';
+  static const String contractInfoView = '/contractInfoView';
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case contractInfoView:
+        return MaterialPageRoute(
+          builder: (context) =>
+          const ContractInfoView(),
+        );
       case designYourOfferView:
         return MaterialPageRoute(
           builder: (context) =>

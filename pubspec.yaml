@@ -47,6 +47,8 @@ dependencies:
   carousel_slider: ^4.2.1
 # automatically resizes text to fit perfectly within its bounds.
   auto_size_text: ^3.0.0
+# The Flutter Calendar widget has nine built-in configurable views that provide basic functionalities for scheduling and representing appointments/events efficiently.
+  syncfusion_flutter_calendar: ^26.1.40+1
 
   font_awesome_flutter:
   get_it: ^7.7.0

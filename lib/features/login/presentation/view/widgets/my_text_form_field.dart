@@ -10,6 +10,8 @@ class MyTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final double? padding;
   final int? maxLines;
+  final String?hint;
+  final TextStyle?hintStyle;
   final Function(String? value) validator;
 
   const MyTextFormField({
@@ -19,7 +21,7 @@ class MyTextFormField extends StatelessWidget {
     this.isObscureText,
     required this.controller,
     this.padding,
-    required this.validator, this.maxLines,
+    required this.validator, this.maxLines, this.hint, this.hintStyle,
   });
 
   @override
@@ -29,6 +31,7 @@ class MyTextFormField extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(bottom: padding ?? 15.0),
         child: TextFormField(
+
           validator: (value) {
             return validator(value);
           },
@@ -36,7 +39,8 @@ class MyTextFormField extends StatelessWidget {
           controller: controller,
           obscureText: isObscureText ?? false,
           decoration: InputDecoration(
-
+            hintText: hint,
+            hintStyle: hintStyle,
             floatingLabelBehavior: FloatingLabelBehavior.always,
             // تثبيت التسمية
 
