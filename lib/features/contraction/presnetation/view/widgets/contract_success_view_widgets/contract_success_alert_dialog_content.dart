@@ -39,7 +39,9 @@ class ContractSuccessAlertDialogContent extends StatelessWidget {
             child: CustomButton(
               textStyle: MyTextStyles.font18Weight600.copyWith(color: Colors.white),
               text: 'طلباتي',
-              onPressed: () {},
+              onPressed: () {
+                context.pushNamed(AppRouter.myOrdersView);
+              },
             ),
           ),
           const VerticalSpacer(17),
