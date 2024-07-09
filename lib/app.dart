@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/helper/cache_helper.dart';
 import 'package:test1/core/shared/cubits/auth_cubit/auth_cubit.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         textDirection: TextDirection.rtl,
         child: BlocProvider(
           create: (BuildContext context)=>AuthCubit(),
-          child: MaterialApp(
+          child: GetMaterialApp(
             theme: ThemeData(
               useMaterial3: true,
               colorSchemeSeed:MyColors.kPrimaryColor ,
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
               )
             ),
            initialRoute: AppRouter.loginView,
-            onGenerateRoute: AppRouter().generateRoute,
+             onGenerateRoute: AppRouter().generateRoute,
 
           ),
         ),

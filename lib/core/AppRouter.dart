@@ -1,19 +1,22 @@
 import 'dart:developer';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/di/locator.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/design_your_offer/presentation/view/design_your_offer_view.dart';
 import 'package:test1/features/home/presentation/view/home_view.dart';
+import 'package:test1/features/my_orders/presentation/view_model/orders_cubit/orders_cubit.dart';
 import 'package:test1/features/select_address/presentation/view/select_address_view.dart';
 import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_cubit.dart';
 import 'package:test1/features/select_your_plan/presentation/view/select_your_plan_view.dart';
 
+import '../features/bottom_nav_bar/presentation/view/BottomNavBar.dart';
 import '../features/contraction/presnetation/view/contract_info_view.dart';
 import '../features/contraction/presnetation/view/contract_success_view.dart';
 import '../features/login/presentation/view/login_view.dart';
+import '../features/my_orders/presentation/view/add_new_order.dart';
+import '../features/my_orders/presentation/view/my_orders_view.dart';
 import '../features/select_address/presentation/view/new_address_view.dart';
 import '../features/select_address/presentation/view/empty_address_view.dart';
 import '../features/service_per_hour/presentation/view/service_per_hour_view.dart';
@@ -43,6 +46,7 @@ class AppRouter {
   }
 
   static const String homeView = '/homeView';
+  static const String bottomNavBar = '/bottomNavBar';
   static const String onBoardingView = '/onBoardingView';
   static const String loginView = '/LoginView';
   static const String searchView = '/searchView';
@@ -55,70 +59,76 @@ class AppRouter {
   static const String designYourOfferView = '/designYourOfferView';
   static const String contractInfoView = '/contractInfoView';
   static const String contractSuccessView = '/contractSuccessView';
+  static const String myOrdersView = '/myOrdersView';
+  static const String addNewOrderView = '/addNewOrderView';
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case myOrdersView:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+              create: (context)=>OrdersCubit(),
+              child: const MyOrdersView()),
+        );
+      case addNewOrderView:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+              create: (context)=>OrdersCubit(),
+              child: const AddNewOrderView()),
+        );
       case contractSuccessView:
         return MaterialPageRoute(
-          builder: (context) =>
-          const ContractSuccessView(),
+          builder: (context) => const ContractSuccessView(),
         );
       case contractInfoView:
         return MaterialPageRoute(
-          builder: (context) =>
-          const ContractInfoView(),
+          builder: (context) => const ContractInfoView(),
         );
       case designYourOfferView:
         return MaterialPageRoute(
-          builder: (context) =>
-          const DesignYourOfferView(),
+          builder: (context) => const DesignYourOfferView(),
         );
       case selectYourPlanView:
         return MaterialPageRoute(
-          builder: (context) =>
-          const SelectYourPlanView(),
+          builder: (context) => const SelectYourPlanView(),
         );
       case emptyAddressView:
         return MaterialPageRoute(
-          builder: (context) =>
-          const EmptyAddressView(),
+          builder: (context) => const EmptyAddressView(),
         );
       case newAddressView:
         return MaterialPageRoute(
-          builder: (context) =>
-          BlocProvider(create: (BuildContext context) =>locator<AddressCubit>(),
-          child: const NewAddressView()),
+          builder: (context) => BlocProvider(
+              create: (BuildContext context) => locator<AddressCubit>(),
+              child: const NewAddressView()),
         );
       case selectAddressView:
         return MaterialPageRoute(
-          builder: (context) =>
-          const SelectAddressView(),
+          builder: (context) => const SelectAddressView(),
         );
       case servicePerHourView:
         return MaterialPageRoute(
-          builder: (context) =>
-          const ServicePerHourView(),
+          builder: (context) => const ServicePerHourView(),
+        );
+      case bottomNavBar:
+        return MaterialPageRoute(
+          builder: (context) => const BottomNavBar(),
         );
       case homeView:
         return MaterialPageRoute(
-          builder: (context) =>
-          const HomeView(),
+          builder: (context) => const HomeView(),
         );
       case loginView:
         return MaterialPageRoute(
-          builder: (context) =>
-          const LoginView(),
+          builder: (context) => const LoginView(),
         );
       case singUpView:
         return MaterialPageRoute(
-          builder: (context) =>
-          const SignUpView(),
+          builder: (context) => const SignUpView(),
         );
 
         return null;
     }
     return null;
   }
-
-
 }

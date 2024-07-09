@@ -30,7 +30,7 @@ class LoginButtonAndCreateAccountText extends StatelessWidget {
             } if (state is AuthSuccess) {
               ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('اهلا بك')));
-            context.pushNamed(AppRouter.homeView);
+            context.pushNamed(AppRouter.bottomNavBar);
             }
 
           },
@@ -51,7 +51,7 @@ class LoginButtonAndCreateAccountText extends StatelessWidget {
                     .validate()) {
                   context.read<AuthCubit>().logIn();
                 }*/
-                context.pushNamed(AppRouter.homeView);
+                context.pushNamed(AppRouter.bottomNavBar);
               },
             ),
           ),

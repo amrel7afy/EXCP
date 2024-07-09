@@ -3,11 +3,13 @@ import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 
 import '../../../../../core/theming/my_colors.dart';
 import '../../../../../core/theming/styles.dart';
+import '../../../data/order_model.dart';
 
 class MyOrdersCollapseDetails extends StatelessWidget {
+  final Order order;
   final bool isExpanded;
   const MyOrdersCollapseDetails({
-    super.key, required this.isExpanded,
+    super.key, required this.isExpanded, required this.order,
   });
 
   @override
@@ -31,17 +33,17 @@ class MyOrdersCollapseDetails extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const VerticalSpacer(11),
+                 const VerticalSpacer(11),
 
                 Text(
-                  'صاحب الطلب: Ahmed Abo Alfadl ',
+                  'صاحب الطلب: ${order.orderName} ',
                   style: MyTextStyles.font14Weight500.copyWith(
                     color: MyColors.kPrimaryColor,
                     height: 2,
                   ),
                 ),
                 Text(
-                  'تاريخ الطلب : 20/05/2021 ',
+                  'تاريخ الطلب : ${order.orderDate} ',
                   style: MyTextStyles.font14Weight500.copyWith(
                     color: MyColors.kPrimaryColor,
                     height: 2,
@@ -49,7 +51,7 @@ class MyOrdersCollapseDetails extends StatelessWidget {
                 ),
 
                 if(isExpanded)
-                  const MyOrderExpandedContent()
+                   MyOrderExpandedContent(order: order,)
               ],
             ),
           ),
@@ -61,8 +63,9 @@ class MyOrdersCollapseDetails extends StatelessWidget {
 }
 
 class MyOrderExpandedContent extends StatelessWidget {
+  final Order order;
   const MyOrderExpandedContent({
-    super.key,
+    super.key, required this.order,
   });
 
   @override
@@ -71,14 +74,14 @@ class MyOrderExpandedContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
                      children: [
      Text(
-       'الجنسية : بنجلاديش ',
+       'الجنسية : ${order.orderNationality} ',
        style: MyTextStyles.font14Weight500.copyWith(
          color: MyColors.kPrimaryColor,
          height: 2,
        ),
      ),
      Text(
-     'المهنة المطلوبة : عاملة منزلية ',
+     'المهنة المطلوبة : ${order.orderJob} ',
      style: MyTextStyles.font14Weight500.copyWith(
        color: MyColors.kPrimaryColor,
        height: 2,
@@ -93,7 +96,7 @@ class MyOrderExpandedContent extends StatelessWidget {
        ),
      ),
      Text(
-       'طلب اختيار افراد من التطبيق',
+       order.orderDetails,
        style: MyTextStyles.font14Weight500.copyWith(
          color: MyColors.kPrimaryColor,
          height: 1.5,

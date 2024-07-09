@@ -40,7 +40,7 @@ class ContractSuccessAlertDialogContent extends StatelessWidget {
               textStyle: MyTextStyles.font18Weight600.copyWith(color: Colors.white),
               text: 'طلباتي',
               onPressed: () {
-                context.pushNamed(AppRouter.myOrdersView);
+                context.pushReplacementNamed(AppRouter.myOrdersView);
               },
             ),
           ),

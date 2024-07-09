@@ -40,6 +40,7 @@ class FavoriteDaysContainer extends StatelessWidget {
     );
   }
 }
+
 class FavoriteDays extends StatefulWidget {
   const FavoriteDays({
     super.key,
@@ -76,6 +77,7 @@ class _FavoriteDaysState extends State<FavoriteDays> {
         }));
   }
 }
+
 class DayCard extends StatelessWidget {
   final VoidCallback onTap;
   final bool selected;

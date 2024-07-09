@@ -3,6 +3,7 @@
 
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const Duration kTransitionDurationVal=Duration(milliseconds: 1300);
@@ -33,5 +34,6 @@ abstract class AppConstants{
  static const double k8Padding=10.0;
  static  double k30ViewPadding=30.0.w;
  static  double k21ViewPadding=21.0.w;
+ FloatingActionButtonLocation floatingActionButtonLocation =FloatingActionButtonLocation.centerFloat;
 
 }
