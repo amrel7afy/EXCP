@@ -12,14 +12,12 @@ class ContractInfoView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
-      child: Scaffold(
+      child: const Scaffold(
         appBar: CustomAppBar(
           title: 'بيانات التعاقد',
-          leadingPressed: () {
-            context.pop();
-          },
+
         ),
-        body: const SafeArea(child: ContractInfoViewBody()),
+        body: SafeArea(child: ContractInfoViewBody()),
       ),
     );
   }

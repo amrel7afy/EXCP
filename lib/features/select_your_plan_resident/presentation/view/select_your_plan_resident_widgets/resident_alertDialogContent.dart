@@ -3,13 +3,15 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/constants/methods.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
+import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/widgets/custom_button.dart';
-import 'package:test1/features/select_your_plan_resident/presentation/view/widgets/choose_deliver_to_home_or_from_company_row.dart';
 import 'package:test1/features/select_your_plan_resident/presentation/view_model/choose_worker_cubit/choose_worker_cubit.dart';
 import '../../../../../core/theming/styles.dart';
 import '../../view_model/choose_worker_cubit/choose_worker_state.dart';
+import 'choose_deliver_to_home_or_from_company_row.dart';
 import 'choose_from_app_or_company_row.dart';
 
 class ResidentAlertDialogContent extends StatefulWidget {
@@ -52,7 +54,17 @@ class _ResidentAlertDialogContentState
                         textStyle: MyTextStyles.font18Weight500
                             .copyWith(color: Colors.white),
                         text: 'التالي',
-                        onPressed: () {}),
+                        onPressed: () {
+                          if (context.read<ChooseWorkerCubit>().isFromApp) {
+                            context.pushReplacementNamed(
+                                AppRouter.selectYourWorkerView);
+                          } else if (!context
+                              .read<ChooseWorkerCubit>()
+                              .isFromApp) {
+                            context.pushReplacementNamed(
+                                AppRouter.residentContractDetailsView);
+                          }
+                        }),
                   ),
                 ],
               );
