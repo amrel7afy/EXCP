@@ -66,12 +66,11 @@ class AppRouter {
   static const String contractSuccessView = '/contractSuccessView';
   static const String myOrdersView = '/myOrdersView';
   static const String addNewOrderView = '/addNewOrderView';
-  static const String selectYourPlanResidentView = '/selectYourPlanResidentView';
+  static const String selectYourPlanResidentView =
+      '/selectYourPlanResidentView';
   static const String selectYourWorkerView = '/selectYourWorkerView';
-  static const String residentContractDetailsView = '/residentContractDetailsView';
-
-
-
+  static const String residentContractDetailsView =
+      '/residentContractDetailsView';
 
   static const String residentServiceView = '/residentServiceView';
 
@@ -79,40 +78,36 @@ class AppRouter {
     switch (settings.name) {
       case residentContractDetailsView:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-              create: (context)=>ChooseWorkerCubit(),
+          builder: (context) => BlocProvider.value(
+            value: ChooseWorkerCubit(),
               child: const ResidentContractDetailsView()),
         );
       case selectYourWorkerView:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-              create: (context)=>ChooseWorkerCubit(),
-              child: const SelectYourWorkerView()),
+          builder: (context) => const SelectYourWorkerView(),
         );
       case selectYourPlanResidentView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-              create: (context)=>OrdersCubit(),
-              child: BlocProvider(
-                  create: (context)=>ChooseWorkerCubit(),
-                  child: const SelectYourPlanResidentView())),
+            lazy: false,
+              create: (context) => ChooseWorkerCubit(),
+              child: const SelectYourPlanResidentView()),
         );
       case myOrdersView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-              create: (context)=>OrdersCubit(),
-              child: const MyOrdersView()),
+              create: (context) => OrdersCubit(), child: const MyOrdersView()),
         );
       case residentServiceView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-              create: (context)=>OrdersCubit(),
+              create: (context) => OrdersCubit(),
               child: const ResidentServiceView()),
         );
       case addNewOrderView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-              create: (context)=>OrdersCubit(),
+              create: (context) => OrdersCubit(),
               child: const AddNewOrderView()),
         );
       case contractSuccessView:
