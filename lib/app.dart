@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         textDirection: TextDirection.rtl,
         child: BlocProvider(
           create: (BuildContext context)=>AuthCubit(),
-          child: GetMaterialApp(
+          child: MaterialApp(
             theme: ThemeData(
               useMaterial3: true,
               colorSchemeSeed:MyColors.kPrimaryColor ,
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
                 shape: CircleBorder(),
               )
             ),
-           initialRoute: AppRouter.loginView,
+           initialRoute: AppRouter.homeView,
              onGenerateRoute: AppRouter().generateRoute,
 
           ),

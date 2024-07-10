@@ -36,6 +36,7 @@ abstract class AppConstants{
  static const double k8Padding=10.0;
  static  double k30ViewPadding=30.0.w;
  static  double k21ViewPadding=21.0.w;
+ static  double k16ViewPadding=16.0.w;
  FloatingActionButtonLocation floatingActionButtonLocation =FloatingActionButtonLocation.centerFloat;
 
 }

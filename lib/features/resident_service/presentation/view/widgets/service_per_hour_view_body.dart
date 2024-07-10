@@ -12,6 +12,7 @@ import 'package:test1/features/select_address/presentation/view/select_address_w
 import 'package:test1/features/service_per_hour/presentation/view/widgets/service_alert_dialog_content.dart';
 import 'package:test1/main.dart';
 
+import '../../../../../core/AppRouter.dart';
 import '../../../../../core/widgets/show_alert_dialog.dart';
 import '../../../../shared/over_label_container.dart';
 import '../../../../shared/over_label_container_body.dart';
@@ -24,7 +25,7 @@ class ResidentServiceBody extends StatefulWidget {
 }
 
 class _ResidentServiceBodyState extends State<ResidentServiceBody> {
-  List<String> nationalities = ['المجر', 'الفلبين', 'اندونيسيا'];
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,7 +41,6 @@ class _ResidentServiceBodyState extends State<ResidentServiceBody> {
             const VerticalSpacer(17),
             const SelectAServiceCards(),
             const VerticalSpacer(20),
-            OverLabelContainer(label: 'الجنسية', body: OverLabelContainerBody(items: nationalities,),),
 
           ],
         ),
@@ -79,6 +79,7 @@ padding: const EdgeInsets.all(20),
               setState(() {
                 isSelected=true;
               });
+              context.pushNamed(AppRouter.selectYourPlanResidentView);
             },
             subTitle: 'تقدم الخدمة بعقود شهرية من شهر الي 24 شهر',
           ),
@@ -89,6 +90,7 @@ padding: const EdgeInsets.all(20),
               setState(() {
                 isSelected=false;
               });
+              context.pushNamed(AppRouter.selectYourPlanResidentView);
             },
             subTitle: 'تقدم الخدمة بعقود شهرية من شهر الي 24 شهر',
 

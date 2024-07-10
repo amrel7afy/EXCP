@@ -9,7 +9,8 @@ import 'package:test1/features/home/presentation/view/home_view.dart';
 import 'package:test1/features/my_orders/presentation/view_model/orders_cubit/orders_cubit.dart';
 import 'package:test1/features/select_address/presentation/view/select_address_view.dart';
 import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_cubit.dart';
-import 'package:test1/features/select_your_plan/presentation/view/select_your_plan_view.dart';
+import 'package:test1/features/select_your_plan_hours/presentation/view/select_your_plan_view.dart';
+import 'package:test1/features/select_your_plan_resident/presentation/view_model/choose_worker_cubit/choose_worker_cubit.dart';
 
 import '../features/bottom_nav_bar/presentation/view/BottomNavBar.dart';
 import '../features/contraction/presnetation/view/contract_info_view.dart';
@@ -20,6 +21,7 @@ import '../features/my_orders/presentation/view/my_orders_view.dart';
 import '../features/resident_service/presentation/view/resident_service_view.dart';
 import '../features/select_address/presentation/view/new_address_view.dart';
 import '../features/select_address/presentation/view/empty_address_view.dart';
+import '../features/select_your_plan_resident/presentation/view/select_your_plan_resident_view.dart';
 import '../features/service_per_hour/presentation/view/service_per_hour_view.dart';
 import '../features/sign_up/presentation/view/sign_up_view.dart';
 import 'constants/constants.dart';
@@ -62,6 +64,7 @@ class AppRouter {
   static const String contractSuccessView = '/contractSuccessView';
   static const String myOrdersView = '/myOrdersView';
   static const String addNewOrderView = '/addNewOrderView';
+  static const String selectYourPlanResidentView = '/selectYourPlanResidentView';
 
 
 
@@ -69,6 +72,14 @@ class AppRouter {
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case selectYourPlanResidentView:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+              create: (context)=>OrdersCubit(),
+              child: BlocProvider(
+                  create: (context)=>ChooseWorkerCubit(),
+                  child: const SelectYourPlanResidentView())),
+        );
       case myOrdersView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(

@@ -7,7 +7,7 @@ import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/my_colors.dart';
 import 'package:test1/core/theming/styles.dart';
-import 'package:test1/features/select_your_plan/presentation/view/widgets/plan_duration_list_view.dart';
+import 'package:test1/features/select_your_plan_hours/presentation/view/widgets/plan_duration_list_view.dart';
 import 'collapse_card.dart';
 import 'expansion_list_view.dart';
 import 'my_choice_chip.dart';

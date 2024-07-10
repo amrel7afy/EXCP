@@ -14,7 +14,7 @@ class ExpansionListView extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.fromLTRB(AppConstants.k21ViewPadding, 0,
               AppConstants.k21ViewPadding, 17.0),
-          child: const CollapseCard(showVisitPrice: false,),
+          child:  CollapseCard(showVisitPrice: false, onExpandedTap: () {  },),
         );
       }, childCount: 4),
     );

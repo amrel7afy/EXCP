@@ -5,6 +5,23 @@ import 'my_colors.dart';
 
 abstract class MyTextStyles {
   //----------------------------------------------
+  static TextStyle font10Weight500 = TextStyle(
+    fontSize: 10.sp,
+    fontWeight: FontWeight.w500,
+    color: MyColors.kPrimaryColor,
+  );
+  static TextStyle font10Weight600 = TextStyle(
+    fontSize: 10.sp,
+    fontWeight: FontWeight.w600,
+    color: MyColors.kPrimaryColor,
+  );
+  static TextStyle font10Weight700 = TextStyle(
+    fontSize: 10.sp,
+    fontWeight: FontWeight.w700,
+    color: MyColors.kPrimaryColor,
+  );
+
+  //----------------------------------------------
   static TextStyle font11Weight500 = TextStyle(
     fontSize: 11.sp,
     fontWeight: FontWeight.w500,
@@ -19,7 +36,7 @@ abstract class MyTextStyles {
     fontSize: 11.sp,
     fontWeight: FontWeight.w700,
     color: MyColors.kPrimaryColor,
-  );//----------------------------------------------
+  ); //----------------------------------------------
   static TextStyle font12Weight500 = TextStyle(
     fontSize: 12.sp,
     fontWeight: FontWeight.w500,
@@ -35,6 +52,7 @@ abstract class MyTextStyles {
     fontWeight: FontWeight.w700,
     color: MyColors.kPrimaryColor,
   );
+
   //----------------------------------------------
   static TextStyle font13Weight500 = TextStyle(
     fontSize: 13.sp,
@@ -51,16 +69,16 @@ abstract class MyTextStyles {
     fontWeight: FontWeight.w700,
     color: MyColors.kGreyColor,
   );
+
   //----------------------------------------------
   static TextStyle font14Weight500 = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w500,
   );
   static TextStyle font14Weight600 = TextStyle(
-    fontSize: 14.sp,
-    fontWeight: FontWeight.w600,
-    color: MyColors.kPrimaryColor
-  );
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w600,
+      color: MyColors.kPrimaryColor);
   static TextStyle font14Weight700 = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w700,
@@ -142,6 +160,7 @@ abstract class MyTextStyles {
     fontSize: 23.sp,
     fontWeight: FontWeight.w900,
   );
+
   //----------------------------------------------
   static TextStyle font24Weight500 = TextStyle(
     fontSize: 24.sp,
@@ -164,29 +183,25 @@ abstract class MyTextStyles {
   static TextStyle font30Weight500 = TextStyle(
     fontSize: 30.sp,
     fontWeight: FontWeight.w500,
-
   );
   static TextStyle font30Weight600 = TextStyle(
     fontSize: 30.sp,
     fontWeight: FontWeight.w600,
-
   );
   static TextStyle font30Weight700 = TextStyle(
     fontSize: 30.sp,
     fontWeight: FontWeight.w700,
-
   );
+
   //----------------------------------------------
   static TextStyle font32Weight500 = TextStyle(
     fontSize: 32.sp,
     fontWeight: FontWeight.w500,
-
     color: MyColors.kPrimaryColor,
   );
   static TextStyle font32Weight600 = TextStyle(
     fontSize: 32.sp,
     fontWeight: FontWeight.w600,
-
     color: MyColors.kPrimaryColor,
   );
   static TextStyle font32Weight700 = TextStyle(
@@ -199,17 +214,16 @@ abstract class MyTextStyles {
     fontWeight: FontWeight.w900,
     color: MyColors.kPrimaryColor,
   );
+
   // ------------------
   static TextStyle font40Weight500 = TextStyle(
     fontSize: 40.sp,
     fontWeight: FontWeight.w500,
-
     color: MyColors.kPrimaryColor,
   );
   static TextStyle font40Weight600 = TextStyle(
     fontSize: 40.sp,
     fontWeight: FontWeight.w600,
-
     color: MyColors.kPrimaryColor,
   );
   static TextStyle font40Weight700 = TextStyle(
