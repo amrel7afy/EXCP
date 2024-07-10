@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/theming/styles.dart';
-import 'package:test1/core/widgets/custom_button.dart';
-import 'package:test1/features/login/presentation/view/widgets/my_text_form_field.dart';
 import 'package:test1/features/select_your_plan/presentation/view/widgets/collapse_card.dart';
 
 import '../../../../../../core/theming/my_colors.dart';
+import '../../../../../shared/over_label_container.dart';
+import '../../../../../shared/over_label_container_body.dart';
 import 'contraction_data_row_actions.dart';
 import 'coupon_form_field.dart';
-import 'favorite_days_container.dart';
 
 class ContractInfoViewBody extends StatefulWidget {
   const ContractInfoViewBody({super.key});
@@ -19,6 +17,14 @@ class ContractInfoViewBody extends StatefulWidget {
 }
 
 class _ContractInfoViewBodyState extends State<ContractInfoViewBody> {
+  final List<String> weekDays = [
+    'السبت',
+    'الاحد',
+    'الاثنين',
+    'الثلاثاء',
+    'الاربعاء',
+    'الخميس'
+  ];
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -29,7 +35,7 @@ class _ContractInfoViewBodyState extends State<ContractInfoViewBody> {
           children: [
             const CouponTextFormField(),
             const VerticalSpacer(20),
-            const FavoriteDaysContainer(),
+             OverLabelContainer(label: 'الأيام المفضلة', body: OverLabelContainerBody(items: weekDays,),),
             const VerticalSpacer(23),
             const CollapseCard(
               showVisitPrice: true,

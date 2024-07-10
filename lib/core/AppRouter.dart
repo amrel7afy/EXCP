@@ -17,6 +17,7 @@ import '../features/contraction/presnetation/view/contract_success_view.dart';
 import '../features/login/presentation/view/login_view.dart';
 import '../features/my_orders/presentation/view/add_new_order.dart';
 import '../features/my_orders/presentation/view/my_orders_view.dart';
+import '../features/resident_service/presentation/view/resident_service_view.dart';
 import '../features/select_address/presentation/view/new_address_view.dart';
 import '../features/select_address/presentation/view/empty_address_view.dart';
 import '../features/service_per_hour/presentation/view/service_per_hour_view.dart';
@@ -62,6 +63,10 @@ class AppRouter {
   static const String myOrdersView = '/myOrdersView';
   static const String addNewOrderView = '/addNewOrderView';
 
+
+
+  static const String residentServiceView = '/residentServiceView';
+
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case myOrdersView:
@@ -69,6 +74,12 @@ class AppRouter {
           builder: (context) => BlocProvider(
               create: (context)=>OrdersCubit(),
               child: const MyOrdersView()),
+        );
+      case residentServiceView:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+              create: (context)=>OrdersCubit(),
+              child: const ResidentServiceView()),
         );
       case addNewOrderView:
         return MaterialPageRoute(

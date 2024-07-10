@@ -22,6 +22,7 @@ const double cardBorderRadius=10.0;
 
 const kGTSectraFine='GT Sectra Fine';
 
+enum Service{hours,resident}
 abstract class AppConstants{
  static const isLoggedInKey='isSignedInKey';
  static const isOnBoardingKey='isOnBoardingKey';
@@ -29,6 +30,7 @@ abstract class AppConstants{
  static const double k8Radius=8.0;
  static  TextDirection appTextDirection=TextDirection.rtl;
  static const String usersListKey='';
+ static Service service=Service.hours;
 
 
  static const double k8Padding=10.0;

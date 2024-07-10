@@ -28,7 +28,7 @@ class DesignYourOfferViewBody extends StatefulWidget {
 }
 
 class _DesignYourOfferViewBodyState extends State<DesignYourOfferViewBody> {
-  List<String> nationality = ['المجر', 'الفلبين'];
+  List<String> nationality = ['المجر', 'الفلبين', 'اندونيسيا'];
   List<String> contractDuration = ['3 شهور', '5 شهور'];
   List<String> duration = ['صباحي', 'مسائي'];
   List<String> intervals = ['من 8ص الي 10ص', 'من 10ص الي 12ص'];
