@@ -44,7 +44,7 @@ class _ServicePerHourBodyState extends State<ServicePerHourBody> {
             ServiceCard(
               title: 'عاملة تنظيف بالمواد المطلوبة',
               subTitle: 'تقدم الخدمة بعقود شهرية من شهر الي 24 شهر',
-              onTap: () {},
+              onTap: () {showAlertDialog(context, const ServiceAlertDialogContent());},
             ),
             const VerticalSpacer(20),
           ],

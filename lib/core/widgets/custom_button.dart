@@ -6,7 +6,7 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final double? padding;
   final BorderRadius? borderRadius;
-  final Color backGroundColor;
+  final Color? backGroundColor;
   final TextStyle textStyle;
   final double? buttonWidth;
   final double? buttonHeight;
@@ -15,7 +15,7 @@ class CustomButton extends StatelessWidget {
       {super.key,
       required this.textStyle,
       required this.text,
-      required this.backGroundColor,
+       this.backGroundColor,
       required this.onPressed,
       this.borderRadius,
       this.buttonWidth,
@@ -36,7 +36,7 @@ class CustomButton extends StatelessWidget {
           Colors.black,
         ),
         backgroundColor: WidgetStateProperty.all<Color>(
-          backGroundColor,
+          backGroundColor??Colors.black,
         ),
         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(

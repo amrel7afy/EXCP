@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/AppRouter.dart';
+import 'package:test1/core/constants/constants.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
@@ -38,13 +39,18 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             ServiceCard(
               title: 'خدمة بالساعة',
               subTitle: 'خدمات منزلية بنظام الساعات',
-              onTap: () {context.pushNamed(AppRouter.servicePerHourView);},
+              onTap: () {
+                AppConstants.service=Service.hours;
+                context.pushNamed(AppRouter.servicePerHourView);},
             ),
             const VerticalSpacer(20),
             ServiceCard(
               title: 'خدمة مقيمة',
               subTitle: 'نظام الباقات الشهرية و السنوية',
-              onTap: () {},
+              onTap: () {
+                AppConstants.service=Service.resident;
+                context.pushNamed(AppRouter.selectAddressView);
+              },
             ),
             const VerticalSpacer(20),
             Align(

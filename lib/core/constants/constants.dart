@@ -3,6 +3,7 @@
 
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const Duration kTransitionDurationVal=Duration(milliseconds: 1300);
@@ -21,6 +22,7 @@ const double cardBorderRadius=10.0;
 
 const kGTSectraFine='GT Sectra Fine';
 
+enum Service{hours,resident}
 abstract class AppConstants{
  static const isLoggedInKey='isSignedInKey';
  static const isOnBoardingKey='isOnBoardingKey';
@@ -28,10 +30,13 @@ abstract class AppConstants{
  static const double k8Radius=8.0;
  static  TextDirection appTextDirection=TextDirection.rtl;
  static const String usersListKey='';
+ static Service service=Service.hours;
 
 
  static const double k8Padding=10.0;
  static  double k30ViewPadding=30.0.w;
  static  double k21ViewPadding=21.0.w;
+ static  double k16ViewPadding=16.0.w;
+ FloatingActionButtonLocation floatingActionButtonLocation =FloatingActionButtonLocation.centerFloat;
 
 }

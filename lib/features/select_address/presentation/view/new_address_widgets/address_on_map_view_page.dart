@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/AppRouter.dart';
+import 'package:test1/core/constants/constants.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
@@ -33,7 +34,6 @@ class _AddressOnTheMapViewPageState extends State<AddressOnTheMapViewPage> {
                     borderRadius: BorderRadius.circular(12),
                     color: Colors.grey,
                   ),
-
                 ),
               ),
               const VerticalSpacer(21),
@@ -52,9 +52,8 @@ class _AddressOnTheMapViewPageState extends State<AddressOnTheMapViewPage> {
                             .read<AddressCubit>()
                             .pageController
                             .previousPage(
-                              duration: const Duration(milliseconds: 300),
-                            curve: Curves.ease
-                            );
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.ease);
                       },
                     ),
                   ),
@@ -71,7 +70,13 @@ class _AddressOnTheMapViewPageState extends State<AddressOnTheMapViewPage> {
                       text: 'حفظ واستكمال',
                       backGroundColor: Colors.black,
                       onPressed: () {
-                        context.pushReplacementNamed(AppRouter.selectYourPlanView);
+                        if (AppConstants.service == Service.hours) {
+                          context.pushReplacementNamed(
+                              AppRouter.selectYourPlanView);
+                        } else if (AppConstants.service == Service.resident) {
+                          context.pushReplacementNamed(
+                              AppRouter.residentServiceView);
+                        }
                       },
                     ),
                   ),
