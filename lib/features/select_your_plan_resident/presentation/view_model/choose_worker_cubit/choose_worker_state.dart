@@ -8,3 +8,9 @@ class ChooseWorkerChangeState extends ChooseWorkerState {
 
   ChooseWorkerChangeState(this.isFromApp);
 }
+
+class ChooseDeliveryState extends ChooseWorkerState {
+  final bool isFromApp;
+
+  ChooseDeliveryState(this.isFromApp);
+}
