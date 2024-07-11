@@ -1,17 +1,24 @@
 import 'dart:developer';
 
+import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/helper/cache_helper.dart';
 import 'package:test1/core/shared/cubits/auth_cubit/auth_states.dart';
 import 'package:test1/core/shared/models/user.dart';
+import 'package:test1/features/sign_up/data/model/sign_up_request.dart';
 
+import '../../../../features/sign_up/data/model/sign_up_response.dart';
+import '../../../../features/sign_up/data/repos/sign_up_repo.dart';
 import '../../../../main.dart';
 import '../../../constants/constants.dart';
 import '../../../helper/app_regex.dart';
+import '../../../networking/failure.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
-  AuthCubit() : super(AuthInitial());
+  SignUpRepo signUpRepo;
+
+  AuthCubit(this.signUpRepo) : super(AuthInitial());
   List<User> users = [];
 
   TextEditingController firstNameController = TextEditingController();
@@ -32,8 +39,38 @@ class AuthCubit extends Cubit<AuthStates> {
     user.email = emailController.text.trim();
     user.password = passwordController.text.trim();
   }
+/// set request body
+  Map<String, dynamic> assignSignUpRequestData() {
+    SignUpRequest signUpRequest = SignUpRequest(
+      userName: phoneNumberController.text.trim(),
+      name: 'name',
+      firstName: firstNameController.text.trim(),
+      middleName: middleNameController.text.trim(),
+      lastName: lastNameController.text.trim(),
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+      confirmPassword: passwordController.text.trim(),
 
-  signUp() async {
+    );
+    log(signUpRequest.toString());
+    return signUpRequest.toMap();
+  }
+
+  emitSignUp() async {
+    emit(AuthLoading());
+    Either<Failure, SignUpResponse> result =
+        await signUpRepo.signUp(assignSignUpRequestData());
+    result.fold((failure) {
+      failure.errorMessage;
+      emit(AuthFailure(failure.errorMessage));
+    },
+        (successResponse) {
+      log(successResponse.data?.phoneNumber.toString()??'No phone');
+      emit(AuthSignUpSuccess(successResponse));
+    });
+  }
+
+/*  signUp() async {
     emit(AuthLoading());
     try {
       await getUsersFromCache();
@@ -46,7 +83,7 @@ class AuthCubit extends Cubit<AuthStates> {
     } catch (e) {
       emit(AuthFailure());
     }
-  }
+  }*/
 
   Future<void> createNewUser(User? user) async {
     user = User();
@@ -68,7 +105,7 @@ class AuthCubit extends Cubit<AuthStates> {
       }
     } catch (e) {
       log(e.toString());
-      emit(AuthFailure());
+      emit(AuthFailure(e.toString()));
     }
   }
 

@@ -1,4 +1,3 @@
-/*
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -36,8 +35,8 @@ class ServerFailure extends Failure {
   }
 
   factory ServerFailure.fromResponse(int? statusCode, dynamic response) {
-    if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
-      return ServerFailure(response['data']['email'][0]);
+    if (statusCode == 400 || statusCode == 401 || statusCode == 403||statusCode==405) {
+      return ServerFailure(response['message']);
     } else if (statusCode! >= 404 && statusCode<500) {
       log('Status code: $statusCode,');
        return ServerFailure(response);
@@ -49,4 +48,4 @@ class ServerFailure extends Failure {
       return ServerFailure('Oops, Something went wrong.');
     }
   }
-}*/
+}
