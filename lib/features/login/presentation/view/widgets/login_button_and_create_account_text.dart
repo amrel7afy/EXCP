@@ -30,9 +30,11 @@ class LoginButtonAndCreateAccountText extends StatelessWidget {
               );
             }
             else if (state is AuthFailure) {
+              context.pop();
               ScaffoldMessenger.of(context).showSnackBar(
                    SnackBar(content: Text(state.error)));
             } else if (state is AuthLoginSuccess) {
+              context.pop();
               ScaffoldMessenger.of(context).showSnackBar(
                    SnackBar(content: Text(state.loginSuccessResponse.data.user.name)));
             context.pushNamed(AppRouter.bottomNavBar);
