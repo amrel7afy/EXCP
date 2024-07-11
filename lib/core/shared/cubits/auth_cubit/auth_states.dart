@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:test1/features/login/data/models/login_success_response_model.dart';
 import 'package:test1/features/sign_up/data/model/sign_up_response.dart';
 
 abstract class AuthStates {}
@@ -29,6 +30,11 @@ class AuthSignUpSuccess extends AuthStates {
  final SignUpResponse signUpResponse;
 
   AuthSignUpSuccess(this.signUpResponse);
+}
+class AuthLoginSuccess extends AuthStates {
+ final LoginSuccessResponse loginSuccessResponse;
+
+  AuthLoginSuccess(this.loginSuccessResponse);
 }
 
 

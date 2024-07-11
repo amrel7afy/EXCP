@@ -10,6 +10,7 @@ import 'package:test1/core/shared/cubits/auth_cubit/auth_states.dart';
 import 'package:test1/core/theming/my_colors.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/custom_button.dart';
+import 'package:test1/core/widgets/show_alert_dialog.dart';
 
 import '../../../../../core/constants/constants.dart';
 import '../../../../../main.dart';
@@ -24,15 +25,24 @@ class LoginButtonAndCreateAccountText extends StatelessWidget {
       children: [
         BlocListener<AuthCubit, AuthStates>(
           listener: (BuildContext context, AuthStates state) {
-            if (state is AuthUserNotExists) {
+            if (state is AuthLoading) {
+              showAlertDialog(context, const CircularProgressIndicator());
+            } else if (state is AuthFailure) {
+              context.pop();
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(state.error)));
+            } else if (state is AuthLoginSuccess) {
+              context.pop();
               ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('يرجي تسجيل حساب جديد')));
-            } if (state is AuthSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('اهلا بك')));
-            context.pushNamed(AppRouter.bottomNavBar);
+                SnackBar(
+                  content: Text(state.loginSuccessResponse.data.user.name),
+                ),
+              );
+              if(state.loginSuccessResponse.data.user.phoneNumberConfirmed){
+              context.pushNamed(AppRouter.bottomNavBar);}else{
+                context.pushNamed(AppRouter.otpVerifyView);
+              }
             }
-
           },
           child: SizedBox(
             height: 47.h,
@@ -44,14 +54,13 @@ class LoginButtonAndCreateAccountText extends StatelessWidget {
                   MyTextStyles.font18Weight600.copyWith(color: Colors.white),
               backGroundColor: MyColors.kPrimaryColor,
               onPressed: () {
-               /* if (context
+                if (context
                     .read<AuthCubit>()
                     .loginFormKey
                     .currentState!
                     .validate()) {
-                  context.read<AuthCubit>().logIn();
-                }*/
-                context.pushNamed(AppRouter.bottomNavBar);
+                  context.read<AuthCubit>().emitLogin();
+                }
               },
             ),
           ),
@@ -70,7 +79,6 @@ class LoginButtonAndCreateAccountText extends StatelessWidget {
               InkWell(
                 onTap: () {
                   context.pushReplacementNamed(AppRouter.singUpView);
-
                 },
                 child: Text(
                   'إنشاء حساب',

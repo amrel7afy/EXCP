@@ -44,7 +44,7 @@ class ShowVisitsDialogContent extends StatelessWidget {
         ),
         const VerticalSpacer(22),
         CustomButton(
-          buttonWidth: 108.w,
+          width: 108.w,
           textStyle: MyTextStyles.font18Weight600.copyWith(color: Colors.white),
           text: 'إغلاق',
           backGroundColor: MyColors.kPrimaryColor,

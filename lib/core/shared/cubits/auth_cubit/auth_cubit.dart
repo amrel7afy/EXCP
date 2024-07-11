@@ -6,20 +6,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/helper/cache_helper.dart';
 import 'package:test1/core/shared/cubits/auth_cubit/auth_states.dart';
 import 'package:test1/core/shared/models/user.dart';
+import 'package:test1/features/login/data/models/login_request_model.dart';
+import 'package:test1/features/login/data/models/login_success_response_model.dart';
 import 'package:test1/features/sign_up/data/model/sign_up_request.dart';
 
+import '../../../../features/login/data/repos/login_repo.dart';
 import '../../../../features/sign_up/data/model/sign_up_response.dart';
 import '../../../../features/sign_up/data/repos/sign_up_repo.dart';
-import '../../../../main.dart';
+
 import '../../../constants/constants.dart';
 import '../../../helper/app_regex.dart';
 import '../../../networking/failure.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
   SignUpRepo signUpRepo;
+  LoginRepo loginRepo;
 
-  AuthCubit(this.signUpRepo) : super(AuthInitial());
-  List<User> users = [];
+  AuthCubit(this.signUpRepo,this.loginRepo) : super(AuthInitial());
+  //List<User> users = [];
 
   TextEditingController firstNameController = TextEditingController();
   TextEditingController middleNameController = TextEditingController();
@@ -31,15 +35,16 @@ class AuthCubit extends Cubit<AuthStates> {
   final signUpFormKey = GlobalKey<FormState>();
   final loginFormKey = GlobalKey<FormState>();
 
-  void assignUserData(User user) {
+/*  void assignUserData(User user) {
     user.firstName = firstNameController.text.trim();
     user.middleName = middleNameController.text.trim();
     user.lastName = lastNameController.text.trim();
     user.phoneNumber = phoneNumberController.text.trim();
     user.email = emailController.text.trim();
     user.password = passwordController.text.trim();
-  }
-/// set request body
+  }*/
+
+  /// set request body
   Map<String, dynamic> assignSignUpRequestData() {
     SignUpRequest signUpRequest = SignUpRequest(
       userName: phoneNumberController.text.trim(),
@@ -50,9 +55,7 @@ class AuthCubit extends Cubit<AuthStates> {
       email: emailController.text.trim(),
       password: passwordController.text.trim(),
       confirmPassword: passwordController.text.trim(),
-
     );
-    log(signUpRequest.toString());
     return signUpRequest.toMap();
   }
 
@@ -63,13 +66,31 @@ class AuthCubit extends Cubit<AuthStates> {
     result.fold((failure) {
       failure.errorMessage;
       emit(AuthFailure(failure.errorMessage));
-    },
-        (successResponse) {
-      log(successResponse.data?.phoneNumber.toString()??'No phone');
+    }, (successResponse) {
+      log(successResponse.data?.phoneNumber.toString() ?? 'No phone');
       emit(AuthSignUpSuccess(successResponse));
     });
   }
 
+  Map<String, dynamic> assignLoginRequestData() {
+    LoginRequest loginRequest = LoginRequest(
+        userName: phoneNumberController.text.trim(),
+        password: passwordController.text.trim());
+    log(loginRequest.toString());
+    return loginRequest.toMap();
+  }
+
+  emitLogin() async {
+    emit(AuthLoading());
+    Either<Failure, LoginSuccessResponse> result = await loginRepo.login(assignLoginRequestData());
+    result.fold((failure) {
+      failure.errorMessage;
+      emit(AuthFailure(failure.errorMessage));
+    }, (successResponse) {
+      log(successResponse.data.user.email);
+      emit(AuthLoginSuccess(successResponse));
+    });
+  }
 /*  signUp() async {
     emit(AuthLoading());
     try {
@@ -85,6 +106,7 @@ class AuthCubit extends Cubit<AuthStates> {
     }
   }*/
 
+/*
   Future<void> createNewUser(User? user) async {
     user = User();
     assignUserData(user);
@@ -107,9 +129,9 @@ class AuthCubit extends Cubit<AuthStates> {
       log(e.toString());
       emit(AuthFailure(e.toString()));
     }
-  }
+  }*/
 
-  Future<void> getUsersFromCache() async {
+/*  Future<void> getUsersFromCache() async {
     String users = await SharedPrefHelper.getString(AppConstants.usersListKey);
 
     this.users = User.decode(users);
@@ -124,7 +146,7 @@ class AuthCubit extends Cubit<AuthStates> {
       }
     }
     return null;
-  }
+  }*/
 
   firstNameValidator(String? value) {
     if (value == null || value.isEmpty) {
