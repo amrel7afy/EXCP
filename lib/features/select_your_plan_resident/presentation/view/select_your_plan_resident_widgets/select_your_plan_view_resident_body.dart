@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/widgets/show_alert_dialog.dart';
 import 'package:test1/features/select_your_plan_hours/presentation/view/widgets/collapse_card.dart';
-import 'package:test1/features/select_your_plan_resident/presentation/view/widgets/resident_alertDialogContent.dart';
+import 'package:test1/features/select_your_plan_resident/presentation/view/select_your_plan_resident_widgets/resident_alertDialogContent.dart';
 import 'package:test1/features/shared/coupon_form_field.dart';
 import 'package:test1/features/shared/over_label_container.dart';
 import 'package:test1/features/shared/over_label_container_body.dart';

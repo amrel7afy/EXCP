@@ -13,8 +13,10 @@ import 'package:test1/features/select_your_plan_hours/presentation/view/select_y
 import 'package:test1/features/select_your_plan_resident/presentation/view_model/choose_worker_cubit/choose_worker_cubit.dart';
 
 import '../features/bottom_nav_bar/presentation/view/BottomNavBar.dart';
+import '../features/contraction/presnetation/view/contract_download_view.dart';
 import '../features/contraction/presnetation/view/contract_info_view.dart';
 import '../features/contraction/presnetation/view/contract_success_view.dart';
+import '../features/contraction/presnetation/view/resident_contract_details_view.dart';
 import '../features/login/presentation/view/login_view.dart';
 import '../features/my_orders/presentation/view/add_new_order.dart';
 import '../features/my_orders/presentation/view/my_orders_view.dart';
@@ -22,6 +24,7 @@ import '../features/resident_service/presentation/view/resident_service_view.dar
 import '../features/select_address/presentation/view/new_address_view.dart';
 import '../features/select_address/presentation/view/empty_address_view.dart';
 import '../features/select_your_plan_resident/presentation/view/select_your_plan_resident_view.dart';
+import '../features/select_your_plan_resident/presentation/view/select_your_worker_view.dart';
 import '../features/service_per_hour/presentation/view/service_per_hour_view.dart';
 import '../features/sign_up/presentation/view/sign_up_view.dart';
 import 'constants/constants.dart';
@@ -64,38 +67,52 @@ class AppRouter {
   static const String contractSuccessView = '/contractSuccessView';
   static const String myOrdersView = '/myOrdersView';
   static const String addNewOrderView = '/addNewOrderView';
-  static const String selectYourPlanResidentView = '/selectYourPlanResidentView';
-
-
+  static const String selectYourPlanResidentView =
+      '/selectYourPlanResidentView';
+  static const String selectYourWorkerView = '/selectYourWorkerView';
+  static const String residentContractDetailsView =
+      '/residentContractDetailsView';
 
   static const String residentServiceView = '/residentServiceView';
+  static const String downloadContractView = '/downloadContractView';
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case downloadContractView:
+        return MaterialPageRoute(
+          builder: (context) => const DownloadContractView(),
+        );
+      case residentContractDetailsView:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider.value(
+            value: ChooseWorkerCubit(),
+              child: const ResidentContractDetailsView()),
+        );
+      case selectYourWorkerView:
+        return MaterialPageRoute(
+          builder: (context) => const SelectYourWorkerView(),
+        );
       case selectYourPlanResidentView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-              create: (context)=>OrdersCubit(),
-              child: BlocProvider(
-                  create: (context)=>ChooseWorkerCubit(),
-                  child: const SelectYourPlanResidentView())),
+              create: (context) => ChooseWorkerCubit(),
+              child: const SelectYourPlanResidentView()),
         );
       case myOrdersView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-              create: (context)=>OrdersCubit(),
-              child: const MyOrdersView()),
+              create: (context) => OrdersCubit(), child: const MyOrdersView()),
         );
       case residentServiceView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-              create: (context)=>OrdersCubit(),
+              create: (context) => OrdersCubit(),
               child: const ResidentServiceView()),
         );
       case addNewOrderView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-              create: (context)=>OrdersCubit(),
+              create: (context) => OrdersCubit(),
               child: const AddNewOrderView()),
         );
       case contractSuccessView:

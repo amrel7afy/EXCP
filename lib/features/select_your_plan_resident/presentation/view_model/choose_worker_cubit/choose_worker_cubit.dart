@@ -6,7 +6,8 @@ import 'choose_worker_state.dart';
 class ChooseWorkerCubit extends Cubit<ChooseWorkerState> {
   ChooseWorkerCubit() : super(ChooseWorkerInitial());
 
-  bool isFromApp = true;
+  bool isFromApp =true;
+  bool isDelivery=true;
 
   void selectFromApp() {
     isFromApp = true;
@@ -16,6 +17,16 @@ class ChooseWorkerCubit extends Cubit<ChooseWorkerState> {
   void selectFromCompany() {
     isFromApp = false;
     emit(ChooseWorkerChangeState(isFromApp));
+  }
+
+  void selectDelivery() {
+    isDelivery = true;
+    emit(ChooseDeliveryState(isDelivery));
+  }
+
+  void selectWillFromCompany() {
+    isDelivery = false;
+    emit(ChooseDeliveryState(isDelivery));
   }
 }
 

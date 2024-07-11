@@ -11,19 +11,22 @@ import '../../../../../core/theming/styles.dart';
 
 class ExpandedContent extends StatelessWidget {
   final VoidCallback onTap;
+
   const ExpandedContent({
-    super.key, required this.onTap,
+    super.key,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:onTap,
+      onTap: onTap,
       child: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10)),
+            bottomLeft: Radius.circular(10),
+            bottomRight: Radius.circular(10),
+          ),
           color: MyColors.kAppBarBackGroundColor,
         ),
         child: Column(

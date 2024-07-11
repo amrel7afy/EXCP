@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
                 shape: CircleBorder(),
               )
             ),
-           initialRoute: AppRouter.homeView,
+           initialRoute: AppRouter.selectYourPlanResidentView,
              onGenerateRoute: AppRouter().generateRoute,
 
           ),
