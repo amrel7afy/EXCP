@@ -26,17 +26,19 @@ class SignUpButtonAndHaveAccountText extends StatelessWidget {
       children: [
         BlocListener<AuthCubit, AuthStates>(
           listener: (context, state) {
-            if(state is AuthLoading){
+            if (state is AuthLoading) {
               showAlertDialog(context, const CircularProgressIndicator());
-            }
-            else if (state is AuthSignUpSuccess) {
+            } else if (state is AuthSignUpSuccess) {
+              context.pop();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('تم إنشاء الحساب'),
+                ),
+              );
+            } else if (state is AuthFailure) {
               context.pop();
               ScaffoldMessenger.of(context)
-                  .showSnackBar(const SnackBar(content: Text('تم إنشاء الحساب')));
-            }else if (state is AuthFailure) {
-              context.pop();
-              ScaffoldMessenger.of(context)
-                  .showSnackBar( SnackBar(content: Text(state.error)));
+                  .showSnackBar(SnackBar(content: Text(state.error)));
             }
           },
           child: SizedBox(
@@ -49,7 +51,11 @@ class SignUpButtonAndHaveAccountText extends StatelessWidget {
                   MyTextStyles.font18Weight600.copyWith(color: Colors.white),
               backGroundColor: MyColors.kPrimaryColor,
               onPressed: () {
-                if(context.read<AuthCubit>().signUpFormKey.currentState!.validate()){
+                if (context
+                    .read<AuthCubit>()
+                    .signUpFormKey
+                    .currentState!
+                    .validate()) {
                   context.read<AuthCubit>().emitSignUp();
                 }
               },
@@ -69,7 +75,7 @@ class SignUpButtonAndHaveAccountText extends StatelessWidget {
               const HorizontalSpacer(10),
               InkWell(
                 onTap: () {
-              context.pushReplacementNamed(AppRouter.loginView);
+                  context.pushReplacementNamed(AppRouter.loginView);
                 },
                 child: Text(
                   'تسجيل الدخول',

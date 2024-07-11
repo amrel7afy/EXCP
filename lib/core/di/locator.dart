@@ -5,6 +5,7 @@ import 'package:test1/features/select_address/presentation/view_model/address_cu
 import 'package:test1/features/sign_up/data/repos/sign_up_repo_impl.dart';
 import 'package:test1/features/sign_up/data/repos/sign_up_repo_impl.dart';
 
+import '../../features/login/data/repos/login_repo_impl.dart';
 import '../../features/select_your_plan_resident/presentation/view_model/choose_worker_cubit/choose_worker_cubit.dart';
 import '../networking/api_service.dart';
 
@@ -12,13 +13,13 @@ GetIt locator = GetIt.instance;
 
 void setupLocator() {
   locator.registerLazySingleton<ApiServices>(() => ApiServices(Dio()));
-  locator.registerLazySingleton<SignUpRepoImpl>(
-      () => SignUpRepoImpl(locator<ApiServices>()));
+  locator.registerLazySingleton<SignUpRepoImpl>(() => SignUpRepoImpl(locator<ApiServices>()));
+  locator.registerLazySingleton<LoginRepoImpl>(() => LoginRepoImpl(locator<ApiServices>()));
 
   //locator.registerLazySingleton<LoginRepoImpl>(() => LoginRepoImpl(locator<ApiServices>()));
   locator.registerFactory<AddressCubit>(() => AddressCubit());
   locator.registerFactory<ChooseWorkerCubit>(() => ChooseWorkerCubit());
 
   locator
-      .registerFactory<AuthCubit>(() => AuthCubit(locator<SignUpRepoImpl>()));
+      .registerFactory<AuthCubit>(() => AuthCubit(locator<SignUpRepoImpl>(),locator<LoginRepoImpl>()));
 }
