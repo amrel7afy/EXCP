@@ -13,6 +13,7 @@ import 'package:test1/features/select_your_plan_hours/presentation/view/select_y
 import 'package:test1/features/select_your_plan_resident/presentation/view_model/choose_worker_cubit/choose_worker_cubit.dart';
 
 import '../features/bottom_nav_bar/presentation/view/BottomNavBar.dart';
+import '../features/contraction/presnetation/view/attachments_contract_view.dart';
 import '../features/contraction/presnetation/view/contract_download_view.dart';
 import '../features/contraction/presnetation/view/contract_info_view.dart';
 import '../features/contraction/presnetation/view/contract_success_view.dart';
@@ -75,12 +76,17 @@ class AppRouter {
 
   static const String residentServiceView = '/residentServiceView';
   static const String downloadContractView = '/downloadContractView';
+  static const String attachmentsContractView = '/attachmentsContractView';
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case downloadContractView:
         return MaterialPageRoute(
           builder: (context) => const DownloadContractView(),
+        );
+      case attachmentsContractView:
+        return MaterialPageRoute(
+          builder: (context) => const AttachmentsContractView(),
         );
       case residentContractDetailsView:
         return MaterialPageRoute(

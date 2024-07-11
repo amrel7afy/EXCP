@@ -1,15 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
-import 'package:test1/features/my_orders/presentation/view/widgets/types_of_order_cards.dart';
-
 import '../../../../../core/theming/my_colors.dart';
 import '../../../data/order_model.dart';
-import '../../view_model/orders_cubit/orders_cubit.dart';
-import '../../view_model/orders_cubit/orders_state.dart';
 import 'my_order_expansion_list_view.dart';
+import 'my_orders_tab_bar.dart';
 
 class MyOrdersViewBody extends StatefulWidget {
   const MyOrdersViewBody({super.key});
@@ -21,11 +15,7 @@ class MyOrdersViewBody extends StatefulWidget {
 class _MyOrdersViewBodyState extends State<MyOrdersViewBody>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final List<List<Order>> listOfOrders = [
-    personOrders,
-    hoursOrders,
-    businessOrders
-  ];
+
 
   @override
   void initState() {
@@ -50,21 +40,7 @@ class _MyOrdersViewBodyState extends State<MyOrdersViewBody>
               borderRadius: BorderRadius.circular(12),
               color: Colors.grey,
             ),
-            child:TabBar(
-              controller: _tabController,
-
-              dividerHeight: 0,
-              tabs: [
-                Tab(
-                  child: Text('الأفراد'),
-                ),
-                Tab(text: 'الساعات'),
-                Tab(text: 'الأعمال'),
-              ],
-              indicatorColor: MyColors.kPrimaryColor,
-              labelColor: MyColors.kPrimaryColor,
-              unselectedLabelColor: Colors.white,
-            ) ,
+            child:MyOrdersTabBar(tabController: _tabController) ,
           ),
 
           const VerticalSpacer(23),
@@ -72,9 +48,9 @@ class _MyOrdersViewBodyState extends State<MyOrdersViewBody>
             child: TabBarView(
               controller: _tabController,
               children: [
-                MyOrdersExpansionListView(orders: listOfOrders[0]),
-                MyOrdersExpansionListView(orders: listOfOrders[1]),
-                MyOrdersExpansionListView(orders: listOfOrders[2]),
+                MyOrdersExpansionListView(orders: personOrders),
+                MyOrdersExpansionListView(orders: hoursOrders),
+                MyOrdersExpansionListView(orders: businessOrders),
               ],
             ),
           ),
@@ -83,3 +59,5 @@ class _MyOrdersViewBodyState extends State<MyOrdersViewBody>
     );
   }
 }
+
+

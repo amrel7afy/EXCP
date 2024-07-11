@@ -102,7 +102,10 @@ class _SelectYourPlanViewBodyState extends State<SelectYourPlanViewBody> {
             ],
           ),
         ),
-        const ExpansionListView()
+        const ExpansionListView(),
+        const SliverToBoxAdapter(
+          child: VerticalSpacer(70),
+        )
       ],
     );
   }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
+import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
 
+import '../../../../../core/AppRouter.dart';
+import '../../../../../core/constants/constants.dart';
 import 'address_card.dart';
 
 class AddressList extends StatefulWidget {
@@ -24,6 +27,13 @@ class _AddressListState extends State<AddressList> {
             setState(() {
               selectedIndex=index;
             });
+            if (AppConstants.service == Service.hours) {
+              context.pushNamed(
+                  AppRouter.selectYourPlanView);
+            } else if (AppConstants.service == Service.resident) {
+              context.pushNamed(
+                  AppRouter.residentServiceView);
+            }
           },
         );
       }, childCount: 3),
