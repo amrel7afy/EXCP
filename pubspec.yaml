@@ -57,6 +57,12 @@ dependencies:
   font_awesome_flutter:
   get_it: ^7.7.0
   get:
+#    powerful HTTP networking package, supports Interceptors,
+  dio: ^5.5.0+1
+#  Functional Programming in Dart. Purify your Dart code using efficient immutable data structures, monads, lenses and other FP tools
+  dartz: ^0.10.1
+#  A modal progress indicator widget with Sound Null Safety.
+  modal_progress_hud_nsn: ^0.5.1
 
 #highly customizable bottom navigation bar for Flutter. It is shipped with 17 prebuilt styles you can choose from
 #  persistent_bottom_nav_bar_v2: ^5.2.3
