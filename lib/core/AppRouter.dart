@@ -21,6 +21,7 @@ import '../features/contraction/presnetation/view/resident_contract_details_view
 import '../features/login/presentation/view/login_view.dart';
 import '../features/my_orders/presentation/view/add_new_order.dart';
 import '../features/my_orders/presentation/view/my_orders_view.dart';
+import '../features/otp/presentation/view/otp_view.dart';
 import '../features/resident_service/presentation/view/resident_service_view.dart';
 import '../features/select_address/presentation/view/new_address_view.dart';
 import '../features/select_address/presentation/view/empty_address_view.dart';
@@ -56,6 +57,7 @@ class AppRouter {
   static const String bottomNavBar = '/bottomNavBar';
   static const String onBoardingView = '/onBoardingView';
   static const String loginView = '/LoginView';
+  static const String otpVerifyView = '/otpVerifyView';
   static const String searchView = '/searchView';
   static const String singUpView = '/singUpView';
   static const String servicePerHourView = '/servicePerHourView';
@@ -162,6 +164,10 @@ class AppRouter {
       case homeView:
         return MaterialPageRoute(
           builder: (context) => const HomeView(),
+        );
+      case otpVerifyView:
+        return MaterialPageRoute(
+          builder: (context) => const OTPVerifyView(),
         );
       case loginView:
         return MaterialPageRoute(

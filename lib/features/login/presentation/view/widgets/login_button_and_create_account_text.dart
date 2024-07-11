@@ -25,21 +25,24 @@ class LoginButtonAndCreateAccountText extends StatelessWidget {
       children: [
         BlocListener<AuthCubit, AuthStates>(
           listener: (BuildContext context, AuthStates state) {
-            if(state is AuthLoading){
-              showAlertDialog(context, CircularProgressIndicator()
-              );
-            }
-            else if (state is AuthFailure) {
+            if (state is AuthLoading) {
+              showAlertDialog(context, const CircularProgressIndicator());
+            } else if (state is AuthFailure) {
               context.pop();
-              ScaffoldMessenger.of(context).showSnackBar(
-                   SnackBar(content: Text(state.error)));
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(state.error)));
             } else if (state is AuthLoginSuccess) {
               context.pop();
               ScaffoldMessenger.of(context).showSnackBar(
-                   SnackBar(content: Text(state.loginSuccessResponse.data.user.name)));
-            context.pushNamed(AppRouter.bottomNavBar);
+                SnackBar(
+                  content: Text(state.loginSuccessResponse.data.user.name),
+                ),
+              );
+              if(state.loginSuccessResponse.data.user.phoneNumberConfirmed){
+              context.pushNamed(AppRouter.bottomNavBar);}else{
+                context.pushNamed(AppRouter.otpVerifyView);
+              }
             }
-
           },
           child: SizedBox(
             height: 47.h,
@@ -58,7 +61,6 @@ class LoginButtonAndCreateAccountText extends StatelessWidget {
                     .validate()) {
                   context.read<AuthCubit>().emitLogin();
                 }
-
               },
             ),
           ),
@@ -77,7 +79,6 @@ class LoginButtonAndCreateAccountText extends StatelessWidget {
               InkWell(
                 onTap: () {
                   context.pushReplacementNamed(AppRouter.singUpView);
-
                 },
                 child: Text(
                   'إنشاء حساب',

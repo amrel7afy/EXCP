@@ -111,7 +111,7 @@ class _DesignYourOfferViewBodyState extends State<DesignYourOfferViewBody> {
             Align(
               alignment: Alignment.centerLeft,
               child: CustomButton(
-                buttonWidth: getWidth(context) * 0.3,
+                width: getWidth(context) * 0.3,
                 borderRadius: BorderRadius.circular(8),
                 textStyle:
                     MyTextStyles.font18Weight600.copyWith(color: Colors.white),

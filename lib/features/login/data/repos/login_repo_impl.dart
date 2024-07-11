@@ -18,7 +18,6 @@ class LoginRepoImpl implements LoginRepo {
       var response = await apiServices.post(endPoint: 'Account/Login', data: data);
       LoginSuccessResponse loginSuccessResponse = LoginSuccessResponse.fromJson(response);
       return right(loginSuccessResponse);
-
     } catch (e) {
       if(e is DioException){
         return left(LoginFailureResponseModel.fromJson(e.response!.data));

@@ -8,8 +8,8 @@ class CustomButton extends StatelessWidget {
   final BorderRadius? borderRadius;
   final Color? backGroundColor;
   final TextStyle textStyle;
-  final double? buttonWidth;
-  final double? buttonHeight;
+  final double? width;
+  final double? height;
 
   const CustomButton(
       {super.key,
@@ -18,8 +18,8 @@ class CustomButton extends StatelessWidget {
        this.backGroundColor,
       required this.onPressed,
       this.borderRadius,
-      this.buttonWidth,
-      this.buttonHeight, this.padding});
+      this.width,
+      this.height, this.padding});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class CustomButton extends StatelessWidget {
           EdgeInsets.all(padding ?? 3),
         ),
         fixedSize: WidgetStateProperty.all(
-            Size(buttonWidth?.w ?? double.maxFinite, buttonHeight?.h ?? 50.h)),
+            Size(width?.w ?? double.maxFinite, height?.h ?? 50.h)),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         foregroundColor: WidgetStateProperty.all<Color>(
           Colors.black,
