@@ -56,7 +56,7 @@ class SignUpButtonAndHaveAccountText extends StatelessWidget {
                     .signUpFormKey
                     .currentState!
                     .validate()) {
-                  context.read<AuthCubit>().emitSignUp();
+                //  context.read<AuthCubit>().emitSignUp();
                 }
               },
             ),

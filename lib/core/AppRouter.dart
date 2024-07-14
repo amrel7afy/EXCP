@@ -7,6 +7,7 @@ import 'package:test1/core/di/locator.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/design_your_offer/presentation/view/design_your_offer_view.dart';
 import 'package:test1/features/home/presentation/view/home_view.dart';
+import 'package:test1/features/login/presentation/view/login_screen.dart';
 import 'package:test1/features/my_orders/presentation/view_model/orders_cubit/orders_cubit.dart';
 import 'package:test1/features/select_address/presentation/view/select_address_view.dart';
 import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_cubit.dart';
@@ -168,7 +169,7 @@ class AppRouter {
         );
       case loginView:
         return MaterialPageRoute(
-          builder: (context) => const LoginView(),
+          builder: (context) => const LoginScreen(),
         );
       case singUpView:
         return MaterialPageRoute(

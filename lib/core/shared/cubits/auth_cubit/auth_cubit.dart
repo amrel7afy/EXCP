@@ -21,30 +21,32 @@ import '../../../helper/app_regex.dart';
 import '../../../networking/failure.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
-  SignUpRepo signUpRepo;
-  LoginUseCase loginUseCase;
+ /* SignUpRepo signUpRepo;
+  LoginUseCase loginUseCase;*/
 
-  AuthCubit(this.signUpRepo,this.loginUseCase) : super(AuthInitial());
+ // AuthCubit(this.signUpRepo,this.loginUseCase) : super(AuthInitial());
+  AuthCubit() : super(AuthInitial());
+  final signUpFormKey = GlobalKey<FormState>();
   //List<User> users = [];
 
-  TextEditingController firstNameController = TextEditingController();
+ /* TextEditingController firstNameController = TextEditingController();
   TextEditingController middleNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  final signUpFormKey = GlobalKey<FormState>();
+
   final loginFormKey = GlobalKey<FormState>();
 
-/*  void assignUserData(User user) {
+*//*  void assignUserData(User user) {
     user.firstName = firstNameController.text.trim();
     user.middleName = middleNameController.text.trim();
     user.lastName = lastNameController.text.trim();
     user.phoneNumber = phoneNumberController.text.trim();
     user.email = emailController.text.trim();
     user.password = passwordController.text.trim();
-  }*/
+  }*//*
 
   /// set request body
   Map<String, dynamic> assignSignUpRequestData() {
@@ -101,7 +103,7 @@ class AuthCubit extends Cubit<AuthStates> {
      User user=successResponse.data.user;
     String userAsString=jsonEncode(user);
     SharedPrefHelper.setSecuredString(AppConstants.userDataKey, userAsString);
-  }
+  }*/
 /*  signUp() async {
     emit(AuthLoading());
     try {

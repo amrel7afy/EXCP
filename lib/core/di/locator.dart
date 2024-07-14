@@ -21,6 +21,6 @@ void setupLocator() {
   locator.registerFactory<AddressCubit>(() => AddressCubit());
   locator.registerFactory<ChooseWorkerCubit>(() => ChooseWorkerCubit());
 
-  locator
-      .registerFactory<AuthCubit>(() => AuthCubit(locator<SignUpRepoImpl>(),locator<LoginUseCase>()));
+ locator
+     .registerFactory<AuthCubit>(() => AuthCubit());
 }
