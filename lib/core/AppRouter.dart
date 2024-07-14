@@ -39,15 +39,15 @@ class AppRouter {
   //
 
   static Future<String> getInitialRouteFromSharedPreferences() async {
-    String userDataAsString = await SharedPrefHelper.getSecuredString(AppConstants.userDataKey);
-    User user=User.fromJson(jsonDecode(userDataAsString));
-    if(user.phoneNumberConfirmed){
-      return homeView;
+    String? userDataAsString =
+        await SharedPrefHelper.getSecuredString(AppConstants.userDataKey);
+    if (!userDataAsString.isNullOrEmpty()) {
+      User user = User.fromJson(jsonDecode(userDataAsString!));
+      if (user.phoneNumberConfirmed) {
+        return homeView;
+      }
     }
-    else{
-      return loginView;
-    }
-
+    return loginView;
   }
 
   static const String homeView = '/homeView';
@@ -90,7 +90,7 @@ class AppRouter {
       case residentContractDetailsView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider.value(
-            value: ChooseWorkerCubit(),
+              value: ChooseWorkerCubit(),
               child: const ResidentContractDetailsView()),
         );
       case selectYourWorkerView:
