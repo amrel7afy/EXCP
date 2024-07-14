@@ -48,7 +48,6 @@ class User  {
     required this.securityStamp,
     required this.isSubscribed,
   }) ;
-
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       userName: json['userName'],
@@ -101,5 +100,10 @@ class User  {
       'securityStamp': securityStamp,
       'isSubscribed': isSubscribed,
     };
+  }
+
+  @override
+  String toString() {
+    return 'User{userName: $userName, phoneNumberConfirmed: $phoneNumberConfirmed, accountType: $accountType, crmUserId: $crmUserId, id: $id, email: $email, phoneNumber: $phoneNumber, otherMobilePhone: $otherMobilePhone, image: $image, createdBy: $createdBy, createdOn: $createdOn, modifiedBy: $modifiedBy, modifiedOn: $modifiedOn, isDeleted: $isDeleted, isDeactivated: $isDeactivated, name: $name, deletedOn: $deletedOn, deletedBy: $deletedBy, ownerId: $ownerId, owner: $owner, securityStamp: $securityStamp, isSubscribed: $isSubscribed}';
   }
 }
