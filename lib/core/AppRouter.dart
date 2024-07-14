@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ import '../features/contraction/presnetation/view/contract_download_view.dart';
 import '../features/contraction/presnetation/view/contract_info_view.dart';
 import '../features/contraction/presnetation/view/contract_success_view.dart';
 import '../features/contraction/presnetation/view/resident_contract_details_view.dart';
+import '../features/login/data/models/login_success_models/user.dart';
 import '../features/login/presentation/view/login_view.dart';
 import '../features/my_orders/presentation/view/add_new_order.dart';
 import '../features/my_orders/presentation/view/my_orders_view.dart';
@@ -37,20 +39,15 @@ class AppRouter {
   //
 
   static Future<String> getInitialRouteFromSharedPreferences() async {
-    String userToken =
-        await SharedPrefHelper.getSecuredString(AppConstants.userToken) ??
-            false;
-    log('$userToken userToken');
-    bool isOnBoarded =
-        await SharedPrefHelper.getBool(AppConstants.isOnBoardingKey) ?? false;
-    log('$isOnBoarded isOnBoarded');
-    if (!userToken.isNullOrEmpty()) {
-      return homeView; // User is logged in, navigate to chatPage
-    } else if (isOnBoarded) {
-      return loginView; // User hasn't logged in but completed onboarding
-    } else {
-      return onBoardingView; // User hasn't completed onboarding
+    String userDataAsString = await SharedPrefHelper.getSecuredString(AppConstants.userDataKey);
+    User user=User.fromJson(jsonDecode(userDataAsString));
+    if(user.phoneNumberConfirmed){
+      return homeView;
     }
+    else{
+      return loginView;
+    }
+
   }
 
   static const String homeView = '/homeView';

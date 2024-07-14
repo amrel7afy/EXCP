@@ -12,40 +12,36 @@ import 'package:test1/core/theming/my_colors.dart';
 import 'package:test1/features/login/presentation/view/login_view.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String initialRoute;
+
+  const MyApp({super.key, required this.initialRoute});
 
   @override
   Widget build(BuildContext context) {
-    return   ScreenUtilInit(
-      designSize: const Size(430,932),
+    return ScreenUtilInit(
+      designSize: const Size(430, 932),
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: BlocProvider(
-          create: (BuildContext context)=>locator<AuthCubit>(),
+          create: (BuildContext context) => locator<AuthCubit>(),
           child: MaterialApp(
             theme: ThemeData(
-              useMaterial3: true,
-              colorSchemeSeed:MyColors.kPrimaryColor ,
-              fontFamily: 'Alexandria',
-              appBarTheme: const AppBarTheme(
-                backgroundColor: MyColors.kAppBarBackGroundColor
-              ),
-              scaffoldBackgroundColor: Colors.white,
-              floatingActionButtonTheme: const FloatingActionButtonThemeData(
-                backgroundColor: MyColors.kPrimaryColor,
-
-                shape: CircleBorder(),
-              )
-            ),
-           initialRoute: AppRouter.singUpView,
-             onGenerateRoute: AppRouter().generateRoute,
-
+                useMaterial3: true,
+                colorSchemeSeed: MyColors.kPrimaryColor,
+                fontFamily: 'Alexandria',
+                appBarTheme: const AppBarTheme(
+                    backgroundColor: MyColors.kAppBarBackGroundColor),
+                scaffoldBackgroundColor: Colors.white,
+                floatingActionButtonTheme: const FloatingActionButtonThemeData(
+                  backgroundColor: MyColors.kPrimaryColor,
+                  shape: CircleBorder(),
+                )),
+            //initialRoute: AppRouter.singUpView,
+            initialRoute: initialRoute,
+            onGenerateRoute: AppRouter().generateRoute,
           ),
         ),
       ),
     );
-
-
-
   }
 }
