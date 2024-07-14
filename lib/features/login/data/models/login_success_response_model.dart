@@ -25,7 +25,7 @@ class LoginSuccessResponse {
 
   Map<String, dynamic> toJson() {
     return {
-      'data': data?.toJson(),
+      'data': data.toJson(),
       'status': status,
       'code': code,
       'message': message,
