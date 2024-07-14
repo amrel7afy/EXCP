@@ -5,7 +5,7 @@ import 'package:test1/core/networking/failure.dart';
 
 import '../../domain/repos/login_repo.dart';
 import '../models/login_failure_response_model.dart';
-import '../models/login_success_response_model.dart';
+import '../models/login_success_models/login_success_model.dart';
 
 class LoginRepoImpl implements LoginRepo {
   final ApiServices apiServices;
