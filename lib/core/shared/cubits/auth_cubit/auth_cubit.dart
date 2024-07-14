@@ -9,6 +9,7 @@ import 'package:test1/features/sign_up/data/model/sign_up_request.dart';
 
 import '../../../../features/login/data/models/login_success_models/login_success_model.dart';
 import '../../../../features/login/domain/repos/login_repo.dart';
+import '../../../../features/login/domain/use_cases/login_use_case.dart';
 import '../../../../features/sign_up/data/model/sign_up_response.dart';
 import '../../../../features/sign_up/data/repos/sign_up_repo.dart';
 
@@ -17,9 +18,9 @@ import '../../../networking/failure.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
   SignUpRepo signUpRepo;
-  LoginRepo loginRepo;
+  LoginUseCase loginUseCase;
 
-  AuthCubit(this.signUpRepo,this.loginRepo) : super(AuthInitial());
+  AuthCubit(this.signUpRepo,this.loginUseCase) : super(AuthInitial());
   //List<User> users = [];
 
   TextEditingController firstNameController = TextEditingController();
@@ -79,7 +80,7 @@ class AuthCubit extends Cubit<AuthStates> {
 
   emitLogin() async {
     emit(AuthLoading());
-    Either<Failure, LoginSuccessResponse> result = await loginRepo.login(assignLoginRequestData());
+    Either<Failure, LoginSuccessResponse> result = await loginUseCase.call(assignLoginRequestData());
     result.fold((failure) {
       failure.errorMessage;
       emit(AuthFailure(failure.errorMessage));

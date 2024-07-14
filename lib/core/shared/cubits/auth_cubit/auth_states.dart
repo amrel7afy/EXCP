@@ -10,9 +10,7 @@ class AuthInitial extends AuthStates {}
 
 class AuthLoading extends AuthStates {}
 
-class AuthSuccess extends AuthStates {
-
-}
+class AuthSuccess extends AuthStates {}
 
 class AuthCreateUserSuccess extends AuthStates {}
 
@@ -27,16 +25,15 @@ class AuthFailure extends AuthStates {
 }
 
 class AuthUserNotExists extends AuthStates {}
-class AuthSignUpSuccess extends AuthStates {
- final SignUpResponse signUpResponse;
 
- AuthSignUpSuccess(this.signUpResponse);
+class AuthSignUpSuccess extends AuthStates {
+  final SignUpResponse signUpResponse;
+
+  AuthSignUpSuccess(this.signUpResponse);
 }
+
 class AuthLoginSuccess extends AuthStates {
- final LoginSuccessResponse loginSuccessResponse;
+  final LoginSuccessResponse loginSuccessResponse;
 
   AuthLoginSuccess(this.loginSuccessResponse);
 }
-
-
-
