@@ -1,4 +1,6 @@
-class User {
+import 'package:test1/features/login/domain/entity/user_entity.dart';
+
+class User  {
   final String userName;
   final bool phoneNumberConfirmed;
   final int accountType;
@@ -45,7 +47,7 @@ class User {
     this.owner,
     required this.securityStamp,
     required this.isSubscribed,
-  });
+  }) ;
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
