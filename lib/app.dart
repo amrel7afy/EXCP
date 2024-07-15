@@ -7,6 +7,8 @@ import 'package:test1/core/di/locator.dart';
 import 'package:test1/core/shared/cubits/auth_cubit/auth_cubit.dart';
 import 'package:test1/core/theming/my_colors.dart';
 
+import 'core/shared/cubits/app_cubit/app_cubit.dart';
+
 class MyApp extends StatelessWidget {
   final String initialRoute;
 
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: BlocProvider(
-          create: (BuildContext context) => locator<AuthCubit>(),
+          create: (BuildContext context) => locator<AppCubit>(),
           child: MaterialApp(
             theme: ThemeData(
                 useMaterial3: true,

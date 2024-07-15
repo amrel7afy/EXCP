@@ -2,17 +2,14 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/di/locator.dart';
-import 'package:test1/core/shared/cubits/auth_cubit/auth_cubit.dart';
 import 'package:test1/features/login/data/repos/login_repo_impl.dart';
 import 'package:test1/features/login/domain/repos/login_repo.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/helper/cache_helper.dart';
 import '../../../../core/networking/failure.dart';
-import '../../../core/shared/cubits/auth_cubit/auth_states.dart';
-import '../../my_orders/presentation/view/my_orders_view.dart';
+import '../../../core/shared/cubits/app_cubit/app_cubit.dart';
 import '../data/models/login_request_model.dart';
 import '../data/models/login_success_models/login_success_model.dart';
 import '../data/models/login_success_models/user.dart';
@@ -31,7 +28,7 @@ class LoginViewModel {
   TextEditingController passwordController = TextEditingController();
   final loginFormKey = GlobalKey<FormState>();
 
-  AuthCubit authCubit = AuthCubit();
+  AppCubit appCubit = AppCubit();
 
   Map<String, dynamic> assignLoginRequestData(phoneNumber, password) {
     LoginRequest loginRequest =
@@ -41,12 +38,12 @@ class LoginViewModel {
 
   toggleIsObscureText(BuildContext context) {
     isObscureText = !isObscureText;
-    authCubit.newEmit(AuthChangeIsObscureText());
+    appCubit.update();
   }
 
   toggleIsSwitched(value, BuildContext context) {
     isSwitched = value;
-    authCubit.newEmit(AuthChangeIsSwitched());
+    appCubit.update();
   }
 
   userLogin(context) async {

@@ -8,6 +8,8 @@ import '../../../../../core/constants/constants.dart';
 import '../../../../core/constants/methods.dart';
 import '../../../../core/shared/cubits/auth_cubit/auth_cubit.dart';
 import '../../../../core/widgets/custom_button.dart';
+import '../../../core/shared/cubits/app_cubit/app_cubit.dart';
+import '../../../core/shared/cubits/app_cubit/app_state.dart';
 import '../../../core/shared/cubits/auth_cubit/auth_states.dart';
 import 'components/login_logo_and_upper_text.dart';
 import '../../shared/my_text_form_field.dart';
@@ -42,11 +44,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     MyTextFormField(
                         labelText: 'رقم الجوال ',
                         controller: loginViewModel.phoneNumberController,
-                        validator: context.read<AuthCubit>().phoneValidator),
+                        validator: context.read<AppCubit>().phoneValidator),
                     const VerticalSpacer(18),
-                    BlocBuilder<AuthCubit, AuthStates>(
-                      buildWhen: (p, c) => c is AuthChangeIsObscureText,
-                      bloc: loginViewModel.authCubit,
+                    BlocBuilder<AppCubit, AppState>(
+
+                      bloc: loginViewModel.appCubit,
                       builder: (context, state) {
                         return MyTextFormField(
                           isObscureText: loginViewModel.isObscureText,
@@ -61,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           labelText: 'كلمة المرور ',
                           validator:
-                              context.read<AuthCubit>().passwordValidator,
+                              context.read<AppCubit>().passwordValidator,
                           controller: loginViewModel.passwordController,
                         );
                       },
@@ -102,9 +104,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   const Text('English'),
                   const HorizontalSpacer(7),
-                  BlocBuilder<AuthCubit, AuthStates>(
-                    buildWhen: (p, c) => c is AuthChangeIsSwitched,
-                    bloc: loginViewModel.authCubit,
+                  BlocBuilder<AppCubit, AppState >(
+
+                    bloc: loginViewModel.appCubit,
                     builder: (context, state) {
                       return Directionality(
                         textDirection: AppConstants.appTextDirection,

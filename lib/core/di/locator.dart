@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:test1/core/shared/cubits/app_cubit/app_cubit.dart';
+import 'package:test1/core/shared/cubits/app_cubit/app_cubit.dart';
 import 'package:test1/core/shared/cubits/auth_cubit/auth_cubit.dart';
 import 'package:test1/features/login/domain/use_cases/login_use_case.dart';
 import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_cubit.dart';
@@ -21,6 +23,6 @@ void setupLocator() {
   locator.registerFactory<AddressCubit>(() => AddressCubit());
   locator.registerFactory<ChooseWorkerCubit>(() => ChooseWorkerCubit());
 
- locator
-     .registerFactory<AuthCubit>(() => AuthCubit());
+ locator.registerFactory<AuthCubit>(() => AuthCubit());
+ locator.registerFactory<AppCubit>(() => AppCubit());
 }
