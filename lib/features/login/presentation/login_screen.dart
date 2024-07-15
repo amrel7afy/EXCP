@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
@@ -36,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const VerticalSpacer(54),
               BlocConsumer<AuthCubit, AuthStates>(
                 listener: (context, state) {
-                  // TODO: implement listener
+
                 },
                 builder: (context, state) {
                   return Form(
@@ -50,13 +52,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context.read<AuthCubit>().phoneValidator),
                         const VerticalSpacer(18),
                         MyTextFormField(
-                          isObscureText: context.read<AuthCubit>().isObscureText,
+                          isObscureText:
+                              context.read<AuthCubit>().isObscureText,
                           suffixIcon: GestureDetector(
                             onTap: () {
-                              setState(() {
-                                context.read<AuthCubit>().isObscureText =
-                                    context.read<AuthCubit>().isObscureText;
-                              });
+                              context.read<AuthCubit>().toggleIsObscureText();
                             },
                             child: Icon(
                               context.read<AuthCubit>().isObscureText
@@ -120,9 +120,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       activeColor: MyColors.kGreenColor,
                       value: context.read<AuthCubit>().isSwitched,
                       onChanged: (value) {
-                        setState(() {
-                          context.read<AuthCubit>().isSwitched = value;
-                        });
+
+                        log(value.toString());
+                        context.read<AuthCubit>().toggleIsSwitched(value);
+
                       },
                     ),
                   ),

@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
                   shape: CircleBorder(),
                 )),
             //initialRoute: AppRouter.singUpView,
-            initialRoute: initialRoute,
+            initialRoute: AppRouter.loginView,
             onGenerateRoute: AppRouter().generateRoute,
           ),
         ),

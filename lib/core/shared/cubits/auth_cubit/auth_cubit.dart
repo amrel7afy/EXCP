@@ -1,24 +1,34 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/shared/cubits/auth_cubit/auth_states.dart';
 
-
 import '../../../helper/app_regex.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
- /* SignUpRepo signUpRepo;
+  /* SignUpRepo signUpRepo;
   LoginUseCase loginUseCase;*/
 
- // AuthCubit(this.signUpRepo,this.loginUseCase) : super(AuthInitial());
+  // AuthCubit(this.signUpRepo,this.loginUseCase) : super(AuthInitial());
 
   bool isObscureText = true;
   bool isSwitched = false;
+
   AuthCubit() : super(AuthInitial());
   final signUpFormKey = GlobalKey<FormState>();
+
+  toggleIsObscureText() {
+    isObscureText = !isObscureText;
+    emit(AuthChangeIsObscureText());
+  }
+
+  toggleIsSwitched(value) {
+    isSwitched = value;
+    emit(AuthChangeIsSwitched());
+  }
+
   //List<User> users = [];
 
- /* TextEditingController firstNameController = TextEditingController();
+  /* TextEditingController firstNameController = TextEditingController();
   TextEditingController middleNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
@@ -28,14 +38,14 @@ class AuthCubit extends Cubit<AuthStates> {
 
   final loginFormKey = GlobalKey<FormState>();
 
-*//*  void assignUserData(User user) {
+*/ /*  void assignUserData(User user) {
     user.firstName = firstNameController.text.trim();
     user.middleName = middleNameController.text.trim();
     user.lastName = lastNameController.text.trim();
     user.phoneNumber = phoneNumberController.text.trim();
     user.email = emailController.text.trim();
     user.password = passwordController.text.trim();
-  }*//*
+  }*/ /*
 
   /// set request body
   Map<String, dynamic> assignSignUpRequestData() {

@@ -7,6 +7,8 @@ import '../../../../features/login/data/models/login_success_models/login_succes
 abstract class AuthStates {}
 
 class AuthInitial extends AuthStates {}
+class AuthChangeIsObscureText extends AuthStates {}
+class AuthChangeIsSwitched extends AuthStates {}
 
 class AuthLoading extends AuthStates {}
 
