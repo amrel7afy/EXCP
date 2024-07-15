@@ -23,6 +23,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   LoginViewModel loginViewModel = LoginViewModel();
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const LoginLogoAndUpperText(),
               const VerticalSpacer(54),
               BlocConsumer<AuthCubit, AuthStates>(
+                buildWhen: (p,c)=>c is AuthChangeIsObscureText,
                 listener: (context, state) {},
                 builder: (context, state) {
                   return Form(
@@ -50,13 +52,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         const VerticalSpacer(18),
                         MyTextFormField(
                           isObscureText:
-                              context.read<AuthCubit>().isObscureText,
+                              loginViewModel.isObscureText,
                           suffixIcon: GestureDetector(
                             onTap: () {
-                              context.read<AuthCubit>().toggleIsObscureText();
+                              loginViewModel.toggleIsObscureText(context);
                             },
                             child: Icon(
-                              context.read<AuthCubit>().isObscureText
+                              loginViewModel.isObscureText
                                   ? Icons.visibility_off
                                   : Icons.visibility,
                             ),
@@ -110,6 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Text('English'),
                   const HorizontalSpacer(7),
                   BlocBuilder<AuthCubit, AuthStates>(
+                    buildWhen: (p,c)=>c is AuthChangeIsSwitched,
                     builder: (context, state) {
                       return Directionality(
                         textDirection: AppConstants.appTextDirection,
@@ -117,10 +120,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           inactiveThumbColor: MyColors.kPrimaryColor,
                           inactiveTrackColor: const Color(0xffACACAC),
                           activeColor: MyColors.kGreenColor,
-                          value: context.read<AuthCubit>().isSwitched,
+                          value: loginViewModel.isSwitched,
                           onChanged: (value) {
                             log(value.toString());
-                            context.read<AuthCubit>().toggleIsSwitched(value);
+                            loginViewModel.toggleIsSwitched(value,context);
                           },
                         ),
                       );

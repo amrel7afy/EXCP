@@ -6,21 +6,12 @@ import '../../../helper/app_regex.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
 
-  bool isObscureText = true;
-  bool isSwitched = false;
+
 
   AuthCubit() : super(AuthInitial());
   final signUpFormKey = GlobalKey<FormState>();
 
-  toggleIsObscureText() {
-    isObscureText = !isObscureText;
-    emit(AuthChangeIsObscureText());
-  }
 
-  toggleIsSwitched(value) {
-    isSwitched = value;
-    emit(AuthChangeIsSwitched());
-  }
 
 
   firstNameValidator(String? value) {

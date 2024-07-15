@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/di/locator.dart';
 import 'package:test1/core/shared/cubits/auth_cubit/auth_cubit.dart';
@@ -9,11 +10,14 @@ import 'package:test1/features/login/domain/repos/login_repo.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/helper/cache_helper.dart';
 import '../../../../core/networking/failure.dart';
+import '../../../core/shared/cubits/auth_cubit/auth_states.dart';
 import '../data/models/login_request_model.dart';
 import '../data/models/login_success_models/login_success_model.dart';
 import '../data/models/login_success_models/user.dart';
 
 class LoginViewModel {
+  bool isObscureText = true;
+  bool isSwitched = false;
   LoginViewModel() {
     loginRepo = locator<LoginRepoImpl>();
   }
@@ -34,7 +38,16 @@ class LoginViewModel {
     return loginRequest.toMap();
   }
 
+  toggleIsObscureText(BuildContext context ) {
+    isObscureText = !isObscureText;
+    context.read<AuthCubit>().emit(AuthChangeIsObscureText());
+  }
 
+
+  toggleIsSwitched(value,BuildContext context) {
+    isSwitched = value;
+    context.read<AuthCubit>().emit(AuthChangeIsSwitched());
+  }
   userLogin(context) async {
     Either<Failure, LoginSuccessResponse> result =
         await loginRepo.login(assignLoginRequestData());
