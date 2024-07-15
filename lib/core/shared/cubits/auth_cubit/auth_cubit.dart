@@ -12,7 +12,10 @@ class AuthCubit extends Cubit<AuthStates> {
   final signUpFormKey = GlobalKey<FormState>();
 
 
+newEmit(AuthStates state){
+  emit(state);
 
+}
 
   firstNameValidator(String? value) {
     if (value == null || value.isEmpty) {

@@ -23,7 +23,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   LoginViewModel loginViewModel = LoginViewModel();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,27 +35,24 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               const LoginLogoAndUpperText(),
               const VerticalSpacer(54),
-              BlocConsumer<AuthCubit, AuthStates>(
-                buildWhen: (p,c)=>c is AuthChangeIsObscureText,
-                listener: (context, state) {},
-                builder: (context, state) {
-                  return Form(
-                    key: loginViewModel.loginFormKey,
-                    child: Column(
-                      children: [
-                        MyTextFormField(
-                            labelText: 'رقم الجوال ',
-                            controller: loginViewModel.phoneNumberController,
-                            validator:
-                                context.read<AuthCubit>().phoneValidator),
-                        const VerticalSpacer(18),
-                        MyTextFormField(
-                          isObscureText:
-                              loginViewModel.isObscureText,
+              Form(
+                key: loginViewModel.loginFormKey,
+                child: Column(
+                  children: [
+                    MyTextFormField(
+                        labelText: 'رقم الجوال ',
+                        controller: loginViewModel.phoneNumberController,
+                        validator: context.read<AuthCubit>().phoneValidator),
+                    const VerticalSpacer(18),
+                    BlocBuilder<AuthCubit, AuthStates>(
+                      buildWhen: (p, c) => c is AuthChangeIsObscureText,
+                      bloc: loginViewModel.authCubit,
+                      builder: (context, state) {
+                        return MyTextFormField(
+                          isObscureText: loginViewModel.isObscureText,
                           suffixIcon: GestureDetector(
-                            onTap: () {
-                              loginViewModel.toggleIsObscureText(context);
-                            },
+                            onTap: () =>
+                                loginViewModel.toggleIsObscureText(context),
                             child: Icon(
                               loginViewModel.isObscureText
                                   ? Icons.visibility_off
@@ -67,37 +63,32 @@ class _LoginScreenState extends State<LoginScreen> {
                           validator:
                               context.read<AuthCubit>().passwordValidator,
                           controller: loginViewModel.passwordController,
-                        ),
-                        const VerticalSpacer(8),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: InkWell(
-                            onTap: () {},
-                            child: Text(
-                              'نسيت كلمة المرور',
-                              style: MyTextStyles.font14Weight600,
-                            ),
-                          ),
-                        ),
-                        const VerticalSpacer(12),
-                        CustomButton(
-                          width: getWidth(context) * 0.5,
-                          borderRadius: BorderRadius.circular(8),
-                          text: 'تسجيل الدخول',
-                          textStyle: MyTextStyles.font18Weight600
-                              .copyWith(color: Colors.white),
-                          backGroundColor: MyColors.kPrimaryColor,
-                          onPressed: () {
-                            if (loginViewModel.loginFormKey.currentState!
-                                .validate()) {
-                              loginViewModel.userLogin(context);
-                            }
-                          },
-                        ),
-                      ],
+                        );
+                      },
                     ),
-                  );
-                },
+                    const VerticalSpacer(8),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: InkWell(
+                        onTap: () {},
+                        child: Text(
+                          'نسيت كلمة المرور',
+                          style: MyTextStyles.font14Weight600,
+                        ),
+                      ),
+                    ),
+                    const VerticalSpacer(12),
+                    CustomButton(
+                      width: getWidth(context) * 0.5,
+                      borderRadius: BorderRadius.circular(8),
+                      text: 'تسجيل الدخول',
+                      textStyle: MyTextStyles.font18Weight600
+                          .copyWith(color: Colors.white),
+                      backGroundColor: MyColors.kPrimaryColor,
+                      onPressed: () => loginViewModel.validateAndLogin(context),
+                    ),
+                  ],
+                ),
               ),
               InkWell(
                   onTap: () {},
@@ -112,7 +103,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Text('English'),
                   const HorizontalSpacer(7),
                   BlocBuilder<AuthCubit, AuthStates>(
-                    buildWhen: (p,c)=>c is AuthChangeIsSwitched,
+                    buildWhen: (p, c) => c is AuthChangeIsSwitched,
+                    bloc: loginViewModel.authCubit,
                     builder: (context, state) {
                       return Directionality(
                         textDirection: AppConstants.appTextDirection,
@@ -121,10 +113,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           inactiveTrackColor: const Color(0xffACACAC),
                           activeColor: MyColors.kGreenColor,
                           value: loginViewModel.isSwitched,
-                          onChanged: (value) {
-                            log(value.toString());
-                            loginViewModel.toggleIsSwitched(value,context);
-                          },
+                          onChanged: (value) =>
+                              loginViewModel.toggleIsSwitched(value, context),
                         ),
                       );
                     },
