@@ -1,7 +1,5 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/methods.dart';
 
 class CustomCarousel extends StatefulWidget {
@@ -14,8 +12,8 @@ class CustomCarousel extends StatefulWidget {
 class _CustomCarouselState extends State<CustomCarousel> {
   @override
   Widget build(BuildContext context) {
-    final CarouselController _carouselController = CarouselController();
-    int _currentIndex = 0;
+    final CarouselController carouselController = CarouselController();
+    int currentIndex = 0;
     final List<String> imgList = [
       'https://via.placeholder.com/400x300.png?text=Item+1',
       'https://via.placeholder.com/400x300.png?text=Item+2',
@@ -40,17 +38,17 @@ class _CustomCarouselState extends State<CustomCarousel> {
           aspectRatio: 2.0,
           onPageChanged: (index, reason) {
             setState(() {
-              _currentIndex = index;
+              currentIndex = index;
             });
           },
         ),
-        carouselController: _carouselController,
+        carouselController: carouselController,
       ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: imgList.asMap().entries.map((entry) {
             return GestureDetector(
-              onTap: () => _carouselController.animateToPage(entry.key),
+              onTap: () => carouselController.animateToPage(entry.key),
               child: Container(
                 width: 12.0,
                 height: 12.0,
@@ -61,7 +59,7 @@ class _CustomCarouselState extends State<CustomCarousel> {
                   color: (Theme.of(context).brightness == Brightness.dark
                       ? Colors.white
                       : Colors.grey)
-                      .withOpacity(_currentIndex == entry.key ? 0.9 : 0.2),
+                      .withOpacity(currentIndex == entry.key ? 0.9 : 0.2),
                 ),
               ),
             );

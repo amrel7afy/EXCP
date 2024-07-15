@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/custom_button.dart';
-import 'package:pinput/pinput.dart';
 import 'package:test1/core/widgets/show_alert_dialog.dart';
 import 'package:test1/features/contraction/presnetation/view/widgets/contract_success_view_widgets/wallet_balance.dart';
 
-import '../../../../../../core/constants/methods.dart';
 import '../../../../../../core/theming/my_colors.dart';
 import 'contract_success_alert_dialog_content.dart';
 
@@ -53,7 +50,7 @@ class _ContractSuccessViewBodyState extends State<ContractSuccessViewBody> {
                     .copyWith(color: MyColors.kPrimaryColor),
               ),
               const VerticalSpacer(16),
-              WalletBalanceCard(),
+              const WalletBalanceCard(),
               const VerticalSpacer(37),
               SizedBox(
                 child: CustomButton(

@@ -9,7 +9,6 @@ class LoginLogoAndUpperText extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Column(
       children: [
-
         Text(
           'Logo',
           style: MyTextStyles.font40Weight700

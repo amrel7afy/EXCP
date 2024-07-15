@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/constants/constants.dart';
-import '../../../../../main.dart';
+import '../../../core/constants/constants.dart';
 
 class MyTextFormField extends StatelessWidget {
   final String labelText;

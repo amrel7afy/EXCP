@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/features/home/presentation/view/widgets/home_view_body.dart';
-import 'package:test1/main.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/widgets/custom_app_bar.dart';

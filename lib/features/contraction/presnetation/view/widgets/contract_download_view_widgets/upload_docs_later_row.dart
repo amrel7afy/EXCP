@@ -12,11 +12,11 @@ class UploadDocsLaterRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(
+        const Icon(
           Icons.emoji_objects,
           color: MyColors.kPrimaryColor,
         ),
-        HorizontalSpacer(11),
+        const HorizontalSpacer(11),
 
         Text(
           'يتوجب عليك رفع المستندات المطلوبة لاحقا',

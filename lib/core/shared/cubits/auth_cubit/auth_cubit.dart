@@ -1,30 +1,19 @@
-import 'dart:convert';
-import 'dart:developer';
 
-import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test1/core/constants/constants.dart';
-import 'package:test1/core/helper/cache_helper.dart';
 import 'package:test1/core/shared/cubits/auth_cubit/auth_states.dart';
-import 'package:test1/features/login/data/models/login_request_model.dart';
-import 'package:test1/features/sign_up/data/model/sign_up_request.dart';
 
-import '../../../../features/login/data/models/login_success_models/login_success_model.dart';
-import '../../../../features/login/data/models/login_success_models/user.dart';
-import '../../../../features/login/domain/repos/login_repo.dart';
-import '../../../../features/login/domain/use_cases/login_use_case.dart';
-import '../../../../features/sign_up/data/model/sign_up_response.dart';
-import '../../../../features/sign_up/data/repos/sign_up_repo.dart';
 
 import '../../../helper/app_regex.dart';
-import '../../../networking/failure.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
  /* SignUpRepo signUpRepo;
   LoginUseCase loginUseCase;*/
 
  // AuthCubit(this.signUpRepo,this.loginUseCase) : super(AuthInitial());
+
+  bool isObscureText = true;
+  bool isSwitched = false;
   AuthCubit() : super(AuthInitial());
   final signUpFormKey = GlobalKey<FormState>();
   //List<User> users = [];

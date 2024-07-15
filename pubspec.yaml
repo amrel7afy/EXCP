@@ -67,6 +67,7 @@ dependencies:
 #highly customizable bottom navigation bar for Flutter. It is shipped with 17 prebuilt styles you can choose from
 #  persistent_bottom_nav_bar_v2: ^5.2.3
 
+  bloc: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

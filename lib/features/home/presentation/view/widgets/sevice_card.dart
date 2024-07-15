@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/theming/styles.dart';
-import 'package:test1/features/home/presentation/view/widgets/custom_carousel.dart';
 
 class ServiceCard extends StatelessWidget {
   final String image = '';

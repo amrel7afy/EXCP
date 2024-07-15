@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/contraction/presnetation/view/widgets/contract_info_view_widgets/contract_info_view_body.dart';
 
 import '../../../../../core/constants/constants.dart';

@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:test1/core/networking/api_service.dart';
 import 'package:test1/core/networking/failure.dart';
-import 'package:test1/features/sign_up/data/model/sign_up_request.dart';
 import 'package:test1/features/sign_up/data/model/sign_up_response.dart';
 import 'package:test1/features/sign_up/data/repos/sign_up_repo.dart';
 

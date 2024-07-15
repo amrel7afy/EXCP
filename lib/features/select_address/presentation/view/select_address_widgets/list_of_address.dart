@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
-import 'package:test1/core/theming/styles.dart';
 
 import '../../../../../core/AppRouter.dart';
 import '../../../../../core/constants/constants.dart';

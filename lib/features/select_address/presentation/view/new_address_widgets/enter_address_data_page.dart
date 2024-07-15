@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
-import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
-import 'package:test1/core/widgets/build_drop_down_menu.dart';
 import 'package:test1/core/widgets/drop_down_floating_label_form_field.dart';
-import 'package:test1/core/widgets/drop_down_floating_label_form_field.dart';
-import 'package:test1/core/widgets/drop_down_floating_label_form_field.dart';
-import 'package:test1/features/login/presentation/view/widgets/my_text_form_field.dart';
+import '../../../../shared/my_text_form_field.dart';
 import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_cubit.dart';
-import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_state.dart';
 
-import '../../../../../core/AppRouter.dart';
 import '../../../../../core/widgets/custom_button.dart';
-import 'address_on_map_view_page.dart';
 
 class EnterAddressDataPage extends StatelessWidget {
   const EnterAddressDataPage({

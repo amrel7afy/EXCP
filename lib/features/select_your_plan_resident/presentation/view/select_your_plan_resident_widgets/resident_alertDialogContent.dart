@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -120,7 +119,7 @@ class _ResidentAlertDialogContentState
         Container(
           alignment: Alignment.centerRight,
           margin: const EdgeInsets.symmetric(horizontal: 10),
-          padding: EdgeInsets.all(7),
+          padding: const EdgeInsets.all(7),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8), color: Colors.grey[300]),
           child: Text(
@@ -131,7 +130,7 @@ class _ResidentAlertDialogContentState
         Container(
           alignment: Alignment.centerRight,
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-          padding: EdgeInsets.all(7),
+          padding: const EdgeInsets.all(7),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8), color: Colors.grey[300]),
           child: Text(
@@ -146,12 +145,12 @@ class _ResidentAlertDialogContentState
   Row buildPMIntervalRow() {
     return Row(
       children: [
-        Icon(
+        const Icon(
           Icons.timer,
           size: 18,
           color: Colors.grey,
         ),
-        HorizontalSpacer(5),
+        const HorizontalSpacer(5),
         Text(
           'الفترة المسائية : من 4:00 م الي 6:00 م',
           style: MyTextStyles.font12Weight500,
@@ -163,12 +162,12 @@ class _ResidentAlertDialogContentState
   Row buildAMIntervalRow() {
     return Row(
       children: [
-        Icon(
+        const Icon(
           Icons.timer,
           size: 18,
           color: Colors.grey,
         ),
-        HorizontalSpacer(5),
+        const HorizontalSpacer(5),
         Text(
           'الفترة الصباحية : من 7:30 ص الى 9:30 م',
           style: MyTextStyles.font12Weight500,

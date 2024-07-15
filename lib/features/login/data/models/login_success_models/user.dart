@@ -1,4 +1,3 @@
-import 'package:test1/features/login/domain/entity/user_entity.dart';
 
 class User  {
   final String userName;
