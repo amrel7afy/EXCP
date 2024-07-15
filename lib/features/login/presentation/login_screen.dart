@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
@@ -37,9 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const LoginLogoAndUpperText(),
               const VerticalSpacer(54),
               BlocConsumer<AuthCubit, AuthStates>(
-                listener: (context, state) {
-
-                },
+                listener: (context, state) {},
                 builder: (context, state) {
                   return Form(
                     key: loginViewModel.loginFormKey,
@@ -112,20 +109,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   const Text('English'),
                   const HorizontalSpacer(7),
-                  Directionality(
-                    textDirection: AppConstants.appTextDirection,
-                    child: Switch(
-                      inactiveThumbColor: MyColors.kPrimaryColor,
-                      inactiveTrackColor: const Color(0xffACACAC),
-                      activeColor: MyColors.kGreenColor,
-                      value: context.read<AuthCubit>().isSwitched,
-                      onChanged: (value) {
-
-                        log(value.toString());
-                        context.read<AuthCubit>().toggleIsSwitched(value);
-
-                      },
-                    ),
+                  BlocBuilder<AuthCubit, AuthStates>(
+                    builder: (context, state) {
+                      return Directionality(
+                        textDirection: AppConstants.appTextDirection,
+                        child: Switch(
+                          inactiveThumbColor: MyColors.kPrimaryColor,
+                          inactiveTrackColor: const Color(0xffACACAC),
+                          activeColor: MyColors.kGreenColor,
+                          value: context.read<AuthCubit>().isSwitched,
+                          onChanged: (value) {
+                            log(value.toString());
+                            context.read<AuthCubit>().toggleIsSwitched(value);
+                          },
+                        ),
+                      );
+                    },
                   ),
                   const HorizontalSpacer(7.0),
                   const Text('العربية'),
