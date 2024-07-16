@@ -1,9 +1,14 @@
- class GenericUpdateState<T> {
+import 'package:equatable/equatable.dart';
 
-   final T? data;
-  GenericUpdateState(this.data);
+class GenericUpdateState<T>extends Equatable {
+  final T? data;
+
+  const GenericUpdateState(this.data);
+
+  @override
+  List<Object?> get props => [data];
 }
-class GenericInitial<T> extends GenericUpdateState<T>{
-  GenericInitial(super.data);}
 
-
+class GenericInitial<T> extends GenericUpdateState<T> {
+  const GenericInitial(super.data);
+}

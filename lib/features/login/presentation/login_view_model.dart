@@ -39,7 +39,7 @@ class LoginViewModel {
 
   toggleIsObscureText(BuildContext context) {
     isObscureText = !isObscureText;
-    textFieldCubit.update(isObscureText);
+    textFieldCubit.update(false);
   }
 
   toggleIsSwitched(value, BuildContext context) {
