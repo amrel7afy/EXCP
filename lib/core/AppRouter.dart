@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/di/locator.dart';
 import 'package:test1/core/helper/extensions.dart';
+import 'package:test1/core/shared/cubits/generic_cubit/generic_cubit.dart';
 import 'package:test1/features/design_your_offer/presentation/view/design_your_offer_view.dart';
 import 'package:test1/features/home/presentation/view/home_view.dart';
 import 'package:test1/features/my_orders/presentation/view_model/orders_cubit/orders_cubit.dart';

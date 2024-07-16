@@ -9,7 +9,7 @@ import 'package:test1/features/login/domain/repos/login_repo.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/helper/cache_helper.dart';
 import '../../../../core/networking/failure.dart';
-import '../../../core/shared/cubits/app_cubit/app_cubit.dart';
+import '../../../core/shared/cubits/generic_cubit/generic_cubit.dart';
 import '../data/models/login_request_model.dart';
 import '../data/models/login_success_models/login_success_model.dart';
 import '../data/models/login_success_models/user.dart';
@@ -28,22 +28,24 @@ class LoginViewModel {
   TextEditingController passwordController = TextEditingController();
   final loginFormKey = GlobalKey<FormState>();
 
-  AppCubit appCubit = AppCubit();
+  GenericCubit<bool> textFieldCubit = GenericCubit<bool>(true);
+  GenericCubit<String> switchCubit = GenericCubit<String>('');
 
   Map<String, dynamic> assignLoginRequestData(phoneNumber, password) {
     LoginRequest loginRequest =
-    LoginRequest(userName: phoneNumber, password: password);
+        LoginRequest(userName: phoneNumber, password: password);
     return loginRequest.toMap();
   }
 
   toggleIsObscureText(BuildContext context) {
     isObscureText = !isObscureText;
-    appCubit.update();
+    textFieldCubit.update(isObscureText);
   }
 
   toggleIsSwitched(value, BuildContext context) {
     isSwitched = value;
-    appCubit.update();
+    final String isSwitchedString = 'isSwitched:$value';
+    switchCubit.update(isSwitchedString);
   }
 
   userLogin(context) async {
@@ -55,11 +57,9 @@ class LoginViewModel {
     });
   }
 
-
   validateAndLogin(BuildContext context) {
-    if (loginFormKey.currentState !.validate ()
-    ) {
-    userLogin(context);
+    if (loginFormKey.currentState!.validate()) {
+      userLogin(context);
     }
   }
 
