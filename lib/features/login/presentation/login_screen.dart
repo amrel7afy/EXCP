@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
@@ -23,8 +24,11 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   LoginViewModel loginViewModel = LoginViewModel();
 
+
   @override
   Widget build(BuildContext context) {
+    final switchCubit=loginViewModel.switchCubit;
+    final textFieldCubit=loginViewModel.textFieldCubit;
     return Scaffold(
       body: Center(
         child: Padding(
@@ -42,12 +46,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       MyTextFormField(
                         labelText: 'رقم الجوال ',
                         controller: loginViewModel.phoneNumberController,
-                        validator: context.read<GenericCubit>().phoneValidator,
+                        validator: loginViewModel.textFieldCubit.phoneValidator,
                       ),
                       const VerticalSpacer(18),
                       BlocBuilder<GenericCubit<bool>, GenericUpdateState<bool>>(
                         bloc: loginViewModel.textFieldCubit,
                         builder: (context, state) {
+                          log(state.data.toString());
                           return MyTextFormField(
                             isObscureText: loginViewModel.isObscureText,
                             suffixIcon: GestureDetector(
