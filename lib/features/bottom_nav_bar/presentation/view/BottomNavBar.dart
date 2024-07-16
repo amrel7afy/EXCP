@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test1/features/home/presentation/view/home_view.dart';
+import 'package:test1/features/home/presentation/home_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -12,7 +12,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _currentIndex = 0;
 
   final List<Widget> _children = [
-    const HomeView(),
+    const HomeScreen(),
     const Scaffold(body: Center(child: Text('Search Page'))),
     const Scaffold(body: Center(child: Text('Profile Page'))),
   ];

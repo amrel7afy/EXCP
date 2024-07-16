@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/theming/styles.dart';
-import 'package:test1/features/home/presentation/view/widgets/sevice_card.dart';
 import 'package:test1/features/service_per_hour/presentation/view/widgets/service_alert_dialog_content.dart';
 
 import '../../../../../core/widgets/show_alert_dialog.dart';
+import '../../../../home/presentation/components/sevice_card.dart';
 
 class ServicePerHourBody extends StatefulWidget {
   const ServicePerHourBody({super.key});

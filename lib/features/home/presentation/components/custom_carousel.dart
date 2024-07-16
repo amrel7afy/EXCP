@@ -10,9 +10,15 @@ class CustomCarousel extends StatefulWidget {
 }
 
 class _CustomCarouselState extends State<CustomCarousel> {
+  late final CarouselController carouselController;
+  @override
+  void initState() {
+    carouselController=CarouselController();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    final CarouselController carouselController = CarouselController();
+
     int currentIndex = 0;
     final List<String> imgList = [
       'https://via.placeholder.com/400x300.png?text=Item+1',
@@ -35,7 +41,7 @@ class _CustomCarouselState extends State<CustomCarousel> {
         options: CarouselOptions(
           autoPlay: true,
           enlargeCenterPage: true,
-          aspectRatio: 2.0,
+          aspectRatio: 1.5,
           onPageChanged: (index, reason) {
             setState(() {
               currentIndex = index;
@@ -44,7 +50,7 @@ class _CustomCarouselState extends State<CustomCarousel> {
         ),
         carouselController: carouselController,
       ),
-        Row(
+            Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: imgList.asMap().entries.map((entry) {
             return GestureDetector(

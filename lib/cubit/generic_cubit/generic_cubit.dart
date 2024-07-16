@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../helper/app_regex.dart';
+import '../../core/helper/app_regex.dart';
 import 'generic_state.dart';
 
 class GenericCubit<T> extends Cubit<GenericUpdateState<T>> {

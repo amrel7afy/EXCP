@@ -6,7 +6,7 @@ import 'package:test1/features/sign_up/data/model/sign_up_response.dart';
 import 'package:test1/features/sign_up/data/repos/sign_up_repo.dart';
 
 class SignUpRepoImpl implements SignUpRepo {
-  final ApiServices apiServices;
+  final DioApiServices apiServices;
 
   SignUpRepoImpl(this.apiServices);
 

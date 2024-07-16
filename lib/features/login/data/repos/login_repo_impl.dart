@@ -8,7 +8,7 @@ import '../../../../models/authentication/login_success_models/login_success_mod
 import '../../domain/repos/login_repo.dart';
 
 class LoginRepoImpl implements LoginRepo {
-  final ApiServices apiServices;
+  final DioApiServices apiServices;
 
   LoginRepoImpl(this.apiServices);
 

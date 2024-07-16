@@ -8,8 +8,8 @@ import 'package:test1/core/theming/styles.dart';
 import '../../../../../core/constants/constants.dart';
 import '../../../../core/constants/methods.dart';
 import '../../../../core/widgets/custom_button.dart';
-import '../../../core/shared/cubits/generic_cubit/generic_cubit.dart';
-import '../../../core/shared/cubits/generic_cubit/generic_state.dart';
+import '../../../cubit/generic_cubit/generic_cubit.dart';
+import '../../../cubit/generic_cubit/generic_state.dart';
 import 'components/login_logo_and_upper_text.dart';
 import '../../shared/my_text_form_field.dart';
 import 'login_view_model.dart';
@@ -27,8 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final switchCubit=loginViewModel.switchCubit;
-    final textFieldCubit=loginViewModel.textFieldCubit;
+
     return Scaffold(
       body: Center(
         child: Padding(

@@ -1,11 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/AppRouter.dart';
-import 'package:test1/core/di/locator.dart';
-import 'package:test1/core/theming/my_colors.dart';
-import 'core/shared/cubits/generic_cubit/generic_cubit.dart';
+ import 'package:test1/core/theming/my_colors.dart';
 
 class MyApp extends StatelessWidget {
   final String initialRoute;
@@ -31,7 +28,7 @@ class MyApp extends StatelessWidget {
                 shape: CircleBorder(),
               )),
           //initialRoute: AppRouter.singUpView,
-          initialRoute: AppRouter.loginView,
+          initialRoute: AppRouter.homeView,
           onGenerateRoute: AppRouter().generateRoute,
         ),
       ),

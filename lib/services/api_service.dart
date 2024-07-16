@@ -1,14 +1,11 @@
 import 'dart:convert';
-
-import 'package:dio/dio.dart';
-
 import 'package:http/http.dart' as http;
-
 import '../core/constants/constants.dart';
 import '../core/helper/cache_helper.dart';
 
 class ApiServices {
-  final _baseUrl = 'https://crmtest.hrbs.com.sa:8006/ar/api/';
+  final _baseUrl= 'https://mueen-apitest.azurewebsites.net/ar/api/';
+
 
   Future<Map<String, String>> _getHeaders() async {
     String? token =
