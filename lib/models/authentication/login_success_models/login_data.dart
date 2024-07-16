@@ -1,5 +1,6 @@
 
-import 'package:test1/features/login/data/models/login_success_models/user.dart';
+
+import 'package:test1/models/authentication/login_success_models/user_data.dart';
 
 class LoginData {
   final User user;

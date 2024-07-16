@@ -10,9 +10,9 @@ import '../../../../core/constants/constants.dart';
 import '../../../../core/helper/cache_helper.dart';
 import '../../../../core/networking/failure.dart';
 import '../../../core/shared/cubits/generic_cubit/generic_cubit.dart';
-import '../data/models/login_request_model.dart';
-import '../data/models/login_success_models/login_success_model.dart';
-import '../data/models/login_success_models/user.dart';
+import '../../../models/authentication/login_request_model.dart';
+import '../../../models/authentication/login_success_models/login_success_model.dart';
+import '../../../models/authentication/login_success_models/user_data.dart';
 
 class LoginViewModel {
   bool isObscureText = true;

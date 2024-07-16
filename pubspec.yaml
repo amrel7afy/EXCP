@@ -68,6 +68,9 @@ dependencies:
 # Dart package that helps to implement value based equality without needing to explicitly override == and hashCode.
   equatable: ^2.0.5
 
+# composable, multi-platform, Future-based API for HTTP requests.
+  http: ^1.2.1
+
 
 dev_dependencies:
   flutter_test:

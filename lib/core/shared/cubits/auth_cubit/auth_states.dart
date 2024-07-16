@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:test1/features/sign_up/data/model/sign_up_response.dart';
 
-import '../../../../features/login/data/models/login_success_models/login_success_model.dart';
+import '../../../../models/authentication/login_success_models/login_success_model.dart';
+
 
 abstract class AuthStates {}
 

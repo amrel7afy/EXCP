@@ -19,7 +19,6 @@ import '../features/contraction/presnetation/view/contract_download_view.dart';
 import '../features/contraction/presnetation/view/contract_info_view.dart';
 import '../features/contraction/presnetation/view/contract_success_view.dart';
 import '../features/contraction/presnetation/view/resident_contract_details_view.dart';
-import '../features/login/data/models/login_success_models/user.dart';
 import '../features/login/presentation/login_screen.dart';
 import '../features/my_orders/presentation/view/add_new_order.dart';
 import '../features/my_orders/presentation/view/my_orders_view.dart';
@@ -31,6 +30,7 @@ import '../features/select_your_plan_resident/presentation/view/select_your_plan
 import '../features/select_your_plan_resident/presentation/view/select_your_worker_view.dart';
 import '../features/service_per_hour/presentation/view/service_per_hour_view.dart';
 import '../features/sign_up/presentation/view/sign_up_view.dart';
+import '../models/authentication/login_success_models/user_data.dart';
 import 'constants/constants.dart';
 
 import 'helper/cache_helper.dart';
