@@ -3,7 +3,7 @@ import '../../core/helper/app_regex.dart';
 import 'generic_state.dart';
 
 class GenericCubit<T> extends Cubit<GenericUpdateState<T>> {
-  GenericCubit(T? data) : super(GenericInitial(data));
+  GenericCubit([T? data]) : super(GenericInitial(data));
 
   update(T data) {
     emit(GenericUpdateState(data));

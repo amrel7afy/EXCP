@@ -6,12 +6,14 @@ import '../../models/slider/slider_response.dart';
 import '../../services/api_service.dart';
 
 class SliderController {
-  final ApiServices apiServices;
+  late final ApiServices _apiServices;
 
-  SliderController(this.apiServices);
+  SliderController(){
+    _apiServices=ApiServices();
+  }
 
   Future<SliderResponse> getSlider() async {
-    http.Response result=await apiServices.get(endPoint: 'Slider');
+    http.Response result=await _apiServices.get(endPoint: 'Slider');
     SliderResponse sliderResponse=SliderResponse.fromJson(jsonDecode(result.body));
     return sliderResponse;
   }

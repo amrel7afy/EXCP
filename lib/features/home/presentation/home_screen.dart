@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:test1/features/home/presentation/home_view_model.dart';
+import 'package:test1/models/slider/slider_response.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/constants/vertical_and_horizontal_space.dart';
 import '../../../core/theming/styles.dart';
@@ -9,9 +11,22 @@ import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/home/presentation/components/sevice_card.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  HomeViewModel homeViewModel=HomeViewModel();
+
+
+  @override
+  void initState() {
+    homeViewModel.fetchSlider();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -29,7 +44,7 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CustomCarousel(),
+                 CustomCarousel(homeViewModel: homeViewModel,),
                 const VerticalSpacer(24),
                 Text(
                   "خدماتنا المميزة",
