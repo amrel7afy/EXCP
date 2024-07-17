@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test1/controller/steps/steps_controller.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import 'package:test1/features/home/presentation/home_screen.dart';
@@ -73,7 +74,8 @@ class _ServicePerHourScreenState extends State<ServicePerHourScreen> {
                           const VerticalSpacer(20),
                           ServiceCard(
                             onTap: () async{
-                              servicePerHourViewModel.nextStep(context);
+                             // servicePerHourViewModel.loading.show;
+                              await StepsController.fetchStep(context);
 
                             },
                             service: state.data![1],
@@ -98,5 +100,5 @@ class _ServicePerHourScreenState extends State<ServicePerHourScreen> {
       ],
     );
   }
-}
 
+}
