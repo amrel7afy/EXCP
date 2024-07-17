@@ -27,7 +27,7 @@ import '../features/select_address/presentation/view/new_address_view.dart';
 import '../features/select_address/presentation/view/empty_address_view.dart';
 import '../features/select_your_plan_resident/presentation/view/select_your_plan_resident_view.dart';
 import '../features/select_your_plan_resident/presentation/view/select_your_worker_view.dart';
-import '../features/service_per_hour/presentation/view/service_per_hour_view.dart';
+import '../features/service_per_hour/presentation/service_per_hour_screen.dart';
 import '../features/sign_up/presentation/view/sign_up_view.dart';
 import '../models/authentication/login_success_models/user_data.dart';
 import 'constants/constants.dart';
@@ -151,7 +151,7 @@ class AppRouter {
         );
       case servicePerHourView:
         return MaterialPageRoute(
-          builder: (context) => const ServicePerHourView(),
+          builder: (context) => const ServicePerHourScreen(),
         );
       case bottomNavBar:
         return MaterialPageRoute(
