@@ -8,9 +8,9 @@ import 'package:test1/features/home/presentation/home_view_model.dart';
 import 'package:test1/models/slider/slider_response.dart';
 
 class CustomCarousel extends StatefulWidget {
-  final HomeViewModel homeViewModel;
+  final GenericCubit<SliderResponse> sliderCubit;
 
-  const CustomCarousel({super.key, required this.homeViewModel});
+  const CustomCarousel({super.key, required this.sliderCubit});
 
   @override
   State<CustomCarousel> createState() => _CustomCarouselState();
@@ -36,11 +36,9 @@ class _CustomCarouselState extends State<CustomCarousel> {
 
     return BlocBuilder<GenericCubit<SliderResponse>,
         GenericUpdateState<SliderResponse>>(
-      bloc: widget.homeViewModel.sliderCubit,
+      bloc: widget.sliderCubit,
       builder: (context, state) {
-        if(state.data==null||state.data!.data.isEmpty){
-          return const Center(child: CircularProgressIndicator());
-        }
+
         return Column(
           children: [
             CarouselSlider(
