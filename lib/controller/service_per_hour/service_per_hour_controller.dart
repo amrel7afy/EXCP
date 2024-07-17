@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:test1/models/service_per_hour/sevice_class.dart';
+import 'package:test1/models/service_per_hour/service_class.dart';
 import 'package:test1/services/app_service.dart';
 
 class ServicePerHourController {
