@@ -12,7 +12,7 @@ import 'components/custom_carousel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/helper/extensions.dart';
-import 'package:test1/features/home/presentation/components/sevice_card.dart';
+import 'package:test1/features/home/presentation/components/home_service_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           .copyWith(color: Colors.black),
                     ),
                     const VerticalSpacer(17),
-                    ServiceCard(
+                    HomeServiceCard(
                       title: 'خدمة بالساعة',
                       subTitle: 'خدمات منزلية بنظام الساعات',
                       onTap: () {
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                     const VerticalSpacer(20),
-                    ServiceCard(
+                    HomeServiceCard(
                       title: 'خدمة مقيمة',
                       subTitle: 'نظام الباقات الشهرية و السنوية',
                       onTap: () {

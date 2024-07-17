@@ -57,8 +57,10 @@ dependencies:
   get:
 #    powerful HTTP networking package, supports Interceptors,
   dio: ^5.5.0+1
+
 #  Functional Programming in Dart. Purify your Dart code using efficient immutable data structures, monads, lenses and other FP tools
   dartz: ^0.10.1
+
 #  A modal progress indicator widget with Sound Null Safety.
   modal_progress_hud_nsn: ^0.5.1
 
@@ -70,6 +72,11 @@ dependencies:
 
 # composable, multi-platform, Future-based API for HTTP requests.
   http: ^1.2.1
+
+# package provides an easy way to add shimmer effect in Flutter project
+  shimmer: ^3.0.0
+
+
 
 
 dev_dependencies:

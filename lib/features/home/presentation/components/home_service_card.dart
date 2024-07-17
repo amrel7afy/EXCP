@@ -1,21 +1,22 @@
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/theming/styles.dart';
 
-class ServiceCard extends StatelessWidget {
+class HomeServiceCard extends StatelessWidget {
   final String image = '';
   final String title;
   final String subTitle;
   final VoidCallback onTap;
 
-  const ServiceCard({
-    super.key,
+  const HomeServiceCard({super.key,
     required this.title,
     required this.subTitle,
-    required this.onTap,
-  });
+    required this.onTap,});
+
+
 
   @override
   Widget build(BuildContext context) {
