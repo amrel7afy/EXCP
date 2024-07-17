@@ -28,8 +28,8 @@ class LoginViewModel {
   TextEditingController passwordController = TextEditingController();
   final loginFormKey = GlobalKey<FormState>();
 
-  GenericCubit<bool> textFieldCubit = GenericCubit<bool>(true);
-  GenericCubit<String> switchCubit = GenericCubit<String>('');
+  GenericCubit<bool> textFieldCubit = GenericCubit<bool>(data: true);
+  GenericCubit<String> switchCubit = GenericCubit<String>(data: '');
 
   Map<String, dynamic> assignLoginRequestData(phoneNumber, password) {
     LoginRequest loginRequest =

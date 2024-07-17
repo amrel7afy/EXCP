@@ -1,10 +1,8 @@
-import 'dart:developer';
-
 import 'package:test1/controller/slider/slider_controller.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
-import 'package:test1/models/slider/slider_response.dart';
 
 import '../../../cubit/loader_cubit/loader_cubit.dart';
+import '../../../models/slider/slider_item.dart';
 
 class HomeViewModel {
   late final SliderController sliderController;
@@ -13,13 +11,14 @@ class HomeViewModel {
     sliderController = SliderController();
   }
 
-  GenericCubit<SliderResponse> sliderCubit = GenericCubit<SliderResponse>();
-  LoaderCubit loaderCubit = LoaderCubit(false);
+  GenericCubit<List<SliderItem>> sliderCubit = GenericCubit<List<SliderItem>>();
+  Loading loading = Loading(false);
 
   fetchSlider() async {
-    loaderCubit.update(true);
-    SliderResponse sliderResponse = await sliderController.getSlider();
-    sliderCubit.update(sliderResponse);
-    loaderCubit.update(false);
+    loading.show;
+
+    List<SliderItem> sliderItems = await sliderController.getSlider();
+    sliderCubit.update(sliderItems);
+    loading.hide;
   }
 }

@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         validator: loginViewModel.textFieldCubit.phoneValidator,
                       ),
                       const VerticalSpacer(18),
-                      BlocBuilder<GenericCubit<bool>, GenericUpdateState<bool>>(
+                      BlocBuilder<GenericCubit<bool>, GenericState<bool>>(
                         bloc: loginViewModel.textFieldCubit,
                         builder: (context, state) {
                           log(state.data.toString());
@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     const Text('English'),
                     const HorizontalSpacer(7),
-                    BlocBuilder<GenericCubit<String>, GenericUpdateState<String>>(
+                    BlocBuilder<GenericCubit<String>, GenericState<String>>(
                       bloc: loginViewModel.switchCubit,
                       builder: (context, state) {
                         return Directionality(

@@ -1,20 +1,15 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
-
-import '../../models/slider/slider_response.dart';
-import '../../services/api_service.dart';
+import 'package:test1/models/slider/slider_item.dart';
+import 'package:test1/services/app_service.dart';
 
 class SliderController {
-  late final ApiServices _apiServices;
+  Future<List<SliderItem>> getSlider() async {
+    var result = await AppService.callService(
+        actionType: ActionType.get, apiName: '/api/Slider', body: null);
 
-  SliderController(){
-    _apiServices=ApiServices();
-  }
-
-  Future<SliderResponse> getSlider() async {
-    http.Response result=await _apiServices.get(endPoint: 'Slider');
-    SliderResponse sliderResponse=SliderResponse.fromJson(jsonDecode(result.body));
-    return sliderResponse;
+    return result != null
+        ? (List<SliderItem>.from(json.decode(result).map((x) => SliderItem.fromJson(x))))
+        : <SliderItem>[];
   }
 }

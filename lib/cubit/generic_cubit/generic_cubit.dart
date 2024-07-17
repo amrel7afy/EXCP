@@ -2,11 +2,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/helper/app_regex.dart';
 import 'generic_state.dart';
 
-class GenericCubit<T> extends Cubit<GenericUpdateState<T>> {
-  GenericCubit([T? data]) : super(GenericInitial(data));
+class GenericCubit<T> extends Cubit<GenericState<T>> {
+  GenericCubit({T? data}) : super( GenericInitial(data));
 
   update(T data) {
-    emit(GenericUpdateState(data));
+    emit(GenericUpdate( change : !state.change , data: data));
   }
 
   phoneValidator(String? value) {

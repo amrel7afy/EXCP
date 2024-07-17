@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 
-class LoaderState extends Equatable {
+class LoadingState extends Equatable {
   final bool loading;
 
-  const LoaderState(this.loading);
+  const LoadingState(this.loading);
 
   @override
   List<Object?> get props => [loading];
 }
 
-final class LoaderInitial extends LoaderState {
-  const LoaderInitial(super.loading);
+final class LoadingInitial extends LoadingState {
+  const LoadingInitial(super.loading);
 }

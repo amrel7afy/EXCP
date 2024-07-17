@@ -1,14 +1,21 @@
 import 'package:equatable/equatable.dart';
 
-class GenericUpdateState<T>extends Equatable {
+abstract class GenericState<T>extends Equatable {
   final T? data;
-
-  const GenericUpdateState(this.data);
-
-  @override
-  List<Object?> get props => [data];
+  final bool change;
+  const GenericState({required this.data , required this.change});
 }
 
-class GenericInitial<T> extends GenericUpdateState<T> {
-  const GenericInitial(super.data);
+class GenericInitial<T> extends GenericState<T> {
+  const GenericInitial(T? data) : super(data: data , change: false);
+
+  @override
+  List<Object?> get props => [change];
+}
+
+class GenericUpdate<T> extends GenericState<T> {
+  const GenericUpdate({required T super.data , required super.change });
+
+  @override
+  List<Object?> get props => [change];
 }
