@@ -2,22 +2,22 @@ class StepsModel {
   final String stepHeaderId;
   final int? stepOrder; // Using nullable int for stepOrder
   final String? dbResourceName; // Using nullable String for dbResourceName
-  final String dbResourceFieldName;
+  final String? dbResourceFieldName;
   final bool isAvailable;
   final bool isAuthorized;
   final String name;
-  final String controller;
+  final String? controller;
   final String action;
   final String? iconClass; // Using nullable String for iconClass
   final String? previousStepAction; // Using nullable String for previousStepAction
   final String nextStepAction;
   final String stepKeyword;
-  final String description;
+  final String? description;
   final int stepType;
   final bool isVisible;
   final String stepId;
-  final String httpMethod;
-
+  final String? httpMethod;
+  
   StepsModel({
     required this.stepHeaderId,
     this.stepOrder,

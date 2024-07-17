@@ -9,7 +9,6 @@ import 'core/shared/bloc_observer.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
-  StepsController.fetchStep();
   Bloc.observer = MyBlocObserver();
   String initialRoute= await AppRouter.getInitialRouteFromSharedPreferences();
   runApp( MyApp(initialRoute: initialRoute));
