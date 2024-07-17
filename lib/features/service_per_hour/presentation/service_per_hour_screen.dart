@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import 'package:test1/features/home/presentation/home_screen.dart';
 import 'package:test1/features/service_per_hour/presentation/components/loading_content.dart';
@@ -14,7 +12,6 @@ import '../../../core/theming/styles.dart';
 import '../../../core/widgets/custom_app_bar.dart';
 import '../../../core/widgets/show_alert_dialog.dart';
 import '../../../cubit/generic_cubit/generic_state.dart';
-import '../../home/presentation/components/home_service_card.dart';
 import 'components/service_alert_dialog_content.dart';
 import 'components/service_per_hour_card.dart';
 
@@ -38,7 +35,6 @@ class _ServicePerHourScreenState extends State<ServicePerHourScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-
         Directionality(
           textDirection: AppConstants.appTextDirection,
           child: Scaffold(

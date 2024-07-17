@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:test1/core/di/locator.dart';
 import 'package:test1/core/helper/extensions.dart';
  import 'package:test1/features/design_your_offer/presentation/view/design_your_offer_view.dart';
@@ -35,7 +36,6 @@ import 'constants/constants.dart';
 import 'helper/cache_helper.dart';
 
 class AppRouter {
-  //
 
   static Future<String> getInitialRouteFromSharedPreferences() async {
     String? userDataAsString =
@@ -49,32 +49,32 @@ class AppRouter {
     return loginView;
   }
 
-  static const String homeView = '/homeView';
-  static const String bottomNavBar = '/bottomNavBar';
-  static const String onBoardingView = '/onBoardingView';
-  static const String loginView = '/LoginView';
-  static const String otpVerifyView = '/otpVerifyView';
-  static const String searchView = '/searchView';
-  static const String singUpView = '/singUpView';
-  static const String servicePerHourView = '/servicePerHourView';
-  static const String selectAddressView = '/selectAddressView';
-  static const String emptyAddressView = '/emptyAddressView';
-  static const String newAddressView = '/newAddressView';
-  static const String selectYourPlanView = '/selectYourPlanView';
-  static const String designYourOfferView = '/designYourOfferView';
-  static const String contractInfoView = '/contractInfoView';
-  static const String contractSuccessView = '/contractSuccessView';
-  static const String myOrdersView = '/myOrdersView';
-  static const String addNewOrderView = '/addNewOrderView';
+  static const String homeView = 'homeView';
+  static const String bottomNavBar = 'bottomNavBar';
+  static const String onBoardingView = 'onBoardingView';
+  static const String loginView = 'LoginView';
+  static const String otpVerifyView = 'otpVerifyView';
+  static const String searchView = 'searchView';
+  static const String singUpView = 'singUpView';
+  static const String servicePerHourView = 'servicePerHourView';
+  static const String selectAddressView = 'selectAddressView';
+  static const String emptyAddressView = 'emptyAddressView';
+  static const String newAddressView = 'newAddressView';
+  static const String selectYourPlanView = 'selectYourPlanView';
+  static const String designYourOfferView = 'designYourOfferView';
+  static const String contractInfoView = 'contractInfoView';
+  static const String contractSuccessView = 'contractSuccessView';
+  static const String myOrdersView = 'myOrdersView';
+  static const String addNewOrderView = 'addNewOrderView';
   static const String selectYourPlanResidentView =
-      '/selectYourPlanResidentView';
-  static const String selectYourWorkerView = '/selectYourWorkerView';
-  static const String residentContractDetailsView =
-      '/residentContractDetailsView';
+      'selectYourPlanResidentView';
+  static const String selectYourWorkerView = 'selectYourWorkerView';
+  static const String residentContractDetailsView = 'residentContractDetailsView';
 
-  static const String residentServiceView = '/residentServiceView';
-  static const String downloadContractView = '/downloadContractView';
-  static const String attachmentsContractView = '/attachmentsContractView';
+  static const String residentServiceView = 'residentServiceView';
+  static const String downloadContractView = 'downloadContractView';
+  static const String attachmentsContractView = 'attachmentsContractView';
+
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -179,3 +179,5 @@ class AppRouter {
     return null;
   }
 }
+
+
