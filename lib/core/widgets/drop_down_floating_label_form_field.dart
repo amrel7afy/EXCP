@@ -12,7 +12,7 @@ class MyDropdownFormField<T> extends StatelessWidget {
   final VoidCallback? onItemTap;
   final Widget Function(T) itemBuilder;
   final double? padding;
-  final Function(T? value) validator;
+  final String? Function(T?)? validator;
 
   const MyDropdownFormField({
     super.key,
@@ -22,7 +22,8 @@ class MyDropdownFormField<T> extends StatelessWidget {
     required this.onChanged,
     required this.itemBuilder,
     this.padding,
-    required this.validator, this.onItemTap,
+    required this.validator,
+    this.onItemTap,
   });
 
   @override
@@ -32,8 +33,6 @@ class MyDropdownFormField<T> extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(bottom: padding ?? 15.0),
         child: DropdownButtonFormField<T>(
-
-
           style: MyTextStyles.font15Weight600.copyWith(color: MyColors.kPrimaryColor),
           value: value,
           icon: const Icon(
@@ -66,15 +65,17 @@ class MyDropdownFormField<T> extends StatelessWidget {
           items: items.map((T item) {
             return DropdownMenuItem<T>(
               value: item,
-              onTap: onItemTap,
+              onTap: onItemTap ,
               child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: itemBuilder(item)),
+                alignment: Alignment.bottomRight,
+                child: itemBuilder(item),
+              ),
             );
           }).toList(),
-          validator: (value) => validator(value),
+          validator: validator,
         ),
       ),
     );
   }
 }
+
