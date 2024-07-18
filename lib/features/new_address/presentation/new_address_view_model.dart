@@ -12,7 +12,7 @@ class NewAddressViewModel {
   String? areaNameSelectedValue;
   String? houseTypeSelectedValue;
   String? floorSelectedValue;
-  final PageController pageController = PageController(initialPage: 0);
+
 
   final List<String> areaNameOptions = ['الاندلس', 'الدمام', 'جدة'];
   final List<String> houseTypeOptions = ['عمارة', 'فيلا', 'منزل خاص'];
@@ -26,6 +26,7 @@ class NewAddressViewModel {
   }
   List<String> cityNames = [];
   List<String>? districts = [];
+  String polygonDistrictId='';
   String? getCityKey(String cityName, List<CityModel> cities) {
     return cities.firstWhere((city) => city.value == cityName).key;
   }
@@ -38,12 +39,16 @@ class NewAddressViewModel {
     loading.hide;
   }
 
-  fetchCityDistricts({required String cityId}) async {
+  fetchDistrictsOfCity({required String cityId}) async {
     loading.show;
     List<CityModel> cityDistricts = await CityController.fetchCityDistricts(cityId: cityId);
     districts = cityDistricts.map((city) => city.value).toList();
     districtCubit.update(cityDistricts);
     loading.hide;
+  }
+
+  fetchPolygon(){
+
   }
 }
 

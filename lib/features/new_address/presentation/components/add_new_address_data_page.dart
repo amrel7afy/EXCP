@@ -48,7 +48,7 @@ class _AddNewAddressPageState extends State<AddNewAddressPage> {
                     return MyDropdownFormField<String>(
                       labelText: 'مدينة الإقامة',
                       onItemTap: () async {
-                        await widget.newAddressViewModel.fetchCityDistricts(
+                        await widget.newAddressViewModel.fetchDistrictsOfCity(
                             cityId: '629a2a15-14fa-e911-a81f-000d3abaded5');
                       },
                       items: widget.newAddressViewModel.cityNames,
@@ -56,6 +56,7 @@ class _AddNewAddressPageState extends State<AddNewAddressPage> {
                       onChanged: (newVal) {
                         widget.newAddressViewModel.cityNameSelectedValue =
                             newVal;
+
                       },
                       itemBuilder: (item) {
                         return Text(item);
@@ -73,8 +74,6 @@ class _AddNewAddressPageState extends State<AddNewAddressPage> {
                     GenericState<List<CityModel>>>(
                   bloc: widget.newAddressViewModel.districtCubit,
                   builder: (context, state) {
-
-
                     return MyDropdownFormField<String>(
                       labelText: 'اسم الحي',
                       validator: (v) {
@@ -159,12 +158,7 @@ class _AddNewAddressPageState extends State<AddNewAddressPage> {
                             .copyWith(color: Colors.white),
                         text: 'التالي',
                         backGroundColor: Colors.black,
-                        onPressed: () {
-                          widget.newAddressViewModel.pageController.nextPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.ease,
-                          );
-                        },
+                        onPressed: () {},
                       ),
                     ),
                   ],
