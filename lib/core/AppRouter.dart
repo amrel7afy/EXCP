@@ -24,7 +24,7 @@ import '../features/my_orders/presentation/view/add_new_order.dart';
 import '../features/my_orders/presentation/view/my_orders_view.dart';
 import '../features/otp/presentation/view/otp_view.dart';
 import '../features/resident_service/presentation/view/resident_service_view.dart';
-import '../features/select_address/presentation/view/new_address_view.dart';
+import '../features/new_address/presentation/new_address_screen.dart';
 import '../features/select_address/presentation/view/empty_address_view.dart';
 import '../features/select_your_plan_resident/presentation/view/select_your_plan_resident_view.dart';
 import '../features/select_your_plan_resident/presentation/view/select_your_worker_view.dart';

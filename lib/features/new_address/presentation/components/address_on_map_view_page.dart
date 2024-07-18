@@ -5,12 +5,14 @@ import 'package:test1/core/constants/constants.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
+import 'package:test1/features/new_address/presentation/new_address_view_model.dart';
 import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_cubit.dart';
 import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_state.dart';
-import '../../../../../core/widgets/custom_button.dart';
+import '../../../../core/widgets/custom_button.dart';
 
 class AddressOnTheMapViewPage extends StatefulWidget {
-  const AddressOnTheMapViewPage({super.key});
+  final NewAddressViewModel newAddressViewModel;
+   const AddressOnTheMapViewPage({super.key,required this.newAddressViewModel});
 
   @override
   State<AddressOnTheMapViewPage> createState() =>
@@ -47,9 +49,8 @@ class _AddressOnTheMapViewPageState extends State<AddressOnTheMapViewPage> {
                       text: 'السابق',
                       backGroundColor: Colors.white,
                       onPressed: () {
-                        context
-                            .read<AddressCubit>()
-                            .pageController
+
+                            widget.newAddressViewModel.pageController
                             .previousPage(
                                 duration: const Duration(milliseconds: 300),
                                 curve: Curves.ease);

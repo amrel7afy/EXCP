@@ -11,12 +11,12 @@ class AddNewOrderView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
-      child: const Scaffold(
-        appBar: CustomAppBar(
+      child:  Scaffold(
+        appBar: const CustomAppBar(
           title: 'طلب خدمة ساعات',
 
         ),
-        body: SafeArea(child: AddNewOrderViewBody()),
+        body: SafeArea(child: Container()),
       ),
     );
   }
