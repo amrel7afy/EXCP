@@ -9,6 +9,7 @@ import 'package:test1/features/home/presentation/home_screen.dart';
 import 'package:test1/features/service_per_hour/presentation/components/loading_content.dart';
 import 'package:test1/features/service_per_hour/presentation/service_per_hour_view_model.dart';
 import 'package:test1/models/service_per_hour/service_class.dart';
+import '../../../components/widgets/loader.dart';
 import '../../../components/widgets/shimmer.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/constants/vertical_and_horizontal_space.dart';
@@ -74,9 +75,7 @@ class _ServicePerHourScreenState extends State<ServicePerHourScreen> {
                           const VerticalSpacer(20),
                           ServiceCard(
                             onTap: () async{
-                             // servicePerHourViewModel.loading.show;
-                              await StepsController.fetchStep(context);
-
+                              await StepsController(servicePerHourViewModel.loading).fetchStep(context);
                             },
                             service: state.data![1],
                           ),
