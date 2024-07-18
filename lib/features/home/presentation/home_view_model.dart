@@ -12,7 +12,7 @@ class HomeViewModel {
   }
 
   GenericCubit<List<SliderItem>> sliderCubit = GenericCubit<List<SliderItem>>();
-  Loading loading = Loading(false);
+  Loading loading = Loading.instance();
 
   fetchSlider() async {
     loading.show;

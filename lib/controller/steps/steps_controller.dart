@@ -5,24 +5,18 @@ import 'package:test1/models/steps/steps_model.dart';
 import 'package:test1/services/app_service.dart';
 
 class StepsController {
+  StepsController._internal();
 
-   Loading loading =Loading(false);
-  StepsController(this.loading);
+  static final Loading _loader = Loading.instance();
 
-   Future<StepsModel?> fetchStep(BuildContext context) async {
-    loading.show;
+  static Future<StepsModel?> fetchFirstStep() async {
+    _loader.show;
     var result = await AppService.callService(
         actionType: ActionType.get,
         apiName: '/api/Steps/FirstStep?serviceType=1',
         body: null);
-    loading.hide;
-
-    if (result != null) {
-      StepsModel step = StepsModel.fromJson(jsonDecode(result));
-      Navigator.pushNamed(context, '/${step.name}');
-      return step;
-    } else {
-      return null;
-    }
+    _loader.hide;
+    StepsModel step = StepsModel.fromJson(jsonDecode(result));
+    return result != null ? step : null;
   }
 }

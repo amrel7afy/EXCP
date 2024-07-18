@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: Stack(
           children: [
-            Loader(loading: homeViewModel.loading),
+            Loader(),
             SafeArea(
                 child: Padding(
               padding: const EdgeInsets.all(32),
