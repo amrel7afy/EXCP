@@ -17,8 +17,9 @@ import '../../../core/widgets/custom_button.dart';
 
 class PolygonMapScreen extends StatefulWidget {
   final List<LatLng> points;
+  final NewAddressViewModel newAddressViewModel;
 
-  const PolygonMapScreen({super.key, required this.points});
+  const PolygonMapScreen({super.key, required this.points, required this.newAddressViewModel});
 
   @override
   State<PolygonMapScreen> createState() => _PolygonMapScreenState();
@@ -28,7 +29,7 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
   final Completer<GoogleMapController> _controller = Completer();
   late CameraPosition kGoogle;
   final Set<Polygon> _polygon = HashSet<Polygon>();
-  final Set<Marker> _markers = HashSet<Marker>(); // Set to hold markers
+  final Set<Marker> _markers = HashSet<Marker>();
   List<LatLng> points = [];
 
   @override

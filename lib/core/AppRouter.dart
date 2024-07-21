@@ -6,7 +6,7 @@ import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:test1/core/di/locator.dart';
 import 'package:test1/core/helper/extensions.dart';
- import 'package:test1/features/design_your_offer/presentation/view/design_your_offer_view.dart';
+import 'package:test1/features/design_your_offer/presentation/view/design_your_offer_view.dart';
 import 'package:test1/features/home/presentation/home_screen.dart';
 import 'package:test1/features/my_orders/presentation/view_model/orders_cubit/orders_cubit.dart';
 import 'package:test1/features/new_address/presentation/address_on_map_screen.dart';
@@ -38,7 +38,6 @@ import 'constants/constants.dart';
 import 'helper/cache_helper.dart';
 
 class AppRouter {
-
   static Future<String> getInitialRouteFromSharedPreferences() async {
     String? userDataAsString =
         await SharedPrefHelper.getSecuredString(AppConstants.userDataKey);
@@ -71,21 +70,23 @@ class AppRouter {
   static const String selectYourPlanResidentView =
       '/selectYourPlanResidentView';
   static const String selectYourWorkerView = '/selectYourWorkerView';
-  static const String residentContractDetailsView = '/residentContractDetailsView';
+  static const String residentContractDetailsView =
+      '/residentContractDetailsView';
 
   static const String residentServiceView = '/residentServiceView';
   static const String downloadContractView = '/downloadContractView';
   static const String attachmentsContractView = '/attachmentsContractView';
   static const String polygonMapsView = '/polygonMapsView';
 
-
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
-
       case polygonMapsView:
-        final List<LatLng>points= settings.arguments as List<LatLng>;
+        final args = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
-          builder: (context) =>  PolygonMapScreen(points: points),
+          builder: (context) => PolygonMapScreen(
+            points: args['points'],
+            newAddressViewModel: args['newAddressViewModel'],
+          ),
         );
       case downloadContractView:
         return MaterialPageRoute(
@@ -182,12 +183,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const SignUpView(),
         );
-
-
     }
     return null;
   }
 }
-
-
-

@@ -164,7 +164,11 @@ class _NewAddressViewState extends State<NewAddressView> {
                               listener: (context, state) {
                                 if (state is GenericUpdate) {
                                   context.pushNamed(AppRouter.polygonMapsView,
-                                      arguments: state.data);
+                                      arguments: {
+                                        'points': state.data,
+                                        'newAddressViewModel':
+                                            newAddressViewModel
+                                      });
                                 }
                               },
                               bloc: newAddressViewModel.polygonCubit,
