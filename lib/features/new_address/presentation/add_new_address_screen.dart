@@ -41,9 +41,8 @@ class _NewAddressViewState extends State<NewAddressView> {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
       child: Scaffold(
-        appBar: CustomAppBar(
+        appBar: const CustomAppBar(
           title: 'إضافة عنوان جديد',
-          leadingPressed: () {},
         ),
         body: Stack(
           children: [
@@ -60,16 +59,11 @@ class _NewAddressViewState extends State<NewAddressView> {
                       builder: (context, state) {
                         return MyDropdownFormField<String>(
                           labelText: 'مدينة الإقامة',
-                          onItemTap: () async {
-                           /* await newAddressViewModel.fetchDistrictsOfCity(
-                                cityId: '629a2a15-14fa-e911-a81f-000d3abaded5');*/
-                          },
                           items: newAddressViewModel.cityNames,
                           value: newAddressViewModel.cityNameSelectedValue,
                           onChanged: (newVal) {
                             newAddressViewModel.getCityIndex(newVal);
-                             newAddressViewModel.fetchDistrictsOfCity(
-                               );
+                            newAddressViewModel.fetchDistrictsOfCity();
                           },
                           itemBuilder: (item) {
                             return Text(item);
@@ -95,7 +89,7 @@ class _NewAddressViewState extends State<NewAddressView> {
                           items: newAddressViewModel.districts,
                           value: newAddressViewModel.districtSelectedValue,
                           onChanged: (newVal) {
-                           // newAddressViewModel.districtSelectedValue = newVal;
+                            // newAddressViewModel.districtSelectedValue = newVal;
                             newAddressViewModel.getDistrictIndex(newVal);
                           },
                           itemBuilder: (item) {
@@ -166,24 +160,24 @@ class _NewAddressViewState extends State<NewAddressView> {
                         const Spacer(),
                         Flexible(
                           child: BlocListener<GenericCubit<List<LatLng>>,
-                              GenericState<List<LatLng>>>(
-                            listener: (context,state){
-                              if(state is GenericUpdate){
-                                context.pushNamed(AppRouter.polygonMapsView,arguments: state.data);
-                              }
-                            },
-                            bloc: newAddressViewModel.polygonCubit,
-                            child:CustomButton(
-                              borderRadius: BorderRadius.circular(8),
-                              textStyle: MyTextStyles.font18Weight600
-                                  .copyWith(color: Colors.white),
-                              text: 'التالي',
-                              backGroundColor: Colors.black,
-                              onPressed: () {
-                                newAddressViewModel.fetchPolygon(context);
+                                  GenericState<List<LatLng>>>(
+                              listener: (context, state) {
+                                if (state is GenericUpdate) {
+                                  context.pushNamed(AppRouter.polygonMapsView,
+                                      arguments: state.data);
+                                }
                               },
-                            )
-                          ),
+                              bloc: newAddressViewModel.polygonCubit,
+                              child: CustomButton(
+                                borderRadius: BorderRadius.circular(8),
+                                textStyle: MyTextStyles.font18Weight600
+                                    .copyWith(color: Colors.white),
+                                text: 'التالي',
+                                backGroundColor: Colors.black,
+                                onPressed: () {
+                                  newAddressViewModel.fetchPolygon(context);
+                                },
+                              )),
                         ),
                       ],
                     ),
