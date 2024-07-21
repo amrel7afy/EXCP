@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/theming/styles.dart';
@@ -38,3 +39,4 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
     );
   }
 }
+*/

@@ -1,11 +1,7 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/theming/styles.dart';
 
-import '../../../../../core/constants/methods.dart';
-import '../../../../../core/theming/my_colors.dart';
 import 'list_of_address.dart';
 import 'not_accessible_address_card.dart';
 

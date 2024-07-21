@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:test1/core/helper/extensions.dart';
-import 'package:test1/features/select_your_plan_hours/presentation/view/widgets/floating_action_button.dart';
 import 'package:test1/features/select_your_plan_resident/presentation/view/select_your_plan_resident_widgets/select_your_plan_view_resident_body.dart';
 
 import '../../../../core/constants/constants.dart';

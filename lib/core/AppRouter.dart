@@ -1,12 +1,15 @@
-import 'dart:developer';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:test1/core/di/locator.dart';
 import 'package:test1/core/helper/extensions.dart';
-import 'package:test1/features/design_your_offer/presentation/view/design_your_offer_view.dart';
-import 'package:test1/features/home/presentation/view/home_view.dart';
+ import 'package:test1/features/design_your_offer/presentation/view/design_your_offer_view.dart';
+import 'package:test1/features/home/presentation/home_screen.dart';
 import 'package:test1/features/my_orders/presentation/view_model/orders_cubit/orders_cubit.dart';
+import 'package:test1/features/new_address/presentation/address_on_map_screen.dart';
 import 'package:test1/features/select_address/presentation/view/select_address_view.dart';
 import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_cubit.dart';
 import 'package:test1/features/select_your_plan_hours/presentation/view/select_your_plan_view.dart';
@@ -18,39 +21,34 @@ import '../features/contraction/presnetation/view/contract_download_view.dart';
 import '../features/contraction/presnetation/view/contract_info_view.dart';
 import '../features/contraction/presnetation/view/contract_success_view.dart';
 import '../features/contraction/presnetation/view/resident_contract_details_view.dart';
-import '../features/login/presentation/view/login_view.dart';
+import '../features/login/presentation/login_screen.dart';
 import '../features/my_orders/presentation/view/add_new_order.dart';
 import '../features/my_orders/presentation/view/my_orders_view.dart';
 import '../features/otp/presentation/view/otp_view.dart';
 import '../features/resident_service/presentation/view/resident_service_view.dart';
-import '../features/select_address/presentation/view/new_address_view.dart';
+import '../features/new_address/presentation/add_new_address_screen.dart';
 import '../features/select_address/presentation/view/empty_address_view.dart';
 import '../features/select_your_plan_resident/presentation/view/select_your_plan_resident_view.dart';
 import '../features/select_your_plan_resident/presentation/view/select_your_worker_view.dart';
-import '../features/service_per_hour/presentation/view/service_per_hour_view.dart';
+import '../features/service_per_hour/presentation/service_per_hour_screen.dart';
 import '../features/sign_up/presentation/view/sign_up_view.dart';
+import '../models/authentication/login_success_models/user_data.dart';
 import 'constants/constants.dart';
 
 import 'helper/cache_helper.dart';
 
 class AppRouter {
-  //
 
   static Future<String> getInitialRouteFromSharedPreferences() async {
-    String userToken =
-        await SharedPrefHelper.getSecuredString(AppConstants.userToken) ??
-            false;
-    log('$userToken userToken');
-    bool isOnBoarded =
-        await SharedPrefHelper.getBool(AppConstants.isOnBoardingKey) ?? false;
-    log('$isOnBoarded isOnBoarded');
-    if (!userToken.isNullOrEmpty()) {
-      return homeView; // User is logged in, navigate to chatPage
-    } else if (isOnBoarded) {
-      return loginView; // User hasn't logged in but completed onboarding
-    } else {
-      return onBoardingView; // User hasn't completed onboarding
+    String? userDataAsString =
+        await SharedPrefHelper.getSecuredString(AppConstants.userDataKey);
+    if (!userDataAsString.isNullOrEmpty()) {
+      User user = User.fromJson(jsonDecode(userDataAsString!));
+      if (user.phoneNumberConfirmed) {
+        return homeView;
+      }
     }
+    return loginView;
   }
 
   static const String homeView = '/homeView';
@@ -63,7 +61,7 @@ class AppRouter {
   static const String servicePerHourView = '/servicePerHourView';
   static const String selectAddressView = '/selectAddressView';
   static const String emptyAddressView = '/emptyAddressView';
-  static const String newAddressView = '/newAddressView';
+  static const String newAddressView = '/AddNewAddressLocation';
   static const String selectYourPlanView = '/selectYourPlanView';
   static const String designYourOfferView = '/designYourOfferView';
   static const String contractInfoView = '/contractInfoView';
@@ -73,15 +71,22 @@ class AppRouter {
   static const String selectYourPlanResidentView =
       '/selectYourPlanResidentView';
   static const String selectYourWorkerView = '/selectYourWorkerView';
-  static const String residentContractDetailsView =
-      '/residentContractDetailsView';
+  static const String residentContractDetailsView = '/residentContractDetailsView';
 
   static const String residentServiceView = '/residentServiceView';
   static const String downloadContractView = '/downloadContractView';
   static const String attachmentsContractView = '/attachmentsContractView';
+  static const String polygonMapsView = '/polygonMapsView';
+
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+
+      case polygonMapsView:
+        final List<LatLng>points= settings.arguments as List<LatLng>;
+        return MaterialPageRoute(
+          builder: (context) =>  PolygonMapScreen(points: points),
+        );
       case downloadContractView:
         return MaterialPageRoute(
           builder: (context) => const DownloadContractView(),
@@ -93,7 +98,7 @@ class AppRouter {
       case residentContractDetailsView:
         return MaterialPageRoute(
           builder: (context) => BlocProvider.value(
-            value: ChooseWorkerCubit(),
+              value: ChooseWorkerCubit(),
               child: const ResidentContractDetailsView()),
         );
       case selectYourWorkerView:
@@ -155,7 +160,7 @@ class AppRouter {
         );
       case servicePerHourView:
         return MaterialPageRoute(
-          builder: (context) => const ServicePerHourView(),
+          builder: (context) => const ServicePerHourScreen(),
         );
       case bottomNavBar:
         return MaterialPageRoute(
@@ -163,7 +168,7 @@ class AppRouter {
         );
       case homeView:
         return MaterialPageRoute(
-          builder: (context) => const HomeView(),
+          builder: (context) => const HomeScreen(),
         );
       case otpVerifyView:
         return MaterialPageRoute(
@@ -171,15 +176,18 @@ class AppRouter {
         );
       case loginView:
         return MaterialPageRoute(
-          builder: (context) => const LoginView(),
+          builder: (context) => const LoginScreen(),
         );
       case singUpView:
         return MaterialPageRoute(
           builder: (context) => const SignUpView(),
         );
 
-        return null;
+
     }
     return null;
   }
 }
+
+
+

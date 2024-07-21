@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
-import '../../../../../core/theming/my_colors.dart';
 import '../../../data/order_model.dart';
 import 'my_order_expansion_list_view.dart';
 import 'my_orders_tab_bar.dart';
@@ -32,7 +31,7 @@ class _MyOrdersViewBodyState extends State<MyOrdersViewBody>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(23),
+      padding: const EdgeInsets.all(23),
       child: Column(
         children: [
           Container(

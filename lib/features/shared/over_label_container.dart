@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/methods.dart';
 import 'package:test1/core/theming/styles.dart';
 
-import '../../../../../../core/theming/my_colors.dart';
 
 class OverLabelContainer extends StatelessWidget {
   final String label;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/constants/methods.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
@@ -12,10 +11,8 @@ import 'package:test1/core/theming/my_colors.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/custom_button.dart';
 import 'package:test1/core/widgets/show_alert_dialog.dart';
-import 'package:test1/features/login/presentation/view/login_view.dart';
 
 import '../../../../../core/constants/constants.dart';
-import '../../../../../main.dart';
 
 class SignUpButtonAndHaveAccountText extends StatelessWidget {
   const SignUpButtonAndHaveAccountText({super.key});
@@ -56,7 +53,7 @@ class SignUpButtonAndHaveAccountText extends StatelessWidget {
                     .signUpFormKey
                     .currentState!
                     .validate()) {
-                  context.read<AuthCubit>().emitSignUp();
+                //  context.read<AuthCubit>().emitSignUp();
                 }
               },
             ),

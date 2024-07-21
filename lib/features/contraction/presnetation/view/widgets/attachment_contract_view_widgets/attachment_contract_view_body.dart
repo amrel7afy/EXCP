@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/contraction/presnetation/view/widgets/attachment_contract_view_widgets/skip_upload_docs_later_row.dart';
-import 'package:test1/features/contraction/presnetation/view/widgets/contract_download_view_widgets/upload_docs_later_row.dart';
 import 'package:test1/features/shared/next_button.dart';
-import 'package:test1/features/shared/select_worker_card.dart';
 
 import '../../../../../../core/AppRouter.dart';
 import 'attachment_contract_card.dart';

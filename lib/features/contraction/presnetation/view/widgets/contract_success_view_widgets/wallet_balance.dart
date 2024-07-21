@@ -4,7 +4,6 @@ import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/custom_button.dart';
 import 'package:pinput/pinput.dart';
-import 'package:test1/core/widgets/show_alert_dialog.dart';
 
 import '../../../../../../core/constants/methods.dart';
 import '../../../../../../core/theming/my_colors.dart';

@@ -1,9 +1,5 @@
-import 'dart:developer';
 
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/constants/methods.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
@@ -11,8 +7,7 @@ import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/custom_button.dart';
 import 'package:test1/core/widgets/drop_down_floating_label_form_field.dart';
-import 'package:test1/core/widgets/select_date.dart';
-import 'package:test1/features/login/presentation/view/widgets/my_text_form_field.dart';
+import '../../../../shared/my_text_form_field.dart';
 
 import '../../../../../core/theming/my_colors.dart';
 import '../../../../../core/widgets/syncfusion_calendar.dart';

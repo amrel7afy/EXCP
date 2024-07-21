@@ -5,11 +5,13 @@ import 'package:dio/dio.dart';
 import '../constants/constants.dart';
 import '../helper/cache_helper.dart';
 
-class ApiServices {
+class DioApiServices {
   final _baseUrl = 'https://crmtest.hrbs.com.sa:8006/ar/api/';
+ // final _baseUrl= 'https://mueen-apitest.azurewebsites.net/ar/api/';
+
   final Dio _dio;
 
-  ApiServices(this._dio) {
+  DioApiServices(this._dio) {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {

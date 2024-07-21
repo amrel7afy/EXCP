@@ -50,8 +50,6 @@ dependencies:
 # The Flutter Calendar widget has nine built-in configurable views that provide basic functionalities for scheduling and representing appointments/events efficiently.
   syncfusion_flutter_calendar: ^26.1.40+1
 
-
-
   pinput: ^5.0.0
 
   font_awesome_flutter:
@@ -59,13 +57,28 @@ dependencies:
   get:
 #    powerful HTTP networking package, supports Interceptors,
   dio: ^5.5.0+1
+
 #  Functional Programming in Dart. Purify your Dart code using efficient immutable data structures, monads, lenses and other FP tools
   dartz: ^0.10.1
+
 #  A modal progress indicator widget with Sound Null Safety.
   modal_progress_hud_nsn: ^0.5.1
 
-#highly customizable bottom navigation bar for Flutter. It is shipped with 17 prebuilt styles you can choose from
-#  persistent_bottom_nav_bar_v2: ^5.2.3
+# highly customizable persistent/static bottom navigation bar for flutter.
+  persistent_bottom_nav_bar: ^6.2.1
+
+# Dart package that helps to implement value based equality without needing to explicitly override == and hashCode.
+  equatable: ^2.0.5
+
+# composable, multi-platform, Future-based API for HTTP requests.
+  http: ^1.2.1
+
+# package provides an easy way to add shimmer effect in Flutter project
+  shimmer: ^3.0.0
+
+  google_maps_flutter:
+
+
 
 dev_dependencies:
   flutter_test:

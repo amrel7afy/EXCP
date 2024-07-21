@@ -33,8 +33,8 @@ class AttachmentContractCard extends StatelessWidget {
             ),
             const HorizontalSpacer(10),
             Text('الهوية',style: MyTextStyles.font14Weight600,),
-            Spacer(),
-            Column(
+            const Spacer(),
+            const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(Icons.file_upload_outlined,size: 45,),
