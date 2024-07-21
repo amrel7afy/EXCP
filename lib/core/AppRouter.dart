@@ -2,16 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:test1/core/di/locator.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/design_your_offer/presentation/view/design_your_offer_view.dart';
 import 'package:test1/features/home/presentation/home_screen.dart';
 import 'package:test1/features/my_orders/presentation/view_model/orders_cubit/orders_cubit.dart';
 import 'package:test1/features/new_address/presentation/address_on_map_screen.dart';
-import 'package:test1/features/select_address/presentation/view/select_address_view.dart';
-import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_cubit.dart';
+import 'package:test1/features/select_address/presentation/select_address_screen.dart';
 import 'package:test1/features/select_your_plan_hours/presentation/view/select_your_plan_view.dart';
 import 'package:test1/features/select_your_plan_resident/presentation/view_model/choose_worker_cubit/choose_worker_cubit.dart';
 
@@ -24,17 +20,16 @@ import '../features/contraction/presnetation/view/resident_contract_details_view
 import '../features/login/presentation/login_screen.dart';
 import '../features/my_orders/presentation/view/add_new_order.dart';
 import '../features/my_orders/presentation/view/my_orders_view.dart';
+import '../features/new_address/presentation/add_new_address_screen.dart';
 import '../features/otp/presentation/view/otp_view.dart';
 import '../features/resident_service/presentation/view/resident_service_view.dart';
-import '../features/new_address/presentation/add_new_address_screen.dart';
-import '../features/select_address/presentation/view/empty_address_view.dart';
+import '../features/select_address/presentation/empty_address_screen.dart';
 import '../features/select_your_plan_resident/presentation/view/select_your_plan_resident_view.dart';
 import '../features/select_your_plan_resident/presentation/view/select_your_worker_view.dart';
 import '../features/service_per_hour/presentation/service_per_hour_screen.dart';
 import '../features/sign_up/presentation/view/sign_up_view.dart';
 import '../models/authentication/login_success_models/user_data.dart';
 import 'constants/constants.dart';
-
 import 'helper/cache_helper.dart';
 
 class AppRouter {
@@ -147,17 +142,15 @@ class AppRouter {
         );
       case emptyAddressView:
         return MaterialPageRoute(
-          builder: (context) => const EmptyAddressView(),
+          builder: (context) => const EmptyAddressScreen(),
         );
       case newAddressView:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-              create: (BuildContext context) => locator<AddressCubit>(),
-              child: const NewAddressView()),
+          builder: (context) => const NewAddressView(),
         );
       case selectAddressView:
         return MaterialPageRoute(
-          builder: (context) => const SelectAddressView(),
+          builder: (context) => const SelectAddressScreen(),
         );
       case servicePerHourView:
         return MaterialPageRoute(

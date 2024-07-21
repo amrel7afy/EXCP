@@ -1,9 +1,10 @@
-import 'dart:developer';
+import 'dart:collection';
+import 'dart:developer'as dev;
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:test1/controller/city/city_controller.dart';
-import 'package:test1/features/new_address/presentation/address_on_map_screen.dart';
 import 'package:test1/models/city/city_model.dart';
 
 import '../../../cubit/generic_cubit/generic_cubit.dart';
@@ -24,6 +25,7 @@ class NewAddressViewModel {
   GenericCubit<List<CityModel>> cityCubit = GenericCubit<List<CityModel>>();
   GenericCubit<List<CityModel>> districtCubit = GenericCubit<List<CityModel>>();
   GenericCubit<List<LatLng>> polygonCubit = GenericCubit<List<LatLng>>();
+  GenericCubit googleMapsCubit = GenericCubit();
   List<LatLng> points = <LatLng>[];
 
   List<String> cityNames = [];
@@ -31,6 +33,10 @@ class NewAddressViewModel {
 
   int currentDistrictIndex = 0;
   int currentCityIndex = 0;
+
+  final Set<Marker> markers = HashSet<Marker>();
+
+
 
   getDistrictIndex(newVal) {
     int index = districts.indexOf(newVal);
@@ -88,13 +94,62 @@ class NewAddressViewModel {
         if (latitude != null && longitude != null) {
           coordinates.add(LatLng(latitude, longitude));
         } else {
-          log("Invalid coordinate pair: $pair");
+          dev.log("Invalid coordinate pair: $pair");
         }
       } else {
-        log("Invalid format for pair: $pair");
+        dev.log("Invalid format for pair: $pair");
       }
     }
 
     return coordinates;
   }
+
+
+
+  bool isPointInPolygon(LatLng point, List<LatLng> polygon) {
+    int intersections = 0;
+    for (int i = 0; i < polygon.length; i++) {
+      LatLng vertex1 = polygon[i];
+      LatLng vertex2 = polygon[(i + 1) % polygon.length];
+
+      if (vertex1.longitude == vertex2.longitude &&
+          point.longitude == vertex1.longitude &&
+          point.latitude >= min(vertex1.latitude, vertex2.latitude) &&
+          point.latitude <= max(vertex1.latitude, vertex2.latitude)) {
+        return true;
+      }
+
+      if (point.longitude > min(vertex1.longitude, vertex2.longitude) &&
+          point.longitude <= max(vertex1.longitude, vertex2.longitude) &&
+          point.latitude <= max(vertex1.latitude, vertex2.latitude) &&
+          vertex1.longitude != vertex2.longitude) {
+        double intersectionLat = (point.longitude - vertex1.longitude) *
+            (vertex2.latitude - vertex1.latitude) /
+            (vertex2.longitude - vertex1.longitude) +
+            vertex1.latitude;
+        if (vertex1.latitude == vertex2.latitude || point.latitude <= intersectionLat) {
+          intersections++;
+        }
+      }
+    }
+    return intersections % 2 != 0;
+  }
+  void addMarker(LatLng tappedPoint) {
+      markers.clear(); // Clear previous markers if you want only one marker at a time
+      markers.add(
+        Marker(
+          markerId: MarkerId(tappedPoint.toString()),
+          position: tappedPoint,
+          infoWindow: InfoWindow(
+            title: 'Selected Location',
+            snippet: '${tappedPoint.latitude}, ${tappedPoint.longitude}',
+
+          ),
+        ),
+      );
+      googleMapsCubit.update();
+
+  }
+
+
 }
