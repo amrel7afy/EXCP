@@ -27,23 +27,19 @@ class NewAddressViewModel {
   List<LatLng> points = <LatLng>[];
 
   List<String> cityNames = [];
-  List<String>? districts = [];
+  List<String> districts = [];
 
   int currentDistrictIndex = 0;
+  int currentCityIndex = 0;
 
-
-
-  getDistrictIndex(newVal){
-    int index=districts!.indexOf(newVal);
-    currentDistrictIndex=index;
+  getDistrictIndex(newVal) {
+    int index = districts.indexOf(newVal);
+    currentDistrictIndex = index;
   }
 
-  String? getCityKey(String cityName, List<CityModel> cities) {
-    return cities.firstWhere((city) => city.value == cityName).key;
-  }
-
-  List<String> getCityNames(List<CityModel> cities) {
-    return cities.map((city) => city.value).toList();
+  getCityIndex(newVal) {
+    int index = cityNames.indexOf(newVal);
+    currentCityIndex = index;
   }
 
   fetchActiveCities() async {
@@ -54,10 +50,10 @@ class NewAddressViewModel {
     loading.hide;
   }
 
-  fetchDistrictsOfCity({required String cityId}) async {
+  fetchDistrictsOfCity() async {
     loading.show;
-    List<CityModel> cityDistricts =
-        await CityController.fetchDistrictsOfCity(cityId: cityId);
+    List<CityModel> cityDistricts = await CityController.fetchDistrictsOfCity(
+        cityId: CityController.cityAsKeyAndValue[currentCityIndex]['key']);
     districts = cityDistricts.map((city) => city.value).toList();
     districtCubit.update(cityDistricts);
     loading.hide;
@@ -66,10 +62,39 @@ class NewAddressViewModel {
   fetchPolygon(BuildContext context) async {
     loading.show;
     String data = await CityController.fetchPolygonOfDistrict(
-        districtId: CityController.districtsAsKeyAndValue[currentDistrictIndex]['key']);
+        districtId: CityController.districtsAsKeyAndValue[currentDistrictIndex]
+            ['key']);
     points = prepareCoords(data);
     polygonCubit.update(points);
     loading.hide;
+  }
 
+  List<LatLng> prepareCoords(String data) {
+    // Step 1: Remove square brackets and leading/trailing spaces
+    String cleanData = data.replaceAll(RegExp(r"\[\s*|\s*\]"),
+        ''); // Adjusted regex to remove brackets and any surrounding whitespace
+
+    // Step 2: Split by ", " to get individual coordinate pairs
+    List<String> coordinatePairs =
+        cleanData.split(' ,'); // Adjusted split to handle the space after comma
+
+    // Step 3: Convert coordinate pairs to list of LatLng objects
+    List<LatLng> coordinates = [];
+    for (var pair in coordinatePairs) {
+      List<String> values = pair.trim().split(',');
+      if (values.length == 2) {
+        double? latitude = double.tryParse(values[0]);
+        double? longitude = double.tryParse(values[1]);
+        if (latitude != null && longitude != null) {
+          coordinates.add(LatLng(latitude, longitude));
+        } else {
+          log("Invalid coordinate pair: $pair");
+        }
+      } else {
+        log("Invalid format for pair: $pair");
+      }
+    }
+
+    return coordinates;
   }
 }
