@@ -143,30 +143,4 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
   }
 }
 
-List<LatLng> prepareCoords(String data) {
-  // Step 1: Remove square brackets and leading/trailing spaces
-  String cleanData = data.replaceAll(RegExp(r"\[\s*|\s*\]"), ''); // Adjusted regex to remove brackets and any surrounding whitespace
-
-  // Step 2: Split by ", " to get individual coordinate pairs
-  List<String> coordinatePairs = cleanData.split(' ,'); // Adjusted split to handle the space after comma
-
-  // Step 3: Convert coordinate pairs to list of LatLng objects
-  List<LatLng> coordinates = [];
-  for (var pair in coordinatePairs) {
-    List<String> values = pair.trim().split(',');
-    if (values.length == 2) {
-      double? latitude = double.tryParse(values[0]);
-      double? longitude = double.tryParse(values[1]);
-      if (latitude != null && longitude != null) {
-        coordinates.add(LatLng(latitude, longitude));
-      } else {
-        log("Invalid coordinate pair: $pair");
-      }
-    } else {
-      log("Invalid format for pair: $pair");
-    }
-  }
-
-  return coordinates;
-}
 

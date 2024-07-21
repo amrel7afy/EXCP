@@ -67,8 +67,9 @@ class _NewAddressViewState extends State<NewAddressView> {
                           items: newAddressViewModel.cityNames,
                           value: newAddressViewModel.cityNameSelectedValue,
                           onChanged: (newVal) {
+                            newAddressViewModel.getCityIndex(newVal);
                              newAddressViewModel.fetchDistrictsOfCity(
-                                cityId: '629a2a15-14fa-e911-a81f-000d3abaded5');
+                               );
                           },
                           itemBuilder: (item) {
                             return Text(item);
@@ -91,7 +92,7 @@ class _NewAddressViewState extends State<NewAddressView> {
                           validator: (v) {
                             return null;
                           },
-                          items: newAddressViewModel.districts!,
+                          items: newAddressViewModel.districts,
                           value: newAddressViewModel.districtSelectedValue,
                           onChanged: (newVal) {
                            // newAddressViewModel.districtSelectedValue = newVal;
