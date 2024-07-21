@@ -74,10 +74,15 @@ class AppRouter {
   static const String residentServiceView = '/residentServiceView';
   static const String downloadContractView = '/downloadContractView';
   static const String attachmentsContractView = '/attachmentsContractView';
+  static const String mapsView = '/mapsView';
 
 
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case mapsView:
+        return MaterialPageRoute(
+          builder: (context) => const DownloadContractView(),
+        );
       case downloadContractView:
         return MaterialPageRoute(
           builder: (context) => const DownloadContractView(),

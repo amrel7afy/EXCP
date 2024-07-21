@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
+import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/drop_down_floating_label_form_field.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import 'package:test1/cubit/generic_cubit/generic_state.dart';
+import 'package:test1/features/new_address/presentation/components/address_on_map_view_page.dart';
 import 'package:test1/features/new_address/presentation/new_address_view_model.dart';
 import 'package:test1/models/city/city_model.dart';
 
 import '../../../../components/widgets/loader.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
 import '../../../../core/widgets/custom_button.dart';
+import '../../../core/AppRouter.dart';
 import '../../../core/constants/constants.dart';
 import '../../shared/my_text_form_field.dart';
 
@@ -23,11 +27,14 @@ class NewAddressView extends StatefulWidget {
 
 class _NewAddressViewState extends State<NewAddressView> {
   NewAddressViewModel newAddressViewModel = NewAddressViewModel();
-@override
+
+  @override
   void initState() {
- newAddressViewModel.fetchActiveCities();
+    newAddressViewModel.fetchActiveCities();
+    newAddressViewModel.fetchPolygon();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -35,9 +42,7 @@ class _NewAddressViewState extends State<NewAddressView> {
       child: Scaffold(
         appBar: CustomAppBar(
           title: 'إضافة عنوان جديد',
-          leadingPressed: () {
-
-          },
+          leadingPressed: () {},
         ),
         body: Stack(
           children: [
@@ -59,11 +64,9 @@ class _NewAddressViewState extends State<NewAddressView> {
                                 cityId: '629a2a15-14fa-e911-a81f-000d3abaded5');
                           },
                           items: newAddressViewModel.cityNames,
-                          value:
-                              newAddressViewModel.cityNameSelectedValue,
+                          value: newAddressViewModel.cityNameSelectedValue,
                           onChanged: (newVal) {
-                            newAddressViewModel.cityNameSelectedValue =
-                                newVal;
+                            newAddressViewModel.cityNameSelectedValue = newVal;
                           },
                           itemBuilder: (item) {
                             return Text(item);
@@ -87,11 +90,10 @@ class _NewAddressViewState extends State<NewAddressView> {
                             return null;
                           },
                           items: newAddressViewModel.districts!,
-                          value:
-                              newAddressViewModel.areaNameSelectedValue,
+                          value: newAddressViewModel.areaNameSelectedValue,
                           onChanged: (newVal) {
-                            newAddressViewModel.areaNameSelectedValue =
-                                newVal;
+                            newAddressViewModel.areaNameSelectedValue = newVal;
+                            //   newAddressViewModel.polygonDistrictId=
                           },
                           itemBuilder: (item) {
                             return Text(item);
@@ -107,16 +109,14 @@ class _NewAddressViewState extends State<NewAddressView> {
                       value: newAddressViewModel.houseTypeSelectedValue,
                       onChanged: (newVal) {
                         setState(() {
-                          newAddressViewModel.houseTypeSelectedValue =
-                              newVal;
+                          newAddressViewModel.houseTypeSelectedValue = newVal;
                         });
                       },
                       itemBuilder: (item) {
                         return Text(item);
                       },
                     ),
-                    if (newAddressViewModel.houseTypeSelectedValue ==
-                        'عمارة')
+                    if (newAddressViewModel.houseTypeSelectedValue == 'عمارة')
                       MyDropdownFormField<String>(
                         labelText: 'الطابق',
                         validator: (v) =>
@@ -124,8 +124,7 @@ class _NewAddressViewState extends State<NewAddressView> {
                         items: newAddressViewModel.floorOptions,
                         value: newAddressViewModel.floorSelectedValue,
                         onChanged: (newVal) {
-                          newAddressViewModel.floorSelectedValue =
-                              newVal;
+                          newAddressViewModel.floorSelectedValue = newVal;
                         },
                         itemBuilder: (item) {
                           return Text(item);
@@ -163,13 +162,33 @@ class _NewAddressViewState extends State<NewAddressView> {
                         ),
                         const Spacer(),
                         Flexible(
-                          child: CustomButton(
-                            borderRadius: BorderRadius.circular(8),
-                            textStyle: MyTextStyles.font18Weight600
-                                .copyWith(color: Colors.white),
-                            text: 'التالي',
-                            backGroundColor: Colors.black,
-                            onPressed: () {},
+                          child: BlocBuilder<GenericCubit<List<LatLng>>,
+                              GenericState<List<LatLng>>>(
+                            bloc: newAddressViewModel.polygonCubit,
+                            builder: (context, state) {
+                              if (state is GenericUpdate) {}
+                              return CustomButton(
+                                borderRadius: BorderRadius.circular(8),
+                                textStyle: MyTextStyles.font18Weight600
+                                    .copyWith(color: Colors.white),
+                                text: 'التالي',
+                                backGroundColor: Colors.black,
+                                onPressed: () {
+                                  //TODO: حولها ل approuter
+                                  //context.pushNamed(AppRouter.mapsView);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PolygonMapScreen(
+                                                newAddressViewModel:
+                                                    newAddressViewModel,
+                                                points:
+                                                    newAddressViewModel.points,
+                                              )));
+                                },
+                              );
+                            },
                           ),
                         ),
                       ],
@@ -183,6 +202,4 @@ class _NewAddressViewState extends State<NewAddressView> {
       ),
     );
   }
-
-
 }

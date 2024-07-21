@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'dart:collection';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/constants/constants.dart';
@@ -9,42 +10,40 @@ import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/features/new_address/presentation/new_address_view_model.dart';
-import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_cubit.dart';
-import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_state.dart';
+
+import '../../../../components/widgets/loader.dart';
+import '../../../../core/widgets/custom_app_bar.dart';
 import '../../../../core/widgets/custom_button.dart';
 
-class AddressOnTheMapViewPage extends StatefulWidget {
+class PolygonMapScreen extends StatefulWidget {
+  final List<LatLng> points;
   final NewAddressViewModel newAddressViewModel;
 
-  const AddressOnTheMapViewPage({super.key, required this.newAddressViewModel});
+  const PolygonMapScreen({super.key, required this.newAddressViewModel, required this.points});
 
   @override
-  State<AddressOnTheMapViewPage> createState() =>
-      _AddressOnTheMapViewPageState();
+  State<PolygonMapScreen> createState() =>
+      _PolygonMapScreenState();
 }
 
-class _AddressOnTheMapViewPageState extends State<AddressOnTheMapViewPage> {
+class _PolygonMapScreenState extends State<PolygonMapScreen> {
   // created controller to display Google Maps
   final Completer<GoogleMapController> _controller = Completer();
 
 // on below line we have set the camera position
-  static const CameraPosition _kGoogle = CameraPosition(
-    target: LatLng(19.0759837, 72.8776559),
+  static const CameraPosition kGoogle = CameraPosition(
+    target: LatLng(24.746939,46.774352),
     zoom: 10,
   );
 
   final Set<Polygon> _polygon = HashSet<Polygon>();
 
 // created list of locations to display polygon
-  List<LatLng> points = [
-    const LatLng(19.0759837, 72.8776559),
-    const LatLng(28.679079, 77.069710),
-    const LatLng(26.850000, 80.949997),
-    const LatLng(19.0759837, 72.8776559),
-  ];
+  List<LatLng> points=[];
 
   @override
   void initState() {
+    points=widget.points;
     super.initState();
     //initialize polygon
     _polygon.add(
@@ -66,75 +65,115 @@ class _AddressOnTheMapViewPageState extends State<AddressOnTheMapViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(32),
-      child: BlocBuilder<AddressCubit, AddressState>(
-        builder: (context, state) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: GoogleMap(
-                  //given camera position
-                  initialCameraPosition: _kGoogle,
-                  // on below line we have given map type
-                  mapType: MapType.normal,
-                  // on below line we have enabled location
-                  myLocationEnabled: true,
-                  myLocationButtonEnabled: true,
-                  // on below line we have enabled compass location
-                  compassEnabled: true,
-                  // on below line we have added polygon
-                  polygons: _polygon,
-                  // displayed google map
-                  onMapCreated: (GoogleMapController controller) {
-                    _controller.complete(controller);
-                  },
-                ),
-              ),
-              const VerticalSpacer(21),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 7,
-                    child: CustomButton(
-                      borderRadius: BorderRadius.circular(8),
-                      textStyle: MyTextStyles.font18Weight500
-                          .copyWith(color: Colors.black),
-                      text: 'السابق',
-                      backGroundColor: Colors.white,
-                      onPressed: () {},
+    return Directionality(
+      textDirection: AppConstants.appTextDirection,
+      child: Scaffold(
+        appBar: CustomAppBar(
+          title: 'إضافة عنوان جديد',
+          leadingPressed: () {
+
+          },
+        ),
+        body: Stack(
+          children: [
+            const Loader(),
+            Padding(
+                padding: const EdgeInsets.all(32),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: GoogleMap(
+                        //given camera position
+                        initialCameraPosition: kGoogle,
+                        // on below line we have given map type
+                        mapType: MapType.normal,
+                        // on below line we have enabled location
+                        myLocationEnabled: true,
+                        myLocationButtonEnabled: true,
+                        // on below line we have enabled compass location
+                        compassEnabled: true,
+                        // on below line we have added polygon
+                        polygons: _polygon,
+                        // displayed google map
+                        onMapCreated: (GoogleMapController controller) {
+                          _controller.complete(controller);
+                        },
+                      ),
                     ),
-                  ),
-                  const Spacer(
-                    flex: 3,
-                  ),
-                  // Add some space between buttons
-                  Expanded(
-                    flex: 11,
-                    child: CustomButton(
-                      borderRadius: BorderRadius.circular(8),
-                      textStyle: MyTextStyles.font18Weight500
-                          .copyWith(color: Colors.white),
-                      text: 'حفظ واستكمال',
-                      backGroundColor: Colors.black,
-                      onPressed: () {
-                        if (AppConstants.service == Service.hours) {
-                          context.pushReplacementNamed(
-                              AppRouter.selectYourPlanView);
-                        } else if (AppConstants.service == Service.resident) {
-                          context.pushReplacementNamed(
-                              AppRouter.residentServiceView);
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              )
-            ],
-          );
-        },
+                    const VerticalSpacer(21),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 7,
+                          child: CustomButton(
+                            borderRadius: BorderRadius.circular(8),
+                            textStyle: MyTextStyles.font18Weight500
+                                .copyWith(color: Colors.black),
+                            text: 'السابق',
+                            backGroundColor: Colors.white,
+                            onPressed: () {},
+                          ),
+                        ),
+                        const Spacer(
+                          flex: 3,
+                        ),
+                        // Add some space between buttons
+                        Expanded(
+                          flex: 11,
+                          child: CustomButton(
+                            borderRadius: BorderRadius.circular(8),
+                            textStyle: MyTextStyles.font18Weight500
+                                .copyWith(color: Colors.white),
+                            text: 'حفظ واستكمال',
+                            backGroundColor: Colors.black,
+                            onPressed: () {
+                              if (AppConstants.service == Service.hours) {
+                                context.pushReplacementNamed(
+                                    AppRouter.selectYourPlanView);
+                              } else if (AppConstants.service == Service.resident) {
+                                context.pushReplacementNamed(
+                                    AppRouter.residentServiceView);
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                )
+            ),
+          ],
+        ),
       ),
-    );
+    );;
   }
 }
+
+List<LatLng> prepareCoords(String data) {
+  // Step 1: Remove square brackets and leading/trailing spaces
+  String cleanData = data.replaceAll(RegExp(r"\[\s*|\s*\]"), ''); // Adjusted regex to remove brackets and any surrounding whitespace
+
+  // Step 2: Split by ", " to get individual coordinate pairs
+  List<String> coordinatePairs = cleanData.split(' ,'); // Adjusted split to handle the space after comma
+
+  // Step 3: Convert coordinate pairs to list of LatLng objects
+  List<LatLng> coordinates = [];
+  for (var pair in coordinatePairs) {
+    List<String> values = pair.trim().split(',');
+    if (values.length == 2) {
+      double? latitude = double.tryParse(values[0]);
+      double? longitude = double.tryParse(values[1]);
+      if (latitude != null && longitude != null) {
+        coordinates.add(LatLng(latitude, longitude));
+      } else {
+        log("Invalid coordinate pair: $pair");
+      }
+    } else {
+      log("Invalid format for pair: $pair");
+    }
+  }
+
+  return coordinates;
+}
+
