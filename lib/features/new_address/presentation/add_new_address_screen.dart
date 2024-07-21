@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -7,7 +9,7 @@ import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/drop_down_floating_label_form_field.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import 'package:test1/cubit/generic_cubit/generic_state.dart';
-import 'package:test1/features/new_address/presentation/components/address_on_map_view_page.dart';
+import 'package:test1/features/new_address/presentation/address_on_map_screen.dart';
 import 'package:test1/features/new_address/presentation/new_address_view_model.dart';
 import 'package:test1/models/city/city_model.dart';
 
@@ -31,7 +33,6 @@ class _NewAddressViewState extends State<NewAddressView> {
   @override
   void initState() {
     newAddressViewModel.fetchActiveCities();
-    newAddressViewModel.fetchPolygon();
     super.initState();
   }
 
@@ -60,13 +61,14 @@ class _NewAddressViewState extends State<NewAddressView> {
                         return MyDropdownFormField<String>(
                           labelText: 'مدينة الإقامة',
                           onItemTap: () async {
-                            await newAddressViewModel.fetchDistrictsOfCity(
-                                cityId: '629a2a15-14fa-e911-a81f-000d3abaded5');
+                           /* await newAddressViewModel.fetchDistrictsOfCity(
+                                cityId: '629a2a15-14fa-e911-a81f-000d3abaded5');*/
                           },
                           items: newAddressViewModel.cityNames,
                           value: newAddressViewModel.cityNameSelectedValue,
                           onChanged: (newVal) {
-                            newAddressViewModel.cityNameSelectedValue = newVal;
+                             newAddressViewModel.fetchDistrictsOfCity(
+                                cityId: '629a2a15-14fa-e911-a81f-000d3abaded5');
                           },
                           itemBuilder: (item) {
                             return Text(item);
@@ -90,10 +92,10 @@ class _NewAddressViewState extends State<NewAddressView> {
                             return null;
                           },
                           items: newAddressViewModel.districts!,
-                          value: newAddressViewModel.areaNameSelectedValue,
+                          value: newAddressViewModel.districtSelectedValue,
                           onChanged: (newVal) {
-                            newAddressViewModel.areaNameSelectedValue = newVal;
-                            //   newAddressViewModel.polygonDistrictId=
+                           // newAddressViewModel.districtSelectedValue = newVal;
+                            newAddressViewModel.getDistrictIndex(newVal);
                           },
                           itemBuilder: (item) {
                             return Text(item);
@@ -162,33 +164,24 @@ class _NewAddressViewState extends State<NewAddressView> {
                         ),
                         const Spacer(),
                         Flexible(
-                          child: BlocBuilder<GenericCubit<List<LatLng>>,
+                          child: BlocListener<GenericCubit<List<LatLng>>,
                               GenericState<List<LatLng>>>(
-                            bloc: newAddressViewModel.polygonCubit,
-                            builder: (context, state) {
-                              if (state is GenericUpdate) {}
-                              return CustomButton(
-                                borderRadius: BorderRadius.circular(8),
-                                textStyle: MyTextStyles.font18Weight600
-                                    .copyWith(color: Colors.white),
-                                text: 'التالي',
-                                backGroundColor: Colors.black,
-                                onPressed: () {
-                                  //TODO: حولها ل approuter
-                                  //context.pushNamed(AppRouter.mapsView);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              PolygonMapScreen(
-                                                newAddressViewModel:
-                                                    newAddressViewModel,
-                                                points:
-                                                    newAddressViewModel.points,
-                                              )));
-                                },
-                              );
+                            listener: (context,state){
+                              if(state is GenericUpdate){
+                                context.pushNamed(AppRouter.polygonMapsView,arguments: state.data);
+                              }
                             },
+                            bloc: newAddressViewModel.polygonCubit,
+                            child:CustomButton(
+                              borderRadius: BorderRadius.circular(8),
+                              textStyle: MyTextStyles.font18Weight600
+                                  .copyWith(color: Colors.white),
+                              text: 'التالي',
+                              backGroundColor: Colors.black,
+                              onPressed: () {
+                                newAddressViewModel.fetchPolygon(context);
+                              },
+                            )
                           ),
                         ),
                       ],

@@ -14,6 +14,13 @@ class CityModel {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'key': key,
+      'value': value,
+    };
+  }
+
   @override
   String toString() {
     return 'ActiveCityModel {key: $key, value: $value}';

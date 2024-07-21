@@ -10,16 +10,17 @@ import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/features/new_address/presentation/new_address_view_model.dart';
+import 'package:test1/features/shared/next_button.dart';
 
-import '../../../../components/widgets/loader.dart';
-import '../../../../core/widgets/custom_app_bar.dart';
-import '../../../../core/widgets/custom_button.dart';
+import '../../../components/widgets/loader.dart';
+import '../../../core/widgets/custom_app_bar.dart';
+import '../../../core/widgets/custom_button.dart';
 
 class PolygonMapScreen extends StatefulWidget {
   final List<LatLng> points;
-  final NewAddressViewModel newAddressViewModel;
 
-  const PolygonMapScreen({super.key, required this.newAddressViewModel, required this.points});
+
+  const PolygonMapScreen({super.key,  required this.points});
 
   @override
   State<PolygonMapScreen> createState() =>
@@ -31,10 +32,7 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
   final Completer<GoogleMapController> _controller = Completer();
 
 // on below line we have set the camera position
-  static const CameraPosition kGoogle = CameraPosition(
-    target: LatLng(24.746939,46.774352),
-    zoom: 10,
-  );
+ late  CameraPosition kGoogle ;
 
   final Set<Polygon> _polygon = HashSet<Polygon>();
 
@@ -45,6 +43,10 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
   void initState() {
     points=widget.points;
     super.initState();
+    kGoogle=  CameraPosition(
+      target: widget.points.first,
+      zoom: 15,
+    );
     //initialize polygon
     _polygon.add(
       Polygon(
@@ -68,11 +70,9 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
       child: Scaffold(
-        appBar: CustomAppBar(
+        appBar: const CustomAppBar(
           title: 'إضافة عنوان جديد',
-          leadingPressed: () {
-
-          },
+        
         ),
         body: Stack(
           children: [
@@ -119,25 +119,18 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
                           flex: 3,
                         ),
                         // Add some space between buttons
-                        Expanded(
-                          flex: 11,
-                          child: CustomButton(
-                            borderRadius: BorderRadius.circular(8),
-                            textStyle: MyTextStyles.font18Weight500
-                                .copyWith(color: Colors.white),
-                            text: 'حفظ واستكمال',
-                            backGroundColor: Colors.black,
-                            onPressed: () {
-                              if (AppConstants.service == Service.hours) {
-                                context.pushReplacementNamed(
-                                    AppRouter.selectYourPlanView);
-                              } else if (AppConstants.service == Service.resident) {
-                                context.pushReplacementNamed(
-                                    AppRouter.residentServiceView);
-                              }
-                            },
-                          ),
-                        ),
+                       Expanded(
+                         flex: 7,
+                         child: NextButton(onTap: () {
+                           if (AppConstants.service == Service.hours) {
+                             context.pushReplacementNamed(
+                                 AppRouter.selectYourPlanView);
+                           } else if (AppConstants.service == Service.resident) {
+                             context.pushReplacementNamed(
+                                 AppRouter.residentServiceView);
+                           }
+                         }),
+                       )
                       ],
                     )
                   ],
