@@ -8,6 +8,7 @@ import 'package:test1/core/widgets/drop_down_floating_label_form_field.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import 'package:test1/cubit/generic_cubit/generic_state.dart';
 import 'package:test1/features/new_address/presentation/new_address_view_model.dart';
+import 'package:test1/features/shared/back_button.dart';
 import 'package:test1/features/shared/next_button.dart';
 import 'package:test1/models/city/city_model.dart';
 
@@ -146,15 +147,8 @@ class _NewAddressViewState extends State<NewAddressView> {
                       Row(
                         children: [
                           Flexible(
-                            child: CustomButton(
-                              borderRadius: BorderRadius.circular(8),
-                              textStyle: MyTextStyles.font18Weight600
-                                  .copyWith(color: Colors.black),
-                              text: 'السابق',
-                              backGroundColor: Colors.white,
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
+                            child: MyBackButton(
+                              onTap: () => context.pop(),
                             ),
                           ),
                           const Spacer(),
