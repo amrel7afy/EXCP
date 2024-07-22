@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:test1/components/step_view_model.dart';
 import 'package:test1/controller/city/city_controller.dart';

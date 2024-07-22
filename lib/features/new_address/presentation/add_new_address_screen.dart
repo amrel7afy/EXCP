@@ -55,7 +55,6 @@ class _NewAddressViewState extends State<NewAddressView> {
                       bloc: newAddressViewModel.cityCubit,
                       builder: (context, state) {
                         return MyDropdownFormField<String>(
-
                           labelText: 'مدينة الإقامة',
                           items: newAddressViewModel.cityNames,
                           value: newAddressViewModel.cityNameSelectedValue,
@@ -127,7 +126,7 @@ class _NewAddressViewState extends State<NewAddressView> {
                       ),
                     MyTextFormField(
                       labelText: 'رقم المنزل',
-                      controller: TextEditingController(),
+                      controller: newAddressViewModel.houseNumberController,
                       validator: (v) => v == null || v.isEmpty
                           ? 'الرجاء إدخال رقم المنزل'
                           : null,
@@ -135,7 +134,7 @@ class _NewAddressViewState extends State<NewAddressView> {
                     MyTextFormField(
                       maxLines: 6,
                       labelText: 'معلم او مكان مميز قريب من عنوانك',
-                      controller: TextEditingController(),
+                      controller: newAddressViewModel.addressNotesController,
                       validator: (v) => v == null || v.isEmpty
                           ? 'الرجاء إدخال معلم أو مكان مميز'
                           : null,
@@ -169,16 +168,13 @@ class _NewAddressViewState extends State<NewAddressView> {
                               },
                               bloc: newAddressViewModel.polygonCubit,
                               child: CustomButton(
-                                borderRadius: BorderRadius.circular(8),
-                                textStyle: MyTextStyles.font18Weight600
-                                    .copyWith(color: Colors.white),
-                                text: 'التالي',
-                                backGroundColor: Colors.black,
-                                onPressed: () {
-                                  //newAddressViewModel.fetchPolygon(context);
-                                  newAddressViewModel.addNewAddress();
-                                },
-                              )),
+                                  borderRadius: BorderRadius.circular(8),
+                                  textStyle: MyTextStyles.font18Weight600
+                                      .copyWith(color: Colors.white),
+                                  text: 'التالي',
+                                  backGroundColor: Colors.black,
+                                  onPressed: () => newAddressViewModel
+                                      .fetchPolygon(context))),
                         ),
                       ],
                     ),
