@@ -3,6 +3,7 @@ import 'dart:developer' as dev;
 import 'dart:math';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:test1/features/new_address/presentation/new_address_view_model.dart';
 
 import '../../../cubit/generic_cubit/generic_cubit.dart';
 import '../../../cubit/loader_cubit/loader_cubit.dart';
@@ -10,6 +11,7 @@ import '../../../cubit/loader_cubit/loader_cubit.dart';
 class GoogleMapsViewModel {
   Loading loading = Loading.instance();
   GenericCubit googleMapsCubit = GenericCubit();
+  NewAddressViewModel newAddressViewModel=NewAddressViewModel.instance();
 
   final Set<Marker> markers = HashSet<Marker>();
 
@@ -73,6 +75,7 @@ class GoogleMapsViewModel {
   }
 
   void addMarker(LatLng tappedPoint) {
+
     markers
         .clear(); // Clear previous markers if you want only one marker at a time
     markers.add(
@@ -85,6 +88,7 @@ class GoogleMapsViewModel {
         ),
       ),
     );
+    newAddressViewModel.targetPosition=tappedPoint;
     googleMapsCubit.update();
   }
 }

@@ -11,6 +11,15 @@ import '../data/model.dart';
 import 'google_maps_view_model.dart';
 
 class NewAddressViewModel {
+  NewAddressViewModel._();
+
+  // Static instance
+  static final NewAddressViewModel _instance = NewAddressViewModel._();
+
+  // Factory constructor to return the same instance
+  factory NewAddressViewModel.instance() {
+    return _instance;
+  }
   Loading loading = Loading.instance();
 
    String? cityNameSelectedValue;
@@ -36,6 +45,7 @@ class NewAddressViewModel {
   int currentCityIndex = 0;
 
   StepsViewModel stepsViewModel = StepsViewModel.instance();
+  LatLng? targetPosition;
 
 //---------------------------------------------------------------------------
 
@@ -82,12 +92,12 @@ class NewAddressViewModel {
         addressNotes: addressNotesController.text.trim(),
         houseNo: houseNumberController.text.trim(),
         houseType: getHouseType(houseTypeSelectedValue!),
-        floorNo: floorSelectedValue!,
+        floorNo: floorSelectedValue??'0',
         apartmentNo: '1',
         cityId: CityController.cityAsKeyAndValue[currentCityIndex]['key'],
         districtId: CityController.districtsAsKeyAndValue[currentDistrictIndex]['key'],
-        latitude: 30.333,
-        longitude: 20.11223,
+        latitude: targetPosition!.latitude,
+        longitude: targetPosition!.longitude,
         type: 1);
     return newAddressRequest.toMap();
   }

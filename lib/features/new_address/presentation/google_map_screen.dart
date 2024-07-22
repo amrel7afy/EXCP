@@ -5,6 +5,7 @@ import 'package:test1/core/constants/constants.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
+import 'package:test1/features/new_address/presentation/new_address_view_model.dart';
 import 'package:test1/features/shared/next_button.dart';
 
 import '../../../components/widgets/loader.dart';
@@ -25,6 +26,7 @@ class PolygonMapScreen extends StatefulWidget {
 }
 
 class _PolygonMapScreenState extends State<PolygonMapScreen> {
+  NewAddressViewModel newAddressViewModel=NewAddressViewModel.instance();
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -62,13 +64,7 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
                       Expanded(
                         flex: 7,
                         child: NextButton(onTap: () {
-                          if (AppConstants.service == Service.hours) {
-                            context.pushReplacementNamed(
-                                AppRouter.selectYourPlanView);
-                          } else if (AppConstants.service == Service.resident) {
-                            context.pushReplacementNamed(
-                                AppRouter.residentServiceView);
-                          }
+                          newAddressViewModel.addNewAddress();
                         }),
                       ),
                     ],

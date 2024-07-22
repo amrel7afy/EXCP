@@ -25,7 +25,7 @@ class NewAddressView extends StatefulWidget {
 }
 
 class _NewAddressViewState extends State<NewAddressView> {
-  NewAddressViewModel newAddressViewModel = NewAddressViewModel();
+  NewAddressViewModel newAddressViewModel = NewAddressViewModel.instance();
 
   @override
   void initState() {
