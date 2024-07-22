@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/constants.dart';
-import 'package:test1/features/select_your_plan_hours/presentation/view/widgets/my_choice_chip.dart';
+import 'package:test1/features/select_your_plan_hours/presentation/components/my_choice_chip.dart';
 
 
 class PlanDurationChipsListView extends StatefulWidget {

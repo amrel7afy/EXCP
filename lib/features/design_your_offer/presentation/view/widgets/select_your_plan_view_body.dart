@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:test1/core/AppRouter.dart';
-import 'package:test1/core/constants/methods.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
-import 'package:test1/core/theming/styles.dart';
-import 'package:test1/core/widgets/custom_button.dart';
 import 'package:test1/core/widgets/drop_down_floating_label_form_field.dart';
 import 'package:test1/features/shared/next_button.dart';
-import '../../../../shared/my_text_form_field.dart';
 
 import '../../../../../core/theming/my_colors.dart';
 import '../../../../../core/widgets/syncfusion_calendar.dart';
+import '../../../../shared/my_text_form_field.dart';
 import 'appointment_details.dart';
 import 'number_of_workers.dart';
 
@@ -48,7 +45,9 @@ class _DesignYourOfferViewBodyState extends State<DesignYourOfferViewBody> {
                 itemBuilder: (item) {
                   return Text(item);
                 },
-                validator: (validator) {}),
+                validator: (validator) {
+                  return null;
+                }),
             NumberOfWorkers(),
             MyDropdownFormField(
                 labelText: 'مدة التعاقد',
@@ -58,7 +57,9 @@ class _DesignYourOfferViewBodyState extends State<DesignYourOfferViewBody> {
                 itemBuilder: (item) {
                   return Text(item);
                 },
-                validator: (validator) {}),
+                validator: (validator) {
+                  return null;
+                }),
             MyDropdownFormField(
                 labelText: 'الفترات',
                 items: duration,
@@ -67,7 +68,9 @@ class _DesignYourOfferViewBodyState extends State<DesignYourOfferViewBody> {
                 itemBuilder: (item) {
                   return Text(item);
                 },
-                validator: (validator) {}),
+                validator: (validator) {
+                  return null;
+                }),
             const AppointmentDetails(),
             const VerticalSpacer(15),
             MyDropdownFormField(
@@ -78,7 +81,9 @@ class _DesignYourOfferViewBodyState extends State<DesignYourOfferViewBody> {
               itemBuilder: (item) {
                 return Text(item);
               },
-              validator: (validator) {},
+              validator: (validator) {
+                return null;
+              },
             ),
             MyDropdownFormField(
               labelText: 'عدد الزيارات',
@@ -88,7 +93,9 @@ class _DesignYourOfferViewBodyState extends State<DesignYourOfferViewBody> {
               itemBuilder: (item) {
                 return Text(item);
               },
-              validator: (validator) {},
+              validator: (validator) {
+                return null;
+              },
             ),
             MyTextFormField(
               labelText: 'تاريخ اول زيارة',

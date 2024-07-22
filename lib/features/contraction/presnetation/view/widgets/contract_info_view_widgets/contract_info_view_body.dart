@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/theming/styles.dart';
-import 'package:test1/features/select_your_plan_hours/presentation/view/widgets/collapse_card.dart';
 
 import '../../../../../../core/theming/my_colors.dart';
+import '../../../../../select_your_plan_hours/presentation/components/collapse_card.dart';
 import '../../../../../shared/over_label_container.dart';
 import '../../../../../shared/over_label_container_body.dart';
 import 'contraction_data_row_actions.dart';
