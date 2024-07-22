@@ -1,23 +1,29 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:test1/components/step_view_model.dart';
 import 'package:test1/controller/city/city_controller.dart';
+import 'package:test1/controller/hourly_contract/hourly_contract_controller.dart';
 import 'package:test1/models/city/city_model.dart';
 
 import '../../../cubit/generic_cubit/generic_cubit.dart';
 import '../../../cubit/loader_cubit/loader_cubit.dart';
+import '../data/model.dart';
 import 'google_maps_view_model.dart';
 
 class NewAddressViewModel {
   Loading loading = Loading.instance();
 
-  String? cityNameSelectedValue;
-  String? districtSelectedValue;
-  String? houseTypeSelectedValue;
-  String? floorSelectedValue;
+   String? cityNameSelectedValue;
+   String? districtSelectedValue;
+   String? houseTypeSelectedValue;
+   String? floorSelectedValue;
+  TextEditingController houseNumberController = TextEditingController();
+  TextEditingController addressNotesController = TextEditingController();
 
   final List<String> houseTypeOptions = ['عمارة', 'فيلا', 'منزل خاص'];
   final List<String> floorOptions =
-      List.generate(30, (index) => (index + 1).toString());
+  List.generate(30, (index) => (index + 1).toString());
 
   GenericCubit<List<CityModel>> cityCubit = GenericCubit<List<CityModel>>();
   GenericCubit<List<CityModel>> districtCubit = GenericCubit<List<CityModel>>();
@@ -29,6 +35,10 @@ class NewAddressViewModel {
 
   int currentDistrictIndex = 0;
   int currentCityIndex = 0;
+
+  StepsViewModel stepsViewModel = StepsViewModel.instance();
+
+//---------------------------------------------------------------------------
 
   getDistrictIndex(newVal) {
     int index = districts.indexOf(newVal);
@@ -61,9 +71,45 @@ class NewAddressViewModel {
     loading.show;
     String data = await CityController.fetchPolygonOfDistrict(
         districtId: CityController.districtsAsKeyAndValue[currentDistrictIndex]
-            ['key']);
+        ['key']);
     points = GoogleMapsViewModel.prepareCoords(data);
     polygonCubit.update(points);
+    loading.hide;
+  }
+
+
+  assignAddressData() {
+    NewAddressRequestBody newAddressRequest = NewAddressRequestBody(
+        addressNotes: addressNotesController.text.trim(),
+        houseNo: houseNumberController.text.trim(),
+        houseType: getHouseType(houseTypeSelectedValue!),
+        floorNo: floorSelectedValue!,
+        apartmentNo: '1',
+        cityId: CityController.cityAsKeyAndValue[currentCityIndex]['key'],
+        districtId: CityController.districtsAsKeyAndValue[currentDistrictIndex]['key'],
+        latitude: 30.333,
+        longitude: 20.11223,
+        type: 1);
+    return newAddressRequest.toMap();
+  }
+
+  int getHouseType(String houseTypeSelectedValue) {
+    switch (houseTypeSelectedValue.toLowerCase()) {
+      case 'عمارة':
+        return 0;
+      case 'منزل خاص':
+        return 1;
+      case 'فيلا':
+        return 2;
+      default:
+        return -1; // Invalid house type
+    }
+  }
+
+  addNewAddress() async {
+    loading.show;
+    await HourlyContractController.addNewAddress(
+        supServiceId: StepsViewModel.supServiceId, body:assignAddressData());
     loading.hide;
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -9,7 +7,6 @@ import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/drop_down_floating_label_form_field.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import 'package:test1/cubit/generic_cubit/generic_state.dart';
-import 'package:test1/features/new_address/presentation/address_on_map_screen.dart';
 import 'package:test1/features/new_address/presentation/new_address_view_model.dart';
 import 'package:test1/models/city/city_model.dart';
 
@@ -58,6 +55,7 @@ class _NewAddressViewState extends State<NewAddressView> {
                       bloc: newAddressViewModel.cityCubit,
                       builder: (context, state) {
                         return MyDropdownFormField<String>(
+
                           labelText: 'مدينة الإقامة',
                           items: newAddressViewModel.cityNames,
                           value: newAddressViewModel.cityNameSelectedValue,
@@ -106,7 +104,7 @@ class _NewAddressViewState extends State<NewAddressView> {
                       value: newAddressViewModel.houseTypeSelectedValue,
                       onChanged: (newVal) {
                         setState(() {
-                          newAddressViewModel.houseTypeSelectedValue = newVal;
+                          newAddressViewModel.houseTypeSelectedValue = newVal!;
                         });
                       },
                       itemBuilder: (item) {
@@ -121,7 +119,7 @@ class _NewAddressViewState extends State<NewAddressView> {
                         items: newAddressViewModel.floorOptions,
                         value: newAddressViewModel.floorSelectedValue,
                         onChanged: (newVal) {
-                          newAddressViewModel.floorSelectedValue = newVal;
+                          newAddressViewModel.floorSelectedValue = newVal!;
                         },
                         itemBuilder: (item) {
                           return Text(item);
@@ -177,7 +175,8 @@ class _NewAddressViewState extends State<NewAddressView> {
                                 text: 'التالي',
                                 backGroundColor: Colors.black,
                                 onPressed: () {
-                                  newAddressViewModel.fetchPolygon(context);
+                                  //newAddressViewModel.fetchPolygon(context);
+                                  newAddressViewModel.addNewAddress();
                                 },
                               )),
                         ),

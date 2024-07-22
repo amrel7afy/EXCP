@@ -6,7 +6,7 @@ import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/design_your_offer/presentation/view/design_your_offer_view.dart';
 import 'package:test1/features/home/presentation/home_screen.dart';
 import 'package:test1/features/my_orders/presentation/view_model/orders_cubit/orders_cubit.dart';
-import 'package:test1/features/new_address/presentation/address_on_map_screen.dart';
+import 'package:test1/features/new_address/presentation/google_map_screen.dart';
 import 'package:test1/features/select_address/presentation/select_address_screen.dart';
 import 'package:test1/features/select_your_plan_hours/presentation/view/select_your_plan_view.dart';
 import 'package:test1/features/select_your_plan_resident/presentation/view_model/choose_worker_cubit/choose_worker_cubit.dart';

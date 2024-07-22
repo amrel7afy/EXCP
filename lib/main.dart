@@ -10,7 +10,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
   Bloc.observer = MyBlocObserver();
-  HourlyContractController.postNewAddress();
+
+
+
+
+
   String initialRoute= await AppRouter.getInitialRouteFromSharedPreferences();
   runApp( MyApp(initialRoute: initialRoute));
 }

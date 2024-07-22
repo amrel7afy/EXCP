@@ -29,7 +29,7 @@ class ServicePerHourScreen extends StatefulWidget {
 }
 
 class _ServicePerHourScreenState extends State<ServicePerHourScreen> {
-  ServicePerHourViewModel servicePerHourViewModel = ServicePerHourViewModel();
+  ServicePerHourViewModel servicePerHourViewModel = ServicePerHourViewModel.instance();
 
   @override
   void initState() {
@@ -76,6 +76,7 @@ class _ServicePerHourScreenState extends State<ServicePerHourScreen> {
                           const VerticalSpacer(20),
                           ServiceCard(
                             onTap: () async{
+                              StepsViewModel.supServiceId=state.data![1].id;
                               await StepsViewModel.goToFirstStep(context);
                             },
                             service: state.data![1],

@@ -1,12 +1,11 @@
 import 'package:test1/services/app_service.dart';
 
 class HourlyContractController {
-  static postNewAddress() async {
+  static addNewAddress({required supServiceId,required body}) async {
     await AppService.callService(
       actionType: ActionType.post,
       apiName:
-          '/api/HourlyContract/AddNewAddress?hourlyServiceId=c97fdb23-4687-ec11-a837-000d3abe20f8&'
-              'stepId=d282efbb-fabd-4d32-a959-02f74d4ff687',
+          '/api/HourlyContract/AddNewAddress?hourlyServiceId=$supServiceId&stepId=d282efbb-fabd-4d32-a959-02f74d4ff687',
       body: {
         "contactId": "bcc8e562-736b-484a-8455-e1f1911a0911",
         "addressNotes": "",
