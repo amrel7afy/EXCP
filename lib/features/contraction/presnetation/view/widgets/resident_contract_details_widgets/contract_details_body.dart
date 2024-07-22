@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/methods.dart';
 import 'package:test1/core/helper/extensions.dart';
+import 'package:test1/features/shared/next_button.dart';
 import 'package:test1/features/shared/select_worker_card.dart';
 
 import '../../../../../../core/AppRouter.dart';
@@ -87,16 +88,9 @@ class _ResidentContractDetailsViewBodyState
                     const HorizontalSpacer(40),
                     // Add some space between buttons
                     Flexible(
-                      child: CustomButton(
-                        borderRadius: BorderRadius.circular(8),
-                        textStyle: MyTextStyles.font18Weight500
-                            .copyWith(color: Colors.white),
-                        text: 'التالي',
-                        backGroundColor: Colors.black,
-                        onPressed: () {
-                          context.pushNamed(AppRouter.downloadContractView);
-                        },
-                      ),
+                      child:NextButton(onTap: (){
+                        context.pushNamed(AppRouter.downloadContractView);
+                      },),
                     ),
                   ],
                 )

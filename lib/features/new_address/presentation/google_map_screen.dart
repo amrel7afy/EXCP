@@ -12,6 +12,7 @@ import 'package:test1/features/shared/next_button.dart';
 import '../../../components/widgets/loader.dart';
 import '../../../core/widgets/custom_app_bar.dart';
 import '../../../core/widgets/custom_button.dart';
+import '../../shared/back_button.dart';
 import 'components/custom_google_map_widget.dart';
 import 'google_maps_view_model.dart';
 
@@ -40,7 +41,6 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
         ),
         body: Stack(
           children: [
-
             Padding(
               padding: const EdgeInsets.all(32),
               child: Column(
@@ -52,30 +52,18 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
                   const VerticalSpacer(21),
                   Row(
                     children: [
-                      Expanded(
-                        flex: 7,
-                        child: CustomButton(
-                          borderRadius: BorderRadius.circular(8),
-                          textStyle: MyTextStyles.font18Weight500
-                              .copyWith(color: Colors.black),
-                          text: 'السابق',
-                          backGroundColor: Colors.white,
-                          onPressed: () {},
-                        ),
+                      MyBackButton(
+                        onTap: () {},
                       ),
                       const Spacer(flex: 3),
-                      Expanded(
-                        flex: 7,
-                        child: NextButton(onTap: () {
-                          if (GoogleMapsViewModel.markers.isNotEmpty) {
-                            newAddressViewModel.addNewAddress();
-                          }
-                          else {
-                            showAlertDialog(context,
-                                const Text('برجاء إختيار العنوان على الخريطة'));
-                          }
-                        }),
-                      ),
+                      NextButton(onTap: () {
+                        if (GoogleMapsViewModel.markers.isNotEmpty) {
+                          newAddressViewModel.addNewAddress();
+                        } else {
+                          showAlertDialog(context,
+                              const Text('برجاء إختيار العنوان على الخريطة'));
+                        }
+                      }),
                     ],
                   ),
                 ],

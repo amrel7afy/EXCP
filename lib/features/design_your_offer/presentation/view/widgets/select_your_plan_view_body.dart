@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/constants/methods.dart';
@@ -7,6 +6,7 @@ import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/custom_button.dart';
 import 'package:test1/core/widgets/drop_down_floating_label_form_field.dart';
+import 'package:test1/features/shared/next_button.dart';
 import '../../../../shared/my_text_form_field.dart';
 
 import '../../../../../core/theming/my_colors.dart';
@@ -98,21 +98,14 @@ class _DesignYourOfferViewBodyState extends State<DesignYourOfferViewBody> {
                 icon: const Icon(Icons.calendar_today_outlined,
                     size: 20, color: MyColors.kPrimaryColor),
                 onPressed: () {
-
-                   showCalendarDialog(context)?.day.toString();
+                  showCalendarDialog(context)?.day.toString();
                 },
               ),
             ),
             Align(
               alignment: Alignment.centerLeft,
-              child: CustomButton(
-                width: getWidth(context) * 0.3,
-                borderRadius: BorderRadius.circular(8),
-                textStyle:
-                    MyTextStyles.font18Weight600.copyWith(color: Colors.white),
-                text: 'التالي',
-                backGroundColor: Colors.black,
-                onPressed: ()  {
+              child: NextButton(
+                onTap: () {
                   context.pushNamed(AppRouter.contractInfoView);
                 },
               ),
@@ -122,6 +115,4 @@ class _DesignYourOfferViewBodyState extends State<DesignYourOfferViewBody> {
       ),
     );
   }
-
-
 }

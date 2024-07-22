@@ -8,6 +8,7 @@ import 'package:test1/core/widgets/drop_down_floating_label_form_field.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import 'package:test1/cubit/generic_cubit/generic_state.dart';
 import 'package:test1/features/new_address/presentation/new_address_view_model.dart';
+import 'package:test1/features/shared/next_button.dart';
 import 'package:test1/models/city/city_model.dart';
 
 import '../../../../components/widgets/loader.dart';
@@ -82,9 +83,8 @@ class _NewAddressViewState extends State<NewAddressView> {
                         builder: (context, state) {
                           return MyDropdownFormField<String>(
                             labelText: 'اسم الحي',
-                            validator: (v) => v.isNullOrEmpty()
-                                ? 'الرجاء إختيار الحي'
-                                : null,
+                            validator: (v) =>
+                                v.isNullOrEmpty() ? 'الرجاء إختيار الحي' : null,
                             items: newAddressViewModel.districts,
                             value: newAddressViewModel.districtSelectedValue,
                             onChanged: (newVal) {
@@ -116,9 +116,8 @@ class _NewAddressViewState extends State<NewAddressView> {
                       if (newAddressViewModel.houseTypeSelectedValue == 'عمارة')
                         MyDropdownFormField<String>(
                           labelText: 'الطابق',
-                          validator: (v) => v.isNullOrEmpty()
-                              ? 'الرجاء اختيار الطابق'
-                              : null,
+                          validator: (v) =>
+                              v.isNullOrEmpty() ? 'الرجاء اختيار الطابق' : null,
                           items: newAddressViewModel.floorOptions,
                           value: newAddressViewModel.floorSelectedValue,
                           onChanged: (newVal) {
@@ -161,30 +160,25 @@ class _NewAddressViewState extends State<NewAddressView> {
                           const Spacer(),
                           Flexible(
                             child: BlocListener<GenericCubit<List<LatLng>>,
-                                    GenericState<List<LatLng>>>(
-                                listener: (context, state) {
-                                  if (state is GenericUpdate) {
-                                    context.pushNamed(AppRouter.polygonMapsView,
-                                        arguments: {
-                                          'points': state.data,
-                                        });
+                                GenericState<List<LatLng>>>(
+                              listener: (context, state) {
+                                if (state is GenericUpdate) {
+                                  context.pushNamed(AppRouter.polygonMapsView,
+                                      arguments: {
+                                        'points': state.data,
+                                      });
+                                }
+                              },
+                              bloc: newAddressViewModel.polygonCubit,
+                              child: NextButton(
+                                onTap: () {
+                                  if (newAddressViewModel.formKey.currentState!
+                                      .validate()) {
+                                    newAddressViewModel.fetchPolygon(context);
                                   }
                                 },
-                                bloc: newAddressViewModel.polygonCubit,
-                                child: CustomButton(
-                                    borderRadius: BorderRadius.circular(8),
-                                    textStyle: MyTextStyles.font18Weight600
-                                        .copyWith(color: Colors.white),
-                                    text: 'التالي',
-                                    backGroundColor: Colors.black,
-                                    onPressed: () {
-                                      if (newAddressViewModel
-                                          .formKey.currentState!
-                                          .validate()) {
-                                        newAddressViewModel
-                                            .fetchPolygon(context);
-                                      }
-                                    })),
+                              ),
+                            ),
                           ),
                         ],
                       ),

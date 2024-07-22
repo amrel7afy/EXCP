@@ -5,6 +5,7 @@ import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/custom_button.dart';
+import 'package:test1/features/shared/next_button.dart';
 
 
 class ServiceAlertDialogContent extends StatelessWidget {
@@ -55,16 +56,9 @@ class ServiceAlertDialogContent extends StatelessWidget {
               const HorizontalSpacer(10),
               // Add some space between buttons
               Flexible(
-                child: CustomButton(
-                  borderRadius: BorderRadius.circular(8),
-                  textStyle: MyTextStyles.font18Weight600
-                      .copyWith(color: Colors.white),
-                  text: 'التالي',
-                  backGroundColor: Colors.black,
-                  onPressed: () {
+                  child: NextButton(onTap: () {
                     context.pushReplacementNamed(AppRouter.selectAddressView);
-                  },
-                ),
+                  } ,)
               ),
             ],
           ),
