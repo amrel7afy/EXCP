@@ -12,7 +12,7 @@ class NewAddressRequestBody {
   final int type;
 
   NewAddressRequestBody({
-    this.contactId='bcc8e562-736b-484a-8455-e1f1911a0911',
+    required this.contactId,
     required this.addressNotes,
     required this.houseNo,
     required this.houseType,

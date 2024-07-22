@@ -1,10 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:test1/components/step_view_model.dart';
 import 'package:test1/controller/city/city_controller.dart';
 import 'package:test1/controller/hourly_contract/hourly_contract_controller.dart';
+import 'package:test1/core/helper/cache_helper.dart';
+import 'package:test1/models/authentication/login_success_models/user_data.dart';
 import 'package:test1/models/city/city_model.dart';
+import 'package:test1/utility/repository/repository.dart';
 
+import '../../../core/constants/constants.dart';
 import '../../../cubit/generic_cubit/generic_cubit.dart';
 import '../../../cubit/loader_cubit/loader_cubit.dart';
 import '../data/model.dart';
@@ -20,18 +26,19 @@ class NewAddressViewModel {
   factory NewAddressViewModel.instance() {
     return _instance;
   }
+
   Loading loading = Loading.instance();
 
-   String? cityNameSelectedValue;
-   String? districtSelectedValue;
-   String? houseTypeSelectedValue;
-   String? floorSelectedValue;
+  String? cityNameSelectedValue;
+  String? districtSelectedValue;
+  String? houseTypeSelectedValue;
+  String? floorSelectedValue;
   TextEditingController houseNumberController = TextEditingController();
   TextEditingController addressNotesController = TextEditingController();
 
   final List<String> houseTypeOptions = ['عمارة', 'فيلا', 'منزل خاص'];
   final List<String> floorOptions =
-  List.generate(30, (index) => (index + 1).toString());
+      List.generate(30, (index) => (index + 1).toString());
 
   GenericCubit<List<CityModel>> cityCubit = GenericCubit<List<CityModel>>();
   GenericCubit<List<CityModel>> districtCubit = GenericCubit<List<CityModel>>();
@@ -46,7 +53,8 @@ class NewAddressViewModel {
 
   StepsViewModel stepsViewModel = StepsViewModel.instance();
   LatLng? targetPosition;
-  GlobalKey<FormState>formKey=GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  Repository repo = Repository.instance();
 
 //---------------------------------------------------------------------------
 
@@ -81,25 +89,27 @@ class NewAddressViewModel {
     loading.show;
     String data = await CityController.fetchPolygonOfDistrict(
         districtId: CityController.districtsAsKeyAndValue[currentDistrictIndex]
-        ['key']);
+            ['key']);
     points = GoogleMapsViewModel.prepareCoords(data);
     polygonCubit.update(points);
     loading.hide;
   }
 
-
-  assignAddressData() {
+  assignAddressData() async {
+    var user = await repo.getUser();
     NewAddressRequestBody newAddressRequest = NewAddressRequestBody(
         addressNotes: addressNotesController.text.trim(),
         houseNo: houseNumberController.text.trim(),
         houseType: getHouseType(houseTypeSelectedValue!),
-        floorNo: floorSelectedValue??'0',
+        floorNo: floorSelectedValue ?? '0',
         apartmentNo: '1',
         cityId: CityController.cityAsKeyAndValue[currentCityIndex]['key'],
-        districtId: CityController.districtsAsKeyAndValue[currentDistrictIndex]['key'],
+        districtId: CityController.districtsAsKeyAndValue[currentDistrictIndex]
+            ['key'],
         latitude: targetPosition!.latitude,
         longitude: targetPosition!.longitude,
-        type: 1);
+        type: 1,
+        contactId: user.crmUserId);
     return newAddressRequest.toMap();
   }
 
@@ -117,9 +127,11 @@ class NewAddressViewModel {
   }
 
   addNewAddress() async {
+    var data = await assignAddressData();
     loading.show;
     await HourlyContractController.addNewAddress(
-        supServiceId: StepsViewModel.supServiceId, body:assignAddressData());
+        supServiceId: StepsViewModel.supServiceId, body: data);
+
     loading.hide;
   }
 }
