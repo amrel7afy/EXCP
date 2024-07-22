@@ -29,7 +29,7 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        const Loader(),
+
         Directionality(
           textDirection: AppConstants.appTextDirection,
           child: Scaffold(
@@ -73,6 +73,7 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
             ),
           ),
         ),
+        const Loader(),
       ],
     );
   }

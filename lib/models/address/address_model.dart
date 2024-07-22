@@ -1,6 +1,6 @@
 class AddressData {
-  final Location mainLocations;
-  final List<Location> subLocation;
+  final AddressLocation mainLocations;
+  final List<AddressLocation> subLocation;
 
   AddressData({
     required this.mainLocations,
@@ -9,11 +9,12 @@ class AddressData {
 
   factory AddressData.fromJson(Map<String, dynamic> json) {
     return AddressData(
-      mainLocations: Location.fromJson(json['mainLocations']),
-      subLocation: (json['subLocation'] as List)
-          .map((item) => Location.fromJson(item))
-          .toList(),
-    );
+        mainLocations: AddressLocation.fromJson(json['mainLocations']),
+        subLocation: (List<AddressLocation>.from(
+          json['subLocation']
+              .map((item) => AddressLocation.fromJson(item))
+              .toList(),
+        )));
   }
 
   Map<String, dynamic> toJson() {
@@ -24,7 +25,7 @@ class AddressData {
   }
 }
 
-class Location {
+class AddressLocation {
   final String id;
   final String displayValue;
   final int houseType;
@@ -43,7 +44,7 @@ class Location {
   final String longitude;
   final String? addressNotes;
 
-  Location({
+  AddressLocation({
     required this.id,
     required this.displayValue,
     required this.houseType,
@@ -63,8 +64,8 @@ class Location {
     this.addressNotes,
   });
 
-  factory Location.fromJson(Map<String, dynamic> json) {
-    return Location(
+  factory AddressLocation.fromJson(Map<String, dynamic> json) {
+    return AddressLocation(
       id: json['id'],
       displayValue: json['displayValue'],
       houseType: json['houseType'],
