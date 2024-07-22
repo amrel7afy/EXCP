@@ -21,7 +21,7 @@ class CustomGoogleMap extends StatefulWidget {
 }
 
 class _CustomGoogleMapState extends State<CustomGoogleMap> {
-  GoogleMapsViewModel googleMapsViewModel = GoogleMapsViewModel();
+  GoogleMapsViewModel googleMapsViewModel = GoogleMapsViewModel.instance();
   final Completer<GoogleMapController> _controller = Completer();
   late CameraPosition kGoogle;
   final Set<Polygon> _polygon = HashSet<Polygon>();
@@ -62,7 +62,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
             myLocationButtonEnabled: true,
             compassEnabled: true,
             polygons: _polygon,
-            markers: googleMapsViewModel.markers,
+            markers: GoogleMapsViewModel.markers,
             // Add markers to the map
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);

@@ -46,6 +46,7 @@ class NewAddressViewModel {
 
   StepsViewModel stepsViewModel = StepsViewModel.instance();
   LatLng? targetPosition;
+  GlobalKey<FormState>formKey=GlobalKey<FormState>();
 
 //---------------------------------------------------------------------------
 

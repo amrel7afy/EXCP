@@ -47,138 +47,149 @@ class _NewAddressViewState extends State<NewAddressView> {
             Padding(
               padding: const EdgeInsets.all(32),
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    BlocBuilder<GenericCubit<List<CityModel>>,
-                        GenericState<List<CityModel>>>(
-                      bloc: newAddressViewModel.cityCubit,
-                      builder: (context, state) {
-                        return MyDropdownFormField<String>(
-                          labelText: 'مدينة الإقامة',
-                          items: newAddressViewModel.cityNames,
-                          value: newAddressViewModel.cityNameSelectedValue,
-                          onChanged: (newVal) {
-                            newAddressViewModel.getCityIndex(newVal);
-                            newAddressViewModel.fetchDistrictsOfCity();
-                          },
-                          itemBuilder: (item) {
-                            return Text(item);
-                          },
-                          validator: (String? value) {
-                            if (value == null || value.isEmpty) {
-                              return 'الرجاء اختيار مدينة الإقامة';
-                            }
-                            return null;
-                          },
-                        );
-                      },
-                    ),
-                    BlocBuilder<GenericCubit<List<CityModel>>,
-                        GenericState<List<CityModel>>>(
-                      bloc: newAddressViewModel.districtCubit,
-                      builder: (context, state) {
-                        return MyDropdownFormField<String>(
-                          labelText: 'اسم الحي',
-                          validator: (v) {
-                            return null;
-                          },
-                          items: newAddressViewModel.districts,
-                          value: newAddressViewModel.districtSelectedValue,
-                          onChanged: (newVal) {
-                            // newAddressViewModel.districtSelectedValue = newVal;
-                            newAddressViewModel.getDistrictIndex(newVal);
-                          },
-                          itemBuilder: (item) {
-                            return Text(item);
-                          },
-                        );
-                      },
-                    ),
-                    MyDropdownFormField<String>(
-                      labelText: 'نوع المنزل',
-                      validator: (v) =>
-                          v == null ? 'الرجاء اختيار نوع المنزل' : null,
-                      items: newAddressViewModel.houseTypeOptions,
-                      value: newAddressViewModel.houseTypeSelectedValue,
-                      onChanged: (newVal) {
-                        setState(() {
-                          newAddressViewModel.houseTypeSelectedValue = newVal!;
-                        });
-                      },
-                      itemBuilder: (item) {
-                        return Text(item);
-                      },
-                    ),
-                    if (newAddressViewModel.houseTypeSelectedValue == 'عمارة')
+                child: Form(
+                  key: newAddressViewModel.formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      BlocBuilder<GenericCubit<List<CityModel>>,
+                          GenericState<List<CityModel>>>(
+                        bloc: newAddressViewModel.cityCubit,
+                        builder: (context, state) {
+                          return MyDropdownFormField<String>(
+                            labelText: 'مدينة الإقامة',
+                            items: newAddressViewModel.cityNames,
+                            value: newAddressViewModel.cityNameSelectedValue,
+                            onChanged: (newVal) {
+                              newAddressViewModel.getCityIndex(newVal);
+                              newAddressViewModel.fetchDistrictsOfCity();
+                            },
+                            itemBuilder: (item) {
+                              return Text(item);
+                            },
+                            validator: (String? value) {
+                              if (value == null || value.isEmpty) {
+                                return 'الرجاء اختيار مدينة الإقامة';
+                              }
+                              return null;
+                            },
+                          );
+                        },
+                      ),
+                      BlocBuilder<GenericCubit<List<CityModel>>,
+                          GenericState<List<CityModel>>>(
+                        bloc: newAddressViewModel.districtCubit,
+                        builder: (context, state) {
+                          return MyDropdownFormField<String>(
+                            labelText: 'اسم الحي',
+                            validator: (v) => v.isNullOrEmpty()
+                                ? 'الرجاء إختيار الحي'
+                                : null,
+                            items: newAddressViewModel.districts,
+                            value: newAddressViewModel.districtSelectedValue,
+                            onChanged: (newVal) {
+                              // newAddressViewModel.districtSelectedValue = newVal;
+                              newAddressViewModel.getDistrictIndex(newVal);
+                            },
+                            itemBuilder: (item) {
+                              return Text(item);
+                            },
+                          );
+                        },
+                      ),
                       MyDropdownFormField<String>(
-                        labelText: 'الطابق',
+                        labelText: 'نوع المنزل',
                         validator: (v) =>
-                            v == null ? 'الرجاء اختيار الطابق' : null,
-                        items: newAddressViewModel.floorOptions,
-                        value: newAddressViewModel.floorSelectedValue,
+                            v == null ? 'الرجاء اختيار نوع المنزل' : null,
+                        items: newAddressViewModel.houseTypeOptions,
+                        value: newAddressViewModel.houseTypeSelectedValue,
                         onChanged: (newVal) {
-                          newAddressViewModel.floorSelectedValue = newVal!;
+                          setState(() {
+                            newAddressViewModel.houseTypeSelectedValue =
+                                newVal!;
+                          });
                         },
                         itemBuilder: (item) {
                           return Text(item);
                         },
                       ),
-                    MyTextFormField(
-                      labelText: 'رقم المنزل',
-                      controller: newAddressViewModel.houseNumberController,
-                      validator: (v) => v == null || v.isEmpty
-                          ? 'الرجاء إدخال رقم المنزل'
-                          : null,
-                    ),
-                    MyTextFormField(
-                      maxLines: 6,
-                      labelText: 'معلم او مكان مميز قريب من عنوانك',
-                      controller: newAddressViewModel.addressNotesController,
-                      validator: (v) => v == null || v.isEmpty
-                          ? 'الرجاء إدخال معلم أو مكان مميز'
-                          : null,
-                    ),
-                    const VerticalSpacer(16),
-                    Row(
-                      children: [
-                        Flexible(
-                          child: CustomButton(
-                            borderRadius: BorderRadius.circular(8),
-                            textStyle: MyTextStyles.font18Weight600
-                                .copyWith(color: Colors.black),
-                            text: 'السابق',
-                            backGroundColor: Colors.white,
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
+                      if (newAddressViewModel.houseTypeSelectedValue == 'عمارة')
+                        MyDropdownFormField<String>(
+                          labelText: 'الطابق',
+                          validator: (v) => v.isNullOrEmpty()
+                              ? 'الرجاء اختيار الطابق'
+                              : null,
+                          items: newAddressViewModel.floorOptions,
+                          value: newAddressViewModel.floorSelectedValue,
+                          onChanged: (newVal) {
+                            newAddressViewModel.floorSelectedValue = newVal!;
+                          },
+                          itemBuilder: (item) {
+                            return Text(item);
+                          },
                         ),
-                        const Spacer(),
-                        Flexible(
-                          child: BlocListener<GenericCubit<List<LatLng>>,
-                                  GenericState<List<LatLng>>>(
-                              listener: (context, state) {
-                                if (state is GenericUpdate) {
-                                  context.pushNamed(AppRouter.polygonMapsView,
-                                      arguments: {
-                                        'points': state.data,
-                                      });
-                                }
+                      MyTextFormField(
+                        labelText: 'رقم المنزل',
+                        controller: newAddressViewModel.houseNumberController,
+                        validator: (v) => v.isNullOrEmpty()
+                            ? 'الرجاء إدخال رقم المنزل'
+                            : null,
+                      ),
+                      MyTextFormField(
+                        maxLines: 6,
+                        labelText: 'معلم او مكان مميز قريب من عنوانك',
+                        controller: newAddressViewModel.addressNotesController,
+                        validator: (v) => v.isNullOrEmpty()
+                            ? 'الرجاء إدخال معلم أو مكان مميز'
+                            : null,
+                      ),
+                      const VerticalSpacer(16),
+                      Row(
+                        children: [
+                          Flexible(
+                            child: CustomButton(
+                              borderRadius: BorderRadius.circular(8),
+                              textStyle: MyTextStyles.font18Weight600
+                                  .copyWith(color: Colors.black),
+                              text: 'السابق',
+                              backGroundColor: Colors.white,
+                              onPressed: () {
+                                Navigator.of(context).pop();
                               },
-                              bloc: newAddressViewModel.polygonCubit,
-                              child: CustomButton(
-                                  borderRadius: BorderRadius.circular(8),
-                                  textStyle: MyTextStyles.font18Weight600
-                                      .copyWith(color: Colors.white),
-                                  text: 'التالي',
-                                  backGroundColor: Colors.black,
-                                  onPressed: () => newAddressViewModel
-                                      .fetchPolygon(context))),
-                        ),
-                      ],
-                    ),
-                  ],
+                            ),
+                          ),
+                          const Spacer(),
+                          Flexible(
+                            child: BlocListener<GenericCubit<List<LatLng>>,
+                                    GenericState<List<LatLng>>>(
+                                listener: (context, state) {
+                                  if (state is GenericUpdate) {
+                                    context.pushNamed(AppRouter.polygonMapsView,
+                                        arguments: {
+                                          'points': state.data,
+                                        });
+                                  }
+                                },
+                                bloc: newAddressViewModel.polygonCubit,
+                                child: CustomButton(
+                                    borderRadius: BorderRadius.circular(8),
+                                    textStyle: MyTextStyles.font18Weight600
+                                        .copyWith(color: Colors.white),
+                                    text: 'التالي',
+                                    backGroundColor: Colors.black,
+                                    onPressed: () {
+                                      if (newAddressViewModel
+                                          .formKey.currentState!
+                                          .validate()) {
+                                        newAddressViewModel
+                                            .fetchPolygon(context);
+                                      }
+                                    })),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

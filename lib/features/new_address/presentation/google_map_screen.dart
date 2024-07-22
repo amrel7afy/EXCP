@@ -5,6 +5,7 @@ import 'package:test1/core/constants/constants.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
+import 'package:test1/core/widgets/show_alert_dialog.dart';
 import 'package:test1/features/new_address/presentation/new_address_view_model.dart';
 import 'package:test1/features/shared/next_button.dart';
 
@@ -12,6 +13,7 @@ import '../../../components/widgets/loader.dart';
 import '../../../core/widgets/custom_app_bar.dart';
 import '../../../core/widgets/custom_button.dart';
 import 'components/custom_google_map_widget.dart';
+import 'google_maps_view_model.dart';
 
 class PolygonMapScreen extends StatefulWidget {
   final List<LatLng> points;
@@ -26,7 +28,8 @@ class PolygonMapScreen extends StatefulWidget {
 }
 
 class _PolygonMapScreenState extends State<PolygonMapScreen> {
-  NewAddressViewModel newAddressViewModel=NewAddressViewModel.instance();
+  NewAddressViewModel newAddressViewModel = NewAddressViewModel.instance();
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -37,7 +40,7 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
         ),
         body: Stack(
           children: [
-            const Loader(),
+
             Padding(
               padding: const EdgeInsets.all(32),
               child: Column(
@@ -64,7 +67,13 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
                       Expanded(
                         flex: 7,
                         child: NextButton(onTap: () {
-                          newAddressViewModel.addNewAddress();
+                          if (GoogleMapsViewModel.markers.isNotEmpty) {
+                            newAddressViewModel.addNewAddress();
+                          }
+                          else {
+                            showAlertDialog(context,
+                                const Text('برجاء إختيار العنوان على الخريطة'));
+                          }
                         }),
                       ),
                     ],
@@ -72,6 +81,7 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
                 ],
               ),
             ),
+            const Loader(),
           ],
         ),
       ),

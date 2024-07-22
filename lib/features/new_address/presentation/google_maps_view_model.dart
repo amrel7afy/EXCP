@@ -9,11 +9,18 @@ import '../../../cubit/generic_cubit/generic_cubit.dart';
 import '../../../cubit/loader_cubit/loader_cubit.dart';
 
 class GoogleMapsViewModel {
+  GoogleMapsViewModel._();
+  static final GoogleMapsViewModel _instance = GoogleMapsViewModel._();
+
+  // Factory constructor to return the same instance
+  factory GoogleMapsViewModel.instance() {
+    return _instance;
+  }
   Loading loading = Loading.instance();
   GenericCubit googleMapsCubit = GenericCubit();
   NewAddressViewModel newAddressViewModel=NewAddressViewModel.instance();
 
-  final Set<Marker> markers = HashSet<Marker>();
+  static final Set<Marker> markers = HashSet<Marker>();
 
   static List<LatLng> prepareCoords(String data) {
     // Step 1: Remove square brackets and leading/trailing spaces
