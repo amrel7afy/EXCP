@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import '../../core/constants/constants.dart';
 import '../../core/helper/cache_helper.dart';
@@ -10,11 +11,13 @@ class Repository{
   factory Repository.instance(){
     return _init;
   }
-  late User user;
-  getUser() async {
+  static String supServiceId = '';
+  static late User user;
+  static getUser() async {
     String userString =
     await SharedPrefHelper.getSecuredString(AppConstants.userDataKey);
      user = User.fromJson(jsonDecode(userString));
+     log(user.crmUserId,name: 'crmUserId');
     return user;
   }
 

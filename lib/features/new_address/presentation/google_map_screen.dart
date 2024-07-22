@@ -53,12 +53,14 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
                   Row(
                     children: [
                       MyBackButton(
-                        onTap: () {},
+                        onTap: () {
+
+                        },
                       ),
                       const Spacer(flex: 3),
                       NextButton(onTap: () {
                         if (GoogleMapsViewModel.markers.isNotEmpty) {
-                          newAddressViewModel.addNewAddress();
+                          newAddressViewModel.addNewAddress(context);
                         } else {
                           showAlertDialog(context,
                               const Text('برجاء إختيار العنوان على الخريطة'));

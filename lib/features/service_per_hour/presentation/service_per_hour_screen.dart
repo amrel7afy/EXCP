@@ -18,6 +18,7 @@ import '../../../core/theming/styles.dart';
 import '../../../core/widgets/custom_app_bar.dart';
 import '../../../core/widgets/show_alert_dialog.dart';
 import '../../../cubit/generic_cubit/generic_state.dart';
+import '../../../utility/repository/repository.dart';
 import 'components/service_alert_dialog_content.dart';
 import 'components/service_per_hour_card.dart';
 
@@ -76,7 +77,7 @@ class _ServicePerHourScreenState extends State<ServicePerHourScreen> {
                           const VerticalSpacer(20),
                           ServiceCard(
                             onTap: () async{
-                              StepsViewModel.supServiceId=state.data![1].id;
+                              Repository.supServiceId=state.data![1].id;
                               await StepsViewModel.goToFirstStep(context);
                             },
                             service: state.data![1],

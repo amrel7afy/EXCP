@@ -21,6 +21,11 @@ class SelectAddressScreen extends StatefulWidget {
 class _SelectAddressScreenState extends State<SelectAddressScreen> {
   SelectAddressViewModel selectAddressViewModel=SelectAddressViewModel();
   @override
+  void initState() {
+    selectAddressViewModel.getSavedContacts();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
@@ -28,9 +33,9 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
         Directionality(
           textDirection: AppConstants.appTextDirection,
           child: Scaffold(
-            appBar: CustomAppBar(
+            appBar: const CustomAppBar(
               title: 'اختيار العنوان',
-              leadingPressed: () {},
+
             ),
             body: SafeArea(
                 child: Padding(

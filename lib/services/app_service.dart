@@ -1,15 +1,14 @@
 import 'dart:convert';
+import 'dart:developer' as dev;
+import 'dart:io' show InternetAddress, Platform, SocketException, exit;
 import 'dart:math';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'dart:io' show InternetAddress, Platform, SocketException, exit;
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:test1/core/constants/constants.dart';
 import 'package:test1/core/helper/cache_helper.dart';
 import 'package:test1/core/helper/extensions.dart';
-import 'dart:developer' as dev;
 
 import '../components/alert/custom_alert_message.dart';
 import '../models/response/response.dart';

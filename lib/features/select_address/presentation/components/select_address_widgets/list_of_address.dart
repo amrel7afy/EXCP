@@ -32,11 +32,12 @@ class _AddressListState extends State<AddressList> {
               isChecked: widget.selectAddressViewModel.selectedIndex == index,
               onTap: () {
                 widget.selectAddressViewModel.selectAddress(index);
-                if (AppConstants.service == Service.hours) {
+
+               /* if (AppConstants.service == Service.hours) {
                   context.pushNamed(AppRouter.selectYourPlanView);
                 } else if (AppConstants.service == Service.resident) {
                   context.pushNamed(AppRouter.residentServiceView);
-                }
+                }*/
               },
             );
           }, childCount: 3),

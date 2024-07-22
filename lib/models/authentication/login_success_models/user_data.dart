@@ -21,7 +21,7 @@ class User  {
   final dynamic ownerId;
   final dynamic owner;
   final String securityStamp;
-  final bool isSubscribed;
+  final bool? isSubscribed;
 
   User({
     required this.userName,
