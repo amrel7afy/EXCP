@@ -166,8 +166,6 @@ class _NewAddressViewState extends State<NewAddressView> {
                                   context.pushNamed(AppRouter.polygonMapsView,
                                       arguments: {
                                         'points': state.data,
-                                        'newAddressViewModel':
-                                            newAddressViewModel
                                       });
                                 }
                               },

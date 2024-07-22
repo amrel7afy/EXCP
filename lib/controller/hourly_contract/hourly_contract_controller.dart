@@ -6,9 +6,9 @@ class HourlyContractController {
       actionType: ActionType.post,
       apiName:
           '/api/HourlyContract/AddNewAddress?hourlyServiceId=c97fdb23-4687-ec11-a837-000d3abe20f8&'
-              'stepId=6eb2df19-1cba-4c94-a53f-04faf0e4ba9d',
+              'stepId=d282efbb-fabd-4d32-a959-02f74d4ff687',
       body: {
-        "contactId": "b9e024de-8c60-4ccc-9452-f100291bc1f1",
+        "contactId": "bcc8e562-736b-484a-8455-e1f1911a0911",
         "addressNotes": "",
         "houseNo": "3",
         "houseType": "0",

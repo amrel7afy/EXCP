@@ -80,7 +80,6 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => PolygonMapScreen(
             points: args['points'],
-            newAddressViewModel: args['newAddressViewModel'],
           ),
         );
       case downloadContractView:

@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
                 shape: CircleBorder(),
               )),
           //initialRoute: AppRouter.singUpView,
-          initialRoute: AppRouter.loginView,
+          initialRoute: AppRouter.homeView,
           onGenerateRoute: AppRouter().generateRoute,
         ),
       ),

@@ -12,6 +12,7 @@ import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import 'package:test1/cubit/generic_cubit/generic_state.dart';
+import 'package:test1/features/new_address/presentation/google_maps_view_model.dart';
 import 'package:test1/features/new_address/presentation/new_address_view_model.dart';
 import 'package:test1/features/shared/next_button.dart';
 import '../../../components/widgets/loader.dart';
@@ -20,16 +21,18 @@ import '../../../core/widgets/custom_button.dart';
 
 class PolygonMapScreen extends StatefulWidget {
   final List<LatLng> points;
-  final NewAddressViewModel newAddressViewModel;
 
-  const PolygonMapScreen(
-      {super.key, required this.points, required this.newAddressViewModel});
+  const PolygonMapScreen({
+    super.key,
+    required this.points,
+  });
 
   @override
   State<PolygonMapScreen> createState() => _PolygonMapScreenState();
 }
 
 class _PolygonMapScreenState extends State<PolygonMapScreen> {
+  GoogleMapsViewModel googleMapsViewModel = GoogleMapsViewModel();
   final Completer<GoogleMapController> _controller = Completer();
   late CameraPosition kGoogle;
   final Set<Polygon> _polygon = HashSet<Polygon>();
@@ -73,7 +76,7 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   BlocBuilder<GenericCubit, GenericState>(
-                    bloc: widget.newAddressViewModel.googleMapsCubit,
+                    bloc: googleMapsViewModel.googleMapsCubit,
                     builder: (context, state) {
                       return Expanded(
                         child: GoogleMap(
@@ -83,15 +86,15 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
                           myLocationButtonEnabled: true,
                           compassEnabled: true,
                           polygons: _polygon,
-                          markers: widget.newAddressViewModel.markers,
+                          markers: googleMapsViewModel.markers,
                           // Add markers to the map
                           onMapCreated: (GoogleMapController controller) {
                             _controller.complete(controller);
                           },
                           onTap: (LatLng tappedPoint) {
-                            if (widget.newAddressViewModel
-                                .isPointInPolygon(tappedPoint, points)) {
-                              widget.newAddressViewModel.addMarker(
+                            if (googleMapsViewModel.isPointInPolygon(
+                                tappedPoint, points)) {
+                              googleMapsViewModel.addMarker(
                                   tappedPoint); // Add marker if within polygon
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(

@@ -1,4 +1,4 @@
-class StepsModel {
+class StepDetailsVm {
   final String stepHeaderId;
   final int? stepOrder; // Using nullable int for stepOrder
   final String? dbResourceName; // Using nullable String for dbResourceName
@@ -17,8 +17,10 @@ class StepsModel {
   final bool isVisible;
   final String stepId;
   final String? httpMethod;
-  
-  StepsModel({
+
+
+
+  StepDetailsVm({
     required this.stepHeaderId,
     this.stepOrder,
     this.dbResourceName,
@@ -39,8 +41,8 @@ class StepsModel {
     required this.httpMethod,
   });
 
-  factory StepsModel.fromJson(Map<String, dynamic> json) {
-    return StepsModel(
+  factory StepDetailsVm.fromJson(Map<String, dynamic> json) {
+    return StepDetailsVm(
       stepHeaderId: json['stepHeaderId'],
       stepOrder: json['stepOrder'],
       dbResourceName: json['dbResourceName'],
@@ -60,5 +62,28 @@ class StepsModel {
       stepId: json['stepId'],
       httpMethod: json['httpMethod'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'stepHeaderId': stepHeaderId,
+      'stepOrder': stepOrder,
+      'dbResourceName': dbResourceName,
+      'dbResourceFieldName': dbResourceFieldName,
+      'isAvailable': isAvailable,
+      'isAuthorized': isAuthorized,
+      'name': name,
+      'controller': controller,
+      'action': action,
+      'iconClass': iconClass,
+      'previousStepAction': previousStepAction,
+      'nextStepAction': nextStepAction,
+      'stepKeyword': stepKeyword,
+      'description': description,
+      'stepType': stepType,
+      'isVisible': isVisible,
+      'stepId': stepId,
+      'httpMethod': httpMethod,
+    };
   }
 }
