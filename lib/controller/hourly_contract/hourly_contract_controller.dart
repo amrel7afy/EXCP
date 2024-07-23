@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:test1/services/app_service.dart';
 import 'package:test1/utility/repository/repository.dart';
+
+import '../../models/steps/step_model.dart';
 
 class HourlyContractController {
   static addNewAddress({required body}) async {
@@ -14,11 +18,14 @@ class HourlyContractController {
   static selectAddress({
     required String selectedLocationId,
   }) async {
-    await AppService.callService(
+   var result= await AppService.callService(
         actionType: ActionType.post,
         apiName:
-            'api/HourlyContract/SavedAddresses?selectedLocationId=$selectedLocationId&hourlyServiceId=${Repository.supServiceId}&stepId=${Repository.stepIdFromFirstStep}',
+            'api/HourlyContract/SavedAddresses?selectedLocationId=$selectedLocationId&hourlyServiceId=${Repository.supServiceId}'
+                '&stepId=${Repository.stepIdFromFirstStep}',
         body: null);
+
+   return result!=null?StepModel.fromJson(jsonDecode(result)):null;
   }
 
   static fetchFixedPackages() async {

@@ -23,7 +23,7 @@ class _AddressListState extends State<AddressList> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GenericCubit, GenericState>(
-      bloc: widget.selectAddressViewModel.genericCubit,
+      bloc: widget.selectAddressViewModel.addressDataCubit,
       builder: (context, state) {
 
         return SliverList(

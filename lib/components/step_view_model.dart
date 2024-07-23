@@ -15,7 +15,8 @@ class StepsViewModel {
 
   static goToFirstStep(BuildContext context) async {
     var fistStep = await StepsController.fetchFirstStep(Repository.supServiceId);
-    Repository.stepIdFromFirstStep=fistStep!.stepId;
+    Repository.stepIdFromFirstStep=fistStep!.stepId!;
+    log(Repository.stepIdFromFirstStep,name:'StepID');
     if(context.mounted){
       context.pushNamed('/${fistStep.name}');
     }

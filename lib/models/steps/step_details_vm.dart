@@ -11,11 +11,11 @@ class StepDetailsVm {
   final String? iconClass; // Using nullable String for iconClass
   final String? previousStepAction; // Using nullable String for previousStepAction
   final String nextStepAction;
-  final String stepKeyword;
+  final String? stepKeyword;
   final String? description;
   final int stepType;
   final bool isVisible;
-  final String stepId;
+  final String? stepId;
   final String? httpMethod;
 
 
