@@ -77,8 +77,7 @@ class _ServicePerHourScreenState extends State<ServicePerHourScreen> {
                           const VerticalSpacer(20),
                           ServiceCard(
                             onTap: () async{
-                              Repository.supServiceId=state.data![1].id;
-                              await StepsViewModel.goToFirstStep(context);
+                              await StepsViewModel.instance().goToFirstStep(context);
                             },
                             service: state.data![1],
                           ),

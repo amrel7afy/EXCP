@@ -24,7 +24,7 @@ class SelectAddressViewModel {
     StepModel stepModel=await HourlyContractController.selectAddress(
         selectedLocationId: locations[index].id);
     //await HourlyContractController.fetchFixedPackages();
-    stepCubit.update();
+    addressDataCubit.update();
     loading.hide;
   }
 

@@ -6,7 +6,7 @@ class ServicePerHourController {
  static Future<List<ServiceModel>> fetchServicesForService() async {
     var result = await AppService.callService(
         actionType: ActionType.get,
-        apiName: '/api/Service/ServicesForService?serviceType=1',
+        apiName: '/api/Service/ServicesForService?serviceType=2',
         body: null);
 
     var decodedResult = jsonDecode(result);

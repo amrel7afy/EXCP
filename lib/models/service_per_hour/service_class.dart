@@ -2,7 +2,7 @@ class ServiceModel {
   final String id;
   final String name;
   final String description;
-  final String iconUrl;
+  final String? iconUrl;
   final String? serviceBackImageUrl;
   final dynamic serviceNote;
   ServiceModel({required this.id, required this.name, required this.description, required this.iconUrl,

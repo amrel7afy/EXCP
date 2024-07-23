@@ -33,7 +33,6 @@ class _AddressListState extends State<AddressList> {
               isChecked: widget.selectAddressViewModel.selectedIndex == index,
               onTap: () {
                  widget.selectAddressViewModel.selectAddress(index);
-
               },
             );
           }, childCount: widget.selectAddressViewModel.locations.length),

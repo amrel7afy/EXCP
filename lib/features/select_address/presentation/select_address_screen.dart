@@ -20,49 +20,51 @@ class SelectAddressScreen extends StatefulWidget {
 }
 
 class _SelectAddressScreenState extends State<SelectAddressScreen> {
-  SelectAddressViewModel selectAddressViewModel=SelectAddressViewModel();
+  SelectAddressViewModel selectAddressViewModel = SelectAddressViewModel();
+
   @override
   void initState() {
     selectAddressViewModel.getSavedContacts();
 
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-
         Directionality(
           textDirection: AppConstants.appTextDirection,
           child: Scaffold(
             appBar: const CustomAppBar(
               title: 'اختيار العنوان',
-
             ),
             body: SafeArea(
-                child: Padding(
-              padding: const EdgeInsets.all(32),
-              child: CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "اختيار العنوان من عناوينك السابقة",
-                          style: MyTextStyles.font18Weight500
-                              .copyWith(color: Colors.black),
-                        ),
-                        const VerticalSpacer(44),
-                      ],
+              child: Padding(
+                padding: const EdgeInsets.all(32),
+                child: CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "اختيار العنوان من عناوينك السابقة",
+                            style: MyTextStyles.font18Weight500
+                                .copyWith(color: Colors.black),
+                          ),
+                          const VerticalSpacer(44),
+                        ],
+                      ),
                     ),
-                  ),
-                   AddressList(selectAddressViewModel:selectAddressViewModel),
-                  const NotAccessibleAddressCard()
-                ],
+                    AddressList(selectAddressViewModel: selectAddressViewModel),
+                    const NotAccessibleAddressCard()
+                  ],
+                ),
               ),
-            )),
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 context.pushNamed(AppRouter.newAddressView);
@@ -74,7 +76,7 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
             ),
           ),
         ),
-        //const Loader(),
+        const Loader(),
       ],
     );
   }
