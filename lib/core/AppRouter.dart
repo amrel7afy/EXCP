@@ -27,7 +27,7 @@ import '../features/select_address/presentation/empty_address_screen.dart';
 import '../features/select_your_plan_resident/presentation/view/select_your_plan_resident_view.dart';
 import '../features/select_your_plan_resident/presentation/view/select_your_worker_view.dart';
 import '../features/service_per_hour/presentation/service_per_hour_screen.dart';
-import '../features/sign_up/presentation/view/sign_up_view.dart';
+import '../features/sign_up/presentation/sign_up_screen.dart';
 import '../models/authentication/login_success_models/user_data.dart';
 import 'constants/constants.dart';
 import 'helper/cache_helper.dart';
@@ -51,7 +51,7 @@ class AppRouter {
   static const String loginView = '/LoginView';
   static const String otpVerifyView = '/otpVerifyView';
   static const String searchView = '/searchView';
-  static const String singUpView = '/singUpView';
+  static const String signUpView = '/singUpView';
   static const String servicePerHourView = '/servicePerHourView';
   static const String selectAddressView = '/selectAddressView';
   static const String emptyAddressView = '/emptyAddressView';
@@ -171,7 +171,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const LoginScreen(),
         );
-      case singUpView:
+      case signUpView:
         return MaterialPageRoute(
           builder: (context) => const SignUpView(),
         );
