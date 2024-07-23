@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ import 'package:test1/models/authentication/login_success_models/login_data.dart
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/helper/cache_helper.dart';
-import '../../../controller/account/authentication_controller.dart';
+import '../../../controller/account/account_controller.dart';
 import '../../../cubit/generic_cubit/generic_cubit.dart';
 import '../../../cubit/loader_cubit/loader_cubit.dart';
 import '../../../models/authentication/login_request_model.dart';
@@ -62,8 +63,13 @@ class LoginViewModel {
       ),
     );
     loading.hide;
-    userSuccess(context, user: loginData.user);
+    storeToken(loginData);
+    cacheUserAndNavigate(context, user: loginData.user);
+  }
 
+  void storeToken(LoginData loginData) {
+    String accessToken=jsonDecode(loginData.token)['access_token'];
+    SharedPrefHelper.setSecuredString(AppConstants.tokenKey, accessToken);
   }
 
   validateAndLogin(BuildContext context) {
@@ -72,12 +78,11 @@ class LoginViewModel {
     }
   }
 
-  userSuccess(BuildContext context, {required User user}) {
+  cacheUserAndNavigate(BuildContext context, {required User user}) {
     cacheUserData(user);
     context.pushNamed(AppRouter.homeView);
   }
 
-  userFailure({required String errorMessage}) {}
 
   void cacheUserData(User user) {
     String userAsString = jsonEncode(user);

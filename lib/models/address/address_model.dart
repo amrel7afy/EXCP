@@ -29,14 +29,14 @@ class AddressLocation {
   final String id;
   final String displayValue;
   final int houseType;
-  final String apartmentNumber;
-  final String houseNumber;
+  final String? apartmentNumber;
+  final String? houseNumber;
   final String cityId;
   final int type;
   final String cityName;
   final String districtName;
   final String districtId;
-  final int floorNo;
+  final int? floorNo;
   final bool availableForHourly;
   final bool availableForIndividual;
   final String? availabilityMessage;
@@ -70,7 +70,7 @@ class AddressLocation {
       displayValue: json['displayValue'],
       houseType: json['houseType'],
       apartmentNumber: json['apartmentNumber'],
-      houseNumber: json['houseNumber'],
+      houseNumber: json['houseNumber']??'0',
       cityId: json['cityId'],
       type: json['type'],
       cityName: json['cityName'],

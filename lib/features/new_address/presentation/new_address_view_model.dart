@@ -98,7 +98,7 @@ class NewAddressViewModel {
   }
 
   assignAddressData() async {
-    var user = await Repository.getUser();
+    User user = await Repository.getUser();
     NewAddressRequestBody newAddressRequest = NewAddressRequestBody(
         addressNotes: addressNotesController.text.trim(),
         houseNo: houseNumberController.text.trim(),

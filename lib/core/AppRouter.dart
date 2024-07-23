@@ -53,7 +53,7 @@ class AppRouter {
   static const String searchView = '/searchView';
   static const String signUpView = '/singUpView';
   static const String servicePerHourView = '/servicePerHourView';
-  static const String selectAddressView = '/selectAddressView';
+  static const String selectAddressView = '/SavedAddresses';
   static const String emptyAddressView = '/emptyAddressView';
   static const String newAddressView = '/AddNewAddressLocation';
   static const String selectYourPlanView = '/selectYourPlanView';

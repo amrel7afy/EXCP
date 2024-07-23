@@ -74,7 +74,7 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
             ),
           ),
         ),
-        const Loader(),
+        //const Loader(),
       ],
     );
   }

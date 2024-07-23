@@ -71,7 +71,7 @@ class _PolygonMapScreenState extends State<PolygonMapScreen> {
                 ],
               ),
             ),
-            const Loader(),
+           // const Loader(),
           ],
         ),
       ),

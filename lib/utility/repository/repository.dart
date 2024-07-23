@@ -19,7 +19,7 @@ class Repository{
     String userString =
     await SharedPrefHelper.getSecuredString(AppConstants.userDataKey);
      user = User.fromJson(jsonDecode(userString));
-     log(user.crmUserId,name: 'crmUserId');
+     log(userString);
     return user;
   }
 

@@ -39,8 +39,8 @@ class AppService {
       "TimeX": timeX.toString(),
       "cache-control": "no-cache",
       "SignAuth": "$apikey${getSignature(apiUrl, timeX)}",
-      "platform": platform,
-      "version": '2.0.0',
+      "platform": 'android',
+      "version": '3.0.0',
       "source": "1",
       "Accept": 'application/json, text/plain, /',
     };
@@ -83,10 +83,8 @@ class AppService {
   }
      static getStoredToken() async {
     String? storedToken =
-    await SharedPrefHelper.getSecuredString(AppConstants.isLoggedInKey);
+    await SharedPrefHelper.getSecuredString(AppConstants.tokenKey);
     if (storedToken != null) {
-
-
       return storedToken;
     } else {
       return null;

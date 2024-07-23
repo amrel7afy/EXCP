@@ -15,11 +15,11 @@ class SelectAddressViewModel {
   int selectedIndex = 0;
   List<AddressLocation> locations = <AddressLocation>[];
 
-  selectAddress(index) {
+  selectAddress(index) async{
     loading.show;
     selectedIndex = index;
     genericCubit.update();
-    HourlyContractController.selectAddress(selectedLocationId: locations[index].id);
+    await HourlyContractController.selectAddress(selectedLocationId: locations[index].id);
     loading.hide;
   }
 

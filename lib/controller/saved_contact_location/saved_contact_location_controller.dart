@@ -10,6 +10,7 @@ class SavedContactLocationController {
 
   static getSavedContacts() async {
     User user=await Repository.getUser();
+
     var result =await AppService.callService(actionType: ActionType.get,
         apiName: '/api/SavedContactLocation/ContactSavedAddress?'
             'contactId=${user.crmUserId}&serviceId=${Repository.supServiceId}',

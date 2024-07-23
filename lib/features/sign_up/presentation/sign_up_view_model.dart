@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 
-import '../../../controller/account/authentication_controller.dart';
+import '../../../controller/account/account_controller.dart';
 import '../../../core/helper/app_regex.dart';
 import '../data/model/sign_up_request.dart';
 
