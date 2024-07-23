@@ -12,6 +12,8 @@ class Repository{
     return _init;
   }
   static String supServiceId = '';
+  static String stepIdFromFirstStep = '';
+
   static late User user;
   static getUser() async {
     String userString =

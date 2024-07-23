@@ -15,7 +15,6 @@ class _MyOrdersViewBodyState extends State<MyOrdersViewBody>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-
   @override
   void initState() {
     super.initState();
@@ -58,5 +57,3 @@ class _MyOrdersViewBodyState extends State<MyOrdersViewBody>
     );
   }
 }
-
-

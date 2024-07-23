@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/utility/repository/repository.dart';
@@ -13,8 +15,9 @@ class StepsViewModel {
 
   static goToFirstStep(BuildContext context) async {
     var fistStep = await StepsController.fetchFirstStep(Repository.supServiceId);
+    Repository.stepIdFromFirstStep=fistStep!.stepId;
     if(context.mounted){
-      context.pushNamed('/${fistStep!.name}');
+      context.pushNamed('/${fistStep.name}');
     }
   }
 }

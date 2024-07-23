@@ -12,7 +12,7 @@ void main() async {
   Bloc.observer = MyBlocObserver();
 
 
-
+ HourlyContractController.selectAddress(selectedLocationId: '978e8486-3546-4fa8-bd2a-e9e3aab94439');
 
 
   String initialRoute= await AppRouter.getInitialRouteFromSharedPreferences();

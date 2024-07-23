@@ -127,12 +127,11 @@ class NewAddressViewModel {
         return -1; // Invalid house type
     }
   }
-//contactId=dd04599e-d071-4d78-a19c-7230a9662eb1&serviceId=c97fdb23-4687-ec11-a837-000d3abe20f8
+
   addNewAddress(BuildContext context) async {
     var data = await assignAddressData();
     loading.show;
-    await HourlyContractController.addNewAddress(
-        supServiceId: Repository.supServiceId, body: data);
+    await HourlyContractController.addNewAddress(body: data);
     loading.hide;
     context.pushNamed(AppRouter.selectAddressView);
   }

@@ -1,11 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/constants.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
+import 'package:test1/features/my_orders/presentation/view/widgets/my_orders_tab_bar.dart';
 import 'package:test1/features/select_your_plan_hours/presentation/components/plan_duration_list_view.dart';
+import 'package:test1/features/select_your_plan_hours/presentation/components/select_your_plan_tab_bar.dart';
+import 'package:test1/features/select_your_plan_hours/presentation/select_your_plan_view_model.dart';
 
 import '../../../core/widgets/custom_app_bar.dart';
 import 'components/choice_chips_list_view.dart';
@@ -20,10 +22,17 @@ class SelectYourPlanView extends StatefulWidget {
   State<SelectYourPlanView> createState() => _SelectYourPlanViewState();
 }
 
-class _SelectYourPlanViewState extends State<SelectYourPlanView> {
-  bool is4Hours = true;
-  bool isFrom8AM = true;
-  bool isAM = true;
+class _SelectYourPlanViewState extends State<SelectYourPlanView>
+    with SingleTickerProviderStateMixin {
+  SelectYourPlanViewModel selectYourPlanViewModel =
+      SelectYourPlanViewModel.instance();
+
+  @override
+  void initState() {
+    selectYourPlanViewModel.tabController =
+        TabController(length: 2, vsync: this);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +45,8 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView> {
             context.pop();
           },
         ),
-        body:  SafeArea(child: CustomScrollView(
+        body: SafeArea(
+            child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
               child: Column(
@@ -61,6 +71,9 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const VerticalSpacer(12),
+                        SelectYourPlanTabBar(
+                            tabController:
+                                selectYourPlanViewModel.tabController),
                         Text(
                           "الفترة",
                           style: MyTextStyles.font12Weight500
@@ -122,6 +135,7 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView> {
       ),
     );
   }
+
   Row buildHoursRow() {
     return Row(
       children: [
@@ -130,10 +144,10 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView> {
           child: MyChoiceChip(
             onTap: () {
               setState(() {
-                is4Hours = true;
+                selectYourPlanViewModel.is4Hours = true;
               });
             },
-            toggle: is4Hours,
+            toggle: selectYourPlanViewModel.is4Hours,
             text: "4 ساعة",
           ),
         ),
@@ -143,10 +157,10 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView> {
           child: MyChoiceChip(
             onTap: () {
               setState(() {
-                is4Hours = false;
+                selectYourPlanViewModel.is4Hours = false;
               });
             },
-            toggle: !is4Hours,
+            toggle: !selectYourPlanViewModel.is4Hours,
             text: '‏8 ساعة',
           ),
         )
@@ -162,10 +176,10 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView> {
           child: MyChoiceChip(
             onTap: () {
               setState(() {
-                isFrom8AM = true;
+                selectYourPlanViewModel.isFrom8AM = true;
               });
             },
-            toggle: isFrom8AM,
+            toggle: selectYourPlanViewModel.isFrom8AM,
             text: "من 8ص الي 10ص",
           ),
         ),
@@ -175,10 +189,10 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView> {
           child: MyChoiceChip(
             onTap: () {
               setState(() {
-                isFrom8AM = false;
+                selectYourPlanViewModel.isFrom8AM = false;
               });
             },
-            toggle: !isFrom8AM,
+            toggle: !selectYourPlanViewModel.isFrom8AM,
             text: 'من10ص الي 12ص',
           ),
         )
@@ -192,11 +206,13 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView> {
         Expanded(
           child: MyChoiceChip(
             onTap: () {
-              setState(() {
-                isAM = true;
-              });
+              setState(
+                () {
+                  selectYourPlanViewModel.isAM = true;
+                },
+              );
             },
-            toggle: isAM,
+            toggle: selectYourPlanViewModel.isAM,
             text: 'صباحي',
           ),
         ),
@@ -205,10 +221,10 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView> {
           child: MyChoiceChip(
             onTap: () {
               setState(() {
-                isAM = false;
+                selectYourPlanViewModel.isAM = false;
               });
             },
-            toggle: !isAM,
+            toggle: !selectYourPlanViewModel.isAM,
             text: 'مسائي',
           ),
         )
@@ -216,5 +232,3 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView> {
     );
   }
 }
-
-

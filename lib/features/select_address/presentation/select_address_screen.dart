@@ -4,6 +4,7 @@ import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/select_address/presentation/select_address_view_model.dart';
 
 import '../../../components/widgets/loader.dart';
+import '../../../controller/hourly_contract/hourly_contract_controller.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/constants/vertical_and_horizontal_space.dart';
 import '../../../core/theming/styles.dart';
@@ -23,6 +24,7 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
   @override
   void initState() {
     selectAddressViewModel.getSavedContacts();
+
     super.initState();
   }
   @override
@@ -51,8 +53,7 @@ class _SelectAddressScreenState extends State<SelectAddressScreen> {
                           style: MyTextStyles.font18Weight500
                               .copyWith(color: Colors.black),
                         ),
-                        const VerticalSpacer(24),
-                        const VerticalSpacer(20),
+                        const VerticalSpacer(44),
                       ],
                     ),
                   ),

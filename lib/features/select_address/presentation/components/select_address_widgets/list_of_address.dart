@@ -34,11 +34,6 @@ class _AddressListState extends State<AddressList> {
               onTap: () {
                 widget.selectAddressViewModel.selectAddress(index);
 
-               /* if (AppConstants.service == Service.hours) {
-                  context.pushNamed(AppRouter.selectYourPlanView);
-                } else if (AppConstants.service == Service.resident) {
-                  context.pushNamed(AppRouter.residentServiceView);
-                }*/
               },
             );
           }, childCount: widget.selectAddressViewModel.locations.length),
