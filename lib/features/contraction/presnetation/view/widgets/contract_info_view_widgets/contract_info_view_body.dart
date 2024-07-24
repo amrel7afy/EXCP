@@ -37,9 +37,10 @@ class _ContractInfoViewBodyState extends State<ContractInfoViewBody> {
             const VerticalSpacer(20),
              OverLabelContainer(label: 'الأيام المفضلة', body: OverLabelContainerBody(items: weekDays,),),
             const VerticalSpacer(23),
-             CollapseCard(
+          Container()
+          /*CollapseCard(
               showVisitPrice: true, onExpandedTap: () {  },
-            ),
+            )*/,
             const VerticalSpacer(16),
             Text(
               'بإكمالك الخطوات فأنت توافق على',

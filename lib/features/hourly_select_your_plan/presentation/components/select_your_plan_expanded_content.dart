@@ -1,16 +1,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
+import 'package:test1/models/package/package_model.dart';
 
 import '../../../../../core/theming/my_colors.dart';
 import '../../../../../core/theming/styles.dart';
 
 class ExpandedContent extends StatelessWidget {
+final  PackageModel package;
   final VoidCallback onTap;
 
   const ExpandedContent({
     super.key,
-    required this.onTap,
+    required this.onTap, required this.package,
   });
 
   @override
@@ -46,7 +48,7 @@ class ExpandedContent extends StatelessWidget {
                           color: MyColors.kPrimaryColor, fontSize: 14),
                       children: [
                         TextSpan(
-                          text: '12,800.00',
+                          text: package.packagePrice?.toString(),
                           style: MyTextStyles.font14Weight500.copyWith(
                             color: MyColors.kGreenColor,
                           ),
@@ -59,21 +61,21 @@ class ExpandedContent extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'عدد العاملات : 1 عاملة ',
+                    'عدد العاملات : ${package.employeeNumber} ${package.employeeNumberName} ',
                     style: MyTextStyles.font14Weight500.copyWith(
                       color: MyColors.kPrimaryColor,
                       height: 1.5,
                     ),
                   ),
                   Text(
-                    'عدد الساعات : 4 ساعة للزيارة ',
+                    'عدد الساعات : ${package.hoursNumber} ساعة للزيارة ',
                     style: MyTextStyles.font14Weight500.copyWith(
                       color: MyColors.kPrimaryColor,
                       height: 1.5,
                     ),
                   ),
                   Text(
-                    'عدد الزيارات : 1 زيارة ',
+                    'عدد الزيارات : ${package.weeklyVisits} زيارة ',
                     style: MyTextStyles.font14Weight500.copyWith(
                       color: MyColors.kPrimaryColor,
                       height: 1.5,
@@ -87,7 +89,7 @@ class ExpandedContent extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: '800.00',
+                          text: '${package.packagePriceAfterPackageDiscount}',
                           style: MyTextStyles.font14Weight500.copyWith(
                             color: MyColors.kGreenColor,
                           ),
@@ -102,7 +104,7 @@ class ExpandedContent extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'نسبة الضريبة : 15% ',
+                    'نسبة الضريبة : ${package.vatAmount?.round()}% ',
                     style: MyTextStyles.font14Weight500.copyWith(
                       color: MyColors.kPrimaryColor,
                       height: 1.5,
@@ -116,7 +118,7 @@ class ExpandedContent extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'السعر النهائي : 5220  ريال',
+                    'السعر النهائي : ${package.finalPrice}  ريال',
                     style: MyTextStyles.font14Weight500.copyWith(
                       color: MyColors.kPrimaryColor,
                       height: 1.5,

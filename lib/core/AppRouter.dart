@@ -56,7 +56,7 @@ class AppRouter {
   static const String selectAddressView = '/SavedAddresses';
   static const String emptyAddressView = '/emptyAddressView';
   static const String newAddressView = '/AddNewAddressLocation';
-  static const String selectYourPlanView = '/selectYourPlanView';
+  static const String selectYourPlanView = '/FixedPackage';
   static const String designYourOfferView = '/designYourOfferView';
   static const String contractInfoView = '/contractInfoView';
   static const String contractSuccessView = '/contractSuccessView';
@@ -137,7 +137,7 @@ class AppRouter {
         );
       case selectYourPlanView:
         return MaterialPageRoute(
-          builder: (context) => const SelectYourPlanView(),
+          builder: (context) => const SelectYourPlanScreen(),
         );
       case emptyAddressView:
         return MaterialPageRoute(

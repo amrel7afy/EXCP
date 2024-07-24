@@ -39,7 +39,8 @@ class HourlyContractController {
           .stepIdFromFirstStep}',
       body: null,
     );
+    var packages = jsonDecode(result)['selectedPackages'] as List;
     return result != null ? List<PackageModel>.from(
-        jsonDecode(result['selectedPackages'],),):<PackageModel>[];
+        packages.map((package)=>PackageModel.fromJson(package ))):<PackageModel>[];
   }
 }

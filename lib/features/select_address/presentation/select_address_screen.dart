@@ -20,7 +20,7 @@ class SelectAddressScreen extends StatefulWidget {
 }
 
 class _SelectAddressScreenState extends State<SelectAddressScreen> {
-  SelectAddressViewModel selectAddressViewModel = SelectAddressViewModel();
+  SelectAddressViewModel selectAddressViewModel = SelectAddressViewModel.instance();
 
   @override
   void initState() {

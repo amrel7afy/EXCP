@@ -25,14 +25,13 @@ class _AddressListState extends State<AddressList> {
     return BlocBuilder<GenericCubit, GenericState>(
       bloc: widget.selectAddressViewModel.addressDataCubit,
       builder: (context, state) {
-
         return SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {
             return AddressCard(
               text: widget.selectAddressViewModel.locations[index].displayValue,
               isChecked: widget.selectAddressViewModel.selectedIndex == index,
               onTap: () {
-                 widget.selectAddressViewModel.selectAddress(index);
+                widget.selectAddressViewModel.selectAddress(context, index);
               },
             );
           }, childCount: widget.selectAddressViewModel.locations.length),

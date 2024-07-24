@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:test1/core/constants/constants.dart';
-import 'collapse_card.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
+import 'package:test1/cubit/generic_cubit/generic_state.dart';
+import 'package:test1/features/hourly_select_your_plan/presentation/select_your_plan_view_model.dart';
 
-class ExpansionListView extends StatelessWidget {
-  const ExpansionListView({
-    super.key,
-  });
+import 'fixed_packages_am.dart';
+
+class ExpansionListView extends StatefulWidget {
+  const ExpansionListView({super.key});
+
+  @override
+  State<ExpansionListView> createState() => _ExpansionListViewState();
+}
+
+class _ExpansionListViewState extends State<ExpansionListView> {
+  SelectYourPlanViewModel selectYourPlanViewModel = SelectYourPlanViewModel.instance();
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate((context, index) {
-        return Padding(
-          padding: EdgeInsets.fromLTRB(AppConstants.k21ViewPadding, 0,
-              AppConstants.k21ViewPadding, 17.0),
-          child:  CollapseCard(showVisitPrice: false, onExpandedTap: () {  },),
-        );
-      }, childCount: 4),
+    return BlocBuilder<GenericCubit, GenericState>(
+      bloc: selectYourPlanViewModel.genericCubit,
+      builder: (context, state) {
+
+          return  FixedPackagesAM();
+
+      },
     );
   }
 }
+
+

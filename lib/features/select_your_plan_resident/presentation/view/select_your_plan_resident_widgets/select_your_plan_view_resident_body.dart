@@ -51,11 +51,12 @@ class _SelectYourPlanResidentViewBodyState
                   left: AppConstants.k21ViewPadding,
                   right: AppConstants.k21ViewPadding,
                   bottom: AppConstants.k16ViewPadding),
-              child:  CollapseCard(
+              child: Container()
+              /*CollapseCard(
                 showVisitPrice: true, onExpandedTap: () {
                   showAlertDialog(context, const ResidentAlertDialogContent());
               },
-              ),
+              )*/ ,
             );
           }, childCount: 3),
         ),

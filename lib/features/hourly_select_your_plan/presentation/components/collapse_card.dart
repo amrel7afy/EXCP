@@ -1,6 +1,6 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:test1/models/package/package_model.dart';
 
 import '../../../../../core/theming/my_colors.dart';
 import '../../../../../core/theming/styles.dart';
@@ -9,7 +9,11 @@ import 'select_your_plan_expanded_content.dart';
 class CollapseCard extends StatefulWidget {
   final VoidCallback onExpandedTap;
   final bool showVisitPrice;
-  const CollapseCard({super.key, required this.showVisitPrice, required this.onExpandedTap});
+
+  final PackageModel package;
+
+  const CollapseCard(
+      {super.key, required this.showVisitPrice, required this.onExpandedTap,  required this.package});
 
   @override
   State<CollapseCard> createState() => _CollapseCardState();
@@ -40,7 +44,8 @@ class _CollapseCardState extends State<CollapseCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -48,19 +53,18 @@ class _CollapseCardState extends State<CollapseCard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'باقة زيارة واحدة أسبوعيا لمدة 3 شهور',
-                            style: MyTextStyles.font14Weight600
+                            widget.package.displayName!,
+                            style: MyTextStyles.font12Weight600
                                 .copyWith(color: MyColors.kPrimaryColor),
                           ),
-                          if(widget.showVisitPrice)
-                            const VisitPrice(),
+                          if (widget.showVisitPrice) const VisitPrice(),
                           RichText(
                             text: TextSpan(
-                              text: '9,800.00 ريال    ',
+                              text: widget.package.priceAfterTotalDiscount?.toString()??'9,800.00 ريال',
                               style: MyTextStyles.font12Weight500,
                               children: [
                                 TextSpan(
-                                  text: '12,800.00',
+                                  text: widget.package.packagePrice?.toString()??'12,800.00',
                                   style: MyTextStyles.font12Weight500.copyWith(
                                     decoration: TextDecoration.lineThrough,
                                     decorationThickness: 2,
@@ -80,7 +84,10 @@ class _CollapseCardState extends State<CollapseCard> {
                     ],
                   ),
                 ),
-                if (_isExpanded)  ExpandedContent(onTap: widget.onExpandedTap,),
+                if (_isExpanded)
+                  ExpandedContent(
+                    onTap: widget.onExpandedTap, package: widget.package,
+                  ),
               ],
             ),
           ),
@@ -99,13 +106,15 @@ class VisitPrice extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
-      padding: const EdgeInsets.symmetric(
-          horizontal: 4, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(),
       ),
-      child:  Text('سعر الزيارة 240.00 ر .س',style: MyTextStyles.font12Weight500,),
+      child: Text(
+        'سعر الزيارة 240.00 ر .س',
+        style: MyTextStyles.font12Weight500,
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test1/components/widgets/loader.dart';
 import 'package:test1/core/constants/constants.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
@@ -14,14 +15,14 @@ import 'components/expansion_list_view.dart';
 import 'components/floating_action_button.dart';
 import 'components/my_choice_chip.dart';
 
-class SelectYourPlanView extends StatefulWidget {
-  const SelectYourPlanView({super.key});
+class SelectYourPlanScreen extends StatefulWidget {
+  const SelectYourPlanScreen({super.key});
 
   @override
-  State<SelectYourPlanView> createState() => _SelectYourPlanViewState();
+  State<SelectYourPlanScreen> createState() => _SelectYourPlanScreenState();
 }
 
-class _SelectYourPlanViewState extends State<SelectYourPlanView>
+class _SelectYourPlanScreenState extends State<SelectYourPlanScreen>
     with SingleTickerProviderStateMixin {
   SelectYourPlanViewModel selectYourPlanViewModel =
       SelectYourPlanViewModel.instance();
@@ -30,26 +31,26 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView>
   void initState() {
     selectYourPlanViewModel.tabController =
         TabController(length: 2, vsync: this);
+    selectYourPlanViewModel.fetchFixedPackages();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: AppConstants.appTextDirection,
-      child: Scaffold(
-        appBar: CustomAppBar(
-          title: 'اختيار باقتك',
-          leadingPressed: () {
-            context.pop();
-          },
-        ),
-        body: SafeArea(
-            child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
+    return Stack(
+      children: [
+        const Loader(),
+        Directionality(
+          textDirection: AppConstants.appTextDirection,
+          child: Scaffold(
+            appBar: CustomAppBar(
+              title: 'اختيار باقتك',
+              leadingPressed: () {
+                context.pop();
+              },
+            ),
+            body: SafeArea(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const VerticalSpacer(24),
                   Padding(
@@ -76,62 +77,36 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView>
                               .copyWith(color: Colors.black),
                         ),
                         SelectYourPlanTabBar(
-                            tabController:
-                                selectYourPlanViewModel.tabController),
-                        const VerticalSpacer(12),
-                        buildIntervalRow(),
-                        const VerticalSpacer(15),
-                        Text(
-                          "مواعيد التوصيل",
-                          style: MyTextStyles.font12Weight500
-                              .copyWith(color: Colors.black),
-                        ),
-                        Text(
-                          "الفترة الصباحية : من 8 ص الى 5 م     الفترة المسائية : من 5 م الى 9 م",
-                          maxLines: 1,
-                          style: MyTextStyles.font11Weight500
-                              .copyWith(color: Colors.black, height: 2.5),
+                          tabController: selectYourPlanViewModel.tabController,
                         ),
                         const VerticalSpacer(12),
-                        Text(
-                          "عدد الساعات",
-                          style: MyTextStyles.font12Weight500
-                              .copyWith(color: Colors.black),
-                        ),
-                        const VerticalSpacer(12),
-                        buildHoursRow(),
-                        const VerticalSpacer(12),
-                        Text(
-                          "توقيت الزيارة",
-                          style: MyTextStyles.font12Weight500
-                              .copyWith(color: Colors.black),
-                        ),
-                        const VerticalSpacer(12),
-                        buildTimeOfVisitRow(),
-                        const VerticalSpacer(20),
-                        Text(
-                          "مدة الباقة",
-                          style: MyTextStyles.font12Weight500
-                              .copyWith(color: Colors.black),
+                        SizedBox(
+                          height: 400,
+                          child: TabBarView(
+                              controller: selectYourPlanViewModel.tabController,
+                              children: const [
+                                ExpansionListView(),
+                                ExpansionListView(),
+                              ]),
                         ),
                       ],
                     ),
                   ),
-                  const VerticalSpacer(12),
-                  const PlanDurationChipsListView(),
+                  /*  const VerticalSpacer(12),
+                      const PlanDurationChipsListView(),*/
                   const VerticalSpacer(17),
+
+                  // const ExpansionListView(),
+                  const VerticalSpacer(70),
                 ],
               ),
             ),
-            const ExpansionListView(),
-            const SliverToBoxAdapter(
-              child: VerticalSpacer(70),
-            )
-          ],
-        )),
-        floatingActionButton: const SelectYourPlanFAB(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      ),
+            floatingActionButton: const SelectYourPlanFAB(),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+          ),
+        ),
+      ],
     );
   }
 
@@ -194,7 +169,7 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView>
             toggle: !selectYourPlanViewModel.isFrom8AM,
             text: 'من10ص الي 12ص',
           ),
-        )
+        ),
       ],
     );
   }
@@ -226,8 +201,41 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView>
             toggle: !selectYourPlanViewModel.isAM,
             text: 'مسائي',
           ),
-        )
+        ),
       ],
     );
   }
 }
+/* Text(
+                                "مواعيد التوصيل",
+                                style: MyTextStyles.font12Weight500
+                                    .copyWith(color: Colors.black),
+                              ),
+                              Text(
+                                "الفترة الصباحية : من 8 ص الى 5 م     الفترة المسائية : من 5 م الى 9 م",
+                                maxLines: 1,
+                                style: MyTextStyles.font11Weight500
+                                    .copyWith(color: Colors.black, height: 2.5),
+                              ),
+                              const VerticalSpacer(12),
+                              Text(
+                                "عدد الساعات",
+                                style: MyTextStyles.font12Weight500
+                                    .copyWith(color: Colors.black),
+                              ),
+                              const VerticalSpacer(12),
+                              buildHoursRow(),
+                              const VerticalSpacer(12),
+                              Text(
+                                "توقيت الزيارة",
+                                style: MyTextStyles.font12Weight500
+                                    .copyWith(color: Colors.black),
+                              ),
+                              const VerticalSpacer(12),
+                              buildTimeOfVisitRow(),
+                              const VerticalSpacer(20),
+                              Text(
+                                "مدة الباقة",
+                                style: MyTextStyles.font12Weight500
+                                    .copyWith(color: Colors.black),
+                              ),*/

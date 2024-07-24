@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:test1/controller/hourly_contract/hourly_contract_controller.dart';
 import 'package:test1/models/package/package_model.dart';
@@ -32,6 +34,7 @@ class SelectYourPlanViewModel {
     loading.show;
     fixedPackages = await HourlyContractController.fetchFixedPackages();
     filterPackages();
+    log(fixedPackagesAM.length.toString(),name: "Length");
     genericCubit.update();
     loading.hide;
   }
