@@ -7,7 +7,7 @@ import 'package:test1/features/shared/over_label_container.dart';
 import 'package:test1/features/shared/over_label_container_body.dart';
 
 import '../../../../../core/constants/constants.dart';
-import '../../../../select_your_plan_hours/presentation/components/collapse_card.dart';
+import '../../../../hourly_select_your_plan/presentation/components/collapse_card.dart';
 
 class SelectYourPlanResidentViewBody extends StatefulWidget {
   const SelectYourPlanResidentViewBody({super.key});

@@ -4,10 +4,9 @@ import 'package:test1/core/constants/constants.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
-import 'package:test1/features/my_orders/presentation/view/widgets/my_orders_tab_bar.dart';
-import 'package:test1/features/select_your_plan_hours/presentation/components/plan_duration_list_view.dart';
-import 'package:test1/features/select_your_plan_hours/presentation/components/select_your_plan_tab_bar.dart';
-import 'package:test1/features/select_your_plan_hours/presentation/select_your_plan_view_model.dart';
+import 'package:test1/features/hourly_select_your_plan/presentation/components/plan_duration_list_view.dart';
+import 'package:test1/features/hourly_select_your_plan/presentation/components/select_your_plan_tab_bar.dart';
+import 'package:test1/features/hourly_select_your_plan/presentation/select_your_plan_view_model.dart';
 
 import '../../../core/widgets/custom_app_bar.dart';
 import 'components/choice_chips_list_view.dart';
@@ -71,14 +70,14 @@ class _SelectYourPlanViewState extends State<SelectYourPlanView>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const VerticalSpacer(12),
-                        SelectYourPlanTabBar(
-                            tabController:
-                                selectYourPlanViewModel.tabController),
                         Text(
                           "الفترة",
                           style: MyTextStyles.font12Weight500
                               .copyWith(color: Colors.black),
                         ),
+                        SelectYourPlanTabBar(
+                            tabController:
+                                selectYourPlanViewModel.tabController),
                         const VerticalSpacer(12),
                         buildIntervalRow(),
                         const VerticalSpacer(15),
