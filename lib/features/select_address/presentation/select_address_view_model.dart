@@ -29,17 +29,18 @@ class SelectAddressViewModel {
   int selectedIndex = 0;
   List<AddressLocation> locations = <AddressLocation>[];
 
-  selectAddress(BuildContext context,index) async {
+  selectAddress(BuildContext context, index) async {
     loading.show;
     selectedIndex = index;
 
-    StepModel stepModel=await HourlyContractController.selectAddress(
+    StepModel stepModel = await HourlyContractController.selectAddress(
         selectedLocationId: locations[index].id);
 
     addressDataCubit.update();
     loading.hide;
-    context.pushNamed('/${stepModel.stepDetailsVm.name}');
-
+    if (context.mounted&&stepModel.stepDetailsVm.stepType==2) {
+      context.pushNamed('/${stepModel.stepDetailsVm.name}');
+    }
   }
 
   getSavedContacts() async {
