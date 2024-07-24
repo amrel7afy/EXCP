@@ -1,5 +1,5 @@
+
 import 'package:flutter/material.dart';
-import 'package:test1/controller/hourly_contract/hourly_contract_controller.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/design_your_plan/presentation/design_your_plan_view_model.dart';
 
@@ -13,7 +13,6 @@ import '../../../core/widgets/syncfusion_calendar.dart';
 import '../../shared/my_text_form_field.dart';
 import '../../shared/next_button.dart';
 import 'components/appointment_details.dart';
-import 'components/number_of_workers.dart';
 
 class DesignYourOfferView extends StatefulWidget {
   const DesignYourOfferView({super.key});
@@ -23,12 +22,15 @@ class DesignYourOfferView extends StatefulWidget {
 }
 
 class _DesignYourOfferViewState extends State<DesignYourOfferView> {
-  DesignYourPlanViewModel designYourPlanViewModel=DesignYourPlanViewModel.instance();
- @override
+  DesignYourPlanViewModel designYourPlanViewModel = DesignYourPlanViewModel.instance();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
   void initState() {
-   designYourPlanViewModel.fetchDataOfFields();
+    designYourPlanViewModel.fetchDataOfFields();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -36,112 +38,135 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
       child: Scaffold(
         appBar: CustomAppBar(
           title: 'صمم باقتك',
-
           leadingPressed: () {
             context.pop();
           },
         ),
-        body:  SafeArea(child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(27),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MyDropdownFormField(
-                    labelText: 'الجنسية',
-                    items: designYourPlanViewModel.nationality,
-                    value: designYourPlanViewModel.nationality.first,
-                    onChanged: (newVal) {},
-                    itemBuilder: (item) {
-                      return Text(item);
-                    },
-                    validator: (validator) {
-                      return null;
-                    }),
-
-                MyDropdownFormField(
-                    labelText: 'عدد العاملات',
-                    items: designYourPlanViewModel.numberOfWorkers,
-                    value: designYourPlanViewModel.numberOfWorkers.first,
-                    onChanged: (newVal) {},
-                    itemBuilder: (item) {
-                      return Text(item);
-                    },
-                    validator: (validator) {
-                      return null;
-                    }),MyDropdownFormField(
-                    labelText: 'مدة التعاقد',
-                    items: designYourPlanViewModel.contractDuration,
-                    value: designYourPlanViewModel.contractDuration.first,
-                    onChanged: (newVal) {},
-                    itemBuilder: (item) {
-                      return Text(item);
-                    },
-                    validator: (validator) {
-                      return null;
-                    }),
-                MyDropdownFormField(
-                    labelText: 'الفترات',
-                    items: designYourPlanViewModel.duration,
-                    value: designYourPlanViewModel.duration.first,
-                    onChanged: (newVal) {},
-                    itemBuilder: (item) {
-                      return Text(item);
-                    },
-                    validator: (validator) {
-                      return null;
-                    }),
-                const AppointmentDetails(),
-                const VerticalSpacer(15),
-                MyDropdownFormField(
-                  labelText: 'توقيت الزيارة',
-                  items: designYourPlanViewModel.intervals,
-                  value: designYourPlanViewModel.intervals.first,
-                  onChanged: (newVal) {},
-                  itemBuilder: (item) {
-                    return Text(item);
-                  },
-                  validator: (validator) {
-                    return null;
-                  },
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(27),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MyDropdownFormField<String>(
+                      labelText: 'الجنسية',
+                      items: designYourPlanViewModel.nationality,
+                      value: designYourPlanViewModel.nationalitySelected,
+                      onChanged: (newVal) {
+                        setState(() {
+                          designYourPlanViewModel.updateNationalitySelected(newVal);
+                        });
+                      },
+                      itemBuilder: (item) {
+                        return Text(item);
+                      },
+                      validator: designYourPlanViewModel.validateDropdown,
+                    ),
+                    MyDropdownFormField<String>(
+                      labelText: 'عدد العاملات',
+                      items: designYourPlanViewModel.numberOfWorkers,
+                      value: designYourPlanViewModel.numberOfWorkersSelected,
+                      onChanged: (newVal) {
+                        setState(() {
+                          designYourPlanViewModel.updateNumberOfWorkersSelected(newVal);
+                        });
+                      },
+                      itemBuilder: (item) {
+                        return Text(item);
+                      },
+                      validator: designYourPlanViewModel.validateDropdown,
+                    ),
+                    MyDropdownFormField<String>(
+                      labelText: 'مدة التعاقد',
+                      items: designYourPlanViewModel.contractDuration,
+                      value: designYourPlanViewModel.contractDurationSelected,
+                      onChanged: (newVal) {
+                        setState(() {
+                          designYourPlanViewModel.updateContractDurationSelected(newVal);
+                        });
+                      },
+                      itemBuilder: (item) {
+                        return Text(item);
+                      },
+                      validator: designYourPlanViewModel.validateDropdown,
+                    ),
+                    MyDropdownFormField<String>(
+                      labelText: 'الفترات',
+                      items: designYourPlanViewModel.duration,
+                      value: designYourPlanViewModel.durationSelected,
+                      onChanged: (newVal) {
+                        setState(() {
+                          designYourPlanViewModel.updateDurationSelected(newVal);
+                        });
+                      },
+                      itemBuilder: (item) {
+                        return Text(item);
+                      },
+                      validator: designYourPlanViewModel.validateDropdown,
+                    ),
+                    const AppointmentDetails(),
+                    const VerticalSpacer(15),
+                    MyDropdownFormField<String>(
+                      labelText: 'توقيت الزيارة',
+                      items: designYourPlanViewModel.intervals,
+                      value: designYourPlanViewModel.intervalsSelected,
+                      onChanged: (newVal) {
+                        setState(() {
+                          designYourPlanViewModel.updateIntervalsSelected(newVal);
+                        });
+                      },
+                      itemBuilder: (item) {
+                        return Text(item);
+                      },
+                      validator: designYourPlanViewModel.validateDropdown,
+                    ),
+                    MyDropdownFormField<String>(
+                      labelText: 'عدد الزيارات',
+                      items: designYourPlanViewModel.numberOfVisits,
+                      value: designYourPlanViewModel.numberOfVisitsSelected,
+                      onChanged: (newVal) {
+                        setState(() {
+                          designYourPlanViewModel.updateNumberOfVisitsSelected(newVal);
+                        });
+                      },
+                      itemBuilder: (item) {
+                        return Text(item);
+                      },
+                      validator: designYourPlanViewModel.validateDropdown,
+                    ),
+                    MyTextFormField(
+                      labelText: 'تاريخ اول زيارة',
+                      controller: designYourPlanViewModel.dateOfFirstVisitController,
+                      validator: (validator) {},
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.calendar_today_outlined,
+                            size: 20, color: MyColors.kPrimaryColor),
+                        onPressed: () {
+                          showCalendarDialog(context)?.day.toString();
+                        },
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: NextButton(
+                        onTap: () {
+                          if (_formKey.currentState!.validate()) {
+                            context.pushNamed(AppRouter.contractInfoView);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                MyDropdownFormField(
-                  labelText: 'عدد الزيارات',
-                  items: designYourPlanViewModel.numberOfVisits,
-                  onChanged: (newVal) {},
-                  value: designYourPlanViewModel.numberOfVisits.first,
-                  itemBuilder: (item) {
-                    return Text(item);
-                  },
-                  validator: (validator) {
-                    return null;
-                  },
-                ),
-                MyTextFormField(
-                  labelText: 'تاريخ اول زيارة',
-                  controller: designYourPlanViewModel.dateOfFirstVisitController,
-                  validator: (validator) {},
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.calendar_today_outlined,
-                        size: 20, color: MyColors.kPrimaryColor),
-                    onPressed: () {
-                      showCalendarDialog(context)?.day.toString();
-                    },
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: NextButton(
-                    onTap: () {
-                      context.pushNamed(AppRouter.contractInfoView);
-                    },
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-        )),
+        ),
       ),
     );
   }
 }
+
