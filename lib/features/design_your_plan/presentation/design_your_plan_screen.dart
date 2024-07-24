@@ -58,8 +58,18 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
                     validator: (validator) {
                       return null;
                     }),
-                NumberOfWorkers(),
+
                 MyDropdownFormField(
+                    labelText: 'عدد العاملات',
+                    items: designYourPlanViewModel.numberOfWorkers,
+                    value: designYourPlanViewModel.numberOfWorkers.first,
+                    onChanged: (newVal) {},
+                    itemBuilder: (item) {
+                      return Text(item);
+                    },
+                    validator: (validator) {
+                      return null;
+                    }),MyDropdownFormField(
                     labelText: 'مدة التعاقد',
                     items: designYourPlanViewModel.contractDuration,
                     value: designYourPlanViewModel.contractDuration.first,
