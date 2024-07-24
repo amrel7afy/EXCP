@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:test1/models/city/city_model.dart';
 import 'package:test1/models/package/package_model.dart';
 import 'package:test1/services/app_service.dart';
 import 'package:test1/utility/repository/repository.dart';
@@ -43,13 +44,74 @@ class HourlyContractController {
         : <PackageModel>[];
   }
 
- static designYourFixedPackage({required String selectedHourlyPricingId}) async {
+  static designYourFixedPackage(
+      {required String selectedHourlyPricingId}) async {
     var result = await AppService.callService(
       actionType: ActionType.post,
       apiName:
           '/api/HourlyContract/FixedPackage?selectedPricingId=$selectedHourlyPricingId&stepId=${Repository.stepIdFromFirstStep}',
       body: null,
     );
-
   }
+
+  static fetchKeyAndValueData({required String action}) async {
+    var result = await AppService.callService(
+        actionType: ActionType.get,
+        apiName:
+            '/api/HourlyContract/$action?serviceId=${Repository.supServiceId}',
+        body: null);
+    return result != null
+        ? List<KeyValueModel>.from(
+            jsonDecode(result).map((worker) => KeyValueModel.fromJson(worker)))
+        : [];
+  }
+
+
 }
+/*
+  static fetchNumOfVisits() async {
+    var result = await AppService.callService(
+        actionType: ActionType.get,
+        apiName: '/api/HourlyContract/NumOfVisits?',
+        body: null);
+    return result != null
+        ? List<KeyValueModel>.from(
+            jsonDecode(result).map((visit) => KeyValueModel.fromJson(visit)))
+        : [];
+  }
+
+  static fetchNumOfHours() async {
+    var result = await AppService.callService(
+        actionType: ActionType.get,
+        apiName:
+            '/api/HourlyContract/NumOfHours?serviceId=${Repository.supServiceId}',
+        body: null);
+    return result != null
+        ? List<KeyValueModel>.from(
+            jsonDecode(result).map((hour) => KeyValueModel.fromJson(hour)))
+        : [];
+  }
+
+  static fetchContractDuration() async {
+    var result = await AppService.callService(
+        actionType: ActionType.get,
+        apiName: '/api/HourlyContract/ContractDuration?',
+        body: null);
+    return result != null
+        ? List<KeyValueModel>.from(
+        jsonDecode(result).map((contractDuration) => KeyValueModel.fromJson(contractDuration)))
+        : [];
+  }
+
+  static fetchShifts() async {
+    var result = await AppService.callService(
+        actionType: ActionType.get,
+        apiName:
+            '/api/HourlyContract/Shifts?serviceId=${Repository.supServiceId}',
+        body: null);
+    return result != null
+        ? List<KeyValueModel>.from(
+        jsonDecode(result).map((shift) => KeyValueModel.fromJson(shift)))
+        : [];
+  }
+ */

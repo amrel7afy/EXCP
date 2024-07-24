@@ -42,8 +42,8 @@ class NewAddressViewModel {
   final List<String> floorOptions =
       List.generate(30, (index) => (index + 1).toString());
 
-  GenericCubit<List<CityModel>> cityCubit = GenericCubit<List<CityModel>>();
-  GenericCubit<List<CityModel>> districtCubit = GenericCubit<List<CityModel>>();
+  GenericCubit<List<KeyValueModel>> cityCubit = GenericCubit<List<KeyValueModel>>();
+  GenericCubit<List<KeyValueModel>> districtCubit = GenericCubit<List<KeyValueModel>>();
   GenericCubit<List<LatLng>> polygonCubit = GenericCubit<List<LatLng>>();
   List<LatLng> points = <LatLng>[];
 
@@ -72,7 +72,7 @@ class NewAddressViewModel {
 
   fetchActiveCities() async {
     loading.show;
-    List<CityModel> activeCities = await CityController.fetchActiveCities();
+    List<KeyValueModel> activeCities = await CityController.fetchActiveCities();
     cityNames = activeCities.map((city) => city.value).toList();
     cityCubit.update(activeCities);
     loading.hide;
@@ -80,7 +80,7 @@ class NewAddressViewModel {
 
   fetchDistrictsOfCity() async {
     loading.show;
-    List<CityModel> cityDistricts = await CityController.fetchDistrictsOfCity(
+    List<KeyValueModel> cityDistricts = await CityController.fetchDistrictsOfCity(
         cityId: CityController.cityAsKeyAndValue[currentCityIndex]['key']);
     districts = cityDistricts.map((city) => city.value).toList();
     districtCubit.update(cityDistricts);

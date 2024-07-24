@@ -16,14 +16,14 @@ import 'components/expansion_list_view_pm.dart';
 import 'components/floating_action_button.dart';
 import 'components/my_choice_chip.dart';
 
-class SelectYourPlanScreen extends StatefulWidget {
-  const SelectYourPlanScreen({super.key});
+class SelectFixedPlanScreen extends StatefulWidget {
+  const SelectFixedPlanScreen({super.key});
 
   @override
-  State<SelectYourPlanScreen> createState() => _SelectYourPlanScreenState();
+  State<SelectFixedPlanScreen> createState() => _SelectFixedPlanScreenState();
 }
 
-class _SelectYourPlanScreenState extends State<SelectYourPlanScreen>
+class _SelectFixedPlanScreenState extends State<SelectFixedPlanScreen>
     with SingleTickerProviderStateMixin {
   SelectYourPlanViewModel selectYourPlanViewModel =
       SelectYourPlanViewModel.instance();
@@ -40,7 +40,7 @@ class _SelectYourPlanScreenState extends State<SelectYourPlanScreen>
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        const Loader(),
+
         Directionality(
           textDirection: AppConstants.appTextDirection,
           child: Scaffold(
@@ -107,6 +107,7 @@ class _SelectYourPlanScreenState extends State<SelectYourPlanScreen>
                 FloatingActionButtonLocation.centerFloat,
           ),
         ),
+        const Loader(),
       ],
     );
   }

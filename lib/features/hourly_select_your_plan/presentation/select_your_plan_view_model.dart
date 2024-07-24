@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:test1/controller/hourly_contract/hourly_contract_controller.dart';
+import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/models/package/package_model.dart';
 import 'package:test1/models/steps/step_model.dart';
@@ -62,20 +63,27 @@ class SelectYourPlanViewModel {
     }).toList();
   }
 
-  designYourFixedPlanAM(int index) async {
+  designYourFixedPlanAM(BuildContext context,int index) async {
+    loading.show;
     changeSelectedPackageAMIndex(index);
     await HourlyContractController.designYourFixedPackage(
         selectedHourlyPricingId:
             fixedPackagesAM[index].selectedHourlyPricingId!);
+    loading.hide;
+    if(context.mounted){
+      context.pushNamed(AppRouter.designYourOfferView);
+    }
   }
 
   designYourFixedPlanPM(BuildContext context,index) async {
+    loading.show;
     changeSelectedPackagePMIndex(index);
    StepModel step= await HourlyContractController.designYourFixedPackage(
         selectedHourlyPricingId:
         fixedPackagesPM[index].selectedHourlyPricingId!);
+    loading.hide;
    if(context.mounted){
-    // context.pushNamed('/${step.stepDetailsVm.name}')
+    context.pushNamed(AppRouter.designYourOfferView);
    }
   }
 }

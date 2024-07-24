@@ -54,8 +54,8 @@ class _NewAddressViewState extends State<NewAddressView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      BlocBuilder<GenericCubit<List<CityModel>>,
-                          GenericState<List<CityModel>>>(
+                      BlocBuilder<GenericCubit<List<KeyValueModel>>,
+                          GenericState<List<KeyValueModel>>>(
                         bloc: newAddressViewModel.cityCubit,
                         builder: (context, state) {
                           return MyDropdownFormField<String>(
@@ -78,8 +78,8 @@ class _NewAddressViewState extends State<NewAddressView> {
                           );
                         },
                       ),
-                      BlocBuilder<GenericCubit<List<CityModel>>,
-                          GenericState<List<CityModel>>>(
+                      BlocBuilder<GenericCubit<List<KeyValueModel>>,
+                          GenericState<List<KeyValueModel>>>(
                         bloc: newAddressViewModel.districtCubit,
                         builder: (context, state) {
                           return MyDropdownFormField<String>(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test1/controller/hourly_contract/hourly_contract_controller.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/design_your_plan/presentation/design_your_plan_view_model.dart';
 
@@ -23,6 +24,11 @@ class DesignYourOfferView extends StatefulWidget {
 
 class _DesignYourOfferViewState extends State<DesignYourOfferView> {
   DesignYourPlanViewModel designYourPlanViewModel=DesignYourPlanViewModel.instance();
+ @override
+  void initState() {
+   designYourPlanViewModel.fetchDataOfFields();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Directionality(

@@ -1,4 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
+
+import '../../../controller/hourly_contract/hourly_contract_controller.dart';
+import '../../../controller/resource_group/resource_group_controller.dart';
 
 class DesignYourPlanViewModel{
   DesignYourPlanViewModel._();
@@ -19,5 +24,16 @@ class DesignYourPlanViewModel{
 
   TextEditingController dateOfFirstVisitController =
   TextEditingController(text: 'اختر');
+  fetchDataOfFields()async{
+    List results = await Future.wait([
+      ResourceGroupController.fetchGetResourceGroupsByService(),
+      HourlyContractController.fetchKeyAndValueData(action: 'NumOfWorkers'),
+      HourlyContractController.fetchKeyAndValueData(action: 'ContractDuration'),
+      HourlyContractController.fetchKeyAndValueData(action: 'Shifts'),
+      HourlyContractController.fetchKeyAndValueData(action: 'NumOfVisits'),
+      HourlyContractController.fetchKeyAndValueData(action: 'NumOfHours'),
+    ]);
+
+  }
 
 }

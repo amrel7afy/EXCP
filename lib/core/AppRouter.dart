@@ -137,7 +137,7 @@ class AppRouter {
         );
       case selectYourPlanView:
         return MaterialPageRoute(
-          builder: (context) => const SelectYourPlanScreen(),
+          builder: (context) => const SelectFixedPlanScreen(),
         );
       case emptyAddressView:
         return MaterialPageRoute(

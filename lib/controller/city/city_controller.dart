@@ -17,9 +17,9 @@ class CityController {
       cityAsKeyAndValue = List<Map<String, dynamic>>.from(json.decode(result));
     }
     return result != null
-        ? (List<CityModel>.from(
-            json.decode(result).map((x) => CityModel.fromJson(x))))
-        : <CityModel>[];
+        ? (List<KeyValueModel>.from(
+            json.decode(result).map((x) => KeyValueModel.fromJson(x))))
+        : <KeyValueModel>[];
   }
 
   static Future<dynamic> fetchDistrictsOfCity({required String cityId}) async {
@@ -34,9 +34,9 @@ class CityController {
           List<Map<String, dynamic>>.from(json.decode(result));
     }
     return result != null
-        ? (List<CityModel>.from(
-            json.decode(result).map((x) => CityModel.fromJson(x))))
-        : <CityModel>[];
+        ? (List<KeyValueModel>.from(
+            json.decode(result).map((x) => KeyValueModel.fromJson(x))))
+        : <KeyValueModel>[];
   }
 
   static Future<dynamic> fetchPolygonOfDistrict(

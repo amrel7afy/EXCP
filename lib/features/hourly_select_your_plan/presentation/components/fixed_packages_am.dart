@@ -19,7 +19,7 @@ class FixedPackagesAM extends StatelessWidget {
       return CollapseCard(
         showVisitPrice: false,
         onExpandedTap: () {
-          selectYourPlanViewModel.designYourFixedPlanAM(index);
+          selectYourPlanViewModel.designYourFixedPlanAM(context,index);
         },
         package: selectYourPlanViewModel.fixedPackagesAM[index],
       );
