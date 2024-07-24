@@ -6,14 +6,14 @@ import 'package:test1/features/hourly_select_your_plan/presentation/select_your_
 
 import 'fixed_packages_am.dart';
 
-class ExpansionListView extends StatefulWidget {
-  const ExpansionListView({super.key});
+class ExpansionListViewAM extends StatefulWidget {
+  const ExpansionListViewAM({super.key});
 
   @override
-  State<ExpansionListView> createState() => _ExpansionListViewState();
+  State<ExpansionListViewAM> createState() => _ExpansionListViewAMState();
 }
 
-class _ExpansionListViewState extends State<ExpansionListView> {
+class _ExpansionListViewAMState extends State<ExpansionListViewAM> {
   SelectYourPlanViewModel selectYourPlanViewModel = SelectYourPlanViewModel.instance();
 
   @override

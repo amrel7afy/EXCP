@@ -13,7 +13,10 @@ class CollapseCard extends StatefulWidget {
   final PackageModel package;
 
   const CollapseCard(
-      {super.key, required this.showVisitPrice, required this.onExpandedTap,  required this.package});
+      {super.key,
+      required this.showVisitPrice,
+      required this.onExpandedTap,
+      required this.package});
 
   @override
   State<CollapseCard> createState() => _CollapseCardState();
@@ -54,17 +57,21 @@ class _CollapseCardState extends State<CollapseCard> {
                         children: [
                           Text(
                             widget.package.displayName!,
-                            style: MyTextStyles.font12Weight600
+                            style: MyTextStyles.font11Weight600
                                 .copyWith(color: MyColors.kPrimaryColor),
                           ),
                           if (widget.showVisitPrice) const VisitPrice(),
                           RichText(
                             text: TextSpan(
-                              text: widget.package.priceAfterTotalDiscount?.toString()??'9,800.00 ريال',
+                              text: widget.package.priceAfterTotalDiscount
+                                      ?.toString() ??
+                                  '9,800.00 ريال',
                               style: MyTextStyles.font12Weight500,
                               children: [
                                 TextSpan(
-                                  text: widget.package.packagePrice?.toString()??'12,800.00',
+                                  text:
+                                      widget.package.packagePrice?.toString() ??
+                                          '12,800.00',
                                   style: MyTextStyles.font12Weight500.copyWith(
                                     decoration: TextDecoration.lineThrough,
                                     decorationThickness: 2,
@@ -86,7 +93,8 @@ class _CollapseCardState extends State<CollapseCard> {
                 ),
                 if (_isExpanded)
                   ExpandedContent(
-                    onTap: widget.onExpandedTap, package: widget.package,
+                    onTap: widget.onExpandedTap,
+                    package: widget.package,
                   ),
               ],
             ),

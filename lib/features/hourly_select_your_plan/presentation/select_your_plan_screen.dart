@@ -11,7 +11,8 @@ import 'package:test1/features/hourly_select_your_plan/presentation/select_your_
 
 import '../../../core/widgets/custom_app_bar.dart';
 import 'components/choice_chips_list_view.dart';
-import 'components/expansion_list_view.dart';
+import 'components/expansion_list_view_am.dart';
+import 'components/expansion_list_view_pm.dart';
 import 'components/floating_action_button.dart';
 import 'components/my_choice_chip.dart';
 
@@ -85,8 +86,8 @@ class _SelectYourPlanScreenState extends State<SelectYourPlanScreen>
                           child: TabBarView(
                               controller: selectYourPlanViewModel.tabController,
                               children: const [
-                                ExpansionListView(),
-                                ExpansionListView(),
+                                ExpansionListViewAM(),
+                                ExpansionListViewPM(),
                               ]),
                         ),
                       ],
