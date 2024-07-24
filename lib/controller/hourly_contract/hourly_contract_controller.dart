@@ -45,7 +45,7 @@ class HourlyContractController {
 
  static designYourFixedPackage({required String selectedHourlyPricingId}) async {
     var result = await AppService.callService(
-      actionType: ActionType.get,
+      actionType: ActionType.post,
       apiName:
           '/api/HourlyContract/FixedPackage?selectedPricingId=$selectedHourlyPricingId&stepId=${Repository.stepIdFromFirstStep}',
       body: null,

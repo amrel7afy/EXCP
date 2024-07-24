@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 
 import '../../../../../core/theming/my_colors.dart';
-import '../../../../shared/my_text_form_field.dart';
+import '../../../shared/my_text_form_field.dart';
 
 class NumberOfWorkers extends StatelessWidget {
   final TextEditingController numberOfWorkersController = TextEditingController(text: '1');

@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:test1/controller/hourly_contract/hourly_contract_controller.dart';
+import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/models/package/package_model.dart';
+import 'package:test1/models/steps/step_model.dart';
 
 import '../../../cubit/generic_cubit/generic_cubit.dart';
 import '../../../cubit/loader_cubit/loader_cubit.dart';
@@ -67,10 +69,13 @@ class SelectYourPlanViewModel {
             fixedPackagesAM[index].selectedHourlyPricingId!);
   }
 
-  designYourFixedPlanPM(index) async {
+  designYourFixedPlanPM(BuildContext context,index) async {
     changeSelectedPackagePMIndex(index);
-    await HourlyContractController.designYourFixedPackage(
+   StepModel step= await HourlyContractController.designYourFixedPackage(
         selectedHourlyPricingId:
         fixedPackagesPM[index].selectedHourlyPricingId!);
+   if(context.mounted){
+    // context.pushNamed('/${step.stepDetailsVm.name}')
+   }
   }
 }
