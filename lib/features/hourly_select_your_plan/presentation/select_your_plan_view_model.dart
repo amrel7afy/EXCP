@@ -25,26 +25,52 @@ class SelectYourPlanViewModel {
   late TabController tabController;
 
   GenericCubit genericCubit = GenericCubit();
-  List<PackageModel> fixedPackages = <PackageModel>[];
+  List<PackageModel> allFixedPackages = <PackageModel>[];
   List<PackageModel> fixedPackagesAM = <PackageModel>[];
   List<PackageModel> fixedPackagesPM = <PackageModel>[];
 
-
   fetchFixedPackages() async {
     loading.show;
-    fixedPackages = await HourlyContractController.fetchFixedPackages();
+    allFixedPackages = await HourlyContractController.fetchFixedPackages();
     filterPackages();
-    log(fixedPackagesAM.length.toString(),name: "Length");
+    log(fixedPackagesPM.length.toString(), name: "Length");
     genericCubit.update();
     loading.hide;
   }
 
+  int selectedPackageAMIndex = 0;
+  int selectedPackagePMIndex = 0;
+
+  changeSelectedPackageAMIndex(index) {
+    selectedPackageAMIndex = index;
+  }
+
+  changeSelectedPackagePMIndex(index) {
+    selectedPackagePMIndex = index;
+  }
+
+  changeSelectedPackagePM() {}
+
   void filterPackages() {
-    fixedPackagesAM = fixedPackages.where((package) {
+    fixedPackagesAM = allFixedPackages.where((package) {
       return package.visitShiftName == 'صباحي';
     }).toList();
-    fixedPackagesPM = fixedPackages.where((package) {
+    fixedPackagesPM = allFixedPackages.where((package) {
       return package.visitShiftName == 'مسائي';
     }).toList();
+  }
+
+  designYourFixedPlanAM(int index) async {
+    changeSelectedPackageAMIndex(index);
+    await HourlyContractController.designYourFixedPackage(
+        selectedHourlyPricingId:
+            fixedPackagesAM[index].selectedHourlyPricingId!);
+  }
+
+  designYourFixedPlanPM(index) async {
+    changeSelectedPackagePMIndex(index);
+    await HourlyContractController.designYourFixedPackage(
+        selectedHourlyPricingId:
+        fixedPackagesPM[index].selectedHourlyPricingId!);
   }
 }
