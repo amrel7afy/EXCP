@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/design_your_plan/presentation/design_your_plan_view_model.dart';
@@ -22,7 +21,8 @@ class DesignYourOfferView extends StatefulWidget {
 }
 
 class _DesignYourOfferViewState extends State<DesignYourOfferView> {
-  DesignYourPlanViewModel designYourPlanViewModel = DesignYourPlanViewModel.instance();
+  DesignYourPlanViewModel designYourPlanViewModel =
+      DesignYourPlanViewModel.instance();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -54,11 +54,10 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
                     MyDropdownFormField<String>(
                       labelText: 'الجنسية',
                       items: designYourPlanViewModel.nationality,
-                      value: designYourPlanViewModel.nationalitySelected,
+                      //value: designYourPlanViewModel.nationalitySelected,
                       onChanged: (newVal) {
-                        setState(() {
-                          designYourPlanViewModel.updateNationalitySelected(newVal);
-                        });
+                        designYourPlanViewModel
+                            .updateNationalitySelected(newVal);
                       },
                       itemBuilder: (item) {
                         return Text(item);
@@ -68,11 +67,10 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
                     MyDropdownFormField<String>(
                       labelText: 'عدد العاملات',
                       items: designYourPlanViewModel.numberOfWorkers,
-                      value: designYourPlanViewModel.numberOfWorkersSelected,
+                      //value: designYourPlanViewModel.numberOfWorkersSelected,
                       onChanged: (newVal) {
-                        setState(() {
-                          designYourPlanViewModel.updateNumberOfWorkersSelected(newVal);
-                        });
+                        designYourPlanViewModel
+                            .updateNumberOfWorkersSelected(newVal);
                       },
                       itemBuilder: (item) {
                         return Text(item);
@@ -82,11 +80,10 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
                     MyDropdownFormField<String>(
                       labelText: 'مدة التعاقد',
                       items: designYourPlanViewModel.contractDuration,
-                      value: designYourPlanViewModel.contractDurationSelected,
+                      //value: designYourPlanViewModel.contractDurationSelected,
                       onChanged: (newVal) {
-                        setState(() {
-                          designYourPlanViewModel.updateContractDurationSelected(newVal);
-                        });
+                        designYourPlanViewModel
+                            .updateContractDurationSelected(newVal);
                       },
                       itemBuilder: (item) {
                         return Text(item);
@@ -96,11 +93,9 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
                     MyDropdownFormField<String>(
                       labelText: 'الفترات',
                       items: designYourPlanViewModel.duration,
-                      value: designYourPlanViewModel.durationSelected,
+                      //value: designYourPlanViewModel.durationSelected,
                       onChanged: (newVal) {
-                        setState(() {
-                          designYourPlanViewModel.updateDurationSelected(newVal);
-                        });
+                        designYourPlanViewModel.updateDurationSelected(newVal);
                       },
                       itemBuilder: (item) {
                         return Text(item);
@@ -112,11 +107,9 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
                     MyDropdownFormField<String>(
                       labelText: 'توقيت الزيارة',
                       items: designYourPlanViewModel.intervals,
-                      value: designYourPlanViewModel.intervalsSelected,
+                      //value: designYourPlanViewModel.intervalsSelected,
                       onChanged: (newVal) {
-                        setState(() {
-                          designYourPlanViewModel.updateIntervalsSelected(newVal);
-                        });
+                        designYourPlanViewModel.updateIntervalsSelected(newVal);
                       },
                       itemBuilder: (item) {
                         return Text(item);
@@ -128,9 +121,8 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
                       items: designYourPlanViewModel.numberOfVisits,
                       value: designYourPlanViewModel.numberOfVisitsSelected,
                       onChanged: (newVal) {
-                        setState(() {
-                          designYourPlanViewModel.updateNumberOfVisitsSelected(newVal);
-                        });
+                        designYourPlanViewModel
+                            .updateNumberOfVisitsSelected(newVal);
                       },
                       itemBuilder: (item) {
                         return Text(item);
@@ -139,7 +131,8 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
                     ),
                     MyTextFormField(
                       labelText: 'تاريخ اول زيارة',
-                      controller: designYourPlanViewModel.dateOfFirstVisitController,
+                      controller:
+                          designYourPlanViewModel.dateOfFirstVisitController,
                       validator: (validator) {},
                       suffixIcon: IconButton(
                         icon: const Icon(Icons.calendar_today_outlined,
@@ -169,4 +162,3 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
     );
   }
 }
-

@@ -58,7 +58,7 @@ class DesignYourPlanViewModel {
     numberOfVisits =
     List<String>.from(results[5].map((item) => item.value).toList());
 
-    setData();
+
   }
 
   void updateNationalitySelected(String? newVal) {
