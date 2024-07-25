@@ -4,7 +4,6 @@ import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import 'package:test1/cubit/generic_cubit/generic_state.dart';
 import 'package:test1/features/hourly_select_your_plan/presentation/select_your_plan_view_model.dart';
 
-import 'fixed_packages_am.dart';
 import 'fixed_packages_pm.dart';
 
 class ExpansionListViewPM extends StatefulWidget {

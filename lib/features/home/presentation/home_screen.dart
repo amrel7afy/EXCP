@@ -5,6 +5,7 @@ import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/home/presentation/components/home_service_card.dart';
 import 'package:test1/features/home/presentation/home_view_model.dart';
 
+import '../../../components/widgets/custom_drawer.dart';
 import '../../../components/widgets/loader.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/constants/vertical_and_horizontal_space.dart';
@@ -33,36 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
       child: Scaffold(
-        appBar: CustomAppBar(
+        appBar: const CustomAppBar(
           title: 'مرحباً بك عميلنا العزيز',
-
-
         ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                child: Text('القائمة الرئيسية'),
-              ),
-              ListTile(
-                title: const Text('الصفحة الرئيسية'),
-                onTap: () {
-                  // Add your onTap logic here
-                },
-              ),
-              ListTile(
-                title: const Text('صفحة أخرى'),
-                onTap: () {
-                  // Add your onTap logic here
-                },
-              ),
-            ],
-          ),
-        ),
+        drawer: const CustomDrawer(),
         body: Stack(
           children: [
             const Loader(),

@@ -3,7 +3,6 @@ import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/theming/styles.dart';
 
 import '../../../../../../core/theming/my_colors.dart';
-import '../../../../../hourly_select_your_plan/presentation/components/collapse_card.dart';
 import '../../../../../shared/over_label_container.dart';
 import '../../../../../shared/over_label_container_body.dart';
 import 'contraction_data_row_actions.dart';

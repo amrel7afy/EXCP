@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,9 +30,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       body: Stack(
-
         children: [
-          //const Loader(),
+          const Loader(),
           Center(
             child: Padding(
               padding: const EdgeInsets.all(20),

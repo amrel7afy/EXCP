@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/contraction/presnetation/view/widgets/contract_download_view_widgets/contract_download_view_body.dart';
 
 import '../../../../../core/constants/constants.dart';
@@ -12,12 +11,12 @@ class DownloadContractView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
-      child: Scaffold(
+      child: const Scaffold(
         appBar: CustomAppBar(
           title: 'تفاصيل العقد',
 
         ),
-        body: const SafeArea(child: DownloadContractViewBody()),
+        body: SafeArea(child: DownloadContractViewBody()),
       ),
     );
   }

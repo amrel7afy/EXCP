@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
-import 'add_new_order_body/add_new_order_view_body.dart';
 
 class AddNewOrderView extends StatelessWidget {
   const AddNewOrderView({super.key});

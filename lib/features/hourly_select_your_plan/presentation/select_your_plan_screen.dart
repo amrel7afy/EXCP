@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/components/widgets/loader.dart';
 import 'package:test1/core/constants/constants.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
-import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
-import 'package:test1/features/hourly_select_your_plan/presentation/components/plan_duration_list_view.dart';
 import 'package:test1/features/hourly_select_your_plan/presentation/components/select_your_plan_tab_bar.dart';
 import 'package:test1/features/hourly_select_your_plan/presentation/select_your_plan_view_model.dart';
 

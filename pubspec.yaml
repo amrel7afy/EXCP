@@ -80,6 +80,8 @@ dependencies:
 
 
 
+  bloc: any
+  tesvt1: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

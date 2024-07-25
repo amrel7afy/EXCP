@@ -14,7 +14,7 @@ class MyOrdersView extends StatelessWidget {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
       child: Scaffold(
-        appBar: CustomAppBar(
+        appBar: const CustomAppBar(
           title: 'طلباتي',
         ),
         body: const SafeArea(child: MyOrdersViewBody()),
