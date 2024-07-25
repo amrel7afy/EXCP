@@ -15,9 +15,7 @@ class ContractSuccessView extends StatelessWidget {
       child: Scaffold(
         appBar: CustomAppBar(
           title: 'نجاح التعاقد',
-          leadingPressed: () {
-            context.pop();
-          },
+
         ),
         body: const SafeArea(child: ContractSuccessViewBody()),
       ),

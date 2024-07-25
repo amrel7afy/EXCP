@@ -47,7 +47,7 @@ class _ServicePerHourScreenState extends State<ServicePerHourScreen> {
           child: Scaffold(
             appBar: const CustomAppBar(
               title: 'اختر الخدمة',
-              leading: true,
+              disableDrawer: true,
             ),
             body: SafeArea(
                 child: Padding(

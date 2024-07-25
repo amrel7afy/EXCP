@@ -44,11 +44,9 @@ class _SelectFixedPlanScreenState extends State<SelectFixedPlanScreen>
         Directionality(
           textDirection: AppConstants.appTextDirection,
           child: Scaffold(
-            appBar: CustomAppBar(
+            appBar: const CustomAppBar(
               title: 'اختيار باقتك',
-              leadingPressed: () {
-                context.pop();
-              },
+
             ),
             body: SafeArea(
               child: Column(

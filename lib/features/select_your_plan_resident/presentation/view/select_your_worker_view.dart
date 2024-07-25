@@ -14,11 +14,9 @@ import '../../../../core/widgets/custom_app_bar.dart';
     return Directionality(
       textDirection: AppConstants.appTextDirection,
       child: Scaffold(
-        appBar: CustomAppBar(
+        appBar: const CustomAppBar(
           title: 'اختيار العاملة',
-          leadingPressed: () {
-            context.pop();
-          },
+
         ),
         body: const SafeArea(child: SelectYourWorkerViewBody()),
       ),

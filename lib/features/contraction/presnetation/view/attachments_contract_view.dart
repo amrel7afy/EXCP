@@ -12,14 +12,12 @@ class AttachmentsContractView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
-      child: Scaffold(
+      child: const Scaffold(
         appBar: CustomAppBar(
           title: 'مرفقات العقد',
-          leadingPressed: () {
-            context.pop();
-          },
+
         ),
-        body: const SafeArea(child: AttachmentsContractViewBody()),
+        body: SafeArea(child: AttachmentsContractViewBody()),
       ),
     );
   }

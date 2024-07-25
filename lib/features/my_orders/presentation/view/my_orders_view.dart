@@ -16,7 +16,6 @@ class MyOrdersView extends StatelessWidget {
       child: Scaffold(
         appBar: CustomAppBar(
           title: 'طلباتي',
-          leadingPressed: () {},
         ),
         body: const SafeArea(child: MyOrdersViewBody()),
         floatingActionButton: FloatingActionButton(

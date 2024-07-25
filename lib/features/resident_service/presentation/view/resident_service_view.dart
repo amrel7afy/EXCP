@@ -12,13 +12,13 @@ class ResidentServiceView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
-      child: Scaffold(
-        appBar: CustomAppBar(
+      child: const Scaffold(
+        appBar:  CustomAppBar(
           title: 'اختر المهنة',
-          leading: true,
-          leadingPressed: () {},
+          disableDrawer: true,
+
         ),
-        body: const SafeArea(child: ResidentServiceBody()),
+        body: SafeArea(child: ResidentServiceBody()),
       ),
     );
   }

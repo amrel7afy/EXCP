@@ -16,9 +16,7 @@ class ResidentContractDetailsView extends StatelessWidget {
       child: Scaffold(
         appBar: CustomAppBar(
           title: 'تفاصيل العقد',
-          leadingPressed: () {
-            context.pop();
-          },
+
         ),
         body: const SafeArea(child: ResidentContractDetailsViewBody()),
       ),

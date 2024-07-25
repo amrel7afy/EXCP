@@ -40,11 +40,9 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
       child: Scaffold(
-        appBar: CustomAppBar(
+        appBar: const CustomAppBar(
           title: 'صمم باقتك',
-          leadingPressed: () {
-            context.pop();
-          },
+
         ),
         body: BlocBuilder<GenericCubit, GenericState>(
           bloc: designYourPlanViewModel.genericCubit,
