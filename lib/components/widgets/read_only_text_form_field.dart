@@ -11,27 +11,26 @@ import '../../core/theming/styles.dart';
 class ReadOnlyDropdownFormField<T> extends StatefulWidget {
   final String labelText;
   String? text;
+  final GenericCubit<String> cubit;
   final double? padding;
-  final String? hint;
+  final String hint;
   final TextStyle? hintStyle;
   final String? Function(String? value) validator;
-  final List<T> items;
-  final Widget Function(T) itemBuilder;
-  final void Function(T?) onChanged;
+  final List<String> items;
+
   final String searchHintText;
 
-   ReadOnlyDropdownFormField({
+  ReadOnlyDropdownFormField({
     super.key,
     required this.labelText,
     this.padding,
     required this.validator,
-    this.hint,
+    required this.hint,
     this.hintStyle,
     required this.items,
-    required this.itemBuilder,
-    required this.onChanged,
     this.searchHintText = 'ابحث...',
     this.text,
+    required this.cubit,
   });
 
   @override
@@ -47,9 +46,13 @@ class _ReadOnlyDropdownFormFieldState<T>
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GenericCubit, GenericState>(
-      bloc: designYourPlanViewModel.genericCubit,
+    return BlocBuilder<GenericCubit<String>, GenericState<String>>(
+      bloc: widget.cubit,
       builder: (context, state) {
+        String? selected;
+        if (state is GenericUpdate) {
+          selected = state.data??"";
+        }
         return Directionality(
           textDirection: AppConstants.appTextDirection,
           child: Padding(
@@ -67,10 +70,7 @@ class _ReadOnlyDropdownFormFieldState<T>
                             horizontal: 12, vertical: 16),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color:
-                                designYourPlanViewModel.nationalityCheckSelected
-                                    ? Colors.black
-                                    : Colors.red,
+                            color: Colors.black,
                             width: 1.5,
                           ),
                           borderRadius: BorderRadius.circular(20),
@@ -78,10 +78,7 @@ class _ReadOnlyDropdownFormFieldState<T>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-
-                              widget.text??''
-                            ),
+                            Text(selected ?? widget.hint),
                             const Icon(
                               Icons.arrow_drop_down,
                               size: 30,
@@ -127,10 +124,9 @@ class _ReadOnlyDropdownFormFieldState<T>
       context: context,
       builder: (context) {
         return SearchableDropdownDialog<T>(
+          searchCubit: widget.cubit,
           items: widget.items,
-          itemBuilder: widget.itemBuilder,
           onChanged: (value) {
-            widget.onChanged(value);
             widget.text = value.toString();
             setState(() {
               errorText = widget.validator(widget.text);

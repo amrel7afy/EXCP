@@ -17,45 +17,14 @@ class DesignYourPlanViewModel {
     return _instance;
   }
 
-  String? nationalitySelected;
-  String? numberOfWorkersSelected;
-  String? contractDurationSelected;
-  String? durationSelected;
-  String? intervalsSelected;
-  String? numberOfVisitsSelected;
+
   TextEditingController dateOfFirstVisitController = TextEditingController();
+
 //for border handling
-LabelBorderCubit labelBorderCubit=LabelBorderCubit();
+  LabelBorderCubit labelBorderCubit = LabelBorderCubit();
 
 
-  bool nationalityCheckSelected= true;
-  bool numberOfWorkersCheckSelected= true;
-  bool contractDurationCheckSelected= true;
-  bool durationCheckSelected= true;
-  bool intervalsCheckSelected= true;
-  bool numberOfVisitsCheckSelected=true;
 
-  checkValidate() {
-    if (!nationalitySelected.isNullOrEmpty() &&
-        !numberOfWorkersSelected.isNullOrEmpty() &&
-        !contractDurationSelected.isNullOrEmpty() &&
-        !durationSelected.isNullOrEmpty() &&
-        !intervalsSelected.isNullOrEmpty() &&
-        !numberOfVisitsSelected.isNullOrEmpty() &&
-        !dateOfFirstVisitController.text.isNullOrEmpty()) {
-      return true;
-    }
-  }
-
-/*  clearControllers() {
-    nationalityController.clear();
-    numberOfWorkersController.clear();
-    contractDurationController.clear();
-    durationController.clear();
-    intervalsController.clear();
-    numberOfVisitsController.clear();
-    genericCubit.update();
-  }*/
 
   List<String> nationality = [];
   List<String> numberOfWorkers = [];
@@ -64,6 +33,12 @@ LabelBorderCubit labelBorderCubit=LabelBorderCubit();
   List<String> intervals = [];
   List<String> numberOfVisits = [];
 
+  GenericCubit<String> nationalityCubit = GenericCubit<String>();
+  GenericCubit<String> numberOfWorkersCubit = GenericCubit<String>();
+  GenericCubit<String> contractDurationCubit = GenericCubit<String>();
+  GenericCubit<String> durationCubit = GenericCubit<String>();
+  GenericCubit<String> intervalsCubit = GenericCubit<String>();
+  GenericCubit<String> numberOfVisitsCubit = GenericCubit<String>();
   GenericCubit genericCubit = GenericCubit();
 
   fetchDataOfFields() async {
@@ -91,35 +66,6 @@ LabelBorderCubit labelBorderCubit=LabelBorderCubit();
     genericCubit.update();
   }
 
-  void updateNationalitySelected(String? newVal) {
-    nationalitySelected = newVal ?? '';
-    if(newVal!=null){
-      nationalityCheckSelected=true;
-      genericCubit.update();
-    }
-  }
-
-  void updateNumberOfWorkersSelected(String? newVal) {
-    numberOfWorkersSelected = newVal ?? '';
-
-  }
-
-  void updateContractDurationSelected(String? newVal) {
-    contractDurationSelected = newVal ?? '';
-  }
-
-  void updateDurationSelected(String? newVal) {
-    durationSelected = newVal ?? '';
-  }
-
-  void updateIntervalsSelected(String? newVal) {
-    intervalsSelected = newVal ?? '';
-  }
-
-  void updateNumberOfVisitsSelected(String? newVal) {
-    numberOfVisitsSelected = newVal ?? '';
-    genericCubit.update();
-  }
 
   String? validateDropdown(String? value) {
     if (value == null || value.isEmpty) {
@@ -127,5 +73,4 @@ LabelBorderCubit labelBorderCubit=LabelBorderCubit();
     }
     return null;
   }
-
 }
