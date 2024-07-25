@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:test1/core/helper/extensions.dart';
-import 'package:test1/core/theming/my_colors.dart';
-import 'package:test1/core/theming/styles.dart';
-import '../../components/search_alert_dialog.dart';
-import '../constants/constants.dart';
 
-class MyDropdownFormField<T> extends StatelessWidget {
+import '../../../core/constants/constants.dart';
+import '../../components/search_alert_dialog.dart';
+
+class ReadOnlyDropdownFormField<T> extends StatelessWidget {
   final String labelText;
-  final List<T> items;
-  final T? value;
-  final String? hint;
-  final void Function(T?) onChanged;
-  final Widget Function(T) itemBuilder;
+  final TextEditingController controller;
   final double? padding;
-  final String? Function(T?)? validator;
+  final String? hint;
+  final TextStyle? hintStyle;
+  final Function(String? value) validator;
+  final List<T> items;
+  final Widget Function(T) itemBuilder;
+  final void Function(T?) onChanged;
   final String searchHintText;
 
-  const MyDropdownFormField({
+  const ReadOnlyDropdownFormField({
     super.key,
     required this.labelText,
-    required this.items,
-    this.value,
-    required this.onChanged,
-    required this.itemBuilder,
+    required this.controller,
     this.padding,
     required this.validator,
-    this.searchHintText = 'ابحث...', this.hint,
+    this.hint,
+    this.hintStyle,
+    required this.items,
+    required this.itemBuilder,
+    required this.onChanged,
+    this.searchHintText = 'ابحث...',
   });
 
   @override
@@ -37,18 +38,19 @@ class MyDropdownFormField<T> extends StatelessWidget {
         child: GestureDetector(
           onTap: () => showSearchableDialog(context),
           child: AbsorbPointer(
-            child: DropdownButtonFormField<T>(
-              hint: hint != null ? Text(hint!) : null,
-              style: MyTextStyles.font15Weight600
-                  .copyWith(color: MyColors.kPrimaryColor),
-              value: value,
-              icon: const Icon(
-                Icons.arrow_drop_down,
-                size: 30,
-                color: MyColors.kPrimaryColor,
-              ),
+            child: TextFormField(
+              controller: controller,
+              readOnly: true, // Set readOnly property
+              validator: (value) => validator(value),
               decoration: InputDecoration(
+                hintText: hint,
+                hintStyle: hintStyle,
                 floatingLabelBehavior: FloatingLabelBehavior.always,
+                suffixIcon: const Icon(
+                  Icons.arrow_drop_down,
+                  size: 30,
+                  color: Colors.black,
+                ),
                 labelText: labelText,
                 labelStyle: const TextStyle(
                   fontSize: 18,
@@ -68,17 +70,6 @@ class MyDropdownFormField<T> extends StatelessWidget {
                   borderSide: BorderSide(color: Colors.black, width: 1.5),
                 ),
               ),
-              onChanged: onChanged,
-              items: items.map((T item) {
-                return DropdownMenuItem<T>(
-                  value: item,
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: itemBuilder(item),
-                  ),
-                );
-              }).toList(),
-              validator: validator,
             ),
           ),
         ),

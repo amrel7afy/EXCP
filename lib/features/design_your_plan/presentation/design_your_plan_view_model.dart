@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-
+import 'package:flutter/material.dart';
+import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import '../../../controller/hourly_contract/hourly_contract_controller.dart';
 import '../../../controller/resource_group/resource_group_controller.dart';
 
@@ -19,6 +20,24 @@ class DesignYourPlanViewModel {
   String? intervalsSelected;
   String? numberOfVisitsSelected;
 
+  TextEditingController nationalityController = TextEditingController();
+  TextEditingController numberOfWorkersController = TextEditingController();
+  TextEditingController contractDurationController = TextEditingController();
+  TextEditingController durationController = TextEditingController();
+  TextEditingController intervalsController = TextEditingController();
+  TextEditingController numberOfVisitsController = TextEditingController();
+  TextEditingController dateOfFirstVisitController = TextEditingController();
+
+  clearControllers() {
+    nationalityController.clear();
+    numberOfWorkersController.clear();
+    contractDurationController.clear();
+    durationController.clear();
+    intervalsController.clear();
+    numberOfVisitsController.clear();
+    genericCubit.update();
+  }
+
   List<String> nationality = [];
   List<String> numberOfWorkers = [];
   List<String> contractDuration = [];
@@ -26,17 +45,7 @@ class DesignYourPlanViewModel {
   List<String> intervals = [];
   List<String> numberOfVisits = [];
 
-  TextEditingController dateOfFirstVisitController =
-  TextEditingController(text: 'اختر');
-
-  setData() {
-    if (nationality.isNotEmpty) nationalitySelected = nationality.first;
-    if (numberOfWorkers.isNotEmpty) numberOfWorkersSelected = numberOfWorkers.first;
-    if (contractDuration.isNotEmpty) contractDurationSelected = contractDuration.first;
-    if (duration.isNotEmpty) durationSelected = duration.first;
-    if (intervals.isNotEmpty) intervalsSelected = intervals.first;
-    if (numberOfVisits.isNotEmpty) numberOfVisitsSelected = numberOfVisits.first;
-  }
+  GenericCubit genericCubit = GenericCubit();
 
   fetchDataOfFields() async {
     List results = await Future.wait([
@@ -47,42 +56,44 @@ class DesignYourPlanViewModel {
       HourlyContractController.fetchKeyAndValueData(action: 'NumOfVisits'),
       HourlyContractController.fetchKeyAndValueData(action: 'NumOfHours'),
     ]);
+
     nationality =
-    List<String>.from(results[0].map((item) => item.value).toList());
+        List<String>.from(results[0].map((item) => item.value).toList());
     numberOfWorkers =
-    List<String>.from(results[1].map((item) => item.value).toList());
+        List<String>.from(results[1].map((item) => item.value).toList());
     contractDuration =
-    List<String>.from(results[2].map((item) => item.value).toList());
+        List<String>.from(results[2].map((item) => item.value).toList());
     duration = List<String>.from(results[3].map((item) => item.value).toList());
-    intervals = List<String>.from(results[4].map((item) => item.value).toList());
+    intervals =
+        List<String>.from(results[4].map((item) => item.value).toList());
     numberOfVisits =
-    List<String>.from(results[5].map((item) => item.value).toList());
+        List<String>.from(results[5].map((item) => item.value).toList());
 
-
+    genericCubit.update();
   }
 
   void updateNationalitySelected(String? newVal) {
-    nationalitySelected = newVal;
+    nationalityController.text = newVal ?? '';
   }
 
   void updateNumberOfWorkersSelected(String? newVal) {
-    numberOfWorkersSelected = newVal;
+    numberOfWorkersController.text = newVal ?? '';
   }
 
   void updateContractDurationSelected(String? newVal) {
-    contractDurationSelected = newVal;
+    contractDurationController.text = newVal ?? '';
   }
 
   void updateDurationSelected(String? newVal) {
-    durationSelected = newVal;
+    durationController.text = newVal ?? '';
   }
 
   void updateIntervalsSelected(String? newVal) {
-    intervalsSelected = newVal;
+    intervalsController.text = newVal ?? '';
   }
 
   void updateNumberOfVisitsSelected(String? newVal) {
-    numberOfVisitsSelected = newVal;
+    numberOfVisitsController.text = newVal ?? '';
   }
 
   String? validateDropdown(String? value) {
@@ -92,5 +103,3 @@ class DesignYourPlanViewModel {
     return null;
   }
 }
-
-
