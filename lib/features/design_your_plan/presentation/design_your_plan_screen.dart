@@ -24,7 +24,7 @@ class DesignYourOfferView extends StatefulWidget {
 }
 
 class _DesignYourOfferViewState extends State<DesignYourOfferView> {
-  DesignYourPlanViewModel designYourPlanViewModel =
+  final DesignYourPlanViewModel designYourPlanViewModel =
   DesignYourPlanViewModel.instance();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -61,8 +61,7 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
                         ReadOnlyDropdownFormField(
                           hint: 'اختر الجنسية',
                           labelText: 'الجنسية',
-                          controller:
-                          designYourPlanViewModel.nationalityController,
+                          controller: designYourPlanViewModel.nationalityController,
                           validator: designYourPlanViewModel.validateDropdown,
                           itemBuilder: (item) {
                             return Text(item.toString());
@@ -130,8 +129,7 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
                         MyTextFormField(
                           readOnly: true,
                           labelText: 'تاريخ اول زيارة',
-                          controller: designYourPlanViewModel
-                              .dateOfFirstVisitController,
+                          controller: designYourPlanViewModel.dateOfFirstVisitController,
                           validator: (validator) {},
                           suffixIcon: IconButton(
                             icon: const Icon(Icons.calendar_today_outlined,
@@ -162,9 +160,16 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
       ),
     );
   }
+
   @override
   void dispose() {
-
+    designYourPlanViewModel.nationalityController.dispose();
+    designYourPlanViewModel.numberOfWorkersController.dispose();
+    designYourPlanViewModel.contractDurationController.dispose();
+    designYourPlanViewModel.durationController.dispose();
+    designYourPlanViewModel.intervalsController.dispose();
+    designYourPlanViewModel.numberOfVisitsController.dispose();
+    designYourPlanViewModel.dateOfFirstVisitController.dispose();
     super.dispose();
   }
 }
