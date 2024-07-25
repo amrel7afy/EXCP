@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/helper/cache_helper.dart';
 import 'package:test1/core/helper/extensions.dart';
+import 'package:test1/core/theming/styles.dart';
 
 import '../../../core/constants/vertical_and_horizontal_space.dart';
 import '../../../core/theming/my_colors.dart';
@@ -16,11 +17,11 @@ class CustomDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
+           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: MyColors.kLightGreyColor,
             ),
-            child: Text('القائمة الرئيسية'),
+            child: Text('القائمة الرئيسية',),
           ),
           ListTile(
             title: const Text('الصفحة الرئيسية'),

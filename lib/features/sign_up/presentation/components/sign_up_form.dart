@@ -13,7 +13,7 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
-  SignUpViewModel signUpViewModel=SignUpViewModel.instance();
+  SignUpViewModel signUpViewModel=SignUpViewModel();
   bool isObscureText = true;
 
   @override

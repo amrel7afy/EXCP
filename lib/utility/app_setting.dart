@@ -1,7 +1,7 @@
 abstract class AppSetting{
 
   /// TEST
-   static const String serviceURL = 'https://mueen-apitest.azurewebsites.net/';
+   static const String serviceURL = 'https://crmtest.hrbs.com.sa:8006/';
   // static const String serviceURLForUmbracoFile = 'https://testenaya.excp.sa:8012/';
 
   ///TEST ON LIVE

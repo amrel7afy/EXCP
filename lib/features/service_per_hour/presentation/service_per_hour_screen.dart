@@ -25,7 +25,7 @@ class ServicePerHourScreen extends StatefulWidget {
 }
 
 class _ServicePerHourScreenState extends State<ServicePerHourScreen> {
-  ServicePerHourViewModel servicePerHourViewModel = ServicePerHourViewModel.instance();
+  ServicePerHourViewModel servicePerHourViewModel = ServicePerHourViewModel();
 
   @override
   void initState() {

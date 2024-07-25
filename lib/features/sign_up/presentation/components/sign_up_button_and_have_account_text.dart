@@ -16,7 +16,7 @@ class SignUpButtonAndHaveAccountText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SignUpViewModel signUpViewModel = SignUpViewModel.instance();
+    SignUpViewModel signUpViewModel = SignUpViewModel();
     return Column(
       children: [
         SizedBox(
@@ -30,7 +30,7 @@ class SignUpButtonAndHaveAccountText extends StatelessWidget {
             backGroundColor: MyColors.kPrimaryColor,
             onPressed: () {
               if (signUpViewModel.signUpFormKey.currentState!.validate()) {
-                SignUpViewModel.instance().signUp();
+                SignUpViewModel().signUp();
               }
             },
           ),

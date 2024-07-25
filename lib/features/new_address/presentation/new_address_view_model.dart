@@ -16,15 +16,7 @@ import '../data/model.dart';
 import 'google_maps_view_model.dart';
 
 class NewAddressViewModel {
-  NewAddressViewModel._();
 
-  // Static instance
-  static final NewAddressViewModel _instance = NewAddressViewModel._();
-
-  // Factory constructor to return the same instance
-  factory NewAddressViewModel.instance() {
-    return _instance;
-  }
 
   Loading loading = Loading.instance();
 

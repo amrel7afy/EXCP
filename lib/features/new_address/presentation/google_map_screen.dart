@@ -24,7 +24,7 @@ class PolygonMapScreen extends StatefulWidget {
 }
 
 class _PolygonMapScreenState extends State<PolygonMapScreen> {
-  NewAddressViewModel newAddressViewModel = NewAddressViewModel.instance();
+  NewAddressViewModel newAddressViewModel = NewAddressViewModel();
 
   @override
   Widget build(BuildContext context) {

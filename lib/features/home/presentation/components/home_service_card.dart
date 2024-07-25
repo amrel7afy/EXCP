@@ -24,7 +24,6 @@ class HomeServiceCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: 365.w,
-        height: 70.h,
         padding: EdgeInsets.all(7.w),
         decoration: BoxDecoration(
             border: Border.all(), borderRadius: BorderRadius.circular(12)),

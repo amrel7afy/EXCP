@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:test1/components/widgets/read_only_text_form_field.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
@@ -24,13 +27,11 @@ class DesignYourOfferView extends StatefulWidget {
 }
 
 class _DesignYourOfferViewState extends State<DesignYourOfferView> {
-  final DesignYourPlanViewModel designYourPlanViewModel =
-  DesignYourPlanViewModel.instance();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final DesignYourPlanViewModel designYourPlanViewModel = DesignYourPlanViewModel.instance();
 
   @override
   void initState() {
-    designYourPlanViewModel.clearControllers();
+    //designYourPlanViewModel.clearControllers();
     designYourPlanViewModel.fetchDataOfFields();
     super.initState();
   }
@@ -42,7 +43,6 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
       child: Scaffold(
         appBar: const CustomAppBar(
           title: 'صمم باقتك',
-
         ),
         body: BlocBuilder<GenericCubit, GenericState>(
           bloc: designYourPlanViewModel.genericCubit,
@@ -51,104 +51,104 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(27),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ReadOnlyDropdownFormField(
-                          hint: 'اختر الجنسية',
-                          labelText: 'الجنسية',
-                          controller: designYourPlanViewModel.nationalityController,
-                          validator: designYourPlanViewModel.validateDropdown,
-                          itemBuilder: (item) {
-                            return Text(item.toString());
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ReadOnlyDropdownFormField(
+                        hint: 'اختر الجنسية',
+                        labelText: 'الجنسية',
+                        text: designYourPlanViewModel.nationalitySelected,
+                        validator: designYourPlanViewModel.validateDropdown,
+                        itemBuilder: (item) {
+                          return Text(item.toString());
+                        },
+                        onChanged: designYourPlanViewModel.updateNationalitySelected,
+                        items: designYourPlanViewModel.nationality,
+                      ),
+                      ReadOnlyDropdownFormField(
+                        hint: 'اختر عدد العاملات',
+                        labelText: 'عدد العاملات',
+                        text: designYourPlanViewModel.numberOfWorkersSelected,
+                        validator: designYourPlanViewModel.validateDropdown,
+                        itemBuilder: (item) {
+                          return Text(item.toString());
+                        },
+                        onChanged: designYourPlanViewModel.updateNumberOfWorkersSelected,
+                        items: designYourPlanViewModel.numberOfWorkers,
+                      ),
+                      ReadOnlyDropdownFormField(
+                        hint: 'اختر مدة التعاقد',
+                        labelText: 'مدة التعاقد',
+                        text: designYourPlanViewModel.contractDurationSelected,
+                        validator: designYourPlanViewModel.validateDropdown,
+                        itemBuilder: (item) {
+                          return Text(item.toString());
+                        },
+                        onChanged: designYourPlanViewModel.updateContractDurationSelected,
+                        items: designYourPlanViewModel.contractDuration,
+                      ),
+                      ReadOnlyDropdownFormField(
+                        hint: 'اختر الفترات',
+                        labelText: 'الفترات',
+                        text: designYourPlanViewModel.durationSelected,
+                        validator: designYourPlanViewModel.validateDropdown,
+                        itemBuilder: (item) {
+                          return Text(item.toString());
+                        },
+                        onChanged: designYourPlanViewModel.updateDurationSelected,
+                        items: designYourPlanViewModel.duration,
+                      ),
+                      const AppointmentDetails(),
+                      const VerticalSpacer(15),
+                      ReadOnlyDropdownFormField(
+                        hint: 'اختر توقيت الزيارة',
+                        labelText: 'توقيت الزيارة',
+                        text: designYourPlanViewModel.intervalsSelected,
+                        validator: designYourPlanViewModel.validateDropdown,
+                        itemBuilder: (item) {
+                          return Text(item.toString());
+                        },
+                        onChanged: designYourPlanViewModel.updateIntervalsSelected,
+                        items: designYourPlanViewModel.intervals,
+                      ),
+                      ReadOnlyDropdownFormField(
+                        hint: 'اختر عدد الزيارات',
+                        labelText: 'عدد الزيارات',
+                        text: designYourPlanViewModel.numberOfVisitsSelected,
+                        validator: designYourPlanViewModel.validateDropdown,
+                        itemBuilder: (item) {
+                          return Text(item.toString());
+                        },
+                        onChanged: designYourPlanViewModel.updateNumberOfVisitsSelected,
+                        items: designYourPlanViewModel.numberOfVisits,
+                      ),
+                      MyTextFormField(
+                        readOnly: true,
+                        labelText: 'تاريخ اول زيارة',
+                        controller: designYourPlanViewModel.dateOfFirstVisitController,
+                        validator: (value) {},
+                        suffixIcon: IconButton(
+                          icon: const Icon(Icons.calendar_today_outlined,
+                              size: 20, color: MyColors.kPrimaryColor),
+                          onPressed: () {
+                            showCalendarDialog(context)?.day.toString();
                           },
-                          onChanged: designYourPlanViewModel.updateNationalitySelected,
-                          items: designYourPlanViewModel.nationality,
                         ),
-                        ReadOnlyDropdownFormField(
-                          hint: 'اختر عدد العاملات',
-                          labelText: 'عدد العاملات',
-                          controller: designYourPlanViewModel.numberOfWorkersController,
-                          validator: designYourPlanViewModel.validateDropdown,
-                          itemBuilder: (item) {
-                            return Text(item.toString());
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: NextButton(
+                          onTap: () {
+                            // designYourPlanViewModel.checkValidate();
+                            // if(designYourPlanViewModel.){
+                            //   log('Hlel',name:'Hello');
+                            // }
+
+
                           },
-                          onChanged: designYourPlanViewModel.updateNumberOfWorkersSelected,
-                          items: designYourPlanViewModel.numberOfWorkers,
                         ),
-                        ReadOnlyDropdownFormField(
-                          hint: 'اختر مدة التعاقد',
-                          labelText: 'مدة التعاقد',
-                          controller: designYourPlanViewModel.contractDurationController,
-                          validator: designYourPlanViewModel.validateDropdown,
-                          itemBuilder: (item) {
-                            return Text(item.toString());
-                          },
-                          onChanged: designYourPlanViewModel.updateContractDurationSelected,
-                          items: designYourPlanViewModel.contractDuration,
-                        ),
-                        ReadOnlyDropdownFormField(
-                          hint: 'اختر الفترات',
-                          labelText: 'الفترات',
-                          controller: designYourPlanViewModel.durationController,
-                          validator: designYourPlanViewModel.validateDropdown,
-                          itemBuilder: (item) {
-                            return Text(item.toString());
-                          },
-                          onChanged: designYourPlanViewModel.updateDurationSelected,
-                          items: designYourPlanViewModel.duration,
-                        ),
-                        const AppointmentDetails(),
-                        const VerticalSpacer(15),
-                        ReadOnlyDropdownFormField(
-                          hint: 'اختر توقيت الزيارة',
-                          labelText: 'توقيت الزيارة',
-                          controller: designYourPlanViewModel.intervalsController,
-                          validator: designYourPlanViewModel.validateDropdown,
-                          itemBuilder: (item) {
-                            return Text(item.toString());
-                          },
-                          onChanged: designYourPlanViewModel.updateIntervalsSelected,
-                          items: designYourPlanViewModel.intervals,
-                        ),
-                        ReadOnlyDropdownFormField(
-                          hint: 'اختر عدد الزيارات',
-                          labelText: 'عدد الزيارات',
-                          controller: designYourPlanViewModel.numberOfVisitsController,
-                          validator: designYourPlanViewModel.validateDropdown,
-                          itemBuilder: (item) {
-                            return Text(item.toString());
-                          },
-                          onChanged: designYourPlanViewModel.updateNumberOfVisitsSelected,
-                          items: designYourPlanViewModel.numberOfVisits,
-                        ),
-                        MyTextFormField(
-                          readOnly: true,
-                          labelText: 'تاريخ اول زيارة',
-                          controller: designYourPlanViewModel.dateOfFirstVisitController,
-                          validator: (validator) {},
-                          suffixIcon: IconButton(
-                            icon: const Icon(Icons.calendar_today_outlined,
-                                size: 20, color: MyColors.kPrimaryColor),
-                            onPressed: () {
-                              showCalendarDialog(context)?.day.toString();
-                            },
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: NextButton(
-                            onTap: () {
-                              if (_formKey.currentState!.validate()) {
-                                context.pushNamed(AppRouter.contractInfoView);
-                              }
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -159,7 +159,7 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
     );
   }
 
-  @override
+  /*@override
   void dispose() {
     designYourPlanViewModel.nationalityController.dispose();
     designYourPlanViewModel.numberOfWorkersController.dispose();
@@ -169,5 +169,5 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
     designYourPlanViewModel.numberOfVisitsController.dispose();
     designYourPlanViewModel.dateOfFirstVisitController.dispose();
     super.dispose();
-  }
+  }*/
 }

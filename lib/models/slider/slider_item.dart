@@ -2,7 +2,7 @@ class SliderItem {
   final String sliderItemId;
   final String name;
   final String description;
-  final String image;
+  final String? image;
   final String? url;
   final int sliderType;
   final String sliderTypeName;

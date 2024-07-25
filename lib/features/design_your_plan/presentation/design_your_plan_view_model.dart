@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:test1/core/helper/extensions.dart';
+import 'package:test1/cubit/container_label_border_cubit/container_label_border_cubit.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import '../../../controller/hourly_contract/hourly_contract_controller.dart';
 import '../../../controller/resource_group/resource_group_controller.dart';
@@ -7,8 +9,10 @@ import '../../../controller/resource_group/resource_group_controller.dart';
 class DesignYourPlanViewModel {
   DesignYourPlanViewModel._();
 
+  // Static instance
   static final DesignYourPlanViewModel _instance = DesignYourPlanViewModel._();
 
+  // Factory constructor to return the same instance
   factory DesignYourPlanViewModel.instance() {
     return _instance;
   }
@@ -19,16 +23,31 @@ class DesignYourPlanViewModel {
   String? durationSelected;
   String? intervalsSelected;
   String? numberOfVisitsSelected;
-
-  TextEditingController nationalityController = TextEditingController();
-  TextEditingController numberOfWorkersController = TextEditingController();
-  TextEditingController contractDurationController = TextEditingController();
-  TextEditingController durationController = TextEditingController();
-  TextEditingController intervalsController = TextEditingController();
-  TextEditingController numberOfVisitsController = TextEditingController();
   TextEditingController dateOfFirstVisitController = TextEditingController();
+//for border handling
+LabelBorderCubit labelBorderCubit=LabelBorderCubit();
 
-  clearControllers() {
+
+  bool nationalityCheckSelected= true;
+  bool numberOfWorkersCheckSelected= true;
+  bool contractDurationCheckSelected= true;
+  bool durationCheckSelected= true;
+  bool intervalsCheckSelected= true;
+  bool numberOfVisitsCheckSelected=true;
+
+  checkValidate() {
+    if (!nationalitySelected.isNullOrEmpty() &&
+        !numberOfWorkersSelected.isNullOrEmpty() &&
+        !contractDurationSelected.isNullOrEmpty() &&
+        !durationSelected.isNullOrEmpty() &&
+        !intervalsSelected.isNullOrEmpty() &&
+        !numberOfVisitsSelected.isNullOrEmpty() &&
+        !dateOfFirstVisitController.text.isNullOrEmpty()) {
+      return true;
+    }
+  }
+
+/*  clearControllers() {
     nationalityController.clear();
     numberOfWorkersController.clear();
     contractDurationController.clear();
@@ -36,7 +55,7 @@ class DesignYourPlanViewModel {
     intervalsController.clear();
     numberOfVisitsController.clear();
     genericCubit.update();
-  }
+  }*/
 
   List<String> nationality = [];
   List<String> numberOfWorkers = [];
@@ -73,27 +92,33 @@ class DesignYourPlanViewModel {
   }
 
   void updateNationalitySelected(String? newVal) {
-    nationalityController.text = newVal ?? '';
+    nationalitySelected = newVal ?? '';
+    if(newVal!=null){
+      nationalityCheckSelected=true;
+      genericCubit.update();
+    }
   }
 
   void updateNumberOfWorkersSelected(String? newVal) {
-    numberOfWorkersController.text = newVal ?? '';
+    numberOfWorkersSelected = newVal ?? '';
+
   }
 
   void updateContractDurationSelected(String? newVal) {
-    contractDurationController.text = newVal ?? '';
+    contractDurationSelected = newVal ?? '';
   }
 
   void updateDurationSelected(String? newVal) {
-    durationController.text = newVal ?? '';
+    durationSelected = newVal ?? '';
   }
 
   void updateIntervalsSelected(String? newVal) {
-    intervalsController.text = newVal ?? '';
+    intervalsSelected = newVal ?? '';
   }
 
   void updateNumberOfVisitsSelected(String? newVal) {
-    numberOfVisitsController.text = newVal ?? '';
+    numberOfVisitsSelected = newVal ?? '';
+    genericCubit.update();
   }
 
   String? validateDropdown(String? value) {
@@ -102,4 +127,5 @@ class DesignYourPlanViewModel {
     }
     return null;
   }
+
 }

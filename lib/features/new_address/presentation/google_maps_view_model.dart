@@ -18,7 +18,7 @@ class GoogleMapsViewModel {
   }
   Loading loading = Loading.instance();
   GenericCubit googleMapsCubit = GenericCubit();
-  NewAddressViewModel newAddressViewModel=NewAddressViewModel.instance();
+  NewAddressViewModel newAddressViewModel=NewAddressViewModel();
 
   static final Set<Marker> markers = HashSet<Marker>();
 
