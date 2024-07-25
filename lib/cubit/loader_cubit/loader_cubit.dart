@@ -3,10 +3,10 @@ import 'loader_state.dart';
 
 class Loading extends Cubit<LoadingState> {
   // Private constructor
-  Loading._internal() : super(const LoadingInitial(false));
+  Loading._() : super(const LoadingInitial(false));
 
   // Static instance
-  static final Loading _instance = Loading._internal();
+  static final Loading _instance = Loading._();
 
   // Factory constructor to return the same instance
   factory Loading.instance() {

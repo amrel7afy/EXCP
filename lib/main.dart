@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test1/controller/hourly_contract/hourly_contract_controller.dart';
 import 'package:test1/core/AppRouter.dart';
 import 'package:test1/core/di/locator.dart';
+import 'package:test1/utility/repository/repository.dart';
+
 import 'app.dart';
 import 'core/shared/bloc_observer.dart';
 

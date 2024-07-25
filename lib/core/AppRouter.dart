@@ -2,17 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:test1/core/di/locator.dart';
 import 'package:test1/core/helper/extensions.dart';
- import 'package:test1/features/design_your_offer/presentation/view/design_your_offer_view.dart';
 import 'package:test1/features/home/presentation/home_screen.dart';
 import 'package:test1/features/my_orders/presentation/view_model/orders_cubit/orders_cubit.dart';
-import 'package:test1/features/new_address/presentation/address_on_map_screen.dart';
-import 'package:test1/features/select_address/presentation/view/select_address_view.dart';
-import 'package:test1/features/select_address/presentation/view_model/address_cubit/address_cubit.dart';
-import 'package:test1/features/select_your_plan_hours/presentation/view/select_your_plan_view.dart';
+import 'package:test1/features/new_address/presentation/google_map_screen.dart';
+import 'package:test1/features/select_address/presentation/select_address_screen.dart';
+import 'package:test1/features/hourly_select_your_plan/presentation/select_your_plan_screen.dart';
 import 'package:test1/features/select_your_plan_resident/presentation/view_model/choose_worker_cubit/choose_worker_cubit.dart';
 
 import '../features/bottom_nav_bar/presentation/view/BottomNavBar.dart';
@@ -21,24 +16,23 @@ import '../features/contraction/presnetation/view/contract_download_view.dart';
 import '../features/contraction/presnetation/view/contract_info_view.dart';
 import '../features/contraction/presnetation/view/contract_success_view.dart';
 import '../features/contraction/presnetation/view/resident_contract_details_view.dart';
+import '../features/design_your_plan/presentation/design_your_plan_screen.dart';
 import '../features/login/presentation/login_screen.dart';
 import '../features/my_orders/presentation/view/add_new_order.dart';
 import '../features/my_orders/presentation/view/my_orders_view.dart';
+import '../features/new_address/presentation/add_new_address_screen.dart';
 import '../features/otp/presentation/view/otp_view.dart';
 import '../features/resident_service/presentation/view/resident_service_view.dart';
-import '../features/new_address/presentation/add_new_address_screen.dart';
-import '../features/select_address/presentation/view/empty_address_view.dart';
+import '../features/select_address/presentation/empty_address_screen.dart';
 import '../features/select_your_plan_resident/presentation/view/select_your_plan_resident_view.dart';
 import '../features/select_your_plan_resident/presentation/view/select_your_worker_view.dart';
 import '../features/service_per_hour/presentation/service_per_hour_screen.dart';
-import '../features/sign_up/presentation/view/sign_up_view.dart';
+import '../features/sign_up/presentation/sign_up_screen.dart';
 import '../models/authentication/login_success_models/user_data.dart';
 import 'constants/constants.dart';
-
 import 'helper/cache_helper.dart';
 
 class AppRouter {
-
   static Future<String> getInitialRouteFromSharedPreferences() async {
     String? userDataAsString =
         await SharedPrefHelper.getSecuredString(AppConstants.userDataKey);
@@ -57,12 +51,12 @@ class AppRouter {
   static const String loginView = '/LoginView';
   static const String otpVerifyView = '/otpVerifyView';
   static const String searchView = '/searchView';
-  static const String singUpView = '/singUpView';
+  static const String signUpView = '/singUpView';
   static const String servicePerHourView = '/servicePerHourView';
-  static const String selectAddressView = '/selectAddressView';
+  static const String selectAddressView = '/SavedAddresses';
   static const String emptyAddressView = '/emptyAddressView';
   static const String newAddressView = '/AddNewAddressLocation';
-  static const String selectYourPlanView = '/selectYourPlanView';
+  static const String selectYourPlanView = '/FixedPackage';
   static const String designYourOfferView = '/designYourOfferView';
   static const String contractInfoView = '/contractInfoView';
   static const String contractSuccessView = '/contractSuccessView';
@@ -71,21 +65,22 @@ class AppRouter {
   static const String selectYourPlanResidentView =
       '/selectYourPlanResidentView';
   static const String selectYourWorkerView = '/selectYourWorkerView';
-  static const String residentContractDetailsView = '/residentContractDetailsView';
+  static const String residentContractDetailsView =
+      '/residentContractDetailsView';
 
   static const String residentServiceView = '/residentServiceView';
   static const String downloadContractView = '/downloadContractView';
   static const String attachmentsContractView = '/attachmentsContractView';
   static const String polygonMapsView = '/polygonMapsView';
 
-
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
-
       case polygonMapsView:
-        final List<LatLng>points= settings.arguments as List<LatLng>;
+        final args = settings.arguments as Map<String, dynamic>;
         return MaterialPageRoute(
-          builder: (context) =>  PolygonMapScreen(points: points),
+          builder: (context) => PolygonMapScreen(
+            points: args['points'],
+          ),
         );
       case downloadContractView:
         return MaterialPageRoute(
@@ -142,21 +137,19 @@ class AppRouter {
         );
       case selectYourPlanView:
         return MaterialPageRoute(
-          builder: (context) => const SelectYourPlanView(),
+          builder: (context) => const SelectFixedPlanScreen(),
         );
       case emptyAddressView:
         return MaterialPageRoute(
-          builder: (context) => const EmptyAddressView(),
+          builder: (context) => const EmptyAddressScreen(),
         );
       case newAddressView:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-              create: (BuildContext context) => locator<AddressCubit>(),
-              child: const NewAddressView()),
+          builder: (context) => const NewAddressView(),
         );
       case selectAddressView:
         return MaterialPageRoute(
-          builder: (context) => const SelectAddressView(),
+          builder: (context) => const SelectAddressScreen(),
         );
       case servicePerHourView:
         return MaterialPageRoute(
@@ -178,16 +171,11 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const LoginScreen(),
         );
-      case singUpView:
+      case signUpView:
         return MaterialPageRoute(
           builder: (context) => const SignUpView(),
         );
-
-
     }
     return null;
   }
 }
-
-
-

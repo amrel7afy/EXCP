@@ -1,28 +1,51 @@
-import 'dart:developer';
+import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:test1/components/step_view_model.dart';
 import 'package:test1/controller/city/city_controller.dart';
-import 'package:test1/features/new_address/presentation/address_on_map_screen.dart';
+import 'package:test1/controller/hourly_contract/hourly_contract_controller.dart';
+import 'package:test1/core/helper/cache_helper.dart';
+import 'package:test1/core/helper/extensions.dart';
+import 'package:test1/models/authentication/login_success_models/user_data.dart';
 import 'package:test1/models/city/city_model.dart';
+import 'package:test1/utility/repository/repository.dart';
 
+import '../../../core/AppRouter.dart';
+import '../../../core/constants/constants.dart';
 import '../../../cubit/generic_cubit/generic_cubit.dart';
 import '../../../cubit/loader_cubit/loader_cubit.dart';
+import '../data/model.dart';
+import 'google_maps_view_model.dart';
 
 class NewAddressViewModel {
+  NewAddressViewModel._();
+
+  // Static instance
+  static final NewAddressViewModel _instance = NewAddressViewModel._();
+
+  // Factory constructor to return the same instance
+  factory NewAddressViewModel.instance() {
+    return _instance;
+  }
+
   Loading loading = Loading.instance();
 
   String? cityNameSelectedValue;
   String? districtSelectedValue;
   String? houseTypeSelectedValue;
   String? floorSelectedValue;
+  TextEditingController houseNumberController = TextEditingController();
+  TextEditingController addressNotesController = TextEditingController();
 
   final List<String> houseTypeOptions = ['عمارة', 'فيلا', 'منزل خاص'];
   final List<String> floorOptions =
       List.generate(30, (index) => (index + 1).toString());
 
-  GenericCubit<List<CityModel>> cityCubit = GenericCubit<List<CityModel>>();
-  GenericCubit<List<CityModel>> districtCubit = GenericCubit<List<CityModel>>();
+  GenericCubit<List<KeyValueModel>> cityCubit =
+      GenericCubit<List<KeyValueModel>>();
+  GenericCubit<List<KeyValueModel>> districtCubit =
+      GenericCubit<List<KeyValueModel>>();
   GenericCubit<List<LatLng>> polygonCubit = GenericCubit<List<LatLng>>();
   List<LatLng> points = <LatLng>[];
 
@@ -31,6 +54,13 @@ class NewAddressViewModel {
 
   int currentDistrictIndex = 0;
   int currentCityIndex = 0;
+
+  StepsViewModel stepsViewModel = StepsViewModel.instance();
+  LatLng? targetPosition;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  Repository repo = Repository.instance();
+
+//---------------------------------------------------------------------------
 
   getDistrictIndex(newVal) {
     int index = districts.indexOf(newVal);
@@ -44,7 +74,7 @@ class NewAddressViewModel {
 
   fetchActiveCities() async {
     loading.show;
-    List<CityModel> activeCities = await CityController.fetchActiveCities();
+    List<KeyValueModel> activeCities = await CityController.fetchActiveCities();
     cityNames = activeCities.map((city) => city.value).toList();
     cityCubit.update(activeCities);
     loading.hide;
@@ -52,8 +82,9 @@ class NewAddressViewModel {
 
   fetchDistrictsOfCity() async {
     loading.show;
-    List<CityModel> cityDistricts = await CityController.fetchDistrictsOfCity(
-        cityId: CityController.cityAsKeyAndValue[currentCityIndex]['key']);
+    List<KeyValueModel> cityDistricts =
+        await CityController.fetchDistrictsOfCity(
+            cityId: CityController.cityAsKeyAndValue[currentCityIndex]['key']);
     districts = cityDistricts.map((city) => city.value).toList();
     districtCubit.update(cityDistricts);
     loading.hide;
@@ -64,37 +95,49 @@ class NewAddressViewModel {
     String data = await CityController.fetchPolygonOfDistrict(
         districtId: CityController.districtsAsKeyAndValue[currentDistrictIndex]
             ['key']);
-    points = prepareCoords(data);
+    points = GoogleMapsViewModel.prepareCoords(data);
     polygonCubit.update(points);
     loading.hide;
   }
 
-  List<LatLng> prepareCoords(String data) {
-    // Step 1: Remove square brackets and leading/trailing spaces
-    String cleanData = data.replaceAll(RegExp(r"\[\s*|\s*\]"),
-        ''); // Adjusted regex to remove brackets and any surrounding whitespace
+  assignAddressData() async {
+    User user = await Repository.getUser();
+    NewAddressRequestBody newAddressRequest = NewAddressRequestBody(
+        addressNotes: addressNotesController.text.trim(),
+        houseNo: houseNumberController.text.trim(),
+        houseType: getHouseType(houseTypeSelectedValue!),
+        floorNo: floorSelectedValue ?? '0',
+        apartmentNo: '1',
+        cityId: CityController.cityAsKeyAndValue[currentCityIndex]['key'],
+        districtId: CityController.districtsAsKeyAndValue[currentDistrictIndex]
+            ['key'],
+        latitude: targetPosition!.latitude,
+        longitude: targetPosition!.longitude,
+        type: 1,
+        contactId: user.crmUserId);
+    return newAddressRequest.toMap();
+  }
 
-    // Step 2: Split by ", " to get individual coordinate pairs
-    List<String> coordinatePairs =
-        cleanData.split(' ,'); // Adjusted split to handle the space after comma
-
-    // Step 3: Convert coordinate pairs to list of LatLng objects
-    List<LatLng> coordinates = [];
-    for (var pair in coordinatePairs) {
-      List<String> values = pair.trim().split(',');
-      if (values.length == 2) {
-        double? latitude = double.tryParse(values[0]);
-        double? longitude = double.tryParse(values[1]);
-        if (latitude != null && longitude != null) {
-          coordinates.add(LatLng(latitude, longitude));
-        } else {
-          log("Invalid coordinate pair: $pair");
-        }
-      } else {
-        log("Invalid format for pair: $pair");
-      }
+  int getHouseType(String houseTypeSelectedValue) {
+    switch (houseTypeSelectedValue.toLowerCase()) {
+      case 'عمارة':
+        return 0;
+      case 'منزل خاص':
+        return 1;
+      case 'فيلا':
+        return 2;
+      default:
+        return -1; // Invalid house type
     }
+  }
 
-    return coordinates;
+  addNewAddress(BuildContext context) async {
+    var data = await assignAddressData();
+    loading.show;
+    await HourlyContractController.addNewAddress(body: data);
+    loading.hide;
+    if (context.mounted) {
+      context.pushNamed(AppRouter.selectAddressView);
+    }
   }
 }

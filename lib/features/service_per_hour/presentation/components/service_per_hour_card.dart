@@ -19,6 +19,7 @@ class ServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var test='https://imgs.search.brave.com/DsjJjGVxARMz72uT_-zKGxSnb4NDr5GvDqEA8l0ah-Q/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuZnJlZWltYWdl/cy5jb20vaW1hZ2Uv/cHJldmlld3MvZGRl/L21vdGlvbi1waWN0/dXJlLW1lZ2FwaG9u/ZS1wbmctNTY5Mzk1/My5wbmc_Zm10';
      return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -35,7 +36,7 @@ class ServiceCard extends StatelessWidget {
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   color: Colors.grey,
-                  image: DecorationImage(image: NetworkImage(service.iconUrl),fit: BoxFit.cover),
+                  image: DecorationImage(image: NetworkImage(service.iconUrl??test),fit: BoxFit.cover),
                   borderRadius: BorderRadius.circular(14)),
             ),
             const HorizontalSpacer(12),

@@ -16,7 +16,7 @@ class DioApiServices {
       InterceptorsWrapper(
         onRequest: (options, handler) async {
           String? token =
-              await SharedPrefHelper.getSecuredString(AppConstants.userToken);
+              await SharedPrefHelper.getSecuredString(AppConstants.tokenKey);
           if (token != null) {
             options.headers["Authorization"] = "Bearer $token";
           }

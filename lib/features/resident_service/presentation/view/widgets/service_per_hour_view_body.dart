@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
-import 'package:test1/features/select_address/presentation/view/select_address_widgets/address_card.dart';
 
 import '../../../../../core/AppRouter.dart';
+import '../../../../select_address/presentation/components/select_address_widgets/address_card.dart';
 
 class ResidentServiceBody extends StatefulWidget {
   const ResidentServiceBody({super.key});

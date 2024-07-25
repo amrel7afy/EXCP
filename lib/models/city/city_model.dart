@@ -1,16 +1,15 @@
-class CityModel {
-  final String key;
+class KeyValueModel {
+  final dynamic key;
   final String value;
+  final String? image;
 
-  CityModel({
-    required this.key,
-    required this.value,
-  });
+  KeyValueModel({required this.key, required this.value, this.image});
 
-  factory CityModel.fromJson(Map<String, dynamic> json) {
-    return CityModel(
+  factory KeyValueModel.fromJson(Map<String, dynamic> json) {
+    return KeyValueModel(
       key: json['key'],
       value: json['value'],
+      image: json['image'],
     );
   }
 
@@ -18,11 +17,12 @@ class CityModel {
     return {
       'key': key,
       'value': value,
+      'image': image,
     };
   }
 
   @override
   String toString() {
-    return 'ActiveCityModel {key: $key, value: $value}';
+    return 'ActiveCityModel {key: $key, value: $value, image: $image}';
   }
 }
