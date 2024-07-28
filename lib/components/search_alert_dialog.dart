@@ -8,14 +8,14 @@ import '../cubit/generic_cubit/generic_cubit.dart';
 
 class SearchableDropdownDialog<T> extends StatefulWidget {
   final List<String> items;
-  final void Function(T?) onChanged;
+
   final String searchHintText;
   final GenericCubit<String> searchCubit;
 
   const SearchableDropdownDialog({
     super.key,
     required this.items,
-    required this.onChanged,
+
     this.searchHintText = 'Search...',
     required this.searchCubit,
   });
@@ -61,42 +61,11 @@ class _SearchableDropdownDialogState<T>
           textDirection: AppConstants.appTextDirection,
           child: AlertDialog(
             title: filteredItems.length > 10
-                ? TextField(
-                    controller: searchController,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.black, width: 1.5),
-                          borderRadius: BorderRadius.circular(20)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.black, width: 1.5),
-                          borderRadius: BorderRadius.circular(20)),
-                      focusedErrorBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Colors.black, width: 1.5),
-                          borderRadius: BorderRadius.circular(20)),
-                      hintText: widget.searchHintText,
-                      prefixIcon: const Icon(Icons.search),
-                    ),
-                  )
+                ? buildSearchField()
                 : const VerticalSpacer(10),
             content: SizedBox(
               width: double.maxFinite,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: filteredItems.length,
-                itemBuilder: (context, index) {
-                  final item = filteredItems[index];
-                  return ListTile(
-                    title: Text(item),
-                    onTap: () {
-                      widget.searchCubit.update(item);
-                      Navigator.of(context).pop();
-                    },
-                  );
-                },
-              ),
+              child: buildListView(),
             ),
             actions: <Widget>[
               TextButton(
@@ -108,5 +77,44 @@ class _SearchableDropdownDialogState<T>
         );
       },
     );
+  }
+
+  ListView buildListView() {
+    return ListView.builder(
+              shrinkWrap: true,
+              itemCount: filteredItems.length,
+              itemBuilder: (context, index) {
+                final item = filteredItems[index];
+                return ListTile(
+                  title: Text(item),
+                  onTap: () {
+                    widget.searchCubit.update(item);
+                    Navigator.of(context).pop();
+                  },
+                );
+              },
+            );
+  }
+
+  TextField buildSearchField() {
+    return TextField(
+                  controller: searchController,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: 1.5),
+                        borderRadius: BorderRadius.circular(20)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: 1.5),
+                        borderRadius: BorderRadius.circular(20)),
+                    focusedErrorBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: 1.5),
+                        borderRadius: BorderRadius.circular(20)),
+                    hintText: widget.searchHintText,
+                    prefixIcon: const Icon(Icons.search),
+                  ),
+                );
   }
 }

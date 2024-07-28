@@ -41,16 +41,10 @@ class ReadOnlyDropdownFormField<T> extends StatefulWidget {
 
 class _ReadOnlyDropdownFormFieldState<T>
     extends State<ReadOnlyDropdownFormField<T>> {
-
-
   DesignYourPlanViewModel designYourPlanViewModel =
       DesignYourPlanViewModel.instance();
   String? errorText;
-@override
-  void dispose() {
 
-    super.dispose();
-  }
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GenericCubit<String>, GenericState<String>>(
@@ -58,7 +52,7 @@ class _ReadOnlyDropdownFormFieldState<T>
       builder: (context, state) {
         String? selected;
         if (state is GenericUpdate) {
-          selected = state.data??widget.hint;
+          selected = state.data ?? widget.hint;
         }
         return Directionality(
           textDirection: AppConstants.appTextDirection,
@@ -72,41 +66,8 @@ class _ReadOnlyDropdownFormFieldState<T>
                   Stack(
                     clipBehavior: Clip.none,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 16),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.black,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(selected.isNullOrEmpty()? widget.hint:selected!),
-                            const Icon(
-                              Icons.arrow_drop_down,
-                              size: 30,
-                              color: Colors.black,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                        top: -10,
-                        right: 10,
-                        child: Container(
-                          alignment: Alignment.center,
-                          color: Colors.white,
-                          padding: const EdgeInsets.only(left: 7, right: 7),
-                          child: Text(
-                            widget.labelText,
-                            style: MyTextStyles.font14Weight500,
-                          ),
-                        ),
-                      ),
+                      _buildRoundedContainer(selected),
+                      buildOverLabel(),
                     ],
                   ),
                   if (errorText != null)
@@ -126,6 +87,46 @@ class _ReadOnlyDropdownFormFieldState<T>
     );
   }
 
+  Positioned buildOverLabel() {
+    return Positioned(
+      top: -10,
+      right: 10,
+      child: Container(
+        alignment: Alignment.center,
+        color: Colors.white,
+        padding: const EdgeInsets.only(left: 7, right: 7),
+        child: Text(
+          widget.labelText,
+          style: MyTextStyles.font14Weight500,
+        ),
+      ),
+    );
+  }
+
+  Container _buildRoundedContainer(String? selected) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.black,
+          width: 1.5,
+        ),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(selected.isNullOrEmpty() ? widget.hint : selected!),
+          const Icon(
+            Icons.arrow_drop_down,
+            size: 30,
+            color: Colors.black,
+          ),
+        ],
+      ),
+    );
+  }
+
   void showSearchableDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -133,12 +134,6 @@ class _ReadOnlyDropdownFormFieldState<T>
         return SearchableDropdownDialog<T>(
           searchCubit: widget.cubit,
           items: widget.items,
-          onChanged: (value) {
-            widget.text = value.toString();
-            setState(() {
-              errorText = widget.validator(widget.text);
-            });
-          },
           searchHintText: widget.searchHintText,
         );
       },
