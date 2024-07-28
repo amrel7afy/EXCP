@@ -1,11 +1,7 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test1/controller/steps/steps_controller.dart';
-import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
-import 'package:test1/features/home/presentation/home_screen.dart';
 import 'package:test1/features/service_per_hour/presentation/components/loading_content.dart';
 import 'package:test1/features/service_per_hour/presentation/service_per_hour_view_model.dart';
 import 'package:test1/models/service_per_hour/service_class.dart';
@@ -18,7 +14,6 @@ import '../../../core/theming/styles.dart';
 import '../../../core/widgets/custom_app_bar.dart';
 import '../../../core/widgets/show_alert_dialog.dart';
 import '../../../cubit/generic_cubit/generic_state.dart';
-import '../../../utility/repository/repository.dart';
 import 'components/service_alert_dialog_content.dart';
 import 'components/service_per_hour_card.dart';
 
@@ -30,7 +25,7 @@ class ServicePerHourScreen extends StatefulWidget {
 }
 
 class _ServicePerHourScreenState extends State<ServicePerHourScreen> {
-  ServicePerHourViewModel servicePerHourViewModel = ServicePerHourViewModel.instance();
+  ServicePerHourViewModel servicePerHourViewModel = ServicePerHourViewModel();
 
   @override
   void initState() {
@@ -47,7 +42,7 @@ class _ServicePerHourScreenState extends State<ServicePerHourScreen> {
           child: Scaffold(
             appBar: const CustomAppBar(
               title: 'اختر الخدمة',
-              leading: true,
+              disableDrawer: true,
             ),
             body: SafeArea(
                 child: Padding(

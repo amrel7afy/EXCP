@@ -48,9 +48,9 @@ class NotAccessibleAddressCard extends StatelessWidget {
             );
           },
           child: Container(
-            height: 115.h,
+
             width: getWidth(context),
-            padding: const EdgeInsets.only(left: 22, right: 22, top: 23),
+            padding: const EdgeInsets.only(left: 22, right: 22, top: 23,bottom: 20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
               color: MyColors.kAppBarBackGroundColor,

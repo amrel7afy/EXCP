@@ -1,12 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/theming/styles.dart';
-import 'package:test1/cubit/generic_cubit/generic_state.dart';
 
-import '../../../../cubit/generic_cubit/generic_cubit.dart';
 import '../../../../models/service_per_hour/service_class.dart';
 
 class ServiceCard extends StatelessWidget {
@@ -24,7 +21,7 @@ class ServiceCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: 365.w,
-        height: 70.h,
+
         padding: EdgeInsets.all(7.w),
         decoration: BoxDecoration(
             border: Border.all(), borderRadius: BorderRadius.circular(12)),

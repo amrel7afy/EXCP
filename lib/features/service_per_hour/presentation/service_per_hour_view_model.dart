@@ -8,14 +8,7 @@ import '../../../cubit/loader_cubit/loader_cubit.dart';
 import '../../../utility/repository/repository.dart';
 
 class ServicePerHourViewModel {
-  ServicePerHourViewModel._internal();
 
-  static final ServicePerHourViewModel _instance =
-      ServicePerHourViewModel._internal();
-
-  factory ServicePerHourViewModel.instance() {
-    return _instance;
-  }
 
   GenericCubit<List<ServiceModel>> serviceCubit =
       GenericCubit<List<ServiceModel>>();

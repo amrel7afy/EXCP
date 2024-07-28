@@ -7,15 +7,7 @@ import '../../../core/helper/app_regex.dart';
 import '../data/model/sign_up_request.dart';
 
 class SignUpViewModel {
-  SignUpViewModel._();
 
-  // Static instance
-  static final SignUpViewModel _instance = SignUpViewModel._();
-
-  // Factory constructor to return the same instance
-  factory SignUpViewModel.instance() {
-    return _instance;
-  }
   final signUpFormKey = GlobalKey<FormState>();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController middleNameController = TextEditingController();

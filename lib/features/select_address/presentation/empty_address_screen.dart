@@ -11,11 +11,11 @@ class EmptyAddressScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
-      child:  Scaffold(
+      child:  const Scaffold(
         appBar: CustomAppBar(
-          title: 'اختيار العنوان', leadingPressed: () {  },
+          title: 'اختيار العنوان',
         ),
-        body: const SafeArea(child: EmptyAddressBody()),
+        body: SafeArea(child: EmptyAddressBody()),
       ),
     );
   }

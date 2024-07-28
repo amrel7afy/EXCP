@@ -21,9 +21,7 @@ class _ExpansionListViewAMState extends State<ExpansionListViewAM> {
     return BlocBuilder<GenericCubit, GenericState>(
       bloc: selectYourPlanViewModel.genericCubit,
       builder: (context, state) {
-
           return  FixedPackagesAM();
-
       },
     );
   }

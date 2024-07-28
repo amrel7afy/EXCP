@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/contraction/presnetation/view/widgets/contract_success_view_widgets/contract_success_view_body.dart';
 
 import '../../../../../core/constants/constants.dart';
@@ -12,14 +11,12 @@ class ContractSuccessView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
-      child: Scaffold(
+      child: const Scaffold(
         appBar: CustomAppBar(
           title: 'نجاح التعاقد',
-          leadingPressed: () {
-            context.pop();
-          },
+
         ),
-        body: const SafeArea(child: ContractSuccessViewBody()),
+        body: SafeArea(child: ContractSuccessViewBody()),
       ),
     );
   }

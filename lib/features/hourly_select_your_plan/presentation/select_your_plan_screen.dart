@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test1/components/widgets/loader.dart';
 import 'package:test1/core/constants/constants.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
-import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/styles.dart';
-import 'package:test1/features/hourly_select_your_plan/presentation/components/plan_duration_list_view.dart';
 import 'package:test1/features/hourly_select_your_plan/presentation/components/select_your_plan_tab_bar.dart';
 import 'package:test1/features/hourly_select_your_plan/presentation/select_your_plan_view_model.dart';
 
@@ -25,8 +23,7 @@ class SelectFixedPlanScreen extends StatefulWidget {
 
 class _SelectFixedPlanScreenState extends State<SelectFixedPlanScreen>
     with SingleTickerProviderStateMixin {
-  SelectYourPlanViewModel selectYourPlanViewModel =
-      SelectYourPlanViewModel.instance();
+  SelectYourPlanViewModel selectYourPlanViewModel = SelectYourPlanViewModel.instance();
 
   @override
   void initState() {
@@ -40,66 +37,40 @@ class _SelectFixedPlanScreenState extends State<SelectFixedPlanScreen>
   Widget build(BuildContext context) {
     return Stack(
       children: [
-
         Directionality(
           textDirection: AppConstants.appTextDirection,
           child: Scaffold(
-            appBar: CustomAppBar(
+            appBar: const CustomAppBar(
               title: 'اختيار باقتك',
-              leadingPressed: () {
-                context.pop();
-              },
             ),
             body: SafeArea(
-              child: Column(
-                children: [
-                  const VerticalSpacer(24),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: AppConstants.k30ViewPadding),
-                    child: Text(
-                      "الجنسية",
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const VerticalSpacer(24),
+                    const VerticalSpacer(12),
+                    Text(
+                      "الفترة",
                       style: MyTextStyles.font12Weight500
                           .copyWith(color: Colors.black),
                     ),
-                  ),
-                  const VerticalSpacer(12),
-                  const NationalityChipsListView(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: AppConstants.k30ViewPadding),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const VerticalSpacer(12),
-                        Text(
-                          "الفترة",
-                          style: MyTextStyles.font12Weight500
-                              .copyWith(color: Colors.black),
-                        ),
-                        SelectYourPlanTabBar(
-                          tabController: selectYourPlanViewModel.tabController,
-                        ),
-                        const VerticalSpacer(12),
-                        SizedBox(
-                          height: 400,
-                          child: TabBarView(
-                              controller: selectYourPlanViewModel.tabController,
-                              children: const [
-                                ExpansionListViewAM(),
-                                ExpansionListViewPM(),
-                              ]),
-                        ),
-                      ],
+                    SelectYourPlanTabBar(
+                      tabController: selectYourPlanViewModel.tabController,
                     ),
-                  ),
-                  /*  const VerticalSpacer(12),
-                      const PlanDurationChipsListView(),*/
-                  const VerticalSpacer(17),
-
-                  // const ExpansionListView(),
-                  const VerticalSpacer(70),
-                ],
+                    const VerticalSpacer(12),
+                    Expanded(
+                      child: TabBarView(
+                        controller: selectYourPlanViewModel.tabController,
+                        children: const [
+                          ExpansionListViewAM(),
+                          ExpansionListViewPM(),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             floatingActionButton: const SelectYourPlanFAB(),

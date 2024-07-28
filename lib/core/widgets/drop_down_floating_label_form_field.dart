@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/core/theming/my_colors.dart';
 import 'package:test1/core/theming/styles.dart';
 import '../../components/search_alert_dialog.dart';
@@ -90,12 +89,7 @@ class MyDropdownFormField<T> extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) {
-        return SearchableDropdownDialog<T>(
-          items: items,
-          itemBuilder: itemBuilder,
-          onChanged: onChanged,
-          searchHintText: searchHintText,
-        );
+        return Container();
       },
     );
   }

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:test1/models/resource_group/resource_group_model.dart';
-import 'package:test1/models/resource_group/resource_group_model.dart';
 import 'package:test1/services/app_service.dart';
 import 'package:test1/utility/repository/repository.dart';
 

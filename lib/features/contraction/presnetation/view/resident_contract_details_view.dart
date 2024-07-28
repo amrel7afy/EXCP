@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/contraction/presnetation/view/widgets/resident_contract_details_widgets/contract_details_body.dart';
 
 import '../../../../core/constants/constants.dart';
@@ -13,14 +12,12 @@ class ResidentContractDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
-      child: Scaffold(
+      child: const Scaffold(
         appBar: CustomAppBar(
           title: 'تفاصيل العقد',
-          leadingPressed: () {
-            context.pop();
-          },
+
         ),
-        body: const SafeArea(child: ResidentContractDetailsViewBody()),
+        body: SafeArea(child: ResidentContractDetailsViewBody()),
       ),
     );
   }

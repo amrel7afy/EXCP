@@ -38,6 +38,7 @@ class _CollapseCardState extends State<CollapseCard> {
         GestureDetector(
           onTap: _toggleExpand,
           child: Container(
+            margin: EdgeInsets.symmetric(vertical: 8),
             decoration: BoxDecoration(
               color: Colors.grey[300],
               borderRadius: BorderRadius.circular(10),

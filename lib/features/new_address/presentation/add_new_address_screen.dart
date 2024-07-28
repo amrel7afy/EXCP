@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
 import 'package:test1/core/helper/extensions.dart';
-import 'package:test1/core/theming/styles.dart';
 import 'package:test1/core/widgets/drop_down_floating_label_form_field.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import 'package:test1/cubit/generic_cubit/generic_state.dart';
@@ -14,7 +13,6 @@ import 'package:test1/models/city/city_model.dart';
 
 import '../../../../components/widgets/loader.dart';
 import '../../../../core/widgets/custom_app_bar.dart';
-import '../../../../core/widgets/custom_button.dart';
 import '../../../core/AppRouter.dart';
 import '../../../core/constants/constants.dart';
 import '../../shared/my_text_form_field.dart';
@@ -27,7 +25,7 @@ class NewAddressView extends StatefulWidget {
 }
 
 class _NewAddressViewState extends State<NewAddressView> {
-  NewAddressViewModel newAddressViewModel = NewAddressViewModel.instance();
+  NewAddressViewModel newAddressViewModel = NewAddressViewModel();
 
   @override
   void initState() {

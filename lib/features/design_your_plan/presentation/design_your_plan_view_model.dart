@@ -1,53 +1,46 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:test1/core/constants/constants.dart';
+import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
+import 'package:test1/cubit/loader_cubit/loader_cubit.dart';
+
 import '../../../controller/hourly_contract/hourly_contract_controller.dart';
 import '../../../controller/resource_group/resource_group_controller.dart';
 
 class DesignYourPlanViewModel {
   DesignYourPlanViewModel._();
 
+  // Static instance
   static final DesignYourPlanViewModel _instance = DesignYourPlanViewModel._();
 
+  // Factory constructor to return the same instance
   factory DesignYourPlanViewModel.instance() {
     return _instance;
   }
 
-  String? nationalitySelected;
-  String? numberOfWorkersSelected;
-  String? contractDurationSelected;
-  String? durationSelected;
-  String? intervalsSelected;
-  String? numberOfVisitsSelected;
-
-  TextEditingController nationalityController = TextEditingController();
-  TextEditingController numberOfWorkersController = TextEditingController();
-  TextEditingController contractDurationController = TextEditingController();
-  TextEditingController durationController = TextEditingController();
-  TextEditingController intervalsController = TextEditingController();
-  TextEditingController numberOfVisitsController = TextEditingController();
   TextEditingController dateOfFirstVisitController = TextEditingController();
 
-  clearControllers() {
-    nationalityController.clear();
-    numberOfWorkersController.clear();
-    contractDurationController.clear();
-    durationController.clear();
-    intervalsController.clear();
-    numberOfVisitsController.clear();
-    genericCubit.update();
-  }
-
+  String nationalityHint = 'اختر الجنسية';
   List<String> nationality = [];
   List<String> numberOfWorkers = [];
   List<String> contractDuration = [];
-  List<String> duration = [];
+  List<String> shifts = [];
   List<String> intervals = [];
   List<String> numberOfVisits = [];
 
+  GenericCubit<String> nationalityCubit = GenericCubit<String>(data: AppConstants.initState);
+  GenericCubit<String> numberOfWorkersCubit = GenericCubit<String>(data: AppConstants.initState);
+  GenericCubit<String> contractDurationCubit = GenericCubit<String>(data: AppConstants.initState);
+  GenericCubit<String> shiftsCubit = GenericCubit<String>(data: AppConstants.initState);
+  GenericCubit<String> intervalsCubit = GenericCubit<String>(data: AppConstants.initState);
+  GenericCubit<String> numberOfVisitsCubit = GenericCubit<String>(data: AppConstants.initState);
+
   GenericCubit genericCubit = GenericCubit();
+  Loading loading=Loading.instance();
 
   fetchDataOfFields() async {
+    loading.show;
     List results = await Future.wait([
       ResourceGroupController.fetchGetResourceGroupsByService(),
       HourlyContractController.fetchKeyAndValueData(action: 'NumOfWorkers'),
@@ -57,49 +50,59 @@ class DesignYourPlanViewModel {
       HourlyContractController.fetchKeyAndValueData(action: 'NumOfHours'),
     ]);
 
-    nationality =
-        List<String>.from(results[0].map((item) => item.value).toList());
-    numberOfWorkers =
-        List<String>.from(results[1].map((item) => item.value).toList());
-    contractDuration =
-        List<String>.from(results[2].map((item) => item.value).toList());
-    duration = List<String>.from(results[3].map((item) => item.value).toList());
-    intervals =
-        List<String>.from(results[4].map((item) => item.value).toList());
-    numberOfVisits =
-        List<String>.from(results[5].map((item) => item.value).toList());
-
+    nationality = List<String>.from(results[0].map((item) => item.value).toList());
+    numberOfWorkers = List<String>.from(results[1].map((item) => item.value).toList());
+    contractDuration = List<String>.from(results[2].map((item) => item.value).toList());
+    shifts = List<String>.from(results[3].map((item) => item.value).toList());
+    intervals = List<String>.from(results[4].map((item) => item.value).toList());
+    numberOfVisits = List<String>.from(results[5].map((item) => item.value).toList());
+    loading.hide;
     genericCubit.update();
   }
 
-  void updateNationalitySelected(String? newVal) {
-    nationalityController.text = newVal ?? '';
+
+
+  void clearFields() {
+    nationalityCubit.update(AppConstants.initState);
+    numberOfWorkersCubit.update(AppConstants.initState);
+    contractDurationCubit.update(AppConstants.initState);
+    shiftsCubit.update(AppConstants.initState);
+    intervalsCubit.update(AppConstants.initState);
+    numberOfVisitsCubit.update(AppConstants.initState);
+    dateOfFirstVisitController.clear();
   }
 
-  void updateNumberOfWorkersSelected(String? newVal) {
-    numberOfWorkersController.text = newVal ?? '';
-  }
 
-  void updateContractDurationSelected(String? newVal) {
-    contractDurationController.text = newVal ?? '';
-  }
-
-  void updateDurationSelected(String? newVal) {
-    durationController.text = newVal ?? '';
-  }
-
-  void updateIntervalsSelected(String? newVal) {
-    intervalsController.text = newVal ?? '';
-  }
-
-  void updateNumberOfVisitsSelected(String? newVal) {
-    numberOfVisitsController.text = newVal ?? '';
-  }
-
-  String? validateDropdown(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'هذا الحقل مطلوب';
+  void validateFields() {
+    if (nationalityCubit.state.data.isNullOrEmpty() ||
+        nationalityCubit.state.data == AppConstants.initState) {
+      nationalityCubit.update(AppConstants.notValidatedState);
     }
-    return null;
+
+    if (numberOfWorkersCubit.state.data.isNullOrEmpty() ||
+        numberOfWorkersCubit.state.data == AppConstants.initState) {
+      numberOfWorkersCubit.update(AppConstants.notValidatedState);
+    }
+
+    if (contractDurationCubit.state.data.isNullOrEmpty() ||
+        contractDurationCubit.state.data == AppConstants.initState) {
+      contractDurationCubit.update(AppConstants.notValidatedState);
+    }
+
+    if (shiftsCubit.state.data.isNullOrEmpty() ||
+        shiftsCubit.state.data == AppConstants.initState) {
+      shiftsCubit.update(AppConstants.notValidatedState);
+    }
+
+    if (intervalsCubit.state.data.isNullOrEmpty() ||
+        intervalsCubit.state.data == AppConstants.initState) {
+      intervalsCubit.update(AppConstants.notValidatedState);
+    }
+
+    if (numberOfVisitsCubit.state.data.isNullOrEmpty() ||
+        numberOfVisitsCubit.state.data == AppConstants.initState) {
+      numberOfVisitsCubit.update(AppConstants.notValidatedState);
+    }
   }
 }
+

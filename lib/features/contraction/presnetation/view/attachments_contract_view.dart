@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/features/contraction/presnetation/view/widgets/attachment_contract_view_widgets/attachment_contract_view_body.dart';
 
 import '../../../../../../core/constants/constants.dart';
@@ -12,14 +11,12 @@ class AttachmentsContractView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
-      child: Scaffold(
+      child: const Scaffold(
         appBar: CustomAppBar(
           title: 'مرفقات العقد',
-          leadingPressed: () {
-            context.pop();
-          },
+
         ),
-        body: const SafeArea(child: AttachmentsContractViewBody()),
+        body: SafeArea(child: AttachmentsContractViewBody()),
       ),
     );
   }

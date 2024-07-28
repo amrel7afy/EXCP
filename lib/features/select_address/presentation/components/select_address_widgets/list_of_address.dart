@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test1/core/helper/extensions.dart';
-import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import 'package:test1/features/select_address/presentation/select_address_view_model.dart';
 
-import '../../../../../core/AppRouter.dart';
-import '../../../../../core/constants/constants.dart';
 import '../../../../../cubit/generic_cubit/generic_state.dart';
 import 'address_card.dart';
 

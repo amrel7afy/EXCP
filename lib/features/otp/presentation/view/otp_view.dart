@@ -14,7 +14,7 @@ class OTPVerifyView extends StatelessWidget {
       child: const Scaffold(
         appBar: CustomAppBar(
           title: 'اكتب كود التأكيد',
-       leading: true,
+       disableDrawer: true,
         ),
         body: SafeArea(child: OTPVerifyViewBody()),
 

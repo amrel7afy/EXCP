@@ -1,33 +1,22 @@
-import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:test1/components/step_view_model.dart';
 import 'package:test1/controller/city/city_controller.dart';
 import 'package:test1/controller/hourly_contract/hourly_contract_controller.dart';
-import 'package:test1/core/helper/cache_helper.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/models/authentication/login_success_models/user_data.dart';
 import 'package:test1/models/city/city_model.dart';
 import 'package:test1/utility/repository/repository.dart';
 
 import '../../../core/AppRouter.dart';
-import '../../../core/constants/constants.dart';
 import '../../../cubit/generic_cubit/generic_cubit.dart';
 import '../../../cubit/loader_cubit/loader_cubit.dart';
 import '../data/model.dart';
 import 'google_maps_view_model.dart';
 
 class NewAddressViewModel {
-  NewAddressViewModel._();
 
-  // Static instance
-  static final NewAddressViewModel _instance = NewAddressViewModel._();
-
-  // Factory constructor to return the same instance
-  factory NewAddressViewModel.instance() {
-    return _instance;
-  }
 
   Loading loading = Loading.instance();
 

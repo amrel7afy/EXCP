@@ -12,7 +12,6 @@ import '../../../../../../core/constants/constants.dart';
 import '../../../../../../core/constants/vertical_and_horizontal_space.dart';
 import '../../../../../../core/theming/my_colors.dart';
 import '../../../../../../core/theming/styles.dart';
-import '../../../../../../core/widgets/custom_button.dart';
 import '../../../../../select_your_plan_resident/presentation/view_model/choose_worker_cubit/choose_worker_cubit.dart';
 
 class ResidentContractDetailsViewBody extends StatefulWidget {

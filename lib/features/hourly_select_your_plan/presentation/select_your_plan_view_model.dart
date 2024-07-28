@@ -56,10 +56,10 @@ class SelectYourPlanViewModel {
 
   void filterPackages() {
     fixedPackagesAM = allFixedPackages.where((package) {
-      return package.visitShiftName == 'صباحي';
+      return package.visitShiftName == 'صباحي'||package.visitShiftName =='الصباحية';
     }).toList();
     fixedPackagesPM = allFixedPackages.where((package) {
-      return package.visitShiftName == 'مسائي';
+      return package.visitShiftName == 'مسائي'||package.visitShiftName =='المسائية';
     }).toList();
   }
 

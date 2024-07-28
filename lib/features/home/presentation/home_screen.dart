@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test1/cubit/loader_cubit/loader_cubit.dart';
-import 'package:test1/cubit/loader_cubit/loader_cubit.dart';
-import 'package:test1/cubit/loader_cubit/loader_state.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:test1/core/AppRouter.dart';
+import 'package:test1/core/helper/extensions.dart';
+import 'package:test1/features/home/presentation/components/home_service_card.dart';
 import 'package:test1/features/home/presentation/home_view_model.dart';
+
+import '../../../components/widgets/custom_drawer.dart';
 import '../../../components/widgets/loader.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/constants/vertical_and_horizontal_space.dart';
 import '../../../core/theming/styles.dart';
 import '../../../core/widgets/custom_app_bar.dart';
 import 'components/custom_carousel.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:test1/core/AppRouter.dart';
-import 'package:test1/core/helper/extensions.dart';
-import 'package:test1/features/home/presentation/components/home_service_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -36,11 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Directionality(
       textDirection: AppConstants.appTextDirection,
       child: Scaffold(
-        appBar: CustomAppBar(
+        appBar: const CustomAppBar(
           title: 'مرحباً بك عميلنا العزيز',
-          leading: true,
-          leadingPressed: () {},
         ),
+        drawer: const CustomDrawer(),
         body: Stack(
           children: [
             const Loader(),
