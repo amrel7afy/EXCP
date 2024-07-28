@@ -80,8 +80,8 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
                             ReadOnlyDropdownFormField(
                                 hint: 'اختر الفترات',
                                 labelText: 'الفترات',
-                                items: designYourPlanViewModel.duration,
-                                cubit: designYourPlanViewModel.durationCubit),
+                                items: designYourPlanViewModel.shifts,
+                                cubit: designYourPlanViewModel.shiftsCubit),
                             const AppointmentDetails(),
                             const VerticalSpacer(15),
                             ReadOnlyDropdownFormField(

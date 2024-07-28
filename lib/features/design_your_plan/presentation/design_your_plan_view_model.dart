@@ -25,14 +25,14 @@ class DesignYourPlanViewModel {
   List<String> nationality = [];
   List<String> numberOfWorkers = [];
   List<String> contractDuration = [];
-  List<String> duration = [];
+  List<String> shifts = [];
   List<String> intervals = [];
   List<String> numberOfVisits = [];
 
   GenericCubit<String> nationalityCubit = GenericCubit<String>(data: AppConstants.initState);
   GenericCubit<String> numberOfWorkersCubit = GenericCubit<String>(data: AppConstants.initState);
   GenericCubit<String> contractDurationCubit = GenericCubit<String>(data: AppConstants.initState);
-  GenericCubit<String> durationCubit = GenericCubit<String>(data: AppConstants.initState);
+  GenericCubit<String> shiftsCubit = GenericCubit<String>(data: AppConstants.initState);
   GenericCubit<String> intervalsCubit = GenericCubit<String>(data: AppConstants.initState);
   GenericCubit<String> numberOfVisitsCubit = GenericCubit<String>(data: AppConstants.initState);
 
@@ -53,7 +53,7 @@ class DesignYourPlanViewModel {
     nationality = List<String>.from(results[0].map((item) => item.value).toList());
     numberOfWorkers = List<String>.from(results[1].map((item) => item.value).toList());
     contractDuration = List<String>.from(results[2].map((item) => item.value).toList());
-    duration = List<String>.from(results[3].map((item) => item.value).toList());
+    shifts = List<String>.from(results[3].map((item) => item.value).toList());
     intervals = List<String>.from(results[4].map((item) => item.value).toList());
     numberOfVisits = List<String>.from(results[5].map((item) => item.value).toList());
     loading.hide;
@@ -66,7 +66,7 @@ class DesignYourPlanViewModel {
     nationalityCubit.update(AppConstants.initState);
     numberOfWorkersCubit.update(AppConstants.initState);
     contractDurationCubit.update(AppConstants.initState);
-    durationCubit.update(AppConstants.initState);
+    shiftsCubit.update(AppConstants.initState);
     intervalsCubit.update(AppConstants.initState);
     numberOfVisitsCubit.update(AppConstants.initState);
     dateOfFirstVisitController.clear();
@@ -89,9 +89,9 @@ class DesignYourPlanViewModel {
       contractDurationCubit.update(AppConstants.notValidatedState);
     }
 
-    if (durationCubit.state.data.isNullOrEmpty() ||
-        durationCubit.state.data == AppConstants.initState) {
-      durationCubit.update(AppConstants.notValidatedState);
+    if (shiftsCubit.state.data.isNullOrEmpty() ||
+        shiftsCubit.state.data == AppConstants.initState) {
+      shiftsCubit.update(AppConstants.notValidatedState);
     }
 
     if (intervalsCubit.state.data.isNullOrEmpty() ||
