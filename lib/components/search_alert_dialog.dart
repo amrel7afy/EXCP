@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/constants/vertical_and_horizontal_space.dart';
+import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/cubit/generic_cubit/generic_state.dart';
 
 import '../core/constants/constants.dart';
@@ -15,7 +16,6 @@ class SearchableDropdownDialog<T> extends StatefulWidget {
   const SearchableDropdownDialog({
     super.key,
     required this.items,
-
     this.searchHintText = 'Search...',
     required this.searchCubit,
   });
@@ -29,6 +29,7 @@ class _SearchableDropdownDialogState<T>
     extends State<SearchableDropdownDialog<T>> {
   late List<String> filteredItems;
   TextEditingController searchController = TextEditingController();
+  GenericCubit state = GenericCubit();
 
   @override
   void initState() {
@@ -49,13 +50,14 @@ class _SearchableDropdownDialogState<T>
         .where((item) =>
             item.toLowerCase().contains(searchController.text.toLowerCase()))
         .toList();
-    widget.searchCubit.update();
+
+    state.update();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GenericCubit, GenericState>(
-      bloc: widget.searchCubit,
+      bloc: state,
       builder: (context, state) {
         return Directionality(
           textDirection: AppConstants.appTextDirection,
@@ -81,40 +83,37 @@ class _SearchableDropdownDialogState<T>
 
   ListView buildListView() {
     return ListView.builder(
-              shrinkWrap: true,
-              itemCount: filteredItems.length,
-              itemBuilder: (context, index) {
-                final item = filteredItems[index];
-                return ListTile(
-                  title: Text(item),
-                  onTap: () {
-                    widget.searchCubit.update(item);
-                    Navigator.of(context).pop();
-                  },
-                );
-              },
-            );
+      shrinkWrap: true,
+      itemCount: filteredItems.length,
+      itemBuilder: (context, index) {
+        final item = filteredItems[index];
+        return ListTile(
+          title: Text(item),
+          onTap: () {
+            widget.searchCubit.update(item);
+            Navigator.of(context).pop();
+          },
+        );
+      },
+    );
   }
 
   TextField buildSearchField() {
     return TextField(
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.black, width: 1.5),
-                        borderRadius: BorderRadius.circular(20)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.black, width: 1.5),
-                        borderRadius: BorderRadius.circular(20)),
-                    focusedErrorBorder: OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.black, width: 1.5),
-                        borderRadius: BorderRadius.circular(20)),
-                    hintText: widget.searchHintText,
-                    prefixIcon: const Icon(Icons.search),
-                  ),
-                );
+      controller: searchController,
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.black, width: 1.5),
+            borderRadius: BorderRadius.circular(20)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.black, width: 1.5),
+            borderRadius: BorderRadius.circular(20)),
+        focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.black, width: 1.5),
+            borderRadius: BorderRadius.circular(20)),
+        hintText: widget.searchHintText,
+        prefixIcon: const Icon(Icons.search),
+      ),
+    );
   }
 }

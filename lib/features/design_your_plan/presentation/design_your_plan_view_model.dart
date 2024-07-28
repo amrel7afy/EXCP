@@ -36,12 +36,6 @@ class DesignYourPlanViewModel {
   GenericCubit<String> intervalsCubit = GenericCubit<String>(data: AppConstants.initState);
   GenericCubit<String> numberOfVisitsCubit = GenericCubit<String>(data: AppConstants.initState);
 
-  GenericCubit<bool> nationalityBorderCubit = GenericCubit<bool>(data: true);
-  GenericCubit<bool> numberOfWorkersBorderCubit = GenericCubit<bool>(data: true);
-  GenericCubit<bool> contractDurationBorderCubit = GenericCubit<bool>(data: true);
-  GenericCubit<bool> durationBorderCubit = GenericCubit<bool>(data: true);
-  GenericCubit<bool> intervalsBorderCubit = GenericCubit<bool>(data: true);
-  GenericCubit<bool> numberOfVisitsBorderCubit = GenericCubit<bool>(data: true);
   GenericCubit genericCubit = GenericCubit();
   Loading loading=Loading.instance();
 
