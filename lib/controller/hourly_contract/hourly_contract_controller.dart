@@ -52,6 +52,7 @@ class HourlyContractController {
           '/api/HourlyContract/FixedPackage?selectedPricingId=$selectedHourlyPricingId&stepId=${Repository.stepIdFromFirstStep}',
       body: null,
     );
+    return result!=null?StepModel.fromJson(jsonDecode(result)):null;
   }
 
   static fetchKeyAndValueData({required String action}) async {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
 import 'package:test1/cubit/generic_cubit/generic_state.dart';
 import 'package:test1/features/design_your_plan/presentation/design_your_plan_view_model.dart';
@@ -40,10 +41,16 @@ class ReadOnlyDropdownFormField<T> extends StatefulWidget {
 
 class _ReadOnlyDropdownFormFieldState<T>
     extends State<ReadOnlyDropdownFormField<T>> {
+
+
   DesignYourPlanViewModel designYourPlanViewModel =
       DesignYourPlanViewModel.instance();
   String? errorText;
+@override
+  void dispose() {
 
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GenericCubit<String>, GenericState<String>>(
@@ -51,7 +58,7 @@ class _ReadOnlyDropdownFormFieldState<T>
       builder: (context, state) {
         String? selected;
         if (state is GenericUpdate) {
-          selected = state.data??"";
+          selected = state.data??widget.hint;
         }
         return Directionality(
           textDirection: AppConstants.appTextDirection,
@@ -78,7 +85,7 @@ class _ReadOnlyDropdownFormFieldState<T>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(selected ?? widget.hint),
+                            Text(selected.isNullOrEmpty()? widget.hint:selected!),
                             const Icon(
                               Icons.arrow_drop_down,
                               size: 30,

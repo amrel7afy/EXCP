@@ -32,7 +32,7 @@ class _DesignYourOfferViewState extends State<DesignYourOfferView> {
 
   @override
   void initState() {
-    //designYourPlanViewModel.clearControllers();
+    designYourPlanViewModel.clearFields();
     designYourPlanViewModel.fetchDataOfFields();
     super.initState();
   }

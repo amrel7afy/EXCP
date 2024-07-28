@@ -20,11 +20,6 @@ class DesignYourPlanViewModel {
 
   TextEditingController dateOfFirstVisitController = TextEditingController();
 
-//for border handling
-  LabelBorderCubit labelBorderCubit = LabelBorderCubit();
-
-
-
 
   List<String> nationality = [];
   List<String> numberOfWorkers = [];
@@ -72,5 +67,14 @@ class DesignYourPlanViewModel {
       return 'هذا الحقل مطلوب';
     }
     return null;
+  }
+  void clearFields() {
+    nationalityCubit.update('');
+    numberOfWorkersCubit.update('');
+    contractDurationCubit.update('');
+    durationCubit.update('');
+    intervalsCubit.update('');
+    numberOfVisitsCubit.update('');
+    dateOfFirstVisitController.clear();
   }
 }
