@@ -60,7 +60,7 @@ class _SearchableDropdownDialogState<T>
         return Directionality(
           textDirection: AppConstants.appTextDirection,
           child: AlertDialog(
-            title: filteredItems.length > 10
+            title: widget.items.length > 10
                 ? buildSearchField()
                 : const VerticalSpacer(10),
             content: SizedBox(

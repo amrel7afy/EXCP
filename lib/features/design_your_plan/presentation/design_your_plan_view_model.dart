@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:test1/core/constants/constants.dart';
 import 'package:test1/core/helper/extensions.dart';
 import 'package:test1/cubit/generic_cubit/generic_cubit.dart';
+import 'package:test1/cubit/loader_cubit/loader_cubit.dart';
 
 import '../../../controller/hourly_contract/hourly_contract_controller.dart';
 import '../../../controller/resource_group/resource_group_controller.dart';
@@ -42,8 +43,10 @@ class DesignYourPlanViewModel {
   GenericCubit<bool> intervalsBorderCubit = GenericCubit<bool>(data: true);
   GenericCubit<bool> numberOfVisitsBorderCubit = GenericCubit<bool>(data: true);
   GenericCubit genericCubit = GenericCubit();
+  Loading loading=Loading.instance();
 
   fetchDataOfFields() async {
+    loading.show;
     List results = await Future.wait([
       ResourceGroupController.fetchGetResourceGroupsByService(),
       HourlyContractController.fetchKeyAndValueData(action: 'NumOfWorkers'),
@@ -59,16 +62,11 @@ class DesignYourPlanViewModel {
     duration = List<String>.from(results[3].map((item) => item.value).toList());
     intervals = List<String>.from(results[4].map((item) => item.value).toList());
     numberOfVisits = List<String>.from(results[5].map((item) => item.value).toList());
-
+    loading.hide;
     genericCubit.update();
   }
 
-  String? validateDropdown(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'هذا الحقل مطلوب';
-    }
-    return null;
-  }
+
 
   void clearFields() {
     nationalityCubit.update(AppConstants.initState);
@@ -79,6 +77,7 @@ class DesignYourPlanViewModel {
     numberOfVisitsCubit.update(AppConstants.initState);
     dateOfFirstVisitController.clear();
   }
+
 
   void validateFields() {
     if (nationalityCubit.state.data.isNullOrEmpty() ||

@@ -18,7 +18,7 @@ class ReadOnlyDropdownFormField<T> extends StatefulWidget {
   final double? padding;
   final String hint;
   final TextStyle? hintStyle;
-  final String? Function(String? value) validator;
+
   final List<String> items;
 
   final String searchHintText;
@@ -27,7 +27,7 @@ class ReadOnlyDropdownFormField<T> extends StatefulWidget {
     super.key,
     required this.labelText,
     this.padding,
-    required this.validator,
+
     required this.hint,
     this.hintStyle,
     required this.items,
