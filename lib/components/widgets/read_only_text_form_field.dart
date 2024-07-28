@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test1/core/helper/extensions.dart';
@@ -48,43 +50,47 @@ class _ReadOnlyDropdownFormFieldState<T>
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GenericCubit<String>, GenericState<String>>(
-      bloc: widget.cubit,
-      builder: (context, state) {
-        String? selected;
-        if (state is GenericUpdate) {
-          selected = state.data ?? widget.hint;
-        }
-        return Directionality(
-          textDirection: AppConstants.appTextDirection,
-          child: Padding(
-            padding: EdgeInsets.only(bottom: widget.padding ?? 15.0),
-            child: GestureDetector(
-              onTap: () => showSearchableDialog(context),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      _buildRoundedContainer(selected),
-                      buildOverLabel(),
-                    ],
-                  ),
-                  if (errorText != null)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: Text(
-                        errorText!,
-                        style: const TextStyle(color: Colors.red, fontSize: 12),
-                      ),
+        bloc: widget.cubit,
+        builder: (context, state) {
+          String? selected;
+          if (state is GenericUpdate) {
+            if (!state.data.isNullOrEmpty() && state.data != AppConstants.initState&&state.data != AppConstants.notValidatedState) {
+              selected = state.data;
+            } else {
+              selected = widget.hint;
+            }
+          }
+          return Directionality(
+            textDirection: AppConstants.appTextDirection,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: widget.padding ?? 15.0),
+              child: GestureDetector(
+                onTap: () => showSearchableDialog(context),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        _buildRoundedContainer(selected),
+                        buildOverLabel(),
+                      ],
                     ),
-                ],
+                    if (errorText != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Text(
+                          errorText!,
+                          style:
+                              const TextStyle(color: Colors.red, fontSize: 12),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      },
-    );
+          );
+        });
   }
 
   Positioned buildOverLabel() {
@@ -103,27 +109,36 @@ class _ReadOnlyDropdownFormFieldState<T>
     );
   }
 
-  Container _buildRoundedContainer(String? selected) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.black,
-          width: 1.5,
-        ),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(selected.isNullOrEmpty() ? widget.hint : selected!),
-          const Icon(
-            Icons.arrow_drop_down,
-            size: 30,
-            color: Colors.black,
+  _buildRoundedContainer(String? selected) {
+    return BlocBuilder<GenericCubit<String>, GenericState<String>>(
+      bloc: widget.cubit,
+      builder: (context, state) {
+        bool borderFlag = true;
+        if (state is GenericUpdate && state.data == AppConstants.notValidatedState) {
+          borderFlag = false;
+        }
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: borderFlag ? Colors.black : Colors.red,
+              width: 1.5,
+            ),
+            borderRadius: BorderRadius.circular(20),
           ),
-        ],
-      ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(selected.isNullOrEmpty() ? widget.hint : selected!),
+              const Icon(
+                Icons.arrow_drop_down,
+                size: 30,
+                color: Colors.black,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
